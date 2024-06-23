@@ -11,6 +11,20 @@
 		D4D1F0692C27BA8800003163 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4D1F0682C27BA8800003163 /* ContentView.swift */; };
 		D4D1F06B2C27BA8900003163 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D4D1F06A2C27BA8900003163 /* Assets.xcassets */; };
 		D4D1F06E2C27BA8900003163 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D4D1F06D2C27BA8900003163 /* Preview Assets.xcassets */; };
+		D4D1F0762C27BAE700003163 /* ActionTokenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4D1F0752C27BAE700003163 /* ActionTokenView.swift */; };
+		D4D1F0782C27BAF900003163 /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4D1F0772C27BAF900003163 /* Utility.swift */; };
+		D4D1F07B2C27BB2D00003163 /* MoveActionTokenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4D1F07A2C27BB2D00003163 /* MoveActionTokenView.swift */; };
+		D4D1F07D2C27BBDE00003163 /* RotateActionTokenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4D1F07C2C27BBDE00003163 /* RotateActionTokenView.swift */; };
+		D4D1F07F2C27BD7300003163 /* ScaleActionTokenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4D1F07E2C27BD7300003163 /* ScaleActionTokenView.swift */; };
+		D4D1F0812C27BF7500003163 /* ActionTokensScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4D1F0802C27BF7500003163 /* ActionTokensScrollView.swift */; };
+		D4D1F0842C27BFBE00003163 /* ActionToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4D1F0822C27BFBE00003163 /* ActionToken.swift */; };
+		D4D1F0862C27BFF300003163 /* PlaygroundState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4D1F0852C27BFF300003163 /* PlaygroundState.swift */; };
+		D4D1F0882C27C4B400003163 /* ForceActionTokenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4D1F0872C27C4B400003163 /* ForceActionTokenView.swift */; };
+		D4D1F08A2C27C4BF00003163 /* TorqueActionTokenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4D1F0892C27C4BF00003163 /* TorqueActionTokenView.swift */; };
+		D4D1F08C2C27C4C800003163 /* ImpulseActionTokenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4D1F08B2C27C4C800003163 /* ImpulseActionTokenView.swift */; };
+		D4D1F08E2C27C4D500003163 /* AngularImpulseActionTokenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4D1F08D2C27C4D500003163 /* AngularImpulseActionTokenView.swift */; };
+		D4D1F0922C28A15200003163 /* Slider2DView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4D1F0912C28A15200003163 /* Slider2DView.swift */; };
+		D4D1F0942C28A2FE00003163 /* CoreGraphics+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4D1F0932C28A2FE00003163 /* CoreGraphics+Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +34,20 @@
 		D4D1F06A2C27BA8900003163 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D4D1F06D2C27BA8900003163 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		D4D1F06F2C27BA8900003163 /* Ingot.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Ingot.entitlements; sourceTree = "<group>"; };
+		D4D1F0752C27BAE700003163 /* ActionTokenView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionTokenView.swift; sourceTree = "<group>"; };
+		D4D1F0772C27BAF900003163 /* Utility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
+		D4D1F07A2C27BB2D00003163 /* MoveActionTokenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveActionTokenView.swift; sourceTree = "<group>"; };
+		D4D1F07C2C27BBDE00003163 /* RotateActionTokenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RotateActionTokenView.swift; sourceTree = "<group>"; };
+		D4D1F07E2C27BD7300003163 /* ScaleActionTokenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScaleActionTokenView.swift; sourceTree = "<group>"; };
+		D4D1F0802C27BF7500003163 /* ActionTokensScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionTokensScrollView.swift; sourceTree = "<group>"; };
+		D4D1F0822C27BFBE00003163 /* ActionToken.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionToken.swift; sourceTree = "<group>"; };
+		D4D1F0852C27BFF300003163 /* PlaygroundState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaygroundState.swift; sourceTree = "<group>"; };
+		D4D1F0872C27C4B400003163 /* ForceActionTokenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForceActionTokenView.swift; sourceTree = "<group>"; };
+		D4D1F0892C27C4BF00003163 /* TorqueActionTokenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TorqueActionTokenView.swift; sourceTree = "<group>"; };
+		D4D1F08B2C27C4C800003163 /* ImpulseActionTokenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpulseActionTokenView.swift; sourceTree = "<group>"; };
+		D4D1F08D2C27C4D500003163 /* AngularImpulseActionTokenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AngularImpulseActionTokenView.swift; sourceTree = "<group>"; };
+		D4D1F0912C28A15200003163 /* Slider2DView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Slider2DView.swift; sourceTree = "<group>"; };
+		D4D1F0932C28A2FE00003163 /* CoreGraphics+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CoreGraphics+Extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,8 +80,14 @@
 		D4D1F0652C27BA8800003163 /* Ingot */ = {
 			isa = PBXGroup;
 			children = (
-				D4D1F0662C27BA8800003163 /* IngotApp.swift */,
+				D4D1F0832C27BFBE00003163 /* ActionToken */,
+				D4D1F0792C27BB1900003163 /* ActionTokenView */,
 				D4D1F0682C27BA8800003163 /* ContentView.swift */,
+				D4D1F0932C28A2FE00003163 /* CoreGraphics+Extensions.swift */,
+				D4D1F0662C27BA8800003163 /* IngotApp.swift */,
+				D4D1F0852C27BFF300003163 /* PlaygroundState.swift */,
+				D4D1F0912C28A15200003163 /* Slider2DView.swift */,
+				D4D1F0772C27BAF900003163 /* Utility.swift */,
 				D4D1F06A2C27BA8900003163 /* Assets.xcassets */,
 				D4D1F06F2C27BA8900003163 /* Ingot.entitlements */,
 				D4D1F06C2C27BA8900003163 /* Preview Content */,
@@ -67,6 +101,30 @@
 				D4D1F06D2C27BA8900003163 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		D4D1F0792C27BB1900003163 /* ActionTokenView */ = {
+			isa = PBXGroup;
+			children = (
+				D4D1F0752C27BAE700003163 /* ActionTokenView.swift */,
+				D4D1F0802C27BF7500003163 /* ActionTokensScrollView.swift */,
+				D4D1F08D2C27C4D500003163 /* AngularImpulseActionTokenView.swift */,
+				D4D1F0872C27C4B400003163 /* ForceActionTokenView.swift */,
+				D4D1F08B2C27C4C800003163 /* ImpulseActionTokenView.swift */,
+				D4D1F07A2C27BB2D00003163 /* MoveActionTokenView.swift */,
+				D4D1F07C2C27BBDE00003163 /* RotateActionTokenView.swift */,
+				D4D1F07E2C27BD7300003163 /* ScaleActionTokenView.swift */,
+				D4D1F0892C27C4BF00003163 /* TorqueActionTokenView.swift */,
+			);
+			path = ActionTokenView;
+			sourceTree = "<group>";
+		};
+		D4D1F0832C27BFBE00003163 /* ActionToken */ = {
+			isa = PBXGroup;
+			children = (
+				D4D1F0822C27BFBE00003163 /* ActionToken.swift */,
+			);
+			path = ActionToken;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -139,8 +197,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D4D1F08A2C27C4BF00003163 /* TorqueActionTokenView.swift in Sources */,
+				D4D1F07B2C27BB2D00003163 /* MoveActionTokenView.swift in Sources */,
+				D4D1F0812C27BF7500003163 /* ActionTokensScrollView.swift in Sources */,
+				D4D1F0782C27BAF900003163 /* Utility.swift in Sources */,
 				D4D1F0692C27BA8800003163 /* ContentView.swift in Sources */,
+				D4D1F0922C28A15200003163 /* Slider2DView.swift in Sources */,
+				D4D1F0862C27BFF300003163 /* PlaygroundState.swift in Sources */,
+				D4D1F07D2C27BBDE00003163 /* RotateActionTokenView.swift in Sources */,
+				D4D1F0762C27BAE700003163 /* ActionTokenView.swift in Sources */,
+				D4D1F0882C27C4B400003163 /* ForceActionTokenView.swift in Sources */,
+				D4D1F08C2C27C4C800003163 /* ImpulseActionTokenView.swift in Sources */,
+				D4D1F0842C27BFBE00003163 /* ActionToken.swift in Sources */,
 				D4D1F0672C27BA8800003163 /* IngotApp.swift in Sources */,
+				D4D1F0942C28A2FE00003163 /* CoreGraphics+Extensions.swift in Sources */,
+				D4D1F07F2C27BD7300003163 /* ScaleActionTokenView.swift in Sources */,
+				D4D1F08E2C27C4D500003163 /* AngularImpulseActionTokenView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

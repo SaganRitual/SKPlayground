@@ -3,15 +3,21 @@
 import Foundation
 
 final class GameController: ObservableObject {
-    func cancelAssignActionsMode() {
+    weak var playgroundState: PlaygroundState!
 
+    func postInit(_ playgroundState: PlaygroundState) {
+        self.playgroundState = playgroundState
+    }
+
+    func cancelAssignActionsMode() {
+        playgroundState.assignSpaceActions = false
     }
 
     func commitActions(duration: TimeInterval) {
-
+        playgroundState.assignSpaceActions = false
     }
 
     func startActionsMode() {
-        
+        playgroundState.assignSpaceActions = true
     }
 }

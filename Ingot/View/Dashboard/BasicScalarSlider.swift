@@ -14,20 +14,19 @@ struct BasicScalarSlider<TitleView: View, ScalarView: View>: View {
     var body: some View {
         HStack {
             title
-                .frame(width: 55, alignment: .leading)
+                .frame(width: 65, alignment: .leading)
 
             scalarView
-                .frame(width: 30, alignment: .leading)
+                .frame(width: 35, alignment: .leading)
 
             HStack {
                 Text(minLabel)
                 Slider(value: $scalar, in: range)
                 Text(maxLabel)
             }
-            .frame(width: 150, alignment: .leading)
+            .frame(width: 140, alignment: .leading)
             .padding([.horizontal])
         }
-        .font(.system(size: 10))
         .padding(.vertical)
     }
 }
@@ -37,7 +36,7 @@ struct BasicScalarSlider<TitleView: View, ScalarView: View>: View {
 
     return BasicScalarSlider(
         scalar: $scalar,
-        scalarView: Text(String(format: "%.2f", scalar)),
+        scalarView: Text(String(format: "%.1f", scalar)),
         title: Text("Duration"),
         minLabel: "0.1", maxLabel: "5.0",
         range: 0.1...5.0

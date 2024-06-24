@@ -19,6 +19,34 @@ enum SelectionState {
     case many, none, one
 }
 
+protocol HasPhysicsBody {
+    var area: CGFloat { get }
+    var density: CGFloat { get }
+    var friction: CGFloat { get }
+    var mass: CGFloat { get }
+    var restitution: CGFloat { get }
+    var angularDamping: CGFloat { get }
+    var linearDamping: CGFloat { get }
+
+    var dynamism: Bool { get }
+    var gravitism: Bool { get }
+    var rotatism: Bool { get }
+}
+
+class PhysicsBodyHaver: HasPhysicsBody, ObservableObject {
+    @Published var area: CGFloat = .random(in: 0...10)
+    @Published var density: CGFloat = .random(in: 0...10)
+    @Published var friction: CGFloat = .random(in: 0...10)
+    @Published var mass: CGFloat = .random(in: 0...10)
+    @Published var restitution: CGFloat = .random(in: 0...10)
+    @Published var angularDamping: CGFloat = .random(in: 0...10)
+    @Published var linearDamping: CGFloat = .random(in: 0...10)
+
+    @Published var dynamism: Bool = false
+    @Published var gravitism: Bool = false
+    @Published var rotatism: Bool = false
+}
+
 class PlaygroundState: ObservableObject {
     @Published var activeActionTokens = [ActionTokenContainer]()
     @Published var assignSpaceActions: Bool = false
@@ -38,6 +66,8 @@ class PlaygroundState: ObservableObject {
 //        default: selectionState = .many
 //        }
 //    }
+
+    @Published var physicsBodyHaver = PhysicsBodyHaver()
 
     init() {
         makeTestTokensArray()

@@ -8,7 +8,7 @@ struct ContentView: View {
 
     var body: some View {
         VStack(spacing: -2) {
-            PhysicsWorldView()
+            PhysicsTabView()
                 .border(.black, width: 2)
 
             ActionsTabView()
@@ -21,6 +21,9 @@ struct ContentView: View {
         .monospaced()
         .environmentObject(gc)
         .environmentObject(ps)
+        .onAppear {
+            gc.postInit(ps)
+        }
     }
 }
 

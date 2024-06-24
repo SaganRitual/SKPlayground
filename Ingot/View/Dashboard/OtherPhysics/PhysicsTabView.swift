@@ -16,17 +16,10 @@ struct PhysicsTabView: View {
                     }
                     .frame(height: 300)
 
-                PhysicsBodyInertialView()
+                PhysicsBodyTabView()
                     .padding()
                     .tabItem {
-                        Label("E.Inertia", systemImage: "atom")
-                    }
-                    .frame(height: 300)
-
-                PhysicsBodyExternalView()
-                    .padding()
-                    .tabItem {
-                        Label("E.External", systemImage: "atom")
+                        Label("Body", systemImage: "atom")
                     }
                     .frame(height: 300)
             }

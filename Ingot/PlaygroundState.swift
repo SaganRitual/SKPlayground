@@ -9,42 +9,8 @@ enum ClickToCreate: String, RawRepresentable, CaseIterable, Identifiable {
     case gremlin = "Gremlin", physics = "Physics", waypoint = "Waypoint"
 }
 
-enum PlaceablePhysics: String, RawRepresentable, CaseIterable, Identifiable {
-    var id: String { self.rawValue }
-
-    case edge = "Edge", field = "Field", joint = "Joint"
-}
-
 enum SelectionState {
     case many, none, one
-}
-
-protocol HasPhysicsBody {
-    var area: CGFloat { get }
-    var density: CGFloat { get }
-    var friction: CGFloat { get }
-    var mass: CGFloat { get }
-    var restitution: CGFloat { get }
-    var angularDamping: CGFloat { get }
-    var linearDamping: CGFloat { get }
-
-    var dynamism: Bool { get }
-    var gravitism: Bool { get }
-    var rotatism: Bool { get }
-}
-
-class PhysicsBodyHaver: HasPhysicsBody, ObservableObject {
-    @Published var area: CGFloat = .random(in: 0...10)
-    @Published var density: CGFloat = .random(in: 0...10)
-    @Published var friction: CGFloat = .random(in: 0...10)
-    @Published var mass: CGFloat = .random(in: 0...10)
-    @Published var restitution: CGFloat = .random(in: 0...10)
-    @Published var angularDamping: CGFloat = .random(in: 0...10)
-    @Published var linearDamping: CGFloat = .random(in: 0...10)
-
-    @Published var dynamism: Bool = false
-    @Published var gravitism: Bool = false
-    @Published var rotatism: Bool = false
 }
 
 class PlaygroundState: ObservableObject {
@@ -56,6 +22,7 @@ class PlaygroundState: ObservableObject {
     @Published var placePhysics: PlaceablePhysics = .field
     @Published var mousePosition: CGPoint = .zero
     @Published var selectionState: SelectionState = .none
+    @Published var selectedPhysicsField: PhysicsField = PhysicsField()
     @Published var viewSize: CGSize = .zero
 //
 //    func setSelectionState(_ selectedEntities: Set<GameEntity>?) {
@@ -67,7 +34,8 @@ class PlaygroundState: ObservableObject {
 //        }
 //    }
 
-    @Published var physicsBodyHaver = PhysicsBodyHaver()
+    @Published var physicsBodyHaver = PhysicsBody()
+    @Published var physicsCategories = Categories()
 
     init() {
         makeTestTokensArray()

@@ -35,6 +35,10 @@
 		D4D1F09B2C28B47100003163 /* PhysicsActionsTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4D1F09A2C28B47100003163 /* PhysicsActionsTabView.swift */; };
 		D4DE8B312C29CF1C0075F4B7 /* PhysicsBodyExternalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4DE8B302C29CF1C0075F4B7 /* PhysicsBodyExternalView.swift */; };
 		D4DE8B332C29D4280075F4B7 /* PhysicsBodyTogglesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4DE8B322C29D4280075F4B7 /* PhysicsBodyTogglesView.swift */; };
+		D4DE8B352C29DEC50075F4B7 /* PhysicsBodyTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4DE8B342C29DEC50075F4B7 /* PhysicsBodyTabView.swift */; };
+		D4DE8B3C2C29E0990075F4B7 /* PhysicsFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4DE8B3B2C29E0990075F4B7 /* PhysicsFieldView.swift */; };
+		D4DE8B412C29E6440075F4B7 /* Physics.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4DE8B402C29E6440075F4B7 /* Physics.swift */; };
+		D4DE8B432C2A25060075F4B7 /* CheckboxPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4DE8B422C2A25060075F4B7 /* CheckboxPicker.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -68,6 +72,10 @@
 		D4D1F09A2C28B47100003163 /* PhysicsActionsTabView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhysicsActionsTabView.swift; sourceTree = "<group>"; };
 		D4DE8B302C29CF1C0075F4B7 /* PhysicsBodyExternalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhysicsBodyExternalView.swift; sourceTree = "<group>"; };
 		D4DE8B322C29D4280075F4B7 /* PhysicsBodyTogglesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhysicsBodyTogglesView.swift; sourceTree = "<group>"; };
+		D4DE8B342C29DEC50075F4B7 /* PhysicsBodyTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhysicsBodyTabView.swift; sourceTree = "<group>"; };
+		D4DE8B3B2C29E0990075F4B7 /* PhysicsFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhysicsFieldView.swift; sourceTree = "<group>"; };
+		D4DE8B402C29E6440075F4B7 /* Physics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Physics.swift; sourceTree = "<group>"; };
+		D4DE8B422C2A25060075F4B7 /* CheckboxPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckboxPicker.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,15 +92,10 @@
 		D4A621A72C28E46500C3F89A /* Dashboard */ = {
 			isa = PBXGroup;
 			children = (
-				D4A621A32C28CB0300C3F89A /* ActionsTabView.swift */,
-				D4A621AC2C29184600C3F89A /* BasicScalarSlider.swift */,
-				D4D1F09A2C28B47100003163 /* PhysicsActionsTabView.swift */,
-				D4A621AA2C2917CA00C3F89A /* PhysicsBodyInertialView.swift */,
-				D4DE8B302C29CF1C0075F4B7 /* PhysicsBodyExternalView.swift */,
-				D4DE8B322C29D4280075F4B7 /* PhysicsBodyTogglesView.swift */,
-				D4A621A82C29172D00C3F89A /* PhysicsTabView.swift */,
-				D4A621A52C28E45D00C3F89A /* PhysicsWorldView.swift */,
-				D4D1F0962C28B38100003163 /* SpaceActionsTabView.swift */,
+				D4DE8B372C29DFBD0075F4B7 /* Actions */,
+				D4DE8B3A2C29E0010075F4B7 /* OtherPhysics */,
+				D4DE8B362C29DED30075F4B7 /* PhysicsBody */,
+				D4DE8B3D2C29E5A10075F4B7 /* PhysicsField */,
 			);
 			path = Dashboard;
 			sourceTree = "<group>";
@@ -121,6 +124,7 @@
 				D4D1F0932C28A2FE00003163 /* CoreGraphics+Extensions.swift */,
 				D4D1F0982C28B3D600003163 /* GameController.swift */,
 				D4D1F0662C27BA8800003163 /* IngotApp.swift */,
+				D4DE8B402C29E6440075F4B7 /* Physics.swift */,
 				D4D1F0852C27BFF300003163 /* PlaygroundState.swift */,
 				D4D1F0772C27BAF900003163 /* Utility.swift */,
 				D4D1F06A2C27BA8900003163 /* Assets.xcassets */,
@@ -167,10 +171,50 @@
 			children = (
 				D4D1F0792C27BB1900003163 /* ActionTokenView */,
 				D4A621A72C28E46500C3F89A /* Dashboard */,
+				D4A621AC2C29184600C3F89A /* BasicScalarSlider.swift */,
+				D4DE8B422C2A25060075F4B7 /* CheckboxPicker.swift */,
 				D4D1F0682C27BA8800003163 /* ContentView.swift */,
 				D4D1F0912C28A15200003163 /* Slider2DView.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		D4DE8B362C29DED30075F4B7 /* PhysicsBody */ = {
+			isa = PBXGroup;
+			children = (
+				D4A621AA2C2917CA00C3F89A /* PhysicsBodyInertialView.swift */,
+				D4DE8B302C29CF1C0075F4B7 /* PhysicsBodyExternalView.swift */,
+				D4DE8B342C29DEC50075F4B7 /* PhysicsBodyTabView.swift */,
+				D4DE8B322C29D4280075F4B7 /* PhysicsBodyTogglesView.swift */,
+			);
+			path = PhysicsBody;
+			sourceTree = "<group>";
+		};
+		D4DE8B372C29DFBD0075F4B7 /* Actions */ = {
+			isa = PBXGroup;
+			children = (
+				D4A621A32C28CB0300C3F89A /* ActionsTabView.swift */,
+				D4D1F09A2C28B47100003163 /* PhysicsActionsTabView.swift */,
+				D4D1F0962C28B38100003163 /* SpaceActionsTabView.swift */,
+			);
+			path = Actions;
+			sourceTree = "<group>";
+		};
+		D4DE8B3A2C29E0010075F4B7 /* OtherPhysics */ = {
+			isa = PBXGroup;
+			children = (
+				D4A621A82C29172D00C3F89A /* PhysicsTabView.swift */,
+				D4A621A52C28E45D00C3F89A /* PhysicsWorldView.swift */,
+			);
+			path = OtherPhysics;
+			sourceTree = "<group>";
+		};
+		D4DE8B3D2C29E5A10075F4B7 /* PhysicsField */ = {
+			isa = PBXGroup;
+			children = (
+				D4DE8B3B2C29E0990075F4B7 /* PhysicsFieldView.swift */,
+			);
+			path = PhysicsField;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -249,6 +293,7 @@
 				D4D1F0812C27BF7500003163 /* ActionTokensScrollView.swift in Sources */,
 				D4D1F0782C27BAF900003163 /* Utility.swift in Sources */,
 				D4D1F0972C28B38100003163 /* SpaceActionsTabView.swift in Sources */,
+				D4DE8B432C2A25060075F4B7 /* CheckboxPicker.swift in Sources */,
 				D4A621AD2C29184600C3F89A /* BasicScalarSlider.swift in Sources */,
 				D4D1F0692C27BA8800003163 /* ContentView.swift in Sources */,
 				D4A621A62C28E45D00C3F89A /* PhysicsWorldView.swift in Sources */,
@@ -262,9 +307,12 @@
 				D4DE8B332C29D4280075F4B7 /* PhysicsBodyTogglesView.swift in Sources */,
 				D4D1F0762C27BAE700003163 /* ActionTokenView.swift in Sources */,
 				D4D1F0882C27C4B400003163 /* ForceActionTokenView.swift in Sources */,
+				D4DE8B412C29E6440075F4B7 /* Physics.swift in Sources */,
+				D4DE8B3C2C29E0990075F4B7 /* PhysicsFieldView.swift in Sources */,
 				D4D1F08C2C27C4C800003163 /* ImpulseActionTokenView.swift in Sources */,
 				D4D1F0842C27BFBE00003163 /* ActionToken.swift in Sources */,
 				D4D1F0992C28B3D600003163 /* GameController.swift in Sources */,
+				D4DE8B352C29DEC50075F4B7 /* PhysicsBodyTabView.swift in Sources */,
 				D4D1F0672C27BA8800003163 /* IngotApp.swift in Sources */,
 				D4D1F0942C28A2FE00003163 /* CoreGraphics+Extensions.swift in Sources */,
 				D4D1F07F2C27BD7300003163 /* ScaleActionTokenView.swift in Sources */,

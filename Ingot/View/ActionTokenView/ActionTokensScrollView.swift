@@ -50,10 +50,14 @@ struct ActionTokensScrollView: View {
             }
         }
         .background(RoundedRectangle(cornerSize: CGSize(width: 15, height: 15), style: .circular).fill(Color(.controlBackgroundColor)))
+        .frame(height: 350)
     }
 }
 
 #Preview {
-    ActionTokensScrollView()
-        .environmentObject({ let ps = PlaygroundState(); ps.makeTestTokensArray(); return ps }())
+    let ps = PlaygroundState()
+    ps.makeTestTokensArray()
+
+    return ActionTokensScrollView()
+        .environmentObject(ps)
 }

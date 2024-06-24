@@ -2,14 +2,13 @@
 
 import SwiftUI
 
-struct Slider2DView: View {
+struct Slider2DView<Title: View>: View {
     let canvasColor: Color
-    let cornerRadius: CGFloat
     let handleColor: Color
     let scale: CGVector
     let size: CGSize
     let snapTolerance: CGFloat
-    let title: String
+    let title: Title
 
     private let magnets = Magnets()
 
@@ -17,18 +16,20 @@ struct Slider2DView: View {
     @State private var dotPosition: CGPoint = .zero
     @State private var snapped = false
 
+    @Binding var output: CGVector
+
     init(
         canvasColor: Color = Color(NSColor.secondarySystemFill),
-        cornerRadius: CGFloat = 15,
         handleColor: Color = .gray,
+        output: Binding<CGVector>,
         size: CGSize = CGSize(width: 400, height: 400),
         snapTolerance: CGFloat = 20,
-        title: String,
+        title: Title = Text("Title"),
         virtualSize: CGSize? = nil
     ) {
         self.canvasColor = canvasColor
-        self.cornerRadius = cornerRadius
         self.handleColor = handleColor
+        self._output = output
         self.size = size
         self.snapTolerance = snapTolerance
         self.title = title
@@ -51,7 +52,7 @@ struct Slider2DView: View {
 
     var body: some View {
         VStack(alignment: .center) {
-            Text(title)
+            title
 
             ZStack {
                 Rectangle()
@@ -147,5 +148,5 @@ private extension Slider2DView {
 }
 
 #Preview {
-    Slider2DView(title: "Slider 2D")
+    Slider2DView(output: .constant(CGVector.random(in: -10...10)), title: Text("Slider 2D"))
 }

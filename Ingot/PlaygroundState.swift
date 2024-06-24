@@ -39,6 +39,10 @@ class PlaygroundState: ObservableObject {
 //        }
 //    }
 
+    init() {
+        makeTestTokensArray()
+    }
+
     func makeTestTokensArray() {
         activeActionTokens = (0..<5).map { _ in ActionTokenContainer.randomToken() }
     }

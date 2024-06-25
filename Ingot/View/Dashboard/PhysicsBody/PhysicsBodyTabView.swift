@@ -10,22 +10,20 @@ struct PhysicsBodyTabView: View {
                 .tabItem {
                     Label("Inertial", systemImage: "atom")
                 }
-                .frame(height: 200)
 
             PhysicsBodyExternalView()
                 .padding()
                 .tabItem {
                     Label("External", systemImage: "atom")
                 }
-                .frame(height: 200)
 
             PhysicsBodyTogglesView()
                 .padding()
                 .tabItem {
                     Label("Toggles", systemImage: "atom")
                 }
-                .frame(height: 200)
         }
+        .frame(height: 200)
         .padding(.top)
     }
 }

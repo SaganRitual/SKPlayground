@@ -2,7 +2,7 @@
 
 import SwiftUI
 
-struct Slider2DView<Title: View>: View {
+struct Slider2DView<Title: View, OutputType: HasABPairProtocol>: View {
     let canvasColor: Color
     let handleColor: Color
     let scale: CGVector
@@ -16,12 +16,12 @@ struct Slider2DView<Title: View>: View {
     @State private var dotPosition: CGPoint = .zero
     @State private var snapped = false
 
-    @Binding var output: CGVector
+    @Binding var output: OutputType
 
     init(
         canvasColor: Color = Color(NSColor.secondarySystemFill),
         handleColor: Color = .gray,
-        output: Binding<CGVector>,
+        output: Binding<OutputType>,
         size: CGSize = CGSize(width: 400, height: 400),
         snapTolerance: CGFloat = 20,
         title: Title = Text("Title"),
@@ -84,6 +84,10 @@ struct Slider2DView<Title: View>: View {
                         .onEnded { value in
                             dotPosition += value.translation
                             dotPosition = handleOffset
+
+                            let a = OutputType.RegularNumber(integerLiteral: scaledOutput.x as! OutputType.RegularNumber.IntegerLiteralType)
+                            let b = OutputType.RegularNumber(integerLiteral: scaledOutput.y as! OutputType.RegularNumber.IntegerLiteralType)
+                            output = OutputType(a, b)
                         }
                 )
                 .coordinateSpace(name: "sliderCanvas")

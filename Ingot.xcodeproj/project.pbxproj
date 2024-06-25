@@ -95,7 +95,6 @@
 				D4DE8B372C29DFBD0075F4B7 /* Actions */,
 				D4DE8B3A2C29E0010075F4B7 /* OtherPhysics */,
 				D4DE8B362C29DED30075F4B7 /* PhysicsBody */,
-				D4DE8B3D2C29E5A10075F4B7 /* PhysicsField */,
 			);
 			path = Dashboard;
 			sourceTree = "<group>";
@@ -203,18 +202,11 @@
 		D4DE8B3A2C29E0010075F4B7 /* OtherPhysics */ = {
 			isa = PBXGroup;
 			children = (
+				D4DE8B3B2C29E0990075F4B7 /* PhysicsFieldView.swift */,
 				D4A621A82C29172D00C3F89A /* PhysicsTabView.swift */,
 				D4A621A52C28E45D00C3F89A /* PhysicsWorldView.swift */,
 			);
 			path = OtherPhysics;
-			sourceTree = "<group>";
-		};
-		D4DE8B3D2C29E5A10075F4B7 /* PhysicsField */ = {
-			isa = PBXGroup;
-			children = (
-				D4DE8B3B2C29E0990075F4B7 /* PhysicsFieldView.swift */,
-			);
-			path = PhysicsField;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

@@ -36,6 +36,7 @@ class PlaygroundState: ObservableObject {
 
     @Published var physicsBodyHaver = PhysicsBody()
     @Published var physicsCategories = Categories()
+    @Published var physicsField = PhysicsField()
 
     init() {
         makeTestTokensArray()

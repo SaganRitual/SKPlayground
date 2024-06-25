@@ -131,3 +131,60 @@ extension CGRect {
         )
     }
 }
+
+protocol HasABPairProtocol {
+    associatedtype RegularNumber: Comparable & AdditiveArithmetic & ExpressibleByIntegerLiteral
+
+    var abPairA: RegularNumber { get set }
+    var abPairB: RegularNumber { get set }
+
+    init(_ a: RegularNumber, _ b: RegularNumber)
+}
+
+extension CGPoint: HasABPairProtocol {
+    var abPairA: CGFloat {
+        get { x }
+        set { x = newValue }
+    }
+
+    var abPairB: CGFloat {
+        get { y }
+        set { y = newValue }
+    }
+
+    init(_ a: CGFloat, _ b: CGFloat) {
+        self.init(x: a, y: b)
+    }
+}
+
+extension CGVector: HasABPairProtocol {
+    var abPairA: CGFloat {
+        get { dx }
+        set { dx = newValue }
+    }
+
+    var abPairB: CGFloat {
+        get { dy }
+        set { dy = newValue }
+    }
+
+    init(_ a: CGFloat, _ b: CGFloat) {
+        self.init(dx: a, dy: b)
+    }
+}
+
+extension CGSize: HasABPairProtocol {
+    var abPairA: CGFloat {
+        get { width }
+        set { width = newValue }
+    }
+
+    var abPairB: CGFloat {
+        get { height }
+        set { height = newValue }
+    }
+
+    init(_ a: CGFloat, _ b: CGFloat) {
+        self.init(width: a, height: b)
+    }
+}

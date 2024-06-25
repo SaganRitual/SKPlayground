@@ -10,21 +10,25 @@ struct PhysicsTabView: View {
                 .padding(.vertical)
 
             TabView {
-                PhysicsWorldView()
+                PhysicsFieldView()
+                    .padding()
                     .tabItem {
-                        Label("World", systemImage: "globe")
+                        Label("Field", systemImage: "atom")
                     }
-                    .frame(height: 300)
 
                 PhysicsBodyTabView()
                     .padding()
                     .tabItem {
                         Label("Body", systemImage: "atom")
                     }
-                    .frame(height: 300)
+
+                PhysicsWorldView()
+                    .tabItem {
+                        Label("World", systemImage: "globe")
+                    }
             }
         }
-        .frame(height: 400)
+        .frame(height: 450)
     }
 }
 

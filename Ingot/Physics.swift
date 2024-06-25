@@ -26,7 +26,7 @@ class PhysicsField: ObservableObject {
     @Published var exclusive: Bool = .random()
     @Published var falloff: CGFloat = .random(in: 0...100)
     @Published var minimumRadius: CGFloat = .random(in: 0...100)
-    @Published var region: SKRegion? = nil
+    @Published var region: CGSize = .zero
     @Published var smoothness: CGFloat = .random(in: 0...100)
     @Published var strength: CGFloat = .random(in: 0...100)
 }

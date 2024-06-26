@@ -10,16 +10,16 @@ struct PhysicsTabView: View {
                 .padding(.vertical)
 
             TabView {
-                PhysicsFieldView()
-                    .padding()
-                    .tabItem {
-                        Label("Field", systemImage: "atom")
-                    }
-
                 PhysicsBodyTabView()
                     .padding()
                     .tabItem {
                         Label("Body", systemImage: "atom")
+                    }
+
+                PhysicsFieldView()
+                    .padding()
+                    .tabItem {
+                        Label("Field", systemImage: "atom")
                     }
 
                 PhysicsWorldView()

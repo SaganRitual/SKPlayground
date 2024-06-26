@@ -8,6 +8,9 @@ struct ContentView: View {
 
     var body: some View {
         VStack(spacing: -2) {
+            CommandView()
+                .border(.black, width: 2)
+
             PhysicsTabView()
                 .border(.black, width: 2)
 

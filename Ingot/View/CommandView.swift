@@ -6,6 +6,9 @@ struct CommandView: View {
     @EnvironmentObject var playgroundState: PlaygroundState
 
     @State private var physicsFieldType: PhysicsFieldType = .drag
+    @State private var pickerHeight = 0.0
+
+    let titleTextWidth = 120.0
 
     var body: some View {
         VStack {
@@ -13,43 +16,60 @@ struct CommandView: View {
                 .underline()
                 .padding(.bottom)
 
-            HStack {
-                Picker("Click to Place", selection: $playgroundState.clickToPlace) {
-                    ForEach(ClickToPlace.allCases) { option in
-                        Text(option.rawValue).tag(option)
+            VStack {
+                HStack {
+                    Text("Click to Place")
+                        .frame(width: titleTextWidth, alignment: .leading)
+
+                    Picker("", selection: $playgroundState.clickToPlace) {
+                        ForEach(ClickToPlace.allCases) { option in
+                            Text(option.rawValue).tag(option)
+                        }
                     }
+                    .overlay(
+                        GeometryReader { gr in
+                            Color.clear
+                                .onAppear {
+                                    pickerHeight = gr.size.height
+                                }
+                        }
+                    )
                 }
 
                 switch playgroundState.clickToPlace {
                 case .field:
-                    Picker("Field Type", selection: $physicsFieldType) {
-                        ForEach(PhysicsFieldType.allCases) { option in
-                            Text(option.rawValue).tag(option)
+                    HStack {
+                        Text("Field Type")
+                            .frame(width: titleTextWidth, alignment: .leading)
+
+                        Picker("", selection: $physicsFieldType) {
+                            ForEach(PhysicsFieldType.allCases) { option in
+                                Text(option.rawValue).tag(option)
+                            }
                         }
                     }
 
                 case .gremlin:
-                    Picker("", selection: $playgroundState.selectedGremlinTexture) {
-                        ForEach(playgroundState.gremlinImageNames, id: \.self) { imageName in
-                            Image(imageName)
+                    HStack {
+                        Text("Sprite")
+                            .frame(width: titleTextWidth, alignment: .leading)
+
+                        Picker("", selection: $playgroundState.selectedGremlinTexture) {
+                            ForEach(playgroundState.gremlinImageNames, id: \.self) { imageName in
+                                Image(imageName)
+                            }
                         }
                     }
 
-                    Image(playgroundState.selectedGremlinTexture)
-                        .resizable()
-                        .scaledToFit()
-
-                case .joint:
-                    EmptyView()
-                case .vertex:
-                    EmptyView()
-                case .waypoint:
-                    EmptyView()
+                default:
+                    Text("")
+                        .frame(height: pickerHeight)
                 }
             }
         }
     }
 }
+
 
 #Preview {
     CommandView()

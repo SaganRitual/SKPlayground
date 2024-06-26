@@ -3,6 +3,21 @@
 import SwiftUI
 
 struct PhysicsTabView: View {
+    @EnvironmentObject var gameController: GameController
+    @EnvironmentObject var playgroundState: PlaygroundState
+
+    func exactlyOneFieldSelected() -> Bool {
+        let result = playgroundState.selectionState == .one && gameController.getSelected().first is Field
+        print("one field \(result)")
+        return result
+    }
+
+    func exactlyOneGremlinSelected() -> Bool {
+        let result = playgroundState.selectionState == .one && gameController.getSelected().first is Gremlin
+        print("one gremlin \(result)")
+        return result
+    }
+
     var body: some View {
         VStack {
             Text("Physics")
@@ -10,17 +25,21 @@ struct PhysicsTabView: View {
                 .padding(.vertical)
 
             TabView {
-                PhysicsBodyTabView()
-                    .padding()
-                    .tabItem {
-                        Label("Body", systemImage: "atom")
-                    }
+                if exactlyOneGremlinSelected() {
+                    PhysicsBodyTabView()
+                        .padding()
+                        .tabItem {
+                            Label("Body", systemImage: "atom")
+                        }
+                }
 
-                PhysicsFieldView()
-                    .padding()
-                    .tabItem {
-                        Label("Field", systemImage: "atom")
-                    }
+                if exactlyOneFieldSelected() {
+                    PhysicsFieldView()
+                        .padding()
+                        .tabItem {
+                            Label("Field", systemImage: "atom")
+                        }
+                }
 
                 PhysicsWorldView()
                     .tabItem {

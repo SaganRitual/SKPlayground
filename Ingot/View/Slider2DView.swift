@@ -92,7 +92,8 @@ struct Slider2DView<Title: View, OutputType: HasABPairProtocol>: View {
                 )
                 .coordinateSpace(name: "sliderCanvas")
             }
-            .mask( // Apply a mask to hide the overlapping border
+            .mask(
+                // Hide the handle if it goes outside the trackpad bounds
                 Rectangle()
                     .frame(width: size.width, height: size.height)
             )
@@ -100,6 +101,7 @@ struct Slider2DView<Title: View, OutputType: HasABPairProtocol>: View {
 
             Text("\(scaledOutput)")
         }
+        .frame(width: 140)
         .onChange(of: handleOffset) { (_, _) in
             let intendedPosition = CGPoint(dragOffset + dotPosition)
             let magnet = magnets.closest(to: intendedPosition, inSpace: size)

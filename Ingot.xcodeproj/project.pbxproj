@@ -31,6 +31,7 @@
 		D49BD5D42C2C684400FD313C /* SelectionMarquee.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49BD5D32C2C684400FD313C /* SelectionMarquee.swift */; };
 		D49BD5D62C2C698F00FD313C /* GameController+Drag.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49BD5D52C2C698F00FD313C /* GameController+Drag.swift */; };
 		D49BD5D82C2C69C700FD313C /* GameController+Select.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49BD5D72C2C69C700FD313C /* GameController+Select.swift */; };
+		D49BD5DA2C2C9A8A00FD313C /* PlaygroundStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49BD5D92C2C9A8900FD313C /* PlaygroundStatusView.swift */; };
 		D4A621A42C28CB0300C3F89A /* ActionsTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A621A32C28CB0300C3F89A /* ActionsTabView.swift */; };
 		D4A621A62C28E45D00C3F89A /* PhysicsWorldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A621A52C28E45D00C3F89A /* PhysicsWorldView.swift */; };
 		D4A621A92C29172D00C3F89A /* PhysicsTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A621A82C29172D00C3F89A /* PhysicsTabView.swift */; };
@@ -90,6 +91,7 @@
 		D49BD5D32C2C684400FD313C /* SelectionMarquee.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectionMarquee.swift; sourceTree = "<group>"; };
 		D49BD5D52C2C698F00FD313C /* GameController+Drag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameController+Drag.swift"; sourceTree = "<group>"; };
 		D49BD5D72C2C69C700FD313C /* GameController+Select.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameController+Select.swift"; sourceTree = "<group>"; };
+		D49BD5D92C2C9A8900FD313C /* PlaygroundStatusView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaygroundStatusView.swift; sourceTree = "<group>"; };
 		D4A621A32C28CB0300C3F89A /* ActionsTabView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionsTabView.swift; sourceTree = "<group>"; };
 		D4A621A52C28E45D00C3F89A /* PhysicsWorldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhysicsWorldView.swift; sourceTree = "<group>"; };
 		D4A621A82C29172D00C3F89A /* PhysicsTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhysicsTabView.swift; sourceTree = "<group>"; };
@@ -282,6 +284,7 @@
 				D49BD4FE2C2B218900FD313C /* CommandView.swift */,
 				D4D1F0682C27BA8800003163 /* ContentView.swift */,
 				D49BD5AB2C2C3EAA00FD313C /* GameControllerTestView.swift */,
+				D49BD5D92C2C9A8900FD313C /* PlaygroundStatusView.swift */,
 				D4D1F0912C28A15200003163 /* Slider2DView.swift */,
 				D49BD5C62C2C67DB00FD313C /* SpriteKitView.swift */,
 			);
@@ -402,6 +405,7 @@
 				D49BD4FB2C2A7E8400FD313C /* PhysicsJointView.swift in Sources */,
 				D49BD4FF2C2B218900FD313C /* CommandView.swift in Sources */,
 				D49BD5AC2C2C3EAA00FD313C /* GameControllerTestView.swift in Sources */,
+				D49BD5DA2C2C9A8A00FD313C /* PlaygroundStatusView.swift in Sources */,
 				D4D1F0972C28B38100003163 /* SpaceActionsTabView.swift in Sources */,
 				D49BD5B82C2C4CCB00FD313C /* Gremlin.swift in Sources */,
 				D4DE8B432C2A25060075F4B7 /* CheckboxPicker.swift in Sources */,

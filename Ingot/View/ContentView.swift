@@ -3,26 +3,46 @@
 import SwiftUI
 
 struct ContentView: View {
+    @EnvironmentObject var gameController: GameController
+    @EnvironmentObject var playgroundState: PlaygroundState
+
     var body: some View {
-        HStack {
+        HStack(alignment: .top) {
             SpriteKitView()
 
-            VStack(spacing: -2) {
+            VStack {
+                PlaygroundStatusView()
+                    .frame(height: 100)
+                    .padding()
+                    .background(Color(NSColor.secondarySystemFill))
+                    .padding(2)
+
                 CommandView()
-                    .border(.black, width: 2)
+                    .frame(height: 100)
+                    .padding()
+                    .background(Color(NSColor.secondarySystemFill))
+                    .padding(2)
 
                 PhysicsTabView()
-                    .border(.black, width: 2)
+                    .padding()
+                    .background(Color(NSColor.secondarySystemFill))
+                    .padding(2)
 
-                ActionsTabView()
-                    .border(.black, width: 2)
+                if playgroundState.selectionState == .one &&
+                    gameController.getSelected().first is Gremlin {
 
-                ActionTokensScrollView()
-                    .frame(maxWidth: .infinity)
-                    .border(.black, width: 2)
+                    ActionsTabView()
+                        .border(.black, width: 2)
+
+                    ActionTokensScrollView()
+                        .frame(maxWidth: .infinity)
+                        .border(.black, width: 2)
+                }
             }
             .monospaced()
+            .frame(width: 700)
         }
+        .background(Color(NSColor.tertiarySystemFill))
     }
 }
 

@@ -65,6 +65,8 @@ extension CGPoint {
         let (x, y) = Utility.randomPair(in: range, bRange: yRange)
         return CGPoint(x: CGFloat(x), y: CGFloat(y))
     }
+
+    var magnitude: CGFloat { distance(to: .zero) }
 }
 
 extension CGVector {

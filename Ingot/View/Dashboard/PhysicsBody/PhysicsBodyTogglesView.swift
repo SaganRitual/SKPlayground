@@ -22,60 +22,50 @@ struct PhysicsBodyTogglesView: View {
     @State private var selectedContactIndices = Set<Int>()
 
     var body: some View {
-        VStack {
-            HStack(spacing: 75) {
+        HStack {
+            VStack(alignment: .leading) {
                 Toggle(isOn: $playgroundState.physicsBodyHaver.dynamism) {
-                    Text("Physics")
+                    Text("Apply Physics")
                 }
                 .toggleStyle(.checkbox)
 
                 Toggle(isOn: $playgroundState.physicsBodyHaver.gravitism) {
-                    Text("Gravity")
+                    Text("Apply Gravity")
                 }
                 .toggleStyle(.checkbox)
+                .disabled(!playgroundState.physicsBodyHaver.dynamism)
 
                 Toggle(isOn: $playgroundState.physicsBodyHaver.rotatism) {
-                    Text("Rotation")
+                    Text("Allow Rotation")
                 }
                 .toggleStyle(.checkbox)
+                .disabled(!playgroundState.physicsBodyHaver.dynamism)
             }
             .padding()
 
-            HStack {
-                Text("Category")
-                    .frame(width: 80, alignment: .leading)
-
+            VStack {
                 CheckboxPicker(
                     selectedIndices: $selectedCategoryIndices,
-                    label: Text("Set Categories"),
+                    label: Text("Mask Categories"),
                     options: playgroundState.physicsCategories.names
                 )
-                .frame(minWidth: 150)
-            }
-
-            HStack {
-                Text("Collision")
-                    .frame(width: 80, alignment: .leading)
+                .frame(minWidth: 100)
 
                 CheckboxPicker(
                     selectedIndices: $selectedCollisionIndices,
-                    label: Text("Set Collision"),
+                    label: Text("Collision Mask"),
                     options: playgroundState.physicsCategories.names
                 )
-                .frame(minWidth: 150)
-            }
-
-            HStack {
-                Text("Contact")
-                    .frame(width: 80, alignment: .leading)
+                .frame(minWidth: 100)
 
                 CheckboxPicker(
                     selectedIndices: $selectedContactIndices,
-                    label: Text("Set Contact"),
+                    label: Text("Contact Mask"),
                     options: playgroundState.physicsCategories.names
                 )
-                .frame(minWidth: 150)
+                .frame(minWidth: 100)
             }
+            .padding()
         }
     }
 }

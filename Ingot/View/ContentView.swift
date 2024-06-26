@@ -3,29 +3,25 @@
 import SwiftUI
 
 struct ContentView: View {
-    @StateObject var ps = PlaygroundState()
-    @StateObject var gc = GameController()
-
     var body: some View {
-        VStack(spacing: -2) {
-            CommandView()
-                .border(.black, width: 2)
+        HStack {
+            SpriteKitView()
 
-            PhysicsTabView()
-                .border(.black, width: 2)
+            VStack(spacing: -2) {
+                CommandView()
+                    .border(.black, width: 2)
 
-            ActionsTabView()
-                .border(.black, width: 2)
+                PhysicsTabView()
+                    .border(.black, width: 2)
 
-            ActionTokensScrollView()
-                .frame(maxWidth: .infinity)
-                .border(.black, width: 2)
-        }
-        .monospaced()
-        .environmentObject(gc)
-        .environmentObject(ps)
-        .onAppear {
-            gc.postInit(ps)
+                ActionsTabView()
+                    .border(.black, width: 2)
+
+                ActionTokensScrollView()
+                    .frame(maxWidth: .infinity)
+                    .border(.black, width: 2)
+            }
+            .monospaced()
         }
     }
 }

@@ -24,15 +24,15 @@ class PlaygroundState: ObservableObject {
     @Published var selectionState: SelectionState = .none
     @Published var selectedPhysicsField: PhysicsField = PhysicsField()
     @Published var viewSize: CGSize = .zero
-//
-//    func setSelectionState(_ selectedEntities: Set<GameEntity>?) {
-//        let count = selectedEntities?.count ?? 0
-//        switch count {
-//        case 0: selectionState = .none
-//        case 1: selectionState = .one
-//        default: selectionState = .many
-//        }
-//    }
+
+    func setSelectionState(_ selectedEntities: Set<GameEntity>?) {
+        let count = selectedEntities?.count ?? 0
+        switch count {
+        case 0: selectionState = .none
+        case 1: selectionState = .one
+        default: selectionState = .many
+        }
+    }
 
     @Published var physicsBodyHaver = PhysicsBody()
     @Published var physicsCategories = Categories()

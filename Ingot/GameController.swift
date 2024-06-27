@@ -15,14 +15,15 @@ protocol SelectableProtocol {
 }
 
 final class GameController: ObservableObject {
+    weak var commandSelection: CommandSelection!
     weak var gameScene: GameScene!
-
-    var selectionMarquee: SelectionMarquee!
     weak var playgroundState: PlaygroundState!
+    var selectionMarquee: SelectionMarquee!
 
     var entities = Set<GameEntity>()
 
-    func postInit(_ playgroundState: PlaygroundState) {
+    func postInit(_ commandSelection: CommandSelection, _ playgroundState: PlaygroundState) {
+        self.commandSelection = commandSelection
         self.playgroundState = playgroundState
         self.selectionMarquee = SelectionMarquee(playgroundState)
     }
@@ -46,7 +47,7 @@ final class GameController: ObservableObject {
 
         let entity: GameEntity
 
-        switch playgroundState.clickToPlace {
+        switch commandSelection.clickToPlace {
         case .field:
             entity = newField(at: clickDispatch.location)
 
@@ -94,7 +95,7 @@ final class GameController: ObservableObject {
     }
 
     func newGremlin(at position: CGPoint) -> Gremlin {
-        let gremlin = Gremlin.make(at: position, avatarName: playgroundState.selectedGremlinTexture)
+        let gremlin = Gremlin.make(at: position, avatarName: commandSelection.selectedGremlinTexture)
 
         gameScene.entitiesNode.addChild(gremlin.avatar!.sceneNode)
         gameScene.entitiesNode.addChild(gremlin.halo!.sceneNode)

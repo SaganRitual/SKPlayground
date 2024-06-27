@@ -2,10 +2,8 @@
 
 import SwiftUI
 
-struct CommandView: View, CustomDebugStringConvertible {
-    var debugDescription: String { "CommandView" }
-
-    @EnvironmentObject var playgroundState: PlaygroundState
+struct CommandView: View {
+    @EnvironmentObject var commandSelection: CommandSelection
 
     @State private var physicsFieldType: PhysicsFieldType = .drag
     @State private var pickerHeight = 0.0
@@ -23,7 +21,7 @@ struct CommandView: View, CustomDebugStringConvertible {
                     Text("Click to Place")
                         .frame(width: titleTextWidth, alignment: .leading)
 
-                    Picker("", selection: $playgroundState.clickToPlace) {
+                    Picker("", selection: $commandSelection.clickToPlace) {
                         ForEach(ClickToPlace.allCases) { option in
                             Text(option.rawValue).tag(option)
                         }
@@ -38,7 +36,7 @@ struct CommandView: View, CustomDebugStringConvertible {
                     )
                 }
 
-                switch playgroundState.clickToPlace {
+                switch commandSelection.clickToPlace {
                 case .field:
                     HStack {
                         Text("Field Type")
@@ -56,8 +54,8 @@ struct CommandView: View, CustomDebugStringConvertible {
                         Text("Sprite")
                             .frame(width: titleTextWidth, alignment: .leading)
 
-                        Picker("", selection: $playgroundState.selectedGremlinTexture) {
-                            ForEach(playgroundState.gremlinImageNames, id: \.self) { imageName in
+                        Picker("", selection: $commandSelection.selectedGremlinTexture) {
+                            ForEach(commandSelection.gremlinImageNames, id: \.self) { imageName in
                                 Image(imageName)
                             }
                         }
@@ -69,7 +67,6 @@ struct CommandView: View, CustomDebugStringConvertible {
                 }
             }
         }
-        .accessibilityIdentifier(debugDescription)
     }
 }
 

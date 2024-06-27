@@ -3,9 +3,7 @@
 import Foundation
 import SwiftUI
 
-struct PlaygroundStatusView: View, CustomDebugStringConvertible {
-    var debugDescription: String { "PlaygroundStatusView" }
-
+struct PlaygroundStatusView: View {
     @EnvironmentObject var gameController: GameController
     @EnvironmentObject var playgroundState: PlaygroundState
 
@@ -32,6 +30,5 @@ struct PlaygroundStatusView: View, CustomDebugStringConvertible {
                 Text(Utility.positionString(playgroundState.mousePosition))
             }
         }
-        .accessibilityIdentifier(debugDescription)
     }
 }

@@ -2,36 +2,13 @@
 
 import SwiftUI
 
-struct ContentView: View, CustomDebugStringConvertible {
-    var debugDescription: String { "ContentView" }
-
-    @EnvironmentObject var gameController: GameController
-    @EnvironmentObject var playgroundState: PlaygroundState
-
+struct ContentView: View {
     var body: some View {
         HStack(alignment: .top) {
             SpriteKitView()
                 .frame(minWidth: 1024, minHeight: 768)
 
-            VStack {
-                PlaygroundStatusView()
-                    .frame(height: 100)
-                    .padding()
-                    .background(Color(NSColor.secondarySystemFill))
-                    .padding(2)
-
-                CommandView()
-                    .frame(height: 100)
-                    .padding()
-                    .background(Color(NSColor.secondarySystemFill))
-                    .padding(2)
-
-                ConfigurationTabView()
-                    .padding()
-                    .background(Color(NSColor.secondarySystemFill))
-                    .padding(2)
-            }
-            .monospaced()
+            DashboardView()
         }
         .background(Color(NSColor.tertiarySystemFill))
     }

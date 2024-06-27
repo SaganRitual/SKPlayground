@@ -73,5 +73,5 @@ struct CommandView: View {
 
 #Preview {
     CommandView()
-        .environmentObject(PlaygroundState())
+        .environmentObject(CommandSelection())
 }

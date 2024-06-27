@@ -3,9 +3,6 @@
 import SwiftUI
 
 struct ActionsTabView: View {
-    @EnvironmentObject var gameController: GameController
-    @EnvironmentObject var playgroundState: PlaygroundState
-
     var body: some View {
         VStack {
             TabView {
@@ -30,5 +27,4 @@ struct ActionsTabView: View {
 
 #Preview {
     ActionsTabView()
-        .environmentObject(PlaygroundState())
 }

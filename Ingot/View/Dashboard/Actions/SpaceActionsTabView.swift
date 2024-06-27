@@ -4,13 +4,13 @@ import SwiftUI
 
 struct SpaceActionsTabView: View {
     @EnvironmentObject var gameController: GameController
-    @EnvironmentObject var playgroundState: PlaygroundState
+    @EnvironmentObject var spaceActionsState: SpaceActionsState
 
     @State private var duration: CGFloat = 0.5
 
     var body: some View {
         VStack {
-            if playgroundState.assignSpaceActions {
+            if spaceActionsState.assignSpaceActions {
                 VStack {
                     Text("Duration: \(String(format: "%.2f", duration))")
                         .padding(.top)
@@ -53,10 +53,7 @@ struct SpaceActionsTabView: View {
 }
 
 #Preview {
-    let ps = PlaygroundState()
-    ps.assignSpaceActions = false
-
-    return SpaceActionsTabView()
+    SpaceActionsTabView()
         .environmentObject(GameController())
-        .environmentObject(ps)
+        .environmentObject(SpaceActionsState())
 }

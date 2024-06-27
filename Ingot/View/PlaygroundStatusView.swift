@@ -4,7 +4,6 @@ import Foundation
 import SwiftUI
 
 struct PlaygroundStatusView: View {
-    @EnvironmentObject var gameController: GameController
     @EnvironmentObject var playgroundState: PlaygroundState
 
     var body: some View {

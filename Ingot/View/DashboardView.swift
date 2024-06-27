@@ -20,10 +20,10 @@ struct DashboardView: View {
                 .background(Color(NSColor.secondarySystemFill))
                 .padding(2)
 
-//            ConfigurationTabView()
-//                .padding()
-//                .background(Color(NSColor.secondarySystemFill))
-//                .padding(2)
+            ConfigurationTabView()
+                .padding()
+                .background(Color(NSColor.secondarySystemFill))
+                .padding(2)
         }
         .monospaced()
     }

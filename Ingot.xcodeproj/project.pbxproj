@@ -60,10 +60,16 @@
 		D4D1F09B2C28B47100003163 /* PhysicsActionsTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4D1F09A2C28B47100003163 /* PhysicsActionsTabView.swift */; };
 		D4DE8B332C29D4280075F4B7 /* PhysicsBodyCategoriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4DE8B322C29D4280075F4B7 /* PhysicsBodyCategoriesView.swift */; };
 		D4DE8B3C2C29E0990075F4B7 /* PhysicsFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4DE8B3B2C29E0990075F4B7 /* PhysicsFieldView.swift */; };
-		D4DE8B412C29E6440075F4B7 /* Physics.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4DE8B402C29E6440075F4B7 /* Physics.swift */; };
+		D4DE8B412C29E6440075F4B7 /* PhysicsBodyState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4DE8B402C29E6440075F4B7 /* PhysicsBodyState.swift */; };
 		D4DE8B432C2A25060075F4B7 /* CheckboxPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4DE8B422C2A25060075F4B7 /* CheckboxPicker.swift */; };
 		D4EC5E512C2DC91C00E20EC7 /* CommandSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4EC5E502C2DC91C00E20EC7 /* CommandSelection.swift */; };
 		D4EC5E532C2DC9F300E20EC7 /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4EC5E522C2DC9F300E20EC7 /* DashboardView.swift */; };
+		D4EC5E552C2DE4E300E20EC7 /* EntityActionsPublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4EC5E542C2DE4E300E20EC7 /* EntityActionsPublisher.swift */; };
+		D4EC5E572C2DE70900E20EC7 /* SpaceActionsState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4EC5E562C2DE70900E20EC7 /* SpaceActionsState.swift */; };
+		D4EC5E592C2DE7E100E20EC7 /* PhysicsFieldState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4EC5E582C2DE7E100E20EC7 /* PhysicsFieldState.swift */; };
+		D4EC5E5B2C2DE9E100E20EC7 /* PhysicsMaskCategories.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4EC5E5A2C2DE9E100E20EC7 /* PhysicsMaskCategories.swift */; };
+		D4EC5E5D2C2DEC1700E20EC7 /* EntitySelectionState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4EC5E5C2C2DEC1700E20EC7 /* EntitySelectionState.swift */; };
+		D4EC5E5F2C2DED3B00E20EC7 /* PhysicsWorldState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4EC5E5E2C2DED3B00E20EC7 /* PhysicsWorldState.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -123,10 +129,16 @@
 		D4D1F09A2C28B47100003163 /* PhysicsActionsTabView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhysicsActionsTabView.swift; sourceTree = "<group>"; };
 		D4DE8B322C29D4280075F4B7 /* PhysicsBodyCategoriesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhysicsBodyCategoriesView.swift; sourceTree = "<group>"; };
 		D4DE8B3B2C29E0990075F4B7 /* PhysicsFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhysicsFieldView.swift; sourceTree = "<group>"; };
-		D4DE8B402C29E6440075F4B7 /* Physics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Physics.swift; sourceTree = "<group>"; };
+		D4DE8B402C29E6440075F4B7 /* PhysicsBodyState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhysicsBodyState.swift; sourceTree = "<group>"; };
 		D4DE8B422C2A25060075F4B7 /* CheckboxPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckboxPicker.swift; sourceTree = "<group>"; };
 		D4EC5E502C2DC91C00E20EC7 /* CommandSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandSelection.swift; sourceTree = "<group>"; };
 		D4EC5E522C2DC9F300E20EC7 /* DashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardView.swift; sourceTree = "<group>"; };
+		D4EC5E542C2DE4E300E20EC7 /* EntityActionsPublisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityActionsPublisher.swift; sourceTree = "<group>"; };
+		D4EC5E562C2DE70900E20EC7 /* SpaceActionsState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpaceActionsState.swift; sourceTree = "<group>"; };
+		D4EC5E582C2DE7E100E20EC7 /* PhysicsFieldState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhysicsFieldState.swift; sourceTree = "<group>"; };
+		D4EC5E5A2C2DE9E100E20EC7 /* PhysicsMaskCategories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhysicsMaskCategories.swift; sourceTree = "<group>"; };
+		D4EC5E5C2C2DEC1700E20EC7 /* EntitySelectionState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntitySelectionState.swift; sourceTree = "<group>"; };
+		D4EC5E5E2C2DED3B00E20EC7 /* PhysicsWorldState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhysicsWorldState.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -233,7 +245,6 @@
 				D49BD5C82C2C682500FD313C /* GameScene.swift */,
 				D49BD5CA2C2C682B00FD313C /* GameScene+Mouse.swift */,
 				D4D1F0662C27BA8800003163 /* IngotApp.swift */,
-				D4DE8B402C29E6440075F4B7 /* Physics.swift */,
 				D49BD5D32C2C684400FD313C /* SelectionMarquee.swift */,
 				D4D1F0772C27BAF900003163 /* Utility.swift */,
 				D49BD59A2C2C10D800FD313C /* Assets.xcassets */,
@@ -329,7 +340,14 @@
 			isa = PBXGroup;
 			children = (
 				D4EC5E502C2DC91C00E20EC7 /* CommandSelection.swift */,
+				D4EC5E542C2DE4E300E20EC7 /* EntityActionsPublisher.swift */,
+				D4EC5E5C2C2DEC1700E20EC7 /* EntitySelectionState.swift */,
+				D4DE8B402C29E6440075F4B7 /* PhysicsBodyState.swift */,
+				D4EC5E582C2DE7E100E20EC7 /* PhysicsFieldState.swift */,
+				D4EC5E5A2C2DE9E100E20EC7 /* PhysicsMaskCategories.swift */,
+				D4EC5E5E2C2DED3B00E20EC7 /* PhysicsWorldState.swift */,
 				D4D1F0852C27BFF300003163 /* PlaygroundState.swift */,
+				D4EC5E562C2DE70900E20EC7 /* SpaceActionsState.swift */,
 			);
 			path = StateObject;
 			sourceTree = "<group>";
@@ -416,7 +434,10 @@
 				D49BD4FF2C2B218900FD313C /* CommandView.swift in Sources */,
 				D49BD5AC2C2C3EAA00FD313C /* GameControllerTestView.swift in Sources */,
 				D49BD5DA2C2C9A8A00FD313C /* PlaygroundStatusView.swift in Sources */,
+				D4EC5E5B2C2DE9E100E20EC7 /* PhysicsMaskCategories.swift in Sources */,
+				D4EC5E5D2C2DEC1700E20EC7 /* EntitySelectionState.swift in Sources */,
 				D4D1F0972C28B38100003163 /* SpaceActionsTabView.swift in Sources */,
+				D4EC5E5F2C2DED3B00E20EC7 /* PhysicsWorldState.swift in Sources */,
 				D49BD5B82C2C4CCB00FD313C /* Gremlin.swift in Sources */,
 				D4DE8B432C2A25060075F4B7 /* CheckboxPicker.swift in Sources */,
 				D49BD5B42C2C4B4100FD313C /* SelectionHaloRS.swift in Sources */,
@@ -428,6 +449,7 @@
 				D4D1F0922C28A15200003163 /* Slider2DView.swift in Sources */,
 				D4A621A92C29172D00C3F89A /* PhysicsTabView.swift in Sources */,
 				D49BD5CB2C2C682B00FD313C /* GameScene+Mouse.swift in Sources */,
+				D4EC5E552C2DE4E300E20EC7 /* EntityActionsPublisher.swift in Sources */,
 				D4D1F0862C27BFF300003163 /* PlaygroundState.swift in Sources */,
 				D49BD5C52C2C66C300FD313C /* Joint.swift in Sources */,
 				D4D1F07D2C27BBDE00003163 /* RotateActionTokenView.swift in Sources */,
@@ -439,11 +461,13 @@
 				D4DE8B332C29D4280075F4B7 /* PhysicsBodyCategoriesView.swift in Sources */,
 				D4D1F0762C27BAE700003163 /* ActionTokenView.swift in Sources */,
 				D4D1F0882C27C4B400003163 /* ForceActionTokenView.swift in Sources */,
+				D4EC5E592C2DE7E100E20EC7 /* PhysicsFieldState.swift in Sources */,
 				D49BD5C92C2C682500FD313C /* GameScene.swift in Sources */,
 				D49BD5D82C2C69C700FD313C /* GameController+Select.swift in Sources */,
 				D46584E62C2CD73800BC19E7 /* ConfigurationTabView.swift in Sources */,
-				D4DE8B412C29E6440075F4B7 /* Physics.swift in Sources */,
+				D4DE8B412C29E6440075F4B7 /* PhysicsBodyState.swift in Sources */,
 				D49BD5BF2C2C602200FD313C /* Waypoint.swift in Sources */,
+				D4EC5E572C2DE70900E20EC7 /* SpaceActionsState.swift in Sources */,
 				D4DE8B3C2C29E0990075F4B7 /* PhysicsFieldView.swift in Sources */,
 				D49BD5BB2C2C4D8900FD313C /* SKNode+Extensions.swift in Sources */,
 				D4D1F08C2C27C4C800003163 /* ImpulseActionTokenView.swift in Sources */,

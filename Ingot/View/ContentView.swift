@@ -15,10 +15,24 @@ struct ContentView: View {
 }
 
 #Preview {
-    @StateObject var ps = PlaygroundState()
-    ps.makeTestTokensArray()
+    @StateObject var commandSelection = CommandSelection()
+    @StateObject var entitySelectionState = EntitySelectionState()
+    @StateObject var gameController = GameController()
+    @StateObject var playgroundState = PlaygroundState()
+    @StateObject var spaceActionsState = SpaceActionsState()
 
     return ContentView()
-        .environmentObject(GameController())
-        .environmentObject(ps)
+        .environmentObject(commandSelection)
+        .environmentObject(entitySelectionState)
+        .environmentObject(gameController)
+        .environmentObject(playgroundState)
+        .environmentObject(spaceActionsState)
+        .onAppear() {
+            gameController.postInit(
+                commandSelection,
+                entitySelectionState,
+                playgroundState,
+                spaceActionsState
+            )
+        }
 }

@@ -20,6 +20,31 @@ final class Gremlin: GameEntity {
         avatar!.sceneNode as! SKSpriteNode
     }
 
+    override var physicsBody: SKPhysicsBody? {
+        get { avatar?.sceneNode.physicsBody }
+        set { avatar?.sceneNode.physicsBody = newValue }
+    }
+
+    override var rotation: CGFloat {
+        get { avatar?.sceneNode.zRotation ?? 0 }
+        set {
+            avatar?.sceneNode.zRotation = newValue
+            halo?.sceneNode.zRotation = newValue
+        }
+    }
+
+    override var scale: CGFloat {
+        get {
+            guard let sn = avatar?.sceneNode else { return 0 }
+            return sn.xScale
+        }
+
+        set {
+            avatar?.sceneNode.setScale(newValue)
+            halo?.setScale(newValue)
+        }
+    }
+
     init(halo halo_: SelectionHalo, view avatar_: GameEntitySprite) {
         self.halo_ = halo_
         self.avatar_ = avatar_

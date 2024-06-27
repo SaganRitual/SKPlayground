@@ -3,7 +3,7 @@
 import SwiftUI
 
 struct PhysicsBodyView: View {
-    @EnvironmentObject var playgroundState: PlaygroundState
+    @EnvironmentObject var physicsBodyState: PhysicsBodyState
 
     func makeScalarView(_ value: CGFloat) -> some View {
         Text(String(format: "%.2f", value))
@@ -12,17 +12,17 @@ struct PhysicsBodyView: View {
     var body: some View {
         VStack {
             HStack(spacing: 30) {
-                Toggle(isOn: $playgroundState.physicsBodyHaver.dynamism) {
+                Toggle(isOn: $physicsBodyState.dynamism) {
                     Text("Apply Physics")
                 }
                 .toggleStyle(.checkbox)
 
-                Toggle(isOn: $playgroundState.physicsBodyHaver.gravitism) {
+                Toggle(isOn: $physicsBodyState.gravitism) {
                     Text("Apply Gravity")
                 }
                 .toggleStyle(.checkbox)
 
-                Toggle(isOn: $playgroundState.physicsBodyHaver.rotatism) {
+                Toggle(isOn: $physicsBodyState.rotatism) {
                     Text("Allow Rotation")
                 }
                 .toggleStyle(.checkbox)
@@ -32,22 +32,22 @@ struct PhysicsBodyView: View {
             HStack(alignment: .top) {
                 VStack {
                     BasicScalarSlider(
-                        scalar: $playgroundState.physicsBodyHaver.area,
-                        scalarView: Text(String(format: "%.1f", playgroundState.physicsBodyHaver.area)),
+                        scalar: $physicsBodyState.area,
+                        scalarView: Text(String(format: "%.1f", physicsBodyState.area)),
                         title: Text("Area"),
                         minLabel: "0", maxLabel: "10", range: 0...10
                     )
 
                     BasicScalarSlider(
-                        scalar: $playgroundState.physicsBodyHaver.density,
-                        scalarView: Text(String(format: "%.1f", playgroundState.physicsBodyHaver.density)),
+                        scalar: $physicsBodyState.density,
+                        scalarView: Text(String(format: "%.1f", physicsBodyState.density)),
                         title: Text("Density"),
                         minLabel: "0", maxLabel: "10", range: 0...10
                     )
 
                     BasicScalarSlider(
-                        scalar: $playgroundState.physicsBodyHaver.friction,
-                        scalarView: Text(String(format: "%.1f", playgroundState.physicsBodyHaver.friction)),
+                        scalar: $physicsBodyState.friction,
+                        scalarView: Text(String(format: "%.1f", physicsBodyState.friction)),
                         title: Text("Friction"),
                         minLabel: "0", maxLabel: "10", range: 0...10
                     )
@@ -55,15 +55,15 @@ struct PhysicsBodyView: View {
 
                 VStack {
                     BasicScalarSlider(
-                        scalar: $playgroundState.physicsBodyHaver.mass,
-                        scalarView: Text(String(format: "%.1f", playgroundState.physicsBodyHaver.mass)),
+                        scalar: $physicsBodyState.mass,
+                        scalarView: Text(String(format: "%.1f", physicsBodyState.mass)),
                         title: Text("Mass"),
                         minLabel: "0", maxLabel: "10", range: 0...10
                     )
 
                     BasicScalarSlider(
-                        scalar: $playgroundState.physicsBodyHaver.restitution,
-                        scalarView: Text(String(format: "%.1f", playgroundState.physicsBodyHaver.restitution)),
+                        scalar: $physicsBodyState.restitution,
+                        scalarView: Text(String(format: "%.1f", physicsBodyState.restitution)),
                         title: Text("Restitution"),
                         minLabel: "0", maxLabel: "10", range: 0...10
                     )
@@ -78,15 +78,15 @@ struct PhysicsBodyView: View {
                         .underline()
 
                     BasicScalarSlider(
-                        scalar: $playgroundState.physicsBodyHaver.angularDamping,
-                        scalarView: Text(String(format: "%.1f", playgroundState.physicsBodyHaver.angularDamping)),
+                        scalar: $physicsBodyState.angularDamping,
+                        scalarView: Text(String(format: "%.1f", physicsBodyState.angularDamping)),
                         title: Text("Angular"),
                         minLabel: "0", maxLabel: "10", range: 0...10
                     )
 
                     BasicScalarSlider(
-                        scalar: $playgroundState.physicsBodyHaver.linearDamping,
-                        scalarView: Text(String(format: "%.1f", playgroundState.physicsBodyHaver.linearDamping)),
+                        scalar: $physicsBodyState.linearDamping,
+                        scalarView: Text(String(format: "%.1f", physicsBodyState.linearDamping)),
                         title: Text("Linear"),
                         minLabel: "0", maxLabel: "10", range: 0...10
                     )
@@ -99,5 +99,5 @@ struct PhysicsBodyView: View {
 
 #Preview {
     PhysicsBodyView()
-        .environmentObject(PlaygroundState())
+        .environmentObject(PhysicsBodyState())
 }

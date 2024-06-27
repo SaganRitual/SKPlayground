@@ -3,8 +3,8 @@
 import SwiftUI
 
 struct ConfigurationTabView: View {
+    @EnvironmentObject var entitySelectionState: EntitySelectionState
     @EnvironmentObject var gameController: GameController
-    @EnvironmentObject var playgroundState: PlaygroundState
 
     var body: some View {
         VStack {
@@ -13,7 +13,7 @@ struct ConfigurationTabView: View {
                 .padding(.vertical)
 
             TabView {
-                if playgroundState.selectionState == .one &&
+                if entitySelectionState.selectionState == .one &&
                     gameController.getSelected().first is Gremlin {
                     ActionsTabView()
                         .tabItem {
@@ -33,4 +33,6 @@ struct ConfigurationTabView: View {
 
 #Preview {
     ConfigurationTabView()
+        .environmentObject(EntitySelectionState())
+        .environmentObject(GameController())
 }

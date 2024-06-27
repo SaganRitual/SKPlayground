@@ -3,6 +3,12 @@
 import Foundation
 import SwiftUI
 
+enum ClickToPlace: String, RawRepresentable, CaseIterable, Identifiable {
+    var id: String { self.rawValue }
+
+    case field = "Field", gremlin = "Gremlin", joint = "Joint", vertex = "Vertex", waypoint = "Waypoint"
+}
+
 final class CommandSelection: ObservableObject {
     @Published var clickToPlace: ClickToPlace = .gremlin
     @Published var selectedGremlinTexture = ""

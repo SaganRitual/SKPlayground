@@ -13,13 +13,12 @@ extension VerticalAlignment {
 }
 
 struct PhysicsWorldView: View {
-    @EnvironmentObject var playgroundState: PlaygroundState
+    @EnvironmentObject var physicsMaskCategories: PhysicsMaskCategories
+    @EnvironmentObject var physicsWorldState: PhysicsWorldState
 
     @State private var currentCategoryName = "Category 0"
     @State private var enableEdgeLoop = false
-    @State private var enableGravity = false
     @State private var gravityPair = ABPair(a: 0, b: 0)
-    @State private var speed: CGFloat = 1
 
     @State private var isEditing = false
     @State private var editedName = ""
@@ -27,7 +26,7 @@ struct PhysicsWorldView: View {
     @State private var duplicateCategoryIndex = 0
 
     var gravityToggle: some View {
-        Toggle(isOn: $enableGravity) {
+        Toggle(isOn: $physicsWorldState.enableGravity) {
             Text("Gravity")
         }
         .toggleStyle(.checkbox)
@@ -48,19 +47,19 @@ struct PhysicsWorldView: View {
                 )
                 .padding(.trailing)
                 .onChange(of: gravityPair) {
-                    playgroundState.gravity = CGVector(gravityPair)
+                    physicsWorldState.gravity = CGVector(gravityPair)
                 }
 
                 VStack(alignment: .leading) {
                     VStack(alignment: .center) {
-                        Text("Speed: \(String(format: "%.2f", speed))")
+                        Text("Speed: \(String(format: "%.2f", physicsWorldState.speed))")
                             .alignmentGuide(.gravityToggleAlignment) { dimensions in
                                 dimensions[VerticalAlignment.center]  // Align "Speed" text to center
                             }
 
                         HStack {
                             Text("0.0")
-                            Slider(value: $speed, in: 0...1)
+                            Slider(value: $physicsWorldState.speed, in: 0...1)
                             Text("1.0")
                         }
                         .padding([.horizontal])
@@ -75,7 +74,7 @@ struct PhysicsWorldView: View {
 
                     HStack {
                         Picker("Categories", selection: $currentCategoryName) {
-                            ForEach(playgroundState.physicsCategories.names, id: \.self) { name in
+                            ForEach(physicsMaskCategories.names, id: \.self) { name in
                                 Text(name)
                             }
                         }
@@ -93,7 +92,7 @@ struct PhysicsWorldView: View {
 
                             HStack {
                                 Button("Save") {
-                                    if let duplicateIx = playgroundState.physicsCategories.renameCategory(currentName: currentCategoryName, newName: editedName) {
+                                    if let duplicateIx = physicsMaskCategories.renameCategory(currentName: currentCategoryName, newName: editedName) {
                                         duplicateCategoryIndex = duplicateIx
                                         showDuplicateAlert = true
                                     } else {
@@ -111,7 +110,7 @@ struct PhysicsWorldView: View {
                     .alert(isPresented: $showDuplicateAlert) {  // Alert now bound to state
                       Alert(
                         title: Text("Category names must be unique"),
-                        message: Text("There is already a category called \(playgroundState.physicsCategories.names[duplicateCategoryIndex])"),
+                        message: Text("There is already a category called \(physicsMaskCategories.names[duplicateCategoryIndex])"),
                         dismissButton: .cancel()
                       )
                     }
@@ -125,5 +124,6 @@ struct PhysicsWorldView: View {
 
 #Preview {
     PhysicsWorldView()
-        .environmentObject(PlaygroundState())
+        .environmentObject(PhysicsMaskCategories())
+        .environmentObject(PhysicsWorldState())
 }

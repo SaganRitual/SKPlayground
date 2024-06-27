@@ -18,7 +18,8 @@ enum PhysicsFieldType: String, CaseIterable, Identifiable, RawRepresentable {
 }
 
 struct PhysicsFieldView: View {
-    @EnvironmentObject var playgroundState: PlaygroundState
+    @EnvironmentObject var physicsFieldState: PhysicsFieldState
+    @EnvironmentObject var physicsMaskCategories: PhysicsMaskCategories
 
     @State private var enableRegion = false
     @State private var selectedCategoryIndices = Set<Int>()
@@ -39,12 +40,12 @@ struct PhysicsFieldView: View {
     var body: some View {
         VStack {
             HStack {
-                Toggle(isOn: $playgroundState.physicsField.enabled) {
+                Toggle(isOn: $physicsFieldState.enabled) {
                     Text("Enabled")
                 }
                 .toggleStyle(.checkbox)
 
-                Toggle(isOn: $playgroundState.physicsField.exclusive) {
+                Toggle(isOn: $physicsFieldState.exclusive) {
                     Text("Exclusive")
                 }
                 .toggleStyle(.checkbox)
@@ -53,28 +54,28 @@ struct PhysicsFieldView: View {
             VStack {
                 HStack {
                     BasicScalarSlider(
-                        scalar: $playgroundState.physicsField.falloff,
-                        scalarView: Text(String(format: "%.1f", playgroundState.physicsField.falloff)),
+                        scalar: $physicsFieldState.falloff,
+                        scalarView: Text(String(format: "%.1f", physicsFieldState.falloff)),
                         title: Text("Falloff"),
                         minLabel: "0", maxLabel: "100", range: 0...100
                     )
                     BasicScalarSlider(
-                        scalar: $playgroundState.physicsField.minimumRadius,
-                        scalarView: Text(String(format: "%.1f", playgroundState.physicsField.minimumRadius)),
+                        scalar: $physicsFieldState.minimumRadius,
+                        scalarView: Text(String(format: "%.1f", physicsFieldState.minimumRadius)),
                         title: VStack(alignment: .leading) { Text("Minimum"); Text("Radius") },
                         minLabel: "0", maxLabel: "100", range: 0...100
                     )
                 }
                 HStack {
                     BasicScalarSlider(
-                        scalar: $playgroundState.physicsField.smoothness,
-                        scalarView: Text(String(format: "%.1f", playgroundState.physicsField.smoothness)),
+                        scalar: $physicsFieldState.smoothness,
+                        scalarView: Text(String(format: "%.1f", physicsFieldState.smoothness)),
                         title: Text("Smooth"),
                         minLabel: "0", maxLabel: "100", range: 0...100
                     )
                     BasicScalarSlider(
-                        scalar: $playgroundState.physicsField.strength,
-                        scalarView: Text(String(format: "%.1f", playgroundState.physicsField.strength)),
+                        scalar: $physicsFieldState.strength,
+                        scalarView: Text(String(format: "%.1f", physicsFieldState.strength)),
                         title: Text("Strength"),
                         minLabel: "0", maxLabel: "100", range: 0...100
                     )
@@ -91,10 +92,10 @@ struct PhysicsFieldView: View {
                 )
                 .padding(.trailing)
                 .onChange(of: regionPair) {
-                    playgroundState.physicsField.region = CGSize(regionPair)
+                    physicsFieldState.region = CGSize(regionPair)
                 }
 
-                if playgroundState.selectedPhysicsField.fieldType == .velocity {
+                if physicsFieldState.fieldType == .velocity {
                     Slider2DView(
                         output: $velocityPair,
                         size: CGSize(width: 100, height: 100),
@@ -104,16 +105,16 @@ struct PhysicsFieldView: View {
                     )
                     .padding(.trailing)
                     .onChange(of: velocityPair) {
-                        playgroundState.physicsField.direction = CGVector(velocityPair)
+                        physicsFieldState.direction = CGVector(velocityPair)
                     }
                 }
 
                 VStack {
-                    if playgroundState.selectedPhysicsField.fieldType == .noise ||
-                        playgroundState.selectedPhysicsField.fieldType == .turbulence {
+                    if physicsFieldState.fieldType == .noise ||
+                        physicsFieldState.fieldType == .turbulence {
                         BasicScalarSlider(
-                            scalar: $playgroundState.physicsField.animationSpeed,
-                            scalarView: Text(String(format: "%.1f", playgroundState.physicsField.animationSpeed)),
+                            scalar: $physicsFieldState.animationSpeed,
+                            scalarView: Text(String(format: "%.1f", physicsFieldState.animationSpeed)),
                             title: VStack(alignment: .leading) { Text("Animation").font(.system(size: 10)); Text("Speed").font(.system(size: 10)) },
                             minLabel: "0", maxLabel: "100", range: 0...100
                         )
@@ -123,7 +124,7 @@ struct PhysicsFieldView: View {
                     CheckboxPicker(
                         selectedIndices: $selectedCategoryIndices,
                         label: Text("Set Categories"),
-                        options: playgroundState.physicsCategories.names
+                        options: physicsMaskCategories.names
                     )
                     .padding(.leading)
                 }
@@ -135,5 +136,6 @@ struct PhysicsFieldView: View {
 
 #Preview {
     PhysicsFieldView()
-        .environmentObject(PlaygroundState())
+        .environmentObject(PhysicsFieldState())
+        .environmentObject(PhysicsMaskCategories())
 }

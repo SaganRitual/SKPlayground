@@ -17,7 +17,7 @@ extension GameController {
         cancelAssignActionsMode()
 
         entity.halo?.deselect()
-        playgroundState.setSelectionState(getSelected())
+        entitySelectionState.setSelectionState(getSelected())
     }
 
     func deselectAll() {
@@ -38,13 +38,13 @@ extension GameController {
 
     func select(_ entity: GameEntity) {
         entity.halo?.select()
-        playgroundState.setSelectionState(getSelected())
+        entitySelectionState.setSelectionState(getSelected())
     }
 
     func toggleSelect(_ entity: GameEntity) {
         cancelAssignActionsMode()
 
         entity.halo?.toggleSelect()
-        playgroundState.setSelectionState(getSelected())
+        entitySelectionState.setSelectionState(getSelected())
     }
 }

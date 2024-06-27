@@ -16,10 +16,7 @@ class GameEntity {
 
     var halo: SelectionHalo? { nil }
 
-    var physicsBody: SKPhysicsBody? {
-        get { avatar?.sceneNode.physicsBody }
-        set { avatar?.sceneNode.physicsBody = newValue }
-    }
+    var physicsBody: SKPhysicsBody? { get { nil } set { } }
 
     var position: CGPoint {
         get { avatar?.sceneNode.position ?? .zero }
@@ -29,25 +26,9 @@ class GameEntity {
         }
     }
 
-    var rotation: CGFloat {
-        get { avatar?.sceneNode.zRotation ?? 0 }
-        set {
-            avatar?.sceneNode.zRotation = newValue
-            halo?.sceneNode.zRotation = newValue
-        }
-    }
+    var rotation: CGFloat { get { 0 } set { } }
 
-    var scale: CGFloat {
-        get {
-            guard let sn = avatar?.sceneNode else { return 0 }
-            return sn.xScale
-        }
-
-        set {
-            avatar?.sceneNode.setScale(newValue)
-            halo?.setScale(newValue)
-        }
-    }
+    var scale: CGFloat { get { 1 } set { } }
 
     func addActionToken(_ token: any ActionTokenProtocol) { }
     func getActionTokens() -> [ActionTokenContainer] { [] }

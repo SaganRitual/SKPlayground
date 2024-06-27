@@ -3,7 +3,7 @@
 import SwiftUI
 
 struct ActionTokensScrollView: View {
-    @EnvironmentObject var playgroundState: PlaygroundState
+    @EnvironmentObject var actionsPublisher: EntityActionsPublisher
 
     func createActionView(for container: ActionTokenContainer) -> any View {
         switch container.token {
@@ -35,13 +35,13 @@ struct ActionTokensScrollView: View {
 
     var body: some View {
         Group {
-            if playgroundState.activeActionTokens.isEmpty {
+            if actionsPublisher.actionTokens.isEmpty {
                 Text("No actions assigned to this entity")
                     .padding()
             } else {
                 ScrollView(.horizontal) {
                     HStack {
-                        ForEach(playgroundState.activeActionTokens) { container in
+                        ForEach(actionsPublisher.actionTokens) { container in
                             AnyView(createActionView(for: container))
                         }
                     }
@@ -54,9 +54,9 @@ struct ActionTokensScrollView: View {
 }
 
 #Preview {
-    let ps = PlaygroundState()
-    ps.makeTestTokensArray()
+    let ap = EntityActionsPublisher()
+    ap.makeTestTokensArray()
 
     return ActionTokensScrollView()
-        .environmentObject(ps)
+        .environmentObject(ap)
 }

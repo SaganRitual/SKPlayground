@@ -16,20 +16,29 @@ protocol SelectableProtocol {
 
 final class GameController: ObservableObject {
     weak var commandSelection: CommandSelection!
+    weak var entitySelectionState: EntitySelectionState!
     weak var gameScene: GameScene!
     weak var playgroundState: PlaygroundState!
+    weak var spaceActionsState: SpaceActionsState!
     var selectionMarquee: SelectionMarquee!
 
     var entities = Set<GameEntity>()
 
-    func postInit(_ commandSelection: CommandSelection, _ playgroundState: PlaygroundState) {
+    func postInit(
+        _ commandSelection: CommandSelection,
+        _ entitySelectionState: EntitySelectionState,
+        _ playgroundState: PlaygroundState,
+        _ spaceActionsState: SpaceActionsState
+    ) {
         self.commandSelection = commandSelection
+        self.entitySelectionState = entitySelectionState
         self.playgroundState = playgroundState
         self.selectionMarquee = SelectionMarquee(playgroundState)
+        self.spaceActionsState = spaceActionsState
     }
 
     func cancelAssignActionsMode() {
-        playgroundState.assignSpaceActions = false
+        spaceActionsState.assignSpaceActions = false
     }
 
     func click(_ clickDispatch: ClickDispatch) {
@@ -71,7 +80,7 @@ final class GameController: ObservableObject {
     }
 
     func commitActions(duration: TimeInterval) {
-        playgroundState.assignSpaceActions = false
+        spaceActionsState.assignSpaceActions = false
     }
 
     func installGameScene(_ size: CGSize) -> GameScene {
@@ -139,6 +148,6 @@ final class GameController: ObservableObject {
     }
 
     func startActionsMode() {
-        playgroundState.assignSpaceActions = true
+        spaceActionsState.assignSpaceActions = true
     }
 }

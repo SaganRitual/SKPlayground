@@ -4,14 +4,14 @@ import SwiftUI
 
 struct PhysicsTabView: View {
     @EnvironmentObject var gameController: GameController
-    @EnvironmentObject var playgroundState: PlaygroundState
+    @EnvironmentObject var entitySelectionState: EntitySelectionState
 
     func exactlyOneFieldSelected() -> Bool {
-        playgroundState.selectionState == .one && gameController.getSelected().first is Field
+        entitySelectionState.selectionState == .one && gameController.getSelected().first is Field
     }
 
     func exactlyOneGremlinSelected() -> Bool {
-        playgroundState.selectionState == .one && gameController.getSelected().first is Gremlin
+        entitySelectionState.selectionState == .one && gameController.getSelected().first is Gremlin
     }
 
     var body: some View {
@@ -45,5 +45,6 @@ struct PhysicsTabView: View {
 
 #Preview {
     PhysicsTabView()
-        .environmentObject(PlaygroundState())
+        .environmentObject(GameController())
+        .environmentObject(EntitySelectionState())
 }

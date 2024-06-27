@@ -9,7 +9,7 @@ final class CategorySwitches: ObservableObject {
 }
 
 struct PhysicsBodyCategoriesView: View {
-    @EnvironmentObject var playgroundState: PlaygroundState
+    @EnvironmentObject var physicsMaskCategories: PhysicsMaskCategories
 
     @State private var currentCategoryName = "Category foo"
     @State private var currentCollisionName = "Category bar"
@@ -27,21 +27,21 @@ struct PhysicsBodyCategoriesView: View {
                 CheckboxPicker(
                     selectedIndices: $selectedCategoryIndices,
                     label: Text("Mask Categories"),
-                    options: playgroundState.physicsCategories.names
+                    options: physicsMaskCategories.names
                 )
                 .frame(minWidth: 100)
 
                 CheckboxPicker(
                     selectedIndices: $selectedCollisionIndices,
                     label: Text("Collision Mask"),
-                    options: playgroundState.physicsCategories.names
+                    options: physicsMaskCategories.names
                 )
                 .frame(minWidth: 100)
 
                 CheckboxPicker(
                     selectedIndices: $selectedContactIndices,
                     label: Text("Contact Mask"),
-                    options: playgroundState.physicsCategories.names
+                    options: physicsMaskCategories.names
                 )
                 .frame(minWidth: 100)
             }
@@ -52,5 +52,5 @@ struct PhysicsBodyCategoriesView: View {
 
 #Preview {
     PhysicsBodyCategoriesView()
-        .environmentObject(PlaygroundState())
+        .environmentObject(PhysicsMaskCategories())
 }

@@ -9,19 +9,13 @@ enum PhysicsJointType: String, CaseIterable, Identifiable, RawRepresentable {
 }
 
 struct PhysicsJointView: View {
-    @EnvironmentObject var playgroundState: PlaygroundState
-
-    @State private var currentJoint: String = PhysicsJointType.fixed.rawValue
-
-    let jointTypes = [
-        "Fixed", "Limit", "Pin", "Sliding", "Spring"
-    ]
+    @State private var selectedJointType: PhysicsJointType = .fixed
 
     var body: some View {
         VStack {
-            Picker("", selection: $currentJoint) {
-                ForEach(jointTypes, id: \.self) { name in
-                    Text(name)
+            Picker("", selection: $selectedJointType) {
+                ForEach(PhysicsJointType.allCases, id: \.self) { jointType in
+                    Text(jointType.rawValue).tag(jointType)
                 }
             }
             .pickerStyle(.segmented) // Use segmented control style for radio buttons
@@ -31,5 +25,4 @@ struct PhysicsJointView: View {
 
 #Preview {
     PhysicsJointView()
-        .environmentObject(PlaygroundState())
 }

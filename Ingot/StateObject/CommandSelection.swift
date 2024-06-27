@@ -10,7 +10,11 @@ enum ClickToPlace: String, RawRepresentable, CaseIterable, Identifiable {
 }
 
 final class CommandSelection: ObservableObject {
+    @Published var actionsSpeed: CGFloat = 1
     @Published var clickToPlace: ClickToPlace = .gremlin
+    @Published var physicsSpeed: CGFloat = 1
+    @Published var playActions: Bool = false
+    @Published var playPhysics: Bool = false
     @Published var selectedGremlinTexture = ""
 
     var gremlinImageNames = [String]()

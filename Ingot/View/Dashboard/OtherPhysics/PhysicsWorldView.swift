@@ -73,14 +73,14 @@ struct PhysicsWorldView: View {
                     .padding([.leading, .bottom])
 
                     HStack {
-                        Picker("Categories", selection: $currentCategoryName) {
+                        Picker("Category Names", selection: $currentCategoryName) {
                             ForEach(physicsMaskCategories.names, id: \.self) { name in
                                 Text(name)
                             }
                         }
                         .pickerStyle(.menu)
 
-                        Button("Rename Category") {
+                        Button("Rename") {
                             editedName = currentCategoryName
                             isEditing = true
                         }

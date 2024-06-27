@@ -12,6 +12,7 @@ final class GameController: ObservableObject {
     var selectionMarquee: SelectionMarquee!
 
     var entities = Set<GameEntity>()
+    var resumePhysicsSpeed: CGFloat?
 
     func postInit(
         _ commandSelection: CommandSelection,
@@ -50,6 +51,27 @@ final class GameController: ObservableObject {
         gameScene.postInit(self, self.playgroundState, self.selectionMarquee)
 
         return gameScene
+    }
+
+    func getActionsSpeed() -> CGFloat { gameScene.speed }
+    func setActionsSpeed(_ speed: CGFloat) { gameScene.speed = speed }
+
+    func startActions() { gameScene.isPaused = false }
+    func stopActions() { gameScene.isPaused = true }
+
+    func getPhysicsSpeed() -> CGFloat { gameScene.physicsWorld.speed }
+    func setPhysicsSpeed(_ speed: CGFloat) { gameScene.physicsWorld.speed = speed }
+
+    func startPhysics() {
+        setPhysicsSpeed(resumePhysicsSpeed ?? 1)
+        resumePhysicsSpeed = nil
+    }
+
+    func stopPhysics() {
+        if resumePhysicsSpeed == nil {
+            resumePhysicsSpeed = getPhysicsSpeed()
+            setPhysicsSpeed(0)
+        }
     }
 
     func startActionsMode() {

@@ -12,7 +12,7 @@ struct DashboardView: View {
                 .padding(2)
 
             CommandView()
-                .frame(height: 100)
+                .frame(height: 200)
                 .padding()
                 .background(Color(NSColor.secondarySystemFill))
                 .padding(2)
@@ -28,4 +28,10 @@ struct DashboardView: View {
 
 #Preview {
     DashboardView()
+        .environmentObject(CommandSelection())
+        .environmentObject(EntitySelectionState())
+        .environmentObject(GameController())
+        .environmentObject(PhysicsWorldState())
+        .environmentObject(PhysicsMaskCategories())
+        .environmentObject(PlaygroundState())
 }

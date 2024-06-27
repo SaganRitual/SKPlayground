@@ -18,7 +18,7 @@ struct PhysicsWorldView: View {
     @State private var currentCategoryName = "Category 0"
     @State private var enableEdgeLoop = false
     @State private var enableGravity = false
-    @State private var gravity = CGVector(dx: 0, dy: -9.8)
+    @State private var gravityPair = ABPair(a: 0, b: 0)
     @State private var speed: CGFloat = 1
 
     @State private var isEditing = false
@@ -40,13 +40,16 @@ struct PhysicsWorldView: View {
         VStack {
             HStack(alignment: .gravityToggleAlignment) {
                 Slider2DView(
-                    output: $gravity,
+                    output: $gravityPair,
                     size: CGSize(width: 100, height: 100),
                     snapTolerance: 5,
                     title: gravityToggle,
                     virtualSize: CGSize(width: 20, height: 20)
                 )
                 .padding(.trailing)
+                .onChange(of: gravityPair) {
+                    playgroundState.gravity = CGVector(gravityPair)
+                }
 
                 VStack(alignment: .leading) {
                     VStack(alignment: .center) {
@@ -116,6 +119,7 @@ struct PhysicsWorldView: View {
             }
         }
         .padding()
+        .frame(width: 700, height: 400)
     }
 }
 

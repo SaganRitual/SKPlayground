@@ -134,59 +134,25 @@ extension CGRect {
     }
 }
 
-protocol HasABPairProtocol {
-    associatedtype RegularNumber: Comparable & AdditiveArithmetic & ExpressibleByIntegerLiteral
-
-    var abPairA: RegularNumber { get set }
-    var abPairB: RegularNumber { get set }
-
-    init(_ a: RegularNumber, _ b: RegularNumber)
+struct ABPair: Equatable {
+    let a: CGFloat
+    let b: CGFloat
 }
 
-extension CGPoint: HasABPairProtocol {
-    var abPairA: CGFloat {
-        get { x }
-        set { x = newValue }
-    }
-
-    var abPairB: CGFloat {
-        get { y }
-        set { y = newValue }
-    }
-
-    init(_ a: CGFloat, _ b: CGFloat) {
-        self.init(x: a, y: b)
+extension CGPoint {
+    init(_ abPair: ABPair) {
+        self.init(x: abPair.a, y: abPair.b)
     }
 }
 
-extension CGVector: HasABPairProtocol {
-    var abPairA: CGFloat {
-        get { dx }
-        set { dx = newValue }
-    }
-
-    var abPairB: CGFloat {
-        get { dy }
-        set { dy = newValue }
-    }
-
-    init(_ a: CGFloat, _ b: CGFloat) {
-        self.init(dx: a, dy: b)
+extension CGVector {
+    init(_ abPair: ABPair) {
+        self.init(dx: abPair.a, dy: abPair.b)
     }
 }
 
-extension CGSize: HasABPairProtocol {
-    var abPairA: CGFloat {
-        get { width }
-        set { width = newValue }
-    }
-
-    var abPairB: CGFloat {
-        get { height }
-        set { height = newValue }
-    }
-
-    init(_ a: CGFloat, _ b: CGFloat) {
-        self.init(width: a, height: b)
+extension CGSize {
+    init(_ abPair: ABPair) {
+        self.init(width: abPair.a, height: abPair.b)
     }
 }

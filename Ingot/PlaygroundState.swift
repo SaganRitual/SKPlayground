@@ -19,6 +19,7 @@ class PlaygroundState: ObservableObject {
     @Published var cameraPosition: CGPoint = .zero
     @Published var cameraScale: CGFloat = 1
     @Published var clickToPlace: ClickToPlace = .gremlin
+    @Published var gravity: CGVector = .zero
     @Published var placePhysics: PlaceablePhysics = .field
     @Published var mousePosition: CGPoint = .zero
     @Published var selectionState: SelectionState = .none

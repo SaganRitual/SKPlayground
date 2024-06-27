@@ -8,7 +8,7 @@ final class CategorySwitches: ObservableObject {
     @Published var contact: [Bool] = (0..<32).map { _ in Bool.random() }
 }
 
-struct PhysicsBodyTogglesView: View {
+struct PhysicsBodyCategoriesView: View {
     @EnvironmentObject var playgroundState: PlaygroundState
 
     @State private var currentCategoryName = "Category foo"
@@ -23,26 +23,6 @@ struct PhysicsBodyTogglesView: View {
 
     var body: some View {
         HStack {
-            VStack(alignment: .leading) {
-                Toggle(isOn: $playgroundState.physicsBodyHaver.dynamism) {
-                    Text("Apply Physics")
-                }
-                .toggleStyle(.checkbox)
-
-                Toggle(isOn: $playgroundState.physicsBodyHaver.gravitism) {
-                    Text("Apply Gravity")
-                }
-                .toggleStyle(.checkbox)
-                .disabled(!playgroundState.physicsBodyHaver.dynamism)
-
-                Toggle(isOn: $playgroundState.physicsBodyHaver.rotatism) {
-                    Text("Allow Rotation")
-                }
-                .toggleStyle(.checkbox)
-                .disabled(!playgroundState.physicsBodyHaver.dynamism)
-            }
-            .padding()
-
             VStack {
                 CheckboxPicker(
                     selectedIndices: $selectedCategoryIndices,
@@ -71,6 +51,6 @@ struct PhysicsBodyTogglesView: View {
 }
 
 #Preview {
-    PhysicsBodyTogglesView()
+    PhysicsBodyCategoriesView()
         .environmentObject(PlaygroundState())
 }

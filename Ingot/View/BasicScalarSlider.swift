@@ -14,7 +14,7 @@ struct BasicScalarSlider<TitleView: View, ScalarView: View>: View {
     var body: some View {
         HStack {
             title
-                .frame(width: 65, alignment: .leading)
+                .frame(width: 95, alignment: .leading)
 
             scalarView
                 .frame(width: 35, alignment: .leading)

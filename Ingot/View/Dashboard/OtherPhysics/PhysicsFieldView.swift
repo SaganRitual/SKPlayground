@@ -22,6 +22,8 @@ struct PhysicsFieldView: View {
 
     @State private var enableRegion = false
     @State private var selectedCategoryIndices = Set<Int>()
+    @State private var regionPair = ABPair(a: 0, b: 0)
+    @State private var velocityPair = ABPair(a: 0, b: 0)
 
     func makeScalarView(_ value: CGFloat) -> some View {
         Text(String(format: "%.1f", value))
@@ -81,23 +83,29 @@ struct PhysicsFieldView: View {
 
             HStack {
                 Slider2DView(
-                    output: $playgroundState.physicsField.region,
+                    output: $regionPair,
                     size: CGSize(width: 100, height: 100),
                     snapTolerance: 5,
                     title: regionToggle,
                     virtualSize: CGSize(width: 20, height: 20)
                 )
                 .padding(.trailing)
+                .onChange(of: regionPair) {
+                    playgroundState.physicsField.region = CGSize(regionPair)
+                }
 
                 if playgroundState.selectedPhysicsField.fieldType == .velocity {
                     Slider2DView(
-                        output: $playgroundState.physicsField.direction,
+                        output: $velocityPair,
                         size: CGSize(width: 100, height: 100),
                         snapTolerance: 5,
                         title: Text("Direction"),
                         virtualSize: CGSize(width: 20, height: 20)
                     )
                     .padding(.trailing)
+                    .onChange(of: velocityPair) {
+                        playgroundState.physicsField.direction = CGVector(velocityPair)
+                    }
                 }
 
                 VStack {

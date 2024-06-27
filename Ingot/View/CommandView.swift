@@ -2,7 +2,9 @@
 
 import SwiftUI
 
-struct CommandView: View {
+struct CommandView: View, CustomDebugStringConvertible {
+    var debugDescription: String { "CommandView" }
+
     @EnvironmentObject var playgroundState: PlaygroundState
 
     @State private var physicsFieldType: PhysicsFieldType = .drag
@@ -67,6 +69,7 @@ struct CommandView: View {
                 }
             }
         }
+        .accessibilityIdentifier(debugDescription)
     }
 }
 

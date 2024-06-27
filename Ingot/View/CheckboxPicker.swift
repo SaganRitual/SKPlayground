@@ -27,7 +27,6 @@ struct CheckboxPicker: View {
         } label: {
             label
         }
-        .frame(width: 250)
     }
 }
 

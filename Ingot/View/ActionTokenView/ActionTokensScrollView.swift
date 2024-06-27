@@ -50,7 +50,6 @@ struct ActionTokensScrollView: View {
             }
         }
         .background(RoundedRectangle(cornerSize: CGSize(width: 15, height: 15), style: .circular).fill(Color(.controlBackgroundColor)))
-        .frame(height: 150)
     }
 }
 

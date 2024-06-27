@@ -11,7 +11,9 @@ struct PhysicsActionsTabView: View {
     @State private var selectedType = PhysicsActionType.force
     @State private var duration: Double = 2
     @State private var position: CGPoint = .zero
+    @State private var positionPair: ABPair = ABPair(a: 0, b: 0)
     @State private var force: CGVector = .zero
+    @State private var forcePair: ABPair = ABPair(a: 0, b: 0)
     @State private var torque: Double = 0.0
 
     var body: some View {
@@ -30,20 +32,26 @@ struct PhysicsActionsTabView: View {
 
                 HStack {
                     Slider2DView(
-                        output: $force,
+                        output: $forcePair,
                         size: CGSize(width: 100, height: 100),
                         snapTolerance: 5,
                         title: Text("\(text) Vector"),
                         virtualSize: CGSize(width: 20, height: 20)
                     )
+                    .onChange(of: forcePair) {
+                        force = CGVector(forcePair)
+                    }
 
                     Slider2DView(
-                        output: $position,
+                        output: $positionPair,
                         size: CGSize(width: 100, height: 100),
                         snapTolerance: 5,
                         title: Text("Where"),
                         virtualSize: CGSize(width: 20, height: 20)
                     )
+                    .onChange(of: positionPair) {
+                        position = CGPoint(positionPair)
+                    }
                 }
             } else {
                 VStack {

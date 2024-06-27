@@ -7,26 +7,18 @@ struct PhysicsTabView: View {
     @EnvironmentObject var playgroundState: PlaygroundState
 
     func exactlyOneFieldSelected() -> Bool {
-        let result = playgroundState.selectionState == .one && gameController.getSelected().first is Field
-        print("one field \(result)")
-        return result
+        playgroundState.selectionState == .one && gameController.getSelected().first is Field
     }
 
     func exactlyOneGremlinSelected() -> Bool {
-        let result = playgroundState.selectionState == .one && gameController.getSelected().first is Gremlin
-        print("one gremlin \(result)")
-        return result
+        playgroundState.selectionState == .one && gameController.getSelected().first is Gremlin
     }
 
     var body: some View {
         VStack {
-            Text("Physics")
-                .underline()
-                .padding(.vertical)
-
             TabView {
                 if exactlyOneGremlinSelected() {
-                    PhysicsBodyTabView()
+                    PhysicsBodyView()
                         .padding()
                         .tabItem {
                             Label("Body", systemImage: "atom")
@@ -47,7 +39,7 @@ struct PhysicsTabView: View {
                     }
             }
         }
-        .frame(height: 450)
+        .frame(width: 750, height: 500)
     }
 }
 

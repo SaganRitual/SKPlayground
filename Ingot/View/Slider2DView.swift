@@ -2,7 +2,7 @@
 
 import SwiftUI
 
-struct Slider2DView<Title: View, OutputType: HasABPairProtocol>: View {
+struct Slider2DView<Title: View>: View {
     let canvasColor: Color
     let handleColor: Color
     let scale: CGVector
@@ -16,12 +16,12 @@ struct Slider2DView<Title: View, OutputType: HasABPairProtocol>: View {
     @State private var dotPosition: CGPoint = .zero
     @State private var snapped = false
 
-    @Binding var output: OutputType
+    @Binding var output: ABPair
 
     init(
         canvasColor: Color = Color(NSColor.secondarySystemFill),
         handleColor: Color = .gray,
-        output: Binding<OutputType>,
+        output: Binding<ABPair>,
         size: CGSize = CGSize(width: 400, height: 400),
         snapTolerance: CGFloat = 20,
         title: Title = Text("Title"),
@@ -84,10 +84,7 @@ struct Slider2DView<Title: View, OutputType: HasABPairProtocol>: View {
                         .onEnded { value in
                             dotPosition += value.translation
                             dotPosition = handleOffset
-
-                            let a = OutputType.RegularNumber(integerLiteral: scaledOutput.x as! OutputType.RegularNumber.IntegerLiteralType)
-                            let b = OutputType.RegularNumber(integerLiteral: scaledOutput.y as! OutputType.RegularNumber.IntegerLiteralType)
-                            output = OutputType(a, b)
+                            output = ABPair(a: scaledOutput.x, b: scaledOutput.y)
                         }
                 )
                 .coordinateSpace(name: "sliderCanvas")
@@ -154,5 +151,6 @@ private extension Slider2DView {
 }
 
 #Preview {
-    Slider2DView(output: .constant(CGVector.random(in: -10...10)), title: Text("Slider 2D"))
+    @State var abPair = ABPair(a: CGFloat.random(in: -10...10), b: CGFloat.random(in: -10...10))
+    return Slider2DView(output: $abPair, title: Text("Slider 2D"))
 }

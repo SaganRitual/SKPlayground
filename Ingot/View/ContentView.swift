@@ -2,13 +2,16 @@
 
 import SwiftUI
 
-struct ContentView: View {
+struct ContentView: View, CustomDebugStringConvertible {
+    var debugDescription: String { "ContentView" }
+
     @EnvironmentObject var gameController: GameController
     @EnvironmentObject var playgroundState: PlaygroundState
 
     var body: some View {
         HStack(alignment: .top) {
             SpriteKitView()
+                .frame(minWidth: 1024, minHeight: 768)
 
             VStack {
                 PlaygroundStatusView()
@@ -23,24 +26,12 @@ struct ContentView: View {
                     .background(Color(NSColor.secondarySystemFill))
                     .padding(2)
 
-                PhysicsTabView()
+                ConfigurationTabView()
                     .padding()
                     .background(Color(NSColor.secondarySystemFill))
                     .padding(2)
-
-                if playgroundState.selectionState == .one &&
-                    gameController.getSelected().first is Gremlin {
-
-                    ActionsTabView()
-                        .border(.black, width: 2)
-
-                    ActionTokensScrollView()
-                        .frame(maxWidth: .infinity)
-                        .border(.black, width: 2)
-                }
             }
             .monospaced()
-            .frame(width: 700)
         }
         .background(Color(NSColor.tertiarySystemFill))
     }

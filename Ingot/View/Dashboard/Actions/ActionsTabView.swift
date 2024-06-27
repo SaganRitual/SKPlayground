@@ -3,27 +3,28 @@
 import SwiftUI
 
 struct ActionsTabView: View {
+    @EnvironmentObject var gameController: GameController
+    @EnvironmentObject var playgroundState: PlaygroundState
+
     var body: some View {
         VStack {
-            Text("Actions")
-                .underline()
-                .padding(.vertical)
-            
             TabView {
                 SpaceActionsTabView()
                     .tabItem {
                         Label("Space", systemImage: "globe")
                     }
-                    .frame(height: 300)
 
                 PhysicsActionsTabView()
                     .tabItem {
                         Label("Physics", systemImage: "atom")
                     }
-                    .frame(height: 300)
             }
+
+            ActionTokensScrollView()
+                .frame(maxWidth: .infinity)
+                .border(.black, width: 2)
         }
-        .frame(height: 400)
+        .frame(width: 750, height: 500)
     }
 }
 

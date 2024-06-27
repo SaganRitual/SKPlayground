@@ -70,7 +70,7 @@ struct SpriteKitView: NSViewRepresentable {
 
         view.presentScene(gameScene)
 
-        DispatchQueue.main.async {
+        Task { @MainActor in
             view.window?.makeFirstResponder(view)
         }
 

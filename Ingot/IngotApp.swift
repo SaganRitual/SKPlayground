@@ -4,6 +4,7 @@ import SwiftUI
 
 final class AppData: ObservableObject {
     @Published var commandSelection = CommandSelection()
+    @Published var entityActionsPublisher = EntityActionsPublisher()
     @Published var entitySelectionState = EntitySelectionState()
     @Published var gameController = GameController()
     @Published var physicsBodyState = PhysicsBodyState()
@@ -13,7 +14,7 @@ final class AppData: ObservableObject {
     @Published var spaceActionsState = SpaceActionsState()
 
     init() {
-        gameController.postInit(commandSelection, entitySelectionState, playgroundState, spaceActionsState)
+        gameController.postInit(commandSelection, entityActionsPublisher, entitySelectionState, playgroundState, spaceActionsState)
     }
 }
 
@@ -25,6 +26,7 @@ struct IngotApp: App {
         WindowGroup {
             ContentView()
                 .environmentObject(appData.commandSelection)
+                .environmentObject(appData.entityActionsPublisher)
                 .environmentObject(appData.entitySelectionState)
                 .environmentObject(appData.gameController)
                 .environmentObject(appData.physicsBodyState)

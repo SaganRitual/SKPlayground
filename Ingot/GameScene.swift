@@ -50,19 +50,9 @@ class GameScene: SKScene {
         addChild(selectionMarquee.marqueeRootNode)
     }
 
-    static var dcsCount = 0
     override func didChangeSize(_ oldSize: CGSize) {
         super.didChangeSize(oldSize)
 
-        if self.size == .zero {
-            Self.dcsCount += 1
-
-            print(".zero \(Self.dcsCount)")
-            return
-        }
-
-        Self.dcsCount += 1
-        print("old size \(oldSize) new size \(self.size), count \(Self.dcsCount)")
         Task { @MainActor in
             playgroundState.viewSize = self.size
         }

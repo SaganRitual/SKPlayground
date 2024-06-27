@@ -16,6 +16,7 @@ struct ContentView: View {
 
 #Preview {
     @StateObject var commandSelection = CommandSelection()
+    @StateObject var entityActionsPublisher = EntityActionsPublisher()
     @StateObject var entitySelectionState = EntitySelectionState()
     @StateObject var gameController = GameController()
     @StateObject var playgroundState = PlaygroundState()
@@ -30,6 +31,7 @@ struct ContentView: View {
         .onAppear() {
             gameController.postInit(
                 commandSelection,
+                entityActionsPublisher,
                 entitySelectionState,
                 playgroundState,
                 spaceActionsState

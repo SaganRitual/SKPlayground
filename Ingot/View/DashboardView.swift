@@ -12,9 +12,6 @@ struct DashboardView: View {
                 .padding(2)
 
             CommandView()
-                .onAppear() {
-                    print("Command View")
-                }
                 .frame(height: 100)
                 .padding()
                 .background(Color(NSColor.secondarySystemFill))

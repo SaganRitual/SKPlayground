@@ -6,7 +6,8 @@ final class EntityActionsPublisher: ObservableObject {
     @Published var actionTokens = [ActionTokenContainer]()
 
     init() {
-        makeTestTokensArray()
+        // Just for testing views when not actually running the app
+//        makeTestTokensArray()
     }
 
     func makeTestTokensArray() {

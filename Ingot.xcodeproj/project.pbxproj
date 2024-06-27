@@ -70,6 +70,7 @@
 		D4EC5E5B2C2DE9E100E20EC7 /* PhysicsMaskCategories.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4EC5E5A2C2DE9E100E20EC7 /* PhysicsMaskCategories.swift */; };
 		D4EC5E5D2C2DEC1700E20EC7 /* EntitySelectionState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4EC5E5C2C2DEC1700E20EC7 /* EntitySelectionState.swift */; };
 		D4EC5E5F2C2DED3B00E20EC7 /* PhysicsWorldState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4EC5E5E2C2DED3B00E20EC7 /* PhysicsWorldState.swift */; };
+		D4EC5E612C2DF84600E20EC7 /* GameController+Click.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4EC5E602C2DF84600E20EC7 /* GameController+Click.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -139,6 +140,7 @@
 		D4EC5E5A2C2DE9E100E20EC7 /* PhysicsMaskCategories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhysicsMaskCategories.swift; sourceTree = "<group>"; };
 		D4EC5E5C2C2DEC1700E20EC7 /* EntitySelectionState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntitySelectionState.swift; sourceTree = "<group>"; };
 		D4EC5E5E2C2DED3B00E20EC7 /* PhysicsWorldState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhysicsWorldState.swift; sourceTree = "<group>"; };
+		D4EC5E602C2DF84600E20EC7 /* GameController+Click.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameController+Click.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -240,6 +242,7 @@
 				D4EC5E4F2C2DC8FE00E20EC7 /* StateObject */,
 				D4D1F0952C28B31F00003163 /* View */,
 				D4D1F0982C28B3D600003163 /* GameController.swift */,
+				D4EC5E602C2DF84600E20EC7 /* GameController+Click.swift */,
 				D49BD5D52C2C698F00FD313C /* GameController+Drag.swift */,
 				D49BD5D72C2C69C700FD313C /* GameController+Select.swift */,
 				D49BD5C82C2C682500FD313C /* GameScene.swift */,
@@ -430,6 +433,7 @@
 				D49BD5C12C2C628200FD313C /* Vertex.swift in Sources */,
 				D4D1F0812C27BF7500003163 /* ActionTokensScrollView.swift in Sources */,
 				D4D1F0782C27BAF900003163 /* Utility.swift in Sources */,
+				D4EC5E612C2DF84600E20EC7 /* GameController+Click.swift in Sources */,
 				D49BD4FB2C2A7E8400FD313C /* PhysicsJointView.swift in Sources */,
 				D49BD4FF2C2B218900FD313C /* CommandView.swift in Sources */,
 				D49BD5AC2C2C3EAA00FD313C /* GameControllerTestView.swift in Sources */,

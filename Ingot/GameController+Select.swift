@@ -18,6 +18,7 @@ extension GameController {
 
         entity.halo?.deselect()
         entitySelectionState.setSelectionState(getSelected())
+        reloadEntityViews()
     }
 
     func deselectAll() {
@@ -39,6 +40,7 @@ extension GameController {
     func select(_ entity: GameEntity) {
         entity.halo?.select()
         entitySelectionState.setSelectionState(getSelected())
+        reloadEntityViews()
     }
 
     func toggleSelect(_ entity: GameEntity) {
@@ -46,5 +48,6 @@ extension GameController {
 
         entity.halo?.toggleSelect()
         entitySelectionState.setSelectionState(getSelected())
+        reloadEntityViews()
     }
 }

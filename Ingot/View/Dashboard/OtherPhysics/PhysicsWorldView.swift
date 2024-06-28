@@ -13,6 +13,7 @@ extension VerticalAlignment {
 }
 
 struct PhysicsWorldView: View {
+    @EnvironmentObject var gameController: GameController
     @EnvironmentObject var physicsMaskCategories: PhysicsMaskCategories
     @EnvironmentObject var physicsWorldState: PhysicsWorldState
 
@@ -26,10 +27,7 @@ struct PhysicsWorldView: View {
     @State private var duplicateCategoryIndex = 0
 
     var gravityToggle: some View {
-        Toggle(isOn: $physicsWorldState.enableGravity) {
-            Text("Gravity")
-        }
-        .toggleStyle(.checkbox)
+        Text("Gravity")
         .alignmentGuide(.gravityToggleAlignment) { dimensions in
             dimensions[VerticalAlignment.center]  // Align Slider2DView to center
         }
@@ -47,7 +45,9 @@ struct PhysicsWorldView: View {
                 )
                 .padding(.trailing)
                 .onChange(of: gravityPair) {
-                    physicsWorldState.gravity = CGVector(gravityPair)
+                    let gv = CGVector(gravityPair)
+                    physicsWorldState.gravity = gv
+                    gameController.setGravity(gv)
                 }
 
                 VStack(alignment: .leading) {
@@ -60,6 +60,9 @@ struct PhysicsWorldView: View {
                         HStack {
                             Text("0.0")
                             Slider(value: $physicsWorldState.speed, in: 0...1)
+                                .onChange(of: physicsWorldState.speed) {
+                                    gameController.setPhysicsSpeed(physicsWorldState.speed)
+                                }
                             Text("1.0")
                         }
                         .padding([.horizontal])
@@ -119,11 +122,16 @@ struct PhysicsWorldView: View {
         }
         .padding()
         .frame(width: 700, height: 400)
+        .onAppear {
+            physicsWorldState.gravity = gameController.getGravity()
+            physicsWorldState.speed = gameController.getPhysicsSpeed()
+        }
     }
 }
 
 #Preview {
     PhysicsWorldView()
+        .environmentObject(GameController())
         .environmentObject(PhysicsMaskCategories())
         .environmentObject(PhysicsWorldState())
 }

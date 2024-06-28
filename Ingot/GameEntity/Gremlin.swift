@@ -12,9 +12,9 @@ final class Gremlin: GameEntity {
 
     var actionTokens = [any ActionTokenProtocol]()
 
-    var anchorMoveAction = CGPoint.zero
-    var anchorRotateAction = CGFloat.zero
-    var anchorScaleAction = CGFloat.zero
+    var anchorMoveAction: CGPoint?
+    var anchorRotateAction: CGFloat?
+    var anchorScaleAction: CGFloat?
 
     var viewSpriteNode: SKSpriteNode {
         avatar!.sceneNode as! SKSpriteNode
@@ -87,19 +87,25 @@ final class Gremlin: GameEntity {
     override func restoreActionAnchors() {
         var actions = [SKAction]()
 
-        if anchorMoveAction != position {
-            let a = SKAction.move(to: anchorMoveAction, duration: 0.5)
+        if let move = anchorMoveAction{
+            let a = SKAction.move(to: move, duration: 0.5)
             actions.append(a)
+
+            anchorMoveAction = nil
         }
 
-        if anchorRotateAction != rotation {
-            let a = SKAction.rotate(toAngle: anchorRotateAction, duration: 0.5)
+        if let rotate = anchorRotateAction {
+            let a = SKAction.rotate(toAngle: rotate, duration: 0.5)
             actions.append(a)
+
+            anchorRotateAction = nil
         }
 
-        if anchorScaleAction != scale {
-            let a = SKAction.scale(to: anchorScaleAction, duration: 0.5)
+        if let scale = anchorScaleAction {
+            let a = SKAction.scale(to: scale, duration: 0.5)
             actions.append(a)
+
+            anchorScaleAction = nil
         }
 
         if !actions.isEmpty {

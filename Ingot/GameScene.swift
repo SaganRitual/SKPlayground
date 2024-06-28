@@ -27,7 +27,7 @@ class GameScene: SKScene {
         scaleMode = .resizeFill
 
         physicsWorld.gravity = .zero
-        physicsWorld.speed = 0
+        physicsWorld.speed = 1
 
         addChild(cameraNode)
         camera = cameraNode

@@ -6,6 +6,8 @@ import SpriteKit
 class GameEntity {
     let uuid = UUID()
 
+    var actionsArray = [SKAction]()
+
     var avatar: GameEntitySprite? { nil }
 
     var dragAnchor: CGPoint?

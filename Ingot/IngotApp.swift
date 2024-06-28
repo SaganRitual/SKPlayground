@@ -7,14 +7,21 @@ final class AppData: ObservableObject {
     @Published var entityActionsPublisher = EntityActionsPublisher()
     @Published var entitySelectionState = EntitySelectionState()
     @Published var gameController = GameController()
-    @Published var physicsBodyState = PhysicsBodyState()
+    @Published var physicsBodyState = PhysicsBodyState(preview: false)
     @Published var physicsMaskCategories = PhysicsMaskCategories()
     @Published var physicsWorldState = PhysicsWorldState()
     @Published var playgroundState = PlaygroundState()
     @Published var spaceActionsState = SpaceActionsState()
 
     init() {
-        gameController.postInit(commandSelection, entityActionsPublisher, entitySelectionState, playgroundState, spaceActionsState)
+        gameController.postInit(
+            commandSelection,
+            entityActionsPublisher,
+            entitySelectionState,
+            physicsBodyState,
+            playgroundState,
+            spaceActionsState
+        )
     }
 }
 

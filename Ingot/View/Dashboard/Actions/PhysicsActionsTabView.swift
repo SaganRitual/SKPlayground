@@ -3,6 +3,8 @@
 import SwiftUI
 
 struct PhysicsActionsTabView: View {
+    @EnvironmentObject var gameController: GameController
+
     enum PhysicsActionType: String, CaseIterable, Identifiable { // Add Identifiable to use with Picker
         case force = "Force", torque = "Torque", impulse = "Impulse", angularImpulse = "Θ-impulse"
         var id: Self { self } // Implementation for Identifiable
@@ -82,9 +84,20 @@ struct PhysicsActionsTabView: View {
             }
 
             Button("Create Physics Action") {
-                // 1. Create the appropriate Physics Action (force, impulse, torque, or angular impulse)
-                // 2. Use forceVector or torqueValue, and duration as needed
-                // 3. Attach the action to the entity
+                let actionToken: ActionTokenProtocol
+
+                switch selectedType {
+                case .force:
+                    actionToken = ForceActionToken(duration: duration, focus: position, force: force)
+                case .torque:
+                    actionToken = TorqueActionToken(duration: duration, torque: torque)
+                case .impulse:
+                    actionToken = ImpulseActionToken(duration: duration, focus: position, impulse: force)
+                case .angularImpulse:
+                    actionToken = AngularImpulseActionToken(duration: duration, angularImpulse: torque)
+                }
+
+                gameController.commitPhysicsAction(actionToken)
             }
             .padding(.top)
         }

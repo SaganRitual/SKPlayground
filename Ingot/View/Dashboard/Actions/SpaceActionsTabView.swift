@@ -30,7 +30,7 @@ struct SpaceActionsTabView: View {
                         // 3. Update the scroll view with representations of the actions.
                         // 4. Reset the sprite and selection handle to their original states.
                         // 5. Show the "Click Here to Start" button again.
-                        gameController.commitActions(duration: duration)
+                        gameController.commitSpaceActions(duration: duration)
                     }
 
                     Button("Cancel") {

@@ -15,6 +15,9 @@ class GameScene: SKScene {
     var hotDragTarget: GameEntity?
     var hotDragSubhandle: SelectionHaloRS.Directions?
 
+    var enableEdgeLoop = false
+    var sceneEdgeLoop: SKPhysicsBody!
+
     enum MouseState {
         case dragBackground, dragHandle, dragSubhandle, idle, mouseDown
     }
@@ -53,11 +56,28 @@ class GameScene: SKScene {
     override func didChangeSize(_ oldSize: CGSize) {
         super.didChangeSize(oldSize)
 
+        let origin = CGPoint(x: -size.width / 2, y: -size.height / 2)
+        let pb = SKPhysicsBody(edgeLoopFrom: CGRect(origin: origin, size: size))
+
+        print("Create edge loop at \(origin) size \(size)")
+
+        self.sceneEdgeLoop = pb
+
         Task { @MainActor in
             playgroundState.viewSize = self.size
         }
     }
 
     override func didMove(to view: SKView) {
+    }
+
+    override func update(_ currentTime: TimeInterval) {
+        if enableEdgeLoop && self.physicsBody == nil {
+            self.run(SKAction.run {
+                self.physicsBody = self.sceneEdgeLoop
+            })
+        } else {
+            self.physicsBody = nil
+        }
     }
 }

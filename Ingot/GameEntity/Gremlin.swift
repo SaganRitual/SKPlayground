@@ -59,7 +59,11 @@ final class Gremlin: GameEntity {
         restoreActionAnchors()
     }
 
-    override func commitActions(duration: TimeInterval) {
+    override func commitPhysicsAction(_ token: ActionTokenProtocol) {
+        addActionToken(token)
+    }
+
+    override func commitSpaceActions(duration: TimeInterval) {
         setAssignActionsMode(false)
 
         if let dragAnchor = dragAnchor, dragAnchor != position {

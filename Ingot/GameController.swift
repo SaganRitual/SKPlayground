@@ -34,7 +34,7 @@ final class GameController: ObservableObject {
     }
 
     func attachPhysicsBody() {
-        let body = SKPhysicsBody(circleOfRadius: 25)
+        let body = SKPhysicsBody(circleOfRadius: 15)
 
         body.affectedByGravity = physicsBodyState.gravitism
         body.allowsRotation = physicsBodyState.rotatism
@@ -59,12 +59,20 @@ final class GameController: ObservableObject {
         getSelected().first?.cancelActionsMode()
     }
 
-    func commitActions(duration: TimeInterval) {
+    func commitSpaceActions(duration: TimeInterval) {
         spaceActionsState.assignSpaceActions = false
 
         let entity = getSelected().first!
 
-        entity.commitActions(duration: duration)
+        entity.commitSpaceActions(duration: duration)
+
+        entityActionsPublisher.actionTokens = entity.getActionTokens()
+    }
+
+    func commitPhysicsAction(_ actionToken: ActionTokenProtocol) {
+        let entity = getSelected().first!
+
+        entity.commitPhysicsAction(actionToken)
 
         entityActionsPublisher.actionTokens = entity.getActionTokens()
     }
@@ -262,5 +270,13 @@ final class GameController: ObservableObject {
         let entity = getSelected().first!
 
         entityActionsPublisher.actionTokens = entity.getActionTokens()
+    }
+
+    func enableSceneEdgeLoop(_ enable: Bool) {
+        gameScene?.enableEdgeLoop = enable
+    }
+
+    func getSceneEdgeLoopEnabled() -> Bool {
+        gameScene?.enableEdgeLoop ?? false
     }
 }

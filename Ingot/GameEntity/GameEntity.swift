@@ -42,7 +42,8 @@ class GameEntity {
     }
 
     func cancelActionsMode() { }
-    func commitActions(duration: TimeInterval) { }
+    func commitPhysicsAction(_ token: ActionTokenProtocol) { }
+    func commitSpaceActions(duration: TimeInterval) { }
     func startActionsMode() { }
 }
 

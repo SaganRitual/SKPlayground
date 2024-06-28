@@ -51,29 +51,17 @@ struct PhysicsWorldView: View {
                 }
 
                 VStack(alignment: .leading) {
-                    VStack(alignment: .center) {
-                        Text("Speed: \(String(format: "%.2f", physicsWorldState.speed))")
-                            .alignmentGuide(.gravityToggleAlignment) { dimensions in
-                                dimensions[VerticalAlignment.center]  // Align "Speed" text to center
-                            }
-
-                        HStack {
-                            Text("0.0")
-                            Slider(value: $physicsWorldState.speed, in: 0...1)
-                                .onChange(of: physicsWorldState.speed) {
-                                    gameController.setPhysicsSpeed(physicsWorldState.speed)
-                                }
-                            Text("1.0")
-                        }
-                        .padding([.horizontal])
-                    }
-                    .padding(.bottom)
-
                     Toggle(isOn: $enableEdgeLoop) {
                         Text("Full Scene Edge Loop")
                     }
                     .toggleStyle(.checkbox)
                     .padding([.leading, .bottom])
+                    .onChange(of: enableEdgeLoop) {
+                        gameController.enableSceneEdgeLoop(enableEdgeLoop)
+                    }
+                    .onAppear() {
+                        enableEdgeLoop = gameController.getSceneEdgeLoopEnabled()
+                    }
 
                     HStack {
                         Picker("Category Names", selection: $currentCategoryName) {

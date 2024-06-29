@@ -45,8 +45,7 @@ extension GameController {
     func newField(at position: CGPoint) -> Field {
         let field = Field.make(at: position)
 
-        gameScene.entitiesNode.addChild(field.avatar!.sceneNode)
-        gameScene.entitiesNode.addChild(field.halo!.sceneNode)
+        gameScene.entitiesNode.addChild(field.face.rootSceneNode)
 
         entities.insert(field)
 
@@ -56,8 +55,7 @@ extension GameController {
     func newGremlin(at position: CGPoint) -> Gremlin {
         let gremlin = Gremlin.make(at: position, avatarName: commandSelection.selectedGremlinTexture)
 
-        gameScene.entitiesNode.addChild(gremlin.avatar!.sceneNode)
-        gameScene.entitiesNode.addChild(gremlin.halo!.sceneNode)
+        gameScene.entitiesNode.addChild(gremlin.face.rootSceneNode)
 
         entities.insert(gremlin)
 
@@ -67,8 +65,7 @@ extension GameController {
     func newJoint(at position: CGPoint) -> Joint {
         let joint = Joint.make(at: position)
 
-        gameScene.entitiesNode.addChild(joint.avatar!.sceneNode)
-        gameScene.entitiesNode.addChild(joint.halo!.sceneNode)
+        gameScene.entitiesNode.addChild(joint.face.rootSceneNode)
 
         entities.insert(joint)
 
@@ -78,8 +75,7 @@ extension GameController {
     func newVertex(at position: CGPoint) -> Vertex {
         let vertex = Vertex.make(at: position)
 
-        gameScene.entitiesNode.addChild(vertex.avatar!.sceneNode)
-        gameScene.entitiesNode.addChild(vertex.halo!.sceneNode)
+        gameScene.entitiesNode.addChild(vertex.face.rootSceneNode)
 
         entities.insert(vertex)
 
@@ -89,8 +85,7 @@ extension GameController {
     func newWaypoint(at position: CGPoint) -> Waypoint {
         let waypoint = Waypoint.make(at: position)
 
-        gameScene.entitiesNode.addChild(waypoint.avatar!.sceneNode)
-        gameScene.entitiesNode.addChild(waypoint.halo!.sceneNode)
+        gameScene.entitiesNode.addChild(waypoint.face.rootSceneNode)
 
         entities.insert(waypoint)
 

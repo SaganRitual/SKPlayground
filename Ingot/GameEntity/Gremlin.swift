@@ -4,50 +4,41 @@ import Foundation
 import SpriteKit
 
 final class Gremlin: GameEntity {
-    private let halo_: SelectionHalo
-    override var halo: SelectionHalo? { halo_ }
-
-    private let avatar_: GameEntitySprite
-    override var avatar: GameEntitySprite? { avatar_ }
-
     var actionTokens = [any ActionTokenProtocol]()
 
     var anchorMoveAction: CGPoint?
     var anchorRotateAction: CGFloat?
     var anchorScaleAction: CGFloat?
 
-    var viewSpriteNode: SKSpriteNode {
-        avatar!.sceneNode as! SKSpriteNode
-    }
-
     override var physicsBody: SKPhysicsBody? {
-        get { avatar?.sceneNode.physicsBody }
-        set { avatar?.sceneNode.physicsBody = newValue }
+        // For most operations we talk to the face, but the physics
+        // engine really does require the physics body to be attached
+        // to the avatar sprite
+        get { face.avatar!.sceneNode.physicsBody }
+        set { face.avatar!.sceneNode.physicsBody = newValue }
     }
 
     override var rotation: CGFloat {
-        get { avatar?.sceneNode.zRotation ?? 0 }
-        set {
-            avatar?.sceneNode.zRotation = newValue
-            halo?.sceneNode.zRotation = newValue
-        }
+        get { face.rotation }
+        set { face.rotation = newValue }
     }
 
     override var scale: CGFloat {
-        get {
-            guard let sn = avatar?.sceneNode else { return 0 }
-            return sn.xScale
-        }
-
-        set {
-            avatar?.sceneNode.setScale(newValue)
-            halo?.setScale(newValue)
-        }
+        get { face.scale }
+        set { face.scale = newValue }
     }
 
-    init(halo halo_: SelectionHalo, view avatar_: GameEntitySprite) {
-        self.halo_ = halo_
-        self.avatar_ = avatar_
+    init(at position: CGPoint, avatarName: String) {
+        let face = GremlinFace(at: position, avatarName: avatarName)
+        super.init(face)
+    }
+
+    static func make(at position: CGPoint, avatarName: String) -> Gremlin {
+        let gremlin = Gremlin(at: position, avatarName: avatarName)
+
+        gremlin.face.setOwnerEntity(gremlin)
+
+        return gremlin
     }
 
     override func addActionToken(_ token: any ActionTokenProtocol) {
@@ -114,8 +105,7 @@ final class Gremlin: GameEntity {
 
         if !actions.isEmpty {
             let group = SKAction.group(actions)
-            halo!.sceneNode.run(group)
-            avatar!.sceneNode.run(group)
+            face.rootSceneNode.run(group)
         }
     }
 
@@ -139,22 +129,5 @@ final class Gremlin: GameEntity {
         }
 
         setAssignActionsMode(true)
-    }
-
-    static func make(at position: CGPoint, avatarName: String) -> Gremlin {
-        let halo = SelectionHaloRS.make()
-        let view = GremlinSprite(avatarName)
-        let gremlin = Gremlin(halo: halo, view: view)
-
-        halo.sceneNode.setOwnerEntity(gremlin)
-        view.sceneNode.setOwnerEntity(gremlin)
-
-        halo.subhandles.values.forEach { sh in
-            sh.sceneNode.setOwnerEntity(gremlin)
-        }
-
-        gremlin.position = position
-
-        return gremlin
     }
 }

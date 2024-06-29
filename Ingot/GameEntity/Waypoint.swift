@@ -23,27 +23,16 @@ class WaypointSprite: GameEntitySprite {
 }
 
 final class Waypoint: GameEntity {
-    private let halo_: SelectionHalo
-    override var halo: SelectionHalo? { halo_ }
-
-    private let avatar_: GameEntitySprite
-    override var avatar: GameEntitySprite? { avatar_ }
-
-    init(halo halo_: SelectionHalo, avatar avatar_: GameEntitySprite) {
-        self.halo_ = halo_
-        self.avatar_ = avatar_
+    static func make(at position: CGPoint) -> Waypoint {
+        let waypoint = Waypoint(at: position)
+        waypoint.face.setOwnerEntity(waypoint)
+        return waypoint
     }
 
-    static func make(at position: CGPoint) -> Waypoint {
+    init(at position: CGPoint) {
         let halo = SelectionHalo()
         let avatar = WaypointSprite()
-        let waypoint = Waypoint(halo: halo, avatar: avatar)
-
-        halo.sceneNode.setOwnerEntity(waypoint)
-        avatar.sceneNode.setOwnerEntity(waypoint)
-
-        waypoint.position = position
-
-        return waypoint
+        let face = GameEntityFace(at: position, avatar: avatar, halo: halo)
+        super.init(face)
     }
 }

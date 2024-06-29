@@ -16,7 +16,7 @@ extension GameController {
     func deselect(_ entity: GameEntity) {
         cancelAssignActionsMode()
 
-        entity.halo?.deselect()
+        entity.deselect()
         entitySelectionState.setSelectionState(getSelected())
         reloadEntityViews()
     }
@@ -31,14 +31,14 @@ extension GameController {
 
     func getSelected(_ entities: Set<GameEntity>) -> Set<GameEntity> {
         let selected = entities.compactMap { entity in
-            entity.halo!.isSelected ? entity : nil
+            entity.isSelected ? entity : nil
         }
 
         return Set(selected)
     }
 
     func select(_ entity: GameEntity) {
-        entity.halo?.select()
+        entity.select()
         entitySelectionState.setSelectionState(getSelected())
         reloadEntityViews()
     }
@@ -46,7 +46,7 @@ extension GameController {
     func toggleSelect(_ entity: GameEntity) {
         cancelAssignActionsMode()
 
-        entity.halo?.toggleSelect()
+        entity.toggleSelect()
         entitySelectionState.setSelectionState(getSelected())
         reloadEntityViews()
     }

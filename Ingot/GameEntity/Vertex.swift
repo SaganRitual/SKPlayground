@@ -23,27 +23,16 @@ class VertexSprite: GameEntitySprite {
 }
 
 final class Vertex: GameEntity {
-    private let halo_: SelectionHalo
-    override var halo: SelectionHalo? { halo_ }
-
-    private let avatar_: GameEntitySprite
-    override var avatar: GameEntitySprite? { avatar_ }
-
-    init(halo halo_: SelectionHalo, avatar avatar_: GameEntitySprite) {
-        self.halo_ = halo_
-        self.avatar_ = avatar_
+    static func make(at position: CGPoint) -> Vertex {
+        let vertex = Vertex(at: position)
+        vertex.face.setOwnerEntity(vertex)
+        return vertex
     }
 
-    static func make(at position: CGPoint) -> Vertex {
+    init(at position: CGPoint) {
         let halo = SelectionHalo()
         let avatar = VertexSprite()
-        let vertex = Vertex(halo: halo, avatar: avatar)
-
-        halo.sceneNode.setOwnerEntity(vertex)
-        avatar.sceneNode.setOwnerEntity(vertex)
-
-        vertex.position = position
-
-        return vertex
+        let face = GameEntityFace(at: position, avatar: avatar, halo: halo)
+        super.init(face)
     }
 }

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D404DF702C2F79D5009686F6 /* GameEntityFace.swift in Sources */ = {isa = PBXBuildFile; fileRef = D404DF6F2C2F79D5009686F6 /* GameEntityFace.swift */; };
+		D404DF722C2F7FEE009686F6 /* GremlinFace.swift in Sources */ = {isa = PBXBuildFile; fileRef = D404DF712C2F7FEE009686F6 /* GremlinFace.swift */; };
 		D46584E62C2CD73800BC19E7 /* ConfigurationTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D46584E52C2CD73800BC19E7 /* ConfigurationTabView.swift */; };
 		D49BD4FB2C2A7E8400FD313C /* PhysicsJointView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49BD4FA2C2A7E8400FD313C /* PhysicsJointView.swift */; };
 		D49BD4FF2C2B218900FD313C /* CommandView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49BD4FE2C2B218900FD313C /* CommandView.swift */; };
@@ -76,6 +78,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D404DF6F2C2F79D5009686F6 /* GameEntityFace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameEntityFace.swift; sourceTree = "<group>"; };
+		D404DF712C2F7FEE009686F6 /* GremlinFace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GremlinFace.swift; sourceTree = "<group>"; };
 		D46584E52C2CD73800BC19E7 /* ConfigurationTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurationTabView.swift; sourceTree = "<group>"; };
 		D49BD4FA2C2A7E8400FD313C /* PhysicsJointView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhysicsJointView.swift; sourceTree = "<group>"; };
 		D49BD4FC2C2AC29600FD313C /* UXScenarios.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = UXScenarios.md; sourceTree = "<group>"; };
@@ -171,8 +175,10 @@
 			children = (
 				D49BD5C22C2C645500FD313C /* Field.swift */,
 				D49BD5AE2C2C40FC00FD313C /* GameEntity.swift */,
+				D404DF6F2C2F79D5009686F6 /* GameEntityFace.swift */,
 				D49BD5B52C2C4B8800FD313C /* GameEntitySprite.swift */,
 				D49BD5B72C2C4CCB00FD313C /* Gremlin.swift */,
+				D404DF712C2F7FEE009686F6 /* GremlinFace.swift */,
 				D49BD5C42C2C66C300FD313C /* Joint.swift */,
 				D49BD5C02C2C628200FD313C /* Vertex.swift */,
 				D49BD5BE2C2C602200FD313C /* Waypoint.swift */,
@@ -461,6 +467,7 @@
 				D4EC5E642C2DFA5E00E20EC7 /* ClickToPlaceView.swift in Sources */,
 				D49BD5B42C2C4B4100FD313C /* SelectionHaloRS.swift in Sources */,
 				D4A621AD2C29184600C3F89A /* BasicScalarSlider.swift in Sources */,
+				D404DF702C2F79D5009686F6 /* GameEntityFace.swift in Sources */,
 				D4D1F0692C27BA8800003163 /* ContentView.swift in Sources */,
 				D49BD5D62C2C698F00FD313C /* GameController+Drag.swift in Sources */,
 				D4A621A62C28E45D00C3F89A /* PhysicsWorldView.swift in Sources */,
@@ -480,6 +487,7 @@
 				D4DE8B332C29D4280075F4B7 /* PhysicsBodyCategoriesView.swift in Sources */,
 				D4D1F0762C27BAE700003163 /* ActionTokenView.swift in Sources */,
 				D4D1F0882C27C4B400003163 /* ForceActionTokenView.swift in Sources */,
+				D404DF722C2F7FEE009686F6 /* GremlinFace.swift in Sources */,
 				D4EC5E592C2DE7E100E20EC7 /* PhysicsFieldState.swift in Sources */,
 				D49BD5C92C2C682500FD313C /* GameScene.swift in Sources */,
 				D49BD5D82C2C69C700FD313C /* GameController+Select.swift in Sources */,

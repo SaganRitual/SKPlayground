@@ -8,10 +8,9 @@ extension GameController {
         switch dragDispatch.phase {
         case .begin:
             let entity = dragDispatch.entity!
-            let halo = entity.halo!
 
-            if !halo.isSelected {
-                halo.select()
+            if !entity.isSelected {
+                entity.select()
             }
 
             setDragAnchorsForSelected()

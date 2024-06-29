@@ -23,27 +23,16 @@ class JointSprite: GameEntitySprite {
 }
 
 final class Joint: GameEntity {
-    private let halo_: SelectionHalo
-    override var halo: SelectionHalo? { halo_ }
-
-    private let avatar_: GameEntitySprite
-    override var avatar: GameEntitySprite? { avatar_ }
-
-    init(halo halo_: SelectionHalo, avatar avatar_: GameEntitySprite) {
-        self.halo_ = halo_
-        self.avatar_ = avatar_
+    static func make(at position: CGPoint) -> Joint {
+        let joint = Joint(at: position)
+        joint.face.setOwnerEntity(joint)
+        return joint
     }
 
-    static func make(at position: CGPoint) -> Joint {
+    init(at position: CGPoint) {
         let halo = SelectionHalo()
         let avatar = JointSprite()
-        let joint = Joint(halo: halo, avatar: avatar)
-
-        halo.sceneNode.setOwnerEntity(joint)
-        avatar.sceneNode.setOwnerEntity(joint)
-
-        joint.position = position
-
-        return joint
+        let face = GameEntityFace(at: position, avatar: avatar, halo: halo)
+        super.init(face)
     }
 }

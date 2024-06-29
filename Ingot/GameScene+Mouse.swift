@@ -103,7 +103,7 @@ private extension GameScene {
             return
         }
 
-        if let haloRS = entity.halo as? SelectionHaloRS {
+        if let haloRS = entity.face.halo as? SelectionHaloRS {
             if let direction = haloRS.getSubhandleDirection(topNode) {
                 let rsDragDispatch = DragDispatch.beginRS(entity, direction, mouseDispatch)
 

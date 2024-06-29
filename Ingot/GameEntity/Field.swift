@@ -23,27 +23,16 @@ class FieldSprite: GameEntitySprite {
 }
 
 final class Field: GameEntity {
-    private let halo_: SelectionHalo
-    override var halo: SelectionHalo? { halo_ }
-
-    private let avatar_: GameEntitySprite
-    override var avatar: GameEntitySprite? { avatar_ }
-
-    init(halo halo_: SelectionHalo, avatar avatar_: GameEntitySprite) {
-        self.halo_ = halo_
-        self.avatar_ = avatar_
+    static func make(at position: CGPoint) -> Field {
+        let field = Field(at: position)
+        field.face.setOwnerEntity(field)
+        return field
     }
 
-    static func make(at position: CGPoint) -> Field {
+    init(at position: CGPoint) {
         let halo = SelectionHalo()
         let avatar = FieldSprite()
-        let field = Field(halo: halo, avatar: avatar)
-
-        halo.sceneNode.setOwnerEntity(field)
-        avatar.sceneNode.setOwnerEntity(field)
-
-        field.position = position
-
-        return field
+        let face = GameEntityFace(at: position, avatar: avatar, halo: halo)
+        super.init(face)
     }
 }

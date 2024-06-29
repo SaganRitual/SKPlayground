@@ -45,11 +45,11 @@ final class GameController: ObservableObject {
         body.mass = physicsBodyState.mass
         body.restitution = physicsBodyState.restitution
 
-        getSelected().first!.avatar!.sceneNode.physicsBody = body
+        getSelected().first!.physicsBody = body
     }
 
     func loadPhysicsBodyFromSelected() {
-        if let body = getSelected().first!.avatar!.sceneNode.physicsBody {
+        if let body = getSelected().first!.physicsBody {
             physicsBodyState.load(body)
         }
     }
@@ -90,7 +90,7 @@ final class GameController: ObservableObject {
     func setActionsSpeed(_ speed: CGFloat) { gameScene.speed = speed }
 
     func removePhysicsBody() {
-        getSelected().first!.avatar!.sceneNode.physicsBody = nil
+        getSelected().first!.physicsBody = nil
     }
 
     var expectedCompletionReports = 0
@@ -119,38 +119,10 @@ final class GameController: ObservableObject {
                     fatalError("Numerous reputable accordion players insist that this can't happen")
                 }
             }
+
+            entity.face.rootSceneNode.run(SKAction.sequence(entity.actionsArray))
         }
 
-        let selected = getSelected()
-        let transaction = SKAction.run { [self, selected] in
-            deselectAll()
-            
-            entities.forEach { entity in
-                if entity.actionsArray.isEmpty { return }
-
-                expectedCompletionReports += 1
-
-                let sequence = SKAction.sequence(entity.actionsArray)
-
-                entity.actionsArray.removeAll()
-
-                entity.avatar!.sceneNode.run(sequence) { [self] in
-                    entity.position = entity.avatar!.sceneNode.position
-                    
-                    expectedCompletionReports -= 1
-
-                    if expectedCompletionReports == 0 {
-                        let reselect = SKAction.run { [self, selected] in
-                            selected.forEach { select($0) }
-                        }
-
-                        gameScene.run(reselect)
-                    }
-                }
-            }
-        }
-
-        gameScene.run(transaction)
         gameScene.isPaused = false
     }
 
@@ -193,75 +165,75 @@ final class GameController: ObservableObject {
     }
 
     func enableGravityOnSelected(_ enable: Bool) {
-        getSelected().first?.avatar?.sceneNode.physicsBody?.affectedByGravity = enable
+        getSelected().first?.physicsBody?.affectedByGravity = enable
     }
 
     func isGravityEnabledOnSelected() -> Bool {
-        getSelected().first?.avatar?.sceneNode.physicsBody?.affectedByGravity ?? false
+        getSelected().first?.physicsBody?.affectedByGravity ?? false
     }
 
     func enablePhysicsOnSelected(_ enable: Bool) {
-        getSelected().first?.avatar?.sceneNode.physicsBody?.isDynamic = false
+        getSelected().first?.physicsBody?.isDynamic = false
     }
 
     func isPhysicsEnabledOnSelected() -> Bool {
-        getSelected().first?.avatar?.sceneNode.physicsBody?.isDynamic ?? false
+        getSelected().first?.physicsBody?.isDynamic ?? false
     }
 
     func enableRotationOnSelected(_ enable: Bool) {
-        getSelected().first?.avatar?.sceneNode.physicsBody?.allowsRotation = enable
+        getSelected().first?.physicsBody?.allowsRotation = enable
     }
 
     func isRotationEnabledOnSelected() -> Bool {
-        getSelected().first?.avatar?.sceneNode.physicsBody?.allowsRotation ?? false
+        getSelected().first?.physicsBody?.allowsRotation ?? false
     }
 
     func getDensityOnSelected() -> CGFloat {
-        getSelected().first?.avatar?.sceneNode.physicsBody?.density ?? 0
+        getSelected().first?.physicsBody?.density ?? 0
     }
 
     func setDensityOnSelected(_ density: CGFloat) {
-        getSelected().first?.avatar?.sceneNode.physicsBody?.density = density
+        getSelected().first?.physicsBody?.density = density
     }
 
     func getFrictionOnSelected() -> CGFloat {
-        getSelected().first?.avatar?.sceneNode.physicsBody?.friction ?? 0
+        getSelected().first?.physicsBody?.friction ?? 0
     }
 
     func setFrictionOnSelected(_ friction: CGFloat) {
-        getSelected().first?.avatar?.sceneNode.physicsBody?.friction = friction
+        getSelected().first?.physicsBody?.friction = friction
     }
 
     func getMassOnSelected() -> CGFloat {
-        getSelected().first?.avatar?.sceneNode.physicsBody?.mass ?? 0
+        getSelected().first?.physicsBody?.mass ?? 0
     }
 
     func setMassOnSelected(_ mass: CGFloat) {
-        getSelected().first?.avatar?.sceneNode.physicsBody?.mass = mass
+        getSelected().first?.physicsBody?.mass = mass
     }
 
     func getRestitutionOnSelected() -> CGFloat {
-        getSelected().first?.avatar?.sceneNode.physicsBody?.restitution ?? 0
+        getSelected().first?.physicsBody?.restitution ?? 0
     }
 
     func setRestitutionOnSelected(_ restitution: CGFloat) {
-        getSelected().first?.avatar?.sceneNode.physicsBody?.restitution = restitution
+        getSelected().first?.physicsBody?.restitution = restitution
     }
     
     func getAngularDampingOnSelected() -> CGFloat {
-        getSelected().first?.avatar?.sceneNode.physicsBody?.angularDamping ?? 0
+        getSelected().first?.physicsBody?.angularDamping ?? 0
     }
 
     func setAngularDampingOnSelected(_ angularDamping: CGFloat) {
-        getSelected().first?.avatar?.sceneNode.physicsBody?.angularDamping = angularDamping
+        getSelected().first?.physicsBody?.angularDamping = angularDamping
     }
 
     func getLinearDampingOnSelected() -> CGFloat {
-        getSelected().first?.avatar?.sceneNode.physicsBody?.linearDamping ?? 0
+        getSelected().first?.physicsBody?.linearDamping ?? 0
     }
 
     func setLinearDampingOnSelected(_ linearDamping: CGFloat) {
-        getSelected().first?.avatar?.sceneNode.physicsBody?.linearDamping = linearDamping
+        getSelected().first?.physicsBody?.linearDamping = linearDamping
     }
 
     func reloadEntityViews() {

@@ -19,6 +19,10 @@ extension GameController {
         entity.deselect()
         entitySelectionState.setSelectionState(getSelected())
         reloadEntityViews()
+
+        if entitySelectionState.selectionState == .one {
+            loadPhysicsBodyFromSelected()
+        }
     }
 
     func deselectAll() {
@@ -41,6 +45,10 @@ extension GameController {
         entity.select()
         entitySelectionState.setSelectionState(getSelected())
         reloadEntityViews()
+
+        if entitySelectionState.selectionState == .one {
+            loadPhysicsBodyFromSelected()
+        }
     }
 
     func toggleSelect(_ entity: GameEntity) {
@@ -49,5 +57,9 @@ extension GameController {
         entity.toggleSelect()
         entitySelectionState.setSelectionState(getSelected())
         reloadEntityViews()
+
+        if entitySelectionState.selectionState == .one {
+            loadPhysicsBodyFromSelected()
+        }
     }
 }

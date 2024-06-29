@@ -10,21 +10,46 @@ struct BasicScalarSlider<TitleView: View, ScalarView: View>: View {
     let minLabel: String
     let maxLabel: String
     let range: ClosedRange<CGFloat>
+    let widthScalar: CGFloat
+    let widthSlider: CGFloat
+    let widthTitle: CGFloat
+
+    init(
+        scalar: Binding<CGFloat>,
+        scalarView: ScalarView,
+        title: TitleView,
+        minLabel: String,
+        maxLabel: String,
+        range: ClosedRange<CGFloat>,
+        widthScalar: CGFloat = 35,
+        widthSlider: CGFloat = 140,
+        widthTitle: CGFloat = 95
+    ) {
+        self._scalar = scalar
+        self.scalarView = scalarView
+        self.title = title
+        self.minLabel = minLabel
+        self.maxLabel = maxLabel
+        self.range = range
+        self.widthScalar = widthScalar
+        self.widthSlider = widthSlider
+        self.widthTitle = widthTitle
+    }
 
     var body: some View {
         HStack {
             title
-                .frame(width: 95, alignment: .leading)
+                .frame(width: widthTitle, alignment: .leading)
 
             scalarView
-                .frame(width: 35, alignment: .leading)
+                .frame(width: widthScalar, alignment: .leading)
 
             HStack {
                 Text(minLabel)
                 Slider(value: $scalar, in: range)
                 Text(maxLabel)
             }
-            .frame(width: 140, alignment: .leading)
+            .frame(width: widthSlider, alignment: .leading)
             .padding([.horizontal])
         }
         .padding(.vertical)

@@ -11,11 +11,8 @@ final class Gremlin: GameEntity {
     var anchorScaleAction: CGFloat?
 
     override var physicsBody: SKPhysicsBody? {
-        // For most operations we talk to the face, but the physics
-        // engine really does require the physics body to be attached
-        // to the avatar sprite
-        get { face.avatar!.sceneNode.physicsBody }
-        set { face.avatar!.sceneNode.physicsBody = newValue }
+        get { face.rootSceneNode.physicsBody }
+        set { face.rootSceneNode.physicsBody = newValue }
     }
 
     override var rotation: CGFloat {
@@ -36,6 +33,7 @@ final class Gremlin: GameEntity {
     static func make(at position: CGPoint, avatarName: String) -> Gremlin {
         let gremlin = Gremlin(at: position, avatarName: avatarName)
 
+        gremlin.face.rootSceneNode.physicsBody = SKPhysicsBody(circleOfRadius: 15)
         gremlin.face.setOwnerEntity(gremlin)
 
         return gremlin

@@ -23,47 +23,42 @@ struct PlayControlsView: View {
     }
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 20) {
+        VStack(alignment: .center, spacing: 20) {
+            HStack(spacing: 50) {
+                Button("Run Actions") {
+                    gameController.startActions()
+                }
+
+                Button("Run Actions on Selected") {
+                    gameController.startActionsOnSelected()
+                }
+
+                Button("Stop Actions") {
+                    gameController.stopActions()
+                }
+            }
+
             HStack {
-                Button(action: { isPlaying.toggle() }) {
-                    Image(systemName: isPlaying ? "pause.fill" : "play.fill")
-                        .font(.largeTitle)
+                BasicScalarSlider(
+                    scalar: $commandSelection.actionsSpeed,
+                    scalarView: Text(String(format: "%.1f", commandSelection.actionsSpeed)),
+                    title: Text("Actions Speed"),
+                    minLabel: "0", maxLabel: "10", range: 0...10,
+                    widthSlider: 180, widthTitle: 110
+                )
+                .onChange(of: commandSelection.actionsSpeed) {
+                    gameController.setActionsSpeed(commandSelection.actionsSpeed)
                 }
-                .padding(.trailing)
-                .onChange(of: isPlaying) {
-                    updateActionsState()
-                    updatePhysicsState()
-                }
 
-                VStack(alignment: .trailing, spacing: 10) {
-                    Toggle("Actions", isOn: $applyToActions)
-                        .onChange(of: applyToActions) { updateActionsState() }
-
-                    Toggle("Physics", isOn: $applyToPhysics)
-                        .onChange(of: applyToPhysics) { updatePhysicsState() }
-                }
-                .padding(.trailing, 30)
-
-                VStack(spacing: -25) {
-                    BasicScalarSlider(
-                        scalar: $commandSelection.actionsSpeed,
-                        scalarView: Text(String(format: "%.1f", commandSelection.actionsSpeed)),
-                        title: Text("Speed"),
-                        minLabel: "0", maxLabel: "10", range: 0...10
-                    )
-                    .onChange(of: commandSelection.actionsSpeed) {
-                        gameController.setActionsSpeed(commandSelection.actionsSpeed)
-                    }
-
-                    BasicScalarSlider(
-                        scalar: $commandSelection.physicsSpeed,
-                        scalarView: Text(String(format: "%.1f", commandSelection.physicsSpeed)),
-                        title: Text("Speed"),
-                        minLabel: "0", maxLabel: "10", range: 0...10
-                    )
-                    .onChange(of: commandSelection.physicsSpeed) {
-                        gameController.setPhysicsSpeed(commandSelection.physicsSpeed)
-                    }
+                BasicScalarSlider(
+                    scalar: $commandSelection.physicsSpeed,
+                    scalarView: Text(String(format: "%.1f", commandSelection.physicsSpeed)),
+                    title: Text("Physics Speed"),
+                    minLabel: "0", maxLabel: "10", range: 0...10,
+                    widthSlider: 180, widthTitle: 110
+                )
+                .onChange(of: commandSelection.physicsSpeed) {
+                    gameController.setPhysicsSpeed(commandSelection.physicsSpeed)
                 }
             }
         }

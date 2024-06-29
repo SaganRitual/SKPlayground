@@ -33,25 +33,8 @@ final class GameController: ObservableObject {
         self.spaceActionsState = spaceActionsState
     }
 
-    func attachPhysicsBody() {
-        let body = SKPhysicsBody(circleOfRadius: 15)
-
-        body.affectedByGravity = physicsBodyState.gravitism
-        body.allowsRotation = physicsBodyState.rotatism
-        body.angularDamping = physicsBodyState.angularDamping
-        body.isDynamic = physicsBodyState.dynamism
-        body.friction = physicsBodyState.friction
-        body.linearDamping = physicsBodyState.linearDamping
-        body.mass = physicsBodyState.mass
-        body.restitution = physicsBodyState.restitution
-
-        getSelected().first!.physicsBody = body
-    }
-
     func loadPhysicsBodyFromSelected() {
-        if let body = getSelected().first!.physicsBody {
-            physicsBodyState.load(body)
-        }
+        physicsBodyState.load(getSelected().first!.physicsBody!)
     }
 
     func cancelAssignActionsMode() {
@@ -95,8 +78,8 @@ final class GameController: ObservableObject {
 
     var expectedCompletionReports = 0
 
-    func startActions() {
-        entities.forEach { entity in
+    func startActions(_ targetEntities: Set<GameEntity>) {
+        targetEntities.forEach { entity in
             let containers = entity.getActionTokens()
 
             entity.actionsArray = containers.map { tokenContainer in
@@ -126,11 +109,24 @@ final class GameController: ObservableObject {
         gameScene.isPaused = false
     }
 
-    func stopActions() { gameScene.isPaused = true }
+    func startActions() {
+        startActions(entities)
+    }
 
-    func getPhysicsSpeed() -> CGFloat { gameScene?.physicsWorld.speed ?? 0 }
+    func startActionsOnSelected() {
+        startActions(getSelected())
+    }
+
+    func stopActions() {
+        gameScene.removeAllActions()
+
+        entities.forEach { entity in
+            entity.face.rootSceneNode.removeAllActions()
+        }
+    }
+
+    func getPhysicsSpeed() -> CGFloat { gameScene?.physicsWorld.speed ?? 1 }
     func setPhysicsSpeed(_ speed: CGFloat) {
-        print("speed \(speed)")
         gameScene?.physicsWorld.speed = speed
 
         if resumePhysicsSpeed != nil {
@@ -160,7 +156,6 @@ final class GameController: ObservableObject {
     }
 
     func setGravity(_ vector: CGVector) {
-        print("gravity \(vector)")
         gameScene?.physicsWorld.gravity = vector
     }
 
@@ -173,7 +168,7 @@ final class GameController: ObservableObject {
     }
 
     func enablePhysicsOnSelected(_ enable: Bool) {
-        getSelected().first?.physicsBody?.isDynamic = false
+        getSelected().first?.physicsBody?.isDynamic = enable
     }
 
     func isPhysicsEnabledOnSelected() -> Bool {

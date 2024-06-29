@@ -15,8 +15,12 @@ class GameScene: SKScene {
     var hotDragTarget: GameEntity?
     var hotDragSubhandle: SelectionHaloRS.Directions?
 
-    var enableEdgeLoop = false
-    var sceneEdgeLoop: SKPhysicsBody!
+    var enableEdgeLoop = true
+    var cachedEdgeLoop: SKPhysicsBody?
+    var hotEdgeLoop: SKPhysicsBody? {
+        get { self.physicsBody }
+        set { self.physicsBody = newValue }
+    }
 
     enum MouseState {
         case dragBackground, dragHandle, dragSubhandle, idle, mouseDown
@@ -56,12 +60,11 @@ class GameScene: SKScene {
     override func didChangeSize(_ oldSize: CGSize) {
         super.didChangeSize(oldSize)
 
-        let origin = CGPoint(x: -size.width / 2, y: -size.height / 2)
-        let pb = SKPhysicsBody(edgeLoopFrom: CGRect(origin: origin, size: size))
+        let shrunk = size * 0.95
+        let origin = CGPoint(x: -shrunk.width / 2, y: -shrunk.height / 2)
+        let pb = SKPhysicsBody(edgeLoopFrom: CGRect(origin: origin, size: shrunk))
 
-        print("Create edge loop at \(origin) size \(size)")
-
-        self.sceneEdgeLoop = pb
+        cachedEdgeLoop = pb
 
         Task { @MainActor in
             playgroundState.viewSize = self.size
@@ -72,12 +75,21 @@ class GameScene: SKScene {
     }
 
     override func update(_ currentTime: TimeInterval) {
-        if enableEdgeLoop && self.physicsBody == nil {
-            self.run(SKAction.run {
-                self.physicsBody = self.sceneEdgeLoop
-            })
+        // Jumping through some hoops to make the scene edge loop
+        // work properly when we disable/enable/recreate it repeatedly.
+        // Note that this seems to make the edge work as a physics
+        // object, but it doesn't always show up as an outline when
+        // view.showsPhysics == true
+        if enableEdgeLoop {
+            if hotEdgeLoop == nil {
+                hotEdgeLoop = cachedEdgeLoop
+            } else if hotEdgeLoop !== cachedEdgeLoop {
+                hotEdgeLoop = nil
+            }
         } else {
-            self.physicsBody = nil
+            if hotEdgeLoop != nil {
+                hotEdgeLoop = nil
+            }
         }
     }
 }

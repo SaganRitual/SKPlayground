@@ -2,16 +2,6 @@
 
 import SwiftUI
 
-extension VerticalAlignment {
-    private enum GravityToggleAlignment: AlignmentID {
-        static func defaultValue(in context: ViewDimensions) -> CGFloat {
-            context[VerticalAlignment.center] // Align to center by default
-        }
-    }
-
-    static let gravityToggleAlignment = VerticalAlignment(GravityToggleAlignment.self)
-}
-
 struct PhysicsWorldView: View {
     @EnvironmentObject var gameController: GameController
     @EnvironmentObject var physicsMaskCategories: PhysicsMaskCategories
@@ -26,21 +16,14 @@ struct PhysicsWorldView: View {
     @State private var showDuplicateAlert = false
     @State private var duplicateCategoryIndex = 0
 
-    var gravityToggle: some View {
-        Text("Gravity")
-        .alignmentGuide(.gravityToggleAlignment) { dimensions in
-            dimensions[VerticalAlignment.center]  // Align Slider2DView to center
-        }
-    }
-
     var body: some View {
         VStack {
-            HStack(alignment: .gravityToggleAlignment) {
+            HStack {
                 Slider2DView(
                     output: $gravityPair,
                     size: CGSize(width: 100, height: 100),
                     snapTolerance: 5,
-                    title: gravityToggle,
+                    title: Text("Gravity"),
                     virtualSize: CGSize(width: 20, height: 20)
                 )
                 .padding(.trailing)
@@ -55,7 +38,7 @@ struct PhysicsWorldView: View {
                         Text("Full Scene Edge Loop")
                     }
                     .toggleStyle(.checkbox)
-                    .padding([.leading, .bottom])
+                    .padding(.bottom)
                     .onChange(of: enableEdgeLoop) {
                         gameController.enableSceneEdgeLoop(enableEdgeLoop)
                     }
@@ -76,6 +59,7 @@ struct PhysicsWorldView: View {
                             isEditing = true
                         }
                     }
+                    .padding(.top)
                     .sheet(isPresented: $isEditing) { // Sheet for editing
                         VStack {
                             TextField("New Name", text: $editedName)

@@ -16,8 +16,6 @@ class PhysicsBodyState: ObservableObject {
     @Published var gravitism: Bool = .random()
     @Published var rotatism: Bool = .random()
 
-    @Published var hasPhysicsBody: Bool = false
-
     init(preview: Bool) {
         density = 1
 
@@ -56,7 +54,5 @@ class PhysicsBodyState: ObservableObject {
         dynamism = body.isDynamic
         gravitism = body.affectedByGravity
         rotatism = body.allowsRotation
-
-        hasPhysicsBody = true
     }
 }

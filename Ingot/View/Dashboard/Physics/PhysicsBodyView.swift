@@ -10,23 +10,9 @@ struct PhysicsBodyView: View {
         Text(String(format: "%.2f", value))
     }
 
-    var verb: String {
-        physicsBodyState.hasPhysicsBody ? "Remove" : "Attach"
-    }
-
     var body: some View {
         VStack {
             HStack(spacing: 30) {
-                Button("\(verb) Physics Body") {
-                    if physicsBodyState.hasPhysicsBody {
-                        gameController.removePhysicsBody()
-                        physicsBodyState.hasPhysicsBody = false
-                    } else {
-                        gameController.attachPhysicsBody()
-                        physicsBodyState.hasPhysicsBody = true
-                    }
-                }
-
                 Toggle(isOn: $physicsBodyState.dynamism) {
                     Text("Apply Physics")
                 }
@@ -55,16 +41,6 @@ struct PhysicsBodyView: View {
 
             HStack(alignment: .top) {
                 VStack {
-//                    BasicScalarSlider(
-//                        scalar: $physicsBodyState.density,
-//                        scalarView: Text(String(format: "%.1f", physicsBodyState.density)),
-//                        title: Text("Density"),
-//                        minLabel: "0", maxLabel: "10", range: 0...10
-//                    )
-//                    .onChange(of: physicsBodyState.density) {
-//                        gameController.setDensityOnSelected(physicsBodyState.density)
-//                    }
-
                     BasicScalarSlider(
                         scalar: $physicsBodyState.friction,
                         scalarView: Text(String(format: "%.1f", physicsBodyState.friction)),

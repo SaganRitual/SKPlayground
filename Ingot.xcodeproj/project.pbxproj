@@ -219,8 +219,7 @@
 			children = (
 				D4DE8B372C29DFBD0075F4B7 /* Actions */,
 				D4EC5E622C2DFA1900E20EC7 /* Command */,
-				D4DE8B3A2C29E0010075F4B7 /* OtherPhysics */,
-				D4DE8B362C29DED30075F4B7 /* PhysicsBody */,
+				D4DE8B3A2C29E0010075F4B7 /* Physics */,
 			);
 			path = Dashboard;
 			sourceTree = "<group>";
@@ -319,15 +318,6 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		D4DE8B362C29DED30075F4B7 /* PhysicsBody */ = {
-			isa = PBXGroup;
-			children = (
-				D4A621AA2C2917CA00C3F89A /* PhysicsBodyView.swift */,
-				D4DE8B322C29D4280075F4B7 /* PhysicsBodyCategoriesView.swift */,
-			);
-			path = PhysicsBody;
-			sourceTree = "<group>";
-		};
 		D4DE8B372C29DFBD0075F4B7 /* Actions */ = {
 			isa = PBXGroup;
 			children = (
@@ -338,15 +328,17 @@
 			path = Actions;
 			sourceTree = "<group>";
 		};
-		D4DE8B3A2C29E0010075F4B7 /* OtherPhysics */ = {
+		D4DE8B3A2C29E0010075F4B7 /* Physics */ = {
 			isa = PBXGroup;
 			children = (
+				D4A621AA2C2917CA00C3F89A /* PhysicsBodyView.swift */,
+				D4DE8B322C29D4280075F4B7 /* PhysicsBodyCategoriesView.swift */,
 				D4DE8B3B2C29E0990075F4B7 /* PhysicsFieldView.swift */,
 				D49BD4FA2C2A7E8400FD313C /* PhysicsJointView.swift */,
 				D4A621A82C29172D00C3F89A /* PhysicsTabView.swift */,
 				D4A621A52C28E45D00C3F89A /* PhysicsWorldView.swift */,
 			);
-			path = OtherPhysics;
+			path = Physics;
 			sourceTree = "<group>";
 		};
 		D4EC5E4F2C2DC8FE00E20EC7 /* StateObject */ = {

@@ -55,3 +55,7 @@ the duration, click "Create Action". Then "Run Actions" will run the physics act
 ## Change physics world and gremlin physics body settings
 
 See the Physics Tab
+
+# SwiftLint Dependency
+
+There's a package dependency, but it's just for linting. You can remove the dependency if you don't want it.

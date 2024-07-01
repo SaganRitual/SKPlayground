@@ -25,6 +25,8 @@ with the colored handles (I changed the way they attach to the scene and broke t
 a little; they're supposed to track with the mouse). Choose which sprite you want to place
 in the dropdown menu on the right.
 
+![](https://github.com/SaganRitual/SKPlayground/blob/main/SKPlayground%20Place-Select-Move.gif)
+
 ## Place and move vertices, create paths, assign follow-path actions
 
 Choose "Vertices" in the dropdown menu, click in the playground. A vertex is created. To make
@@ -33,6 +35,8 @@ them in the order you want. Then in the Shape Lab tab, click "Create Closed Path
 path if you want to. Choose "Gremlin" in the dropdown, choose your sprite, place the sprite
 in the playground. Go to the Actions -> Space Actions tab, set a duration, create a follow action.
 Finally, click "Run Actions" 
+
+![](https://github.com/SaganRitual/SKPlayground/blob/main/SKPlayground%20Show%20Follow%20Path%20Action.gif)
 
 ## Assign move, scale, rotate actions
 
@@ -45,6 +49,8 @@ and the actions run.
 
 Same as above but go to Actions -> Physics Actions. Set up the action you want with the sliders, set
 the duration, click "Create Action". Then "Run Actions" will run the physics actions
+
+![](https://github.com/SaganRitual/SKPlayground/blob/main/SKPlayground%20Show%20Physics%20Actions.gif)
 
 ## Change physics world and gremlin physics body settings
 

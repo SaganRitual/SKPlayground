@@ -14,6 +14,7 @@
 		D404DF7A2C31A97A009686F6 /* ShapeListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D404DF792C31A97A009686F6 /* ShapeListView.swift */; };
 		D404DF7C2C3201ED009686F6 /* SelectionHaloOI.swift in Sources */ = {isa = PBXBuildFile; fileRef = D404DF7B2C3201ED009686F6 /* SelectionHaloOI.swift */; };
 		D404DF7F2C320856009686F6 /* SpriteManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D404DF7E2C320856009686F6 /* SpriteManager.swift */; };
+		D404DF812C32B408009686F6 /* FollowPathActionTokenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D404DF802C32B408009686F6 /* FollowPathActionTokenView.swift */; };
 		D46584E62C2CD73800BC19E7 /* ConfigurationTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D46584E52C2CD73800BC19E7 /* ConfigurationTabView.swift */; };
 		D49BD4FB2C2A7E8400FD313C /* PhysicsJointView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49BD4FA2C2A7E8400FD313C /* PhysicsJointView.swift */; };
 		D49BD4FF2C2B218900FD313C /* CommandView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49BD4FE2C2B218900FD313C /* CommandView.swift */; };
@@ -91,6 +92,9 @@
 		D404DF792C31A97A009686F6 /* ShapeListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShapeListView.swift; sourceTree = "<group>"; };
 		D404DF7B2C3201ED009686F6 /* SelectionHaloOI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionHaloOI.swift; sourceTree = "<group>"; };
 		D404DF7E2C320856009686F6 /* SpriteManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpriteManager.swift; sourceTree = "<group>"; };
+		D404DF802C32B408009686F6 /* FollowPathActionTokenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowPathActionTokenView.swift; sourceTree = "<group>"; };
+		D404DF832C33103D009686F6 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		D404DF852C33103D009686F6 /* .overcommit.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = .overcommit.yml; sourceTree = "<group>"; };
 		D46584E52C2CD73800BC19E7 /* ConfigurationTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurationTabView.swift; sourceTree = "<group>"; };
 		D49BD4FA2C2A7E8400FD313C /* PhysicsJointView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhysicsJointView.swift; sourceTree = "<group>"; };
 		D49BD4FC2C2AC29600FD313C /* UXScenarios.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = UXScenarios.md; sourceTree = "<group>"; };
@@ -271,6 +275,8 @@
 		D4D1F05A2C27BA8800003163 = {
 			isa = PBXGroup;
 			children = (
+				D404DF832C33103D009686F6 /* .gitignore */,
+				D404DF852C33103D009686F6 /* .overcommit.yml */,
 				D4D1F0652C27BA8800003163 /* Ingot */,
 				D4D1F0642C27BA8800003163 /* Products */,
 			);
@@ -319,6 +325,7 @@
 				D4D1F0752C27BAE700003163 /* ActionTokenView.swift */,
 				D4D1F0802C27BF7500003163 /* ActionTokensScrollView.swift */,
 				D4D1F08D2C27C4D500003163 /* AngularImpulseActionTokenView.swift */,
+				D404DF802C32B408009686F6 /* FollowPathActionTokenView.swift */,
 				D4D1F0872C27C4B400003163 /* ForceActionTokenView.swift */,
 				D4D1F08B2C27C4C800003163 /* ImpulseActionTokenView.swift */,
 				D4D1F07A2C27BB2D00003163 /* MoveActionTokenView.swift */,
@@ -498,6 +505,7 @@
 				D49BD5D62C2C698F00FD313C /* GameController+Drag.swift in Sources */,
 				D4A621A62C28E45D00C3F89A /* PhysicsWorldView.swift in Sources */,
 				D404DF7A2C31A97A009686F6 /* ShapeListView.swift in Sources */,
+				D404DF812C32B408009686F6 /* FollowPathActionTokenView.swift in Sources */,
 				D49BD5D22C2C683700FD313C /* MouseDispatch.swift in Sources */,
 				D4D1F0922C28A15200003163 /* Slider2DView.swift in Sources */,
 				D4A621A92C29172D00C3F89A /* PhysicsTabView.swift in Sources */,
@@ -671,6 +679,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Ingot/Ingot.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -698,6 +707,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Ingot/Ingot.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;

@@ -5,10 +5,12 @@ import Foundation
 final class UserShape {
     let uuid = UUID()
     var name: String
+    var open: Bool
     var vertices: [Vertex]
 
-    init(_ name: String, _ vertices: [Vertex]) {
+    init(_ name: String, _ vertices: [Vertex], _ open: Bool) {
         self.name = name
+        self.open = open
         self.vertices = vertices
     }
 }
@@ -30,9 +32,20 @@ final class ShapeLab: ObservableObject {
     @Published var paths = [UserShape]()
     @Published var regions = [UserShape]()
 
-    private func makeUniqueName(_ shapeSet: [UserShape]) -> String {
+    private func makeUniqueName(_ shapeSet: [UserShape], whichShape: WhichShape, open: Bool) -> String {
+        let openClosed: String = open ? "Open" : "Closed"
+        let prefix: String
+        switch whichShape {
+        case .edge:
+            prefix = "\(openClosed) Edge"
+        case .path:
+            prefix = "\(openClosed) Path"
+        case .region:
+            prefix = "Region"
+        }
+
         for ix in shapeSet.count... {
-            let trialName = "Shape \(ix)"
+            let trialName = "\(prefix) \(ix)"
             if !shapeSet.contains(where: { $0.name == trialName }) {
                 return trialName
             }
@@ -52,11 +65,11 @@ final class ShapeLab: ObservableObject {
         }
     }
 
-    func newShape(_ which: WhichShape, _ vertices: Set<Vertex>) -> String {
+    func newShape(_ which: WhichShape, _ vertices: Set<Vertex>, _ open: Bool) -> String {
         let orderedVertices = Array(vertices).sorted { $0.selectionOrder < $1.selectionOrder }
 
-        let name = makeUniqueName(shapeSet(for: which))
-        let shape = UserShape(name, orderedVertices)
+        let name = makeUniqueName(shapeSet(for: which), whichShape: which, open: open)
+        let shape = UserShape(name, orderedVertices, open)
 
         switch which {
         case .edge:

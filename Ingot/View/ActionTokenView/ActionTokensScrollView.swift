@@ -10,6 +10,9 @@ struct ActionTokensScrollView: View {
         case let angularImpulseToken as AngularImpulseActionToken:
             return AngularImpulseActionTokenView(duration: angularImpulseToken.duration, angularImpulse: angularImpulseToken.angularImpulse)
 
+        case let followPathToken as FollowPathActionToken:
+            return FollowPathActionTokenView(duration: followPathToken.duration, pathId: followPathToken.pathId!)
+
         case let forceToken as ForceActionToken:
             return ForceActionTokenView(duration: forceToken.duration, focus: forceToken.focus, force: forceToken.force)
 

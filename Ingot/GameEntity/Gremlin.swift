@@ -48,6 +48,10 @@ final class Gremlin: GameEntity {
         restoreActionAnchors()
     }
 
+    override func commitFollowPathAction(_ token: ActionTokenProtocol) {
+        addActionToken(token)
+    }
+
     override func commitPhysicsAction(_ token: ActionTokenProtocol) {
         addActionToken(token)
     }

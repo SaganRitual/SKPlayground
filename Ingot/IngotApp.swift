@@ -23,6 +23,7 @@ final class AppData: ObservableObject {
             physicsBodyState,
             physicsFieldState,
             playgroundState,
+            shapeLab,
             spaceActionsState
         )
     }

@@ -11,6 +11,7 @@ final class GameController: ObservableObject {
     weak var physicsBodyState: PhysicsBodyState!
     weak var physicsFieldState: PhysicsFieldState!
     weak var playgroundState: PlaygroundState!
+    weak var shapeLab: ShapeLab!
     weak var spaceActionsState: SpaceActionsState!
     var selectionMarquee: SelectionMarquee!
 
@@ -26,6 +27,7 @@ final class GameController: ObservableObject {
         _ physicsBodyState: PhysicsBodyState,
         _ physicsFieldState: PhysicsFieldState,
         _ playgroundState: PlaygroundState,
+        _ shapeLab: ShapeLab,
         _ spaceActionsState: SpaceActionsState
     ) {
         self.commandSelection = commandSelection
@@ -35,6 +37,7 @@ final class GameController: ObservableObject {
         self.physicsFieldState = physicsFieldState
         self.playgroundState = playgroundState
         self.selectionMarquee = SelectionMarquee(playgroundState)
+        self.shapeLab = shapeLab
         self.spaceActionsState = spaceActionsState
     }
 
@@ -47,6 +50,14 @@ final class GameController: ObservableObject {
     func cancelAssignActionsMode() {
         spaceActionsState.assignSpaceActions = false
         getSelected().first?.cancelActionsMode()
+    }
+
+    func commitFollowPathAction(_ actionToken: ActionTokenProtocol) {
+        let entity = getSelected().first!
+
+        entity.commitFollowPathAction(actionToken)
+
+        entityActionsPublisher.actionTokens = entity.getActionTokens()
     }
 
     func commitSpaceActions(duration: TimeInterval) {
@@ -91,20 +102,35 @@ final class GameController: ObservableObject {
 
             entity.actionsArray = containers.map { tokenContainer in
                 switch tokenContainer.token {
+                case let angularImpulse as AngularImpulseActionToken:
+                    return SKAction.applyAngularImpulse(angularImpulse.angularImpulse, duration: angularImpulse.duration)
+                    
+                case let follow as FollowPathActionToken:
+                    let path = CGMutablePath()
+                    let pathDescriptor = shapeLab.paths.first(where: { $0.uuid == follow.pathId! })!
+
+                    path.move(to: pathDescriptor.vertices.first!.position)
+
+                    for vertex in pathDescriptor.vertices.dropFirst() {
+                        path.addLine(to: vertex.position)
+                    }
+
+                    path.closeSubpath()
+
+                    return SKAction.follow(path, asOffset: false, orientToPath: false, duration: follow.duration)
+
+                case let force as ForceActionToken:
+                    return SKAction.applyForce(force.force, at: force.focus, duration: force.duration)
+                case let impulse as ImpulseActionToken:
+                    return SKAction.applyImpulse(impulse.impulse, at: impulse.focus, duration: impulse.duration)
                 case let move as MoveActionToken:
                     return SKAction.move(to: move.targetPosition, duration: move.duration)
                 case let rotate as RotateActionToken:
                     return SKAction.rotate(toAngle: rotate.targetRotation, duration: rotate.duration)
                 case let scale as ScaleActionToken:
                     return SKAction.scale(to: scale.targetScale, duration: scale.duration)
-                case let force as ForceActionToken:
-                    return SKAction.applyForce(force.force, at: force.focus, duration: force.duration)
-                case let impulse as ImpulseActionToken:
-                    return SKAction.applyImpulse(impulse.impulse, at: impulse.focus, duration: impulse.duration)
                 case let torque as TorqueActionToken:
                     return SKAction.applyTorque(torque.torque, duration: torque.duration)
-                case let angularImpulse as AngularImpulseActionToken:
-                    return SKAction.applyAngularImpulse(angularImpulse.angularImpulse, duration: angularImpulse.duration)
                 default:
                     fatalError("Numerous reputable accordion players insist that this can't happen")
                 }

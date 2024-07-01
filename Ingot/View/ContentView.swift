@@ -22,6 +22,7 @@ struct ContentView: View {
     @StateObject var physicsBodyState = PhysicsBodyState(preview: true)
     @StateObject var physicsFieldState = PhysicsFieldState()
     @StateObject var playgroundState = PlaygroundState()
+    @StateObject var shapeLab = ShapeLab()
     @StateObject var spaceActionsState = SpaceActionsState()
 
     return ContentView()
@@ -38,6 +39,7 @@ struct ContentView: View {
                 physicsBodyState,
                 physicsFieldState,
                 playgroundState,
+                shapeLab,
                 spaceActionsState
             )
         }

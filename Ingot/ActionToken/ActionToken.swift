@@ -11,24 +11,51 @@ struct ActionTokenContainer: Identifiable {
     let token: any ActionTokenProtocol
 
     static func randomToken() -> ActionTokenContainer {
-        switch Int.random(in: 0..<7) {
+        switch Int.random(in: 0..<8) {
         case 0:
-            return ActionTokenContainer(token: MoveActionToken.randomToken())
+            return ActionTokenContainer(token: FollowPathActionToken.randomToken())
         case 1:
-            return ActionTokenContainer(token: RotateActionToken.randomToken())
+            return ActionTokenContainer(token: MoveActionToken.randomToken())
         case 2:
-            return ActionTokenContainer(token: ScaleActionToken.randomToken())
+            return ActionTokenContainer(token: RotateActionToken.randomToken())
         case 3:
-            return ActionTokenContainer(token: ForceActionToken.randomToken())
+            return ActionTokenContainer(token: ScaleActionToken.randomToken())
         case 4:
-            return ActionTokenContainer(token: TorqueActionToken.randomToken())
+            return ActionTokenContainer(token: ForceActionToken.randomToken())
         case 5:
-            return ActionTokenContainer(token: ImpulseActionToken.randomToken())
+            return ActionTokenContainer(token: TorqueActionToken.randomToken())
         case 6:
+            return ActionTokenContainer(token: ImpulseActionToken.randomToken())
+        case 7:
             return ActionTokenContainer(token: AngularImpulseActionToken.randomToken())
         default:
             fatalError("Reputable accordion players insist this cannot happen")
         }
+    }
+}
+
+struct FollowPathActionToken: ActionTokenProtocol {
+    let duration: TimeInterval
+    let path: [CGPoint]?
+    let pathId: UUID?
+
+    init(duration: TimeInterval, path: [CGPoint]) {
+        self.duration = duration
+        self.path = path
+        self.pathId = nil
+    }
+
+    init(duration: TimeInterval, pathId: UUID) {
+        self.duration = duration
+        self.path = nil
+        self.pathId = pathId
+    }
+
+    static func randomToken() -> FollowPathActionToken {
+        FollowPathActionToken(
+            duration: .random(in: (1.0 / 60)...10),
+            path: (0..<5).map { _ in CGPoint.random(in: -100...100) }
+        )
     }
 }
 

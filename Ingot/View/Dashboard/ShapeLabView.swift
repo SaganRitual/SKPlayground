@@ -28,36 +28,37 @@ struct ShapeLabView: View {
         HStack(spacing: 40) {
             VStack(alignment: .leading) {
                 Button("Create Open Edge") {
-                    selectedEdge = shapeLab.newShape(.edge, gameController.getSelected() as! Set<Vertex>)
+                    selectedEdge = shapeLab.newShape(.edge, gameController.getSelected() as! Set<Vertex>, true)
                 }
                 .disabled(uniformVertexCount() < 2)
                 
                 Button("Create Closed Edge") {
+                    selectedEdge = shapeLab.newShape(.edge, gameController.getSelected() as! Set<Vertex>, false)
                 }
                 .disabled(uniformVertexCount() < 3)
 
                 Button("Create Open Path") {
-
+                    selectedPath = shapeLab.newShape(.path, gameController.getSelected() as! Set<Vertex>, true)
                 }
                 .disabled(uniformVertexCount() < 2)
 
                 Button("Create Closed Path") {
-
+                    selectedPath = shapeLab.newShape(.path, gameController.getSelected() as! Set<Vertex>, false)
                 }
                 .disabled(uniformVertexCount() < 3)
 
                 Button("Create Circlular Region") {
-                    
+                    selectedRegion = shapeLab.newShape(.region, gameController.getSelected() as! Set<Vertex>, false)
                 }
                 .disabled(uniformVertexCount() != 2)
                 
                 Button("Create Rectangular Region") {
-                    
+                    selectedRegion = shapeLab.newShape(.region, gameController.getSelected() as! Set<Vertex>, false)
                 }
                 .disabled(uniformVertexCount() != 2)
                 
                 Button("Create Polygonal Region") {
-                    
+                    selectedRegion = shapeLab.newShape(.region, gameController.getSelected() as! Set<Vertex>, false)
                 }
                 .disabled(uniformVertexCount() < 3)
             }

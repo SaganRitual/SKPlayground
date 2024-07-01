@@ -39,6 +39,7 @@ class GameEntity {
     func restoreActionAnchors() { }
 
     func cancelActionsMode() { }
+    func commitFollowPathAction(_ token: ActionTokenProtocol) { }
     func commitPhysicsAction(_ token: ActionTokenProtocol) { }
     func commitSpaceActions(duration: TimeInterval) { }
     func startActionsMode() { }

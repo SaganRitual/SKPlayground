@@ -2,6 +2,8 @@
 
 A tool for experimenting with SpriteKit
 
+![](https://github.com/SaganRitual/SKPlayground/blob/main/SKPlayground%20Place-Select-Move.gif)
+
 - Create sprites, move them around, scale and rotate
 - Create and run actions to move, scale, rotate, follow paths
 - Create and run physics actions
@@ -17,15 +19,13 @@ That kind of stuff in general. Will be adding the following soon:
 
 It's probably a bit fragile and more than a bit buggy. Here's some stuff that is working:
 
-## Place, move, scale, rotate sprites
+## Place, move, scale, rotate sprites (see the above gif)
 
 Selection works like you would expect: click to select, shift-click to multiselect, or
 drag a rubber band around the ones you want selected. Drag them around, scale and rotate
 with the colored handles (I changed the way they attach to the scene and broke the scaling
 a little; they're supposed to track with the mouse). Choose which sprite you want to place
 in the dropdown menu on the right.
-
-![](https://github.com/SaganRitual/SKPlayground/blob/main/SKPlayground%20Place-Select-Move.gif)
 
 ## Place and move vertices, create paths, assign follow-path actions
 

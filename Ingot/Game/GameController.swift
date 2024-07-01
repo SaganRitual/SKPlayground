@@ -20,6 +20,7 @@ final class GameController: ObservableObject {
     var selectionOrderTracker = 0
     let spriteManager = SpriteManager()
 
+    // swiftlint:disable function_parameter_count
     func postInit(
         _ commandSelection: CommandSelection,
         _ entityActionsPublisher: EntityActionsPublisher,
@@ -40,6 +41,7 @@ final class GameController: ObservableObject {
         self.shapeLab = shapeLab
         self.spaceActionsState = spaceActionsState
     }
+    // swiftlint:enable function_parameter_count
 
     func loadPhysicsBodyFromSelected() {
         if let body = getSelected().first?.physicsBody {
@@ -103,8 +105,10 @@ final class GameController: ObservableObject {
             entity.actionsArray = containers.map { tokenContainer in
                 switch tokenContainer.token {
                 case let angularImpulse as AngularImpulseActionToken:
-                    return SKAction.applyAngularImpulse(angularImpulse.angularImpulse, duration: angularImpulse.duration)
-                    
+                    return SKAction.applyAngularImpulse(
+                        angularImpulse.angularImpulse, duration: angularImpulse.duration
+                    )
+
                 case let follow as FollowPathActionToken:
                     let path = CGMutablePath()
                     let pathDescriptor = shapeLab.paths.first(where: { $0.uuid == follow.pathId! })!
@@ -247,7 +251,7 @@ final class GameController: ObservableObject {
     func setRestitutionOnSelected(_ restitution: CGFloat) {
         getSelected().first?.physicsBody?.restitution = restitution
     }
-    
+
     func getAngularDampingOnSelected() -> CGFloat {
         getSelected().first?.physicsBody?.angularDamping ?? 0
     }

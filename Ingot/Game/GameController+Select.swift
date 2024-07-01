@@ -89,7 +89,8 @@ extension GameController {
                   selected_.first is Vertex,
                   selected_.count > 1 else { return }
 
-        let selected = Array(selected_ as! Set<Vertex>).sorted { $0.selectionOrder < $1.selectionOrder }
+        let selected = Array(Utility.forceCast(selected_, to: Set<Vertex>.self))
+                        .sorted { $0.selectionOrder < $1.selectionOrder }
 
         selected.first!.setOrderIndicator(.first)
         selected.last!.setOrderIndicator(.last)

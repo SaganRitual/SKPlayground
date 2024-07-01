@@ -3,5 +3,5 @@
 import Foundation
 import SpriteKit
 
-class SelectionHaloOI: SelectionHalo {    
+class SelectionHaloOI: SelectionHalo {
 }

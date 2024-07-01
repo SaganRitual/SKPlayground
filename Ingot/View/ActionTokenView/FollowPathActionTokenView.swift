@@ -2,7 +2,6 @@
 
 import SwiftUI
 
-
 struct FollowPathActionTokenView: View, ActionTokenViewProtocol {
     @EnvironmentObject var shapeLab: ShapeLab
 

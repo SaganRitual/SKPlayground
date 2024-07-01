@@ -11,18 +11,21 @@ struct CheckboxPicker: View {
     var body: some View {
         Menu {
             ForEach(options.indices, id: \.self) { index in
-                Button(action: {
-                    if selectedIndices.contains(index) {
-                        selectedIndices.remove(index)
-                    } else {
-                        selectedIndices.insert(index)
+                Button(
+                    action: {
+                        if selectedIndices.contains(index) {
+                            selectedIndices.remove(index)
+                        } else {
+                            selectedIndices.insert(index)
+                        }
+                    },
+                    label: {
+                        HStack {
+                            Image(systemName: selectedIndices.contains(index) ? "checkmark.square.fill" : "square")
+                            Text(options[index])
+                        }
                     }
-                }) {
-                    HStack {
-                        Image(systemName: selectedIndices.contains(index) ? "checkmark.square.fill" : "square")
-                        Text(options[index])
-                    }
-                }
+                )
             }
         } label: {
             label

@@ -2,7 +2,7 @@
 
 import Foundation
 import SpriteKit
- 
+
 class GameScene: SKScene {
     var playgroundState: PlaygroundState!
     var gameController: GameController!
@@ -41,12 +41,16 @@ class GameScene: SKScene {
 
         addChild(entitiesNode)
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func postInit(_ gameController: GameController, _ playgroundState: PlaygroundState, _ selectionMarquee: SelectionMarquee) {
+    func postInit(
+        _ gameController: GameController,
+        _ playgroundState: PlaygroundState,
+        _ selectionMarquee: SelectionMarquee
+    ) {
         self.gameController = gameController
         self.playgroundState = playgroundState
         self.selectionMarquee = selectionMarquee

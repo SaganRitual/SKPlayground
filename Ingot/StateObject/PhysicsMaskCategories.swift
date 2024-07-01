@@ -17,4 +17,3 @@ final class PhysicsMaskCategories: ObservableObject {
         return nil
     }
 }
-

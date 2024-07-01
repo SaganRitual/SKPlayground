@@ -82,7 +82,7 @@ extension GameScene {
 
         mouseState = .idle
     }
-    
+
 }
 
 private extension GameScene {

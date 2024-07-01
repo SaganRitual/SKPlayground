@@ -8,7 +8,7 @@ struct GameControllerTestView: View {
     var body: some View {
         VStack {
             Button("Select Gremlin 1") {
-                
+
             }
         }
     }

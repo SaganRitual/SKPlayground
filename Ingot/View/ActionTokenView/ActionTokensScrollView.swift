@@ -8,7 +8,9 @@ struct ActionTokensScrollView: View {
     func createActionView(for container: ActionTokenContainer) -> any View {
         switch container.token {
         case let angularImpulseToken as AngularImpulseActionToken:
-            return AngularImpulseActionTokenView(duration: angularImpulseToken.duration, angularImpulse: angularImpulseToken.angularImpulse)
+            return AngularImpulseActionTokenView(
+                duration: angularImpulseToken.duration, angularImpulse: angularImpulseToken.angularImpulse
+            )
 
         case let followPathToken as FollowPathActionToken:
             return FollowPathActionTokenView(duration: followPathToken.duration, pathId: followPathToken.pathId!)
@@ -17,7 +19,9 @@ struct ActionTokensScrollView: View {
             return ForceActionTokenView(duration: forceToken.duration, focus: forceToken.focus, force: forceToken.force)
 
         case let impulseToken as ImpulseActionToken:
-            return ImpulseActionTokenView(duration: impulseToken.duration, focus: impulseToken.focus, impulse: impulseToken.impulse)
+            return ImpulseActionTokenView(
+                duration: impulseToken.duration, focus: impulseToken.focus, impulse: impulseToken.impulse
+            )
 
         case let moveToken as MoveActionToken:
             return MoveActionTokenView(duration: moveToken.duration, targetPosition: moveToken.targetPosition)
@@ -52,7 +56,11 @@ struct ActionTokensScrollView: View {
                 .padding()
             }
         }
-        .background(RoundedRectangle(cornerSize: CGSize(width: 15, height: 15), style: .circular).fill(Color(.controlBackgroundColor)))
+        .background(
+            RoundedRectangle(
+                cornerSize: CGSize(width: 15, height: 15), style: .circular).fill(Color(.controlBackgroundColor)
+            )
+        )
     }
 }
 

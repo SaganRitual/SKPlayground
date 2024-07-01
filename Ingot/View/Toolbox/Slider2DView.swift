@@ -33,7 +33,9 @@ struct Slider2DView<Title: View>: View {
         self.size = size
         self.snapTolerance = snapTolerance
         self.title = title
-        self.scale = virtualSize.map { CGVector(dx: $0.width / size.width, dy: $0.height / size.height) } ?? .init(dx: 1, dy: 1)
+        self.scale = virtualSize.map {
+            CGVector(dx: $0.width / size.width, dy: $0.height / size.height)
+        } ?? .init(dx: 1, dy: 1)
     }
 
     private var handleOffset: CGPoint {
@@ -78,7 +80,7 @@ struct Slider2DView<Title: View>: View {
                 }
                 .gesture(
                     DragGesture(coordinateSpace: .local)
-                        .updating($dragOffset) { value, state, transaction in
+                        .updating($dragOffset) { value, state, _ /*transaction*/ in
                             state = value.translation
                         }
                         .onEnded { value in
@@ -132,11 +134,9 @@ private extension Slider2DView {
 
             var ixOfMinimum = -1
             var minimumDistance = CGFloat.greatestFiniteMagnitude
-            for ix in 0..<distances.count {
-                if distances[ix] < minimumDistance {
-                    ixOfMinimum = ix
-                    minimumDistance = distances[ix]
-                }
+            for ix in 0..<distances.count where distances[ix] < minimumDistance {
+                ixOfMinimum = ix
+                minimumDistance = distances[ix]
             }
 
             let magnet = CGPoint(

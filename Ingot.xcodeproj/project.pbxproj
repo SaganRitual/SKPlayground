@@ -95,6 +95,7 @@
 		D404DF802C32B408009686F6 /* FollowPathActionTokenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowPathActionTokenView.swift; sourceTree = "<group>"; };
 		D404DF832C33103D009686F6 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		D404DF852C33103D009686F6 /* .overcommit.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = .overcommit.yml; sourceTree = "<group>"; };
+		D445A8D02C33370A001C1421 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		D46584E52C2CD73800BC19E7 /* ConfigurationTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurationTabView.swift; sourceTree = "<group>"; };
 		D49BD4FA2C2A7E8400FD313C /* PhysicsJointView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhysicsJointView.swift; sourceTree = "<group>"; };
 		D49BD4FC2C2AC29600FD313C /* UXScenarios.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = UXScenarios.md; sourceTree = "<group>"; };
@@ -277,6 +278,7 @@
 			children = (
 				D404DF832C33103D009686F6 /* .gitignore */,
 				D404DF852C33103D009686F6 /* .overcommit.yml */,
+				D445A8D02C33370A001C1421 /* .swiftlint.yml */,
 				D4D1F0652C27BA8800003163 /* Ingot */,
 				D4D1F0642C27BA8800003163 /* Products */,
 			);
@@ -421,6 +423,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				D404DF922C3334E6009686F6 /* PBXTargetDependency */,
 			);
 			name = Ingot;
 			productName = Ingot;
@@ -451,6 +454,9 @@
 				Base,
 			);
 			mainGroup = D4D1F05A2C27BA8800003163;
+			packageReferences = (
+				D404DF902C3334D5009686F6 /* XCRemoteSwiftPackageReference "SwiftLintPlugins" */,
+			);
 			productRefGroup = D4D1F0642C27BA8800003163 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -553,6 +559,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		D404DF922C3334E6009686F6 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			productRef = D404DF912C3334E6009686F6 /* SwiftLintBuildToolPlugin */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		D4D1F0702C27BA8900003163 /* Debug */ = {
@@ -687,6 +700,7 @@
 				DEVELOPMENT_TEAM = DD983V4X84;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
+				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -697,6 +711,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.saganritual.Ingot;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_TREAT_WARNINGS_AS_ERRORS = YES;
 				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
@@ -715,6 +730,7 @@
 				DEVELOPMENT_TEAM = DD983V4X84;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
+				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -725,6 +741,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.saganritual.Ingot;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_TREAT_WARNINGS_AS_ERRORS = YES;
 				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
@@ -751,6 +768,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		D404DF902C3334D5009686F6 /* XCRemoteSwiftPackageReference "SwiftLintPlugins" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SimplyDanny/SwiftLintPlugins";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.55.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		D404DF912C3334E6009686F6 /* SwiftLintBuildToolPlugin */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D404DF902C3334D5009686F6 /* XCRemoteSwiftPackageReference "SwiftLintPlugins" */;
+			productName = "plugin:SwiftLintBuildToolPlugin";
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = D4D1F05B2C27BA8800003163 /* Project object */;
 }

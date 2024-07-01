@@ -25,19 +25,36 @@ struct DragDispatch {
         DragDispatch(.end, entity, nil, mouseDispatch)
     }
 
-    static func beginRS(_ entity: GameEntity?, _ subhandleDirection: SelectionHaloRS.Directions, _ mouseDispatch: MouseDispatch) -> DragDispatch {
+    static func beginRS(
+        _ entity: GameEntity?,
+        _ subhandleDirection: SelectionHaloRS.Directions,
+        _ mouseDispatch: MouseDispatch
+    ) -> DragDispatch {
         DragDispatch(.begin, entity, subhandleDirection, mouseDispatch)
     }
 
-    static func continueRS(_ entity: GameEntity?, _ subhandleDirection: SelectionHaloRS.Directions, _ mouseDispatch: MouseDispatch) -> DragDispatch {
+    static func continueRS(
+        _ entity: GameEntity?,
+        _ subhandleDirection: SelectionHaloRS.Directions,
+        _ mouseDispatch: MouseDispatch
+    ) -> DragDispatch {
         DragDispatch(.continue, entity, subhandleDirection, mouseDispatch)
     }
 
-    static func endRS(_ entity: GameEntity?, _ subhandleDirection: SelectionHaloRS.Directions, _ mouseDispatch: MouseDispatch) -> DragDispatch {
+    static func endRS(
+        _ entity: GameEntity?,
+        _ subhandleDirection: SelectionHaloRS.Directions,
+        _ mouseDispatch: MouseDispatch
+    ) -> DragDispatch {
         DragDispatch(.end, entity, subhandleDirection, mouseDispatch)
     }
 
-    private init(_ phase: Phase, _ entity: GameEntity?, _ subhandleDirection: SelectionHaloRS.Directions?, _ mouseDispatch: MouseDispatch) {
+    private init(
+        _ phase: Phase,
+        _ entity: GameEntity?,
+        _ subhandleDirection: SelectionHaloRS.Directions?,
+        _ mouseDispatch: MouseDispatch
+    ) {
         self.control = mouseDispatch.control
         self.subhandleDirection = subhandleDirection
         self.entity = entity

@@ -31,7 +31,7 @@ struct ContentView: View {
         .environmentObject(gameController)
         .environmentObject(playgroundState)
         .environmentObject(spaceActionsState)
-        .onAppear() {
+        .onAppear {
             gameController.postInit(
                 commandSelection,
                 entityActionsPublisher,

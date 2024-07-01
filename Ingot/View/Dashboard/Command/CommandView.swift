@@ -15,7 +15,6 @@ struct CommandView: View {
     }
 }
 
-
 #Preview {
     CommandView()
         .environmentObject(CommandSelection())

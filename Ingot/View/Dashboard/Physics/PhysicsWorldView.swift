@@ -42,7 +42,7 @@ struct PhysicsWorldView: View {
                     .onChange(of: enableEdgeLoop) {
                         gameController.enableSceneEdgeLoop(enableEdgeLoop)
                     }
-                    .onAppear() {
+                    .onAppear {
                         enableEdgeLoop = gameController.getSceneEdgeLoopEnabled()
                     }
 
@@ -67,7 +67,9 @@ struct PhysicsWorldView: View {
 
                             HStack {
                                 Button("Save") {
-                                    if let duplicateIx = physicsMaskCategories.renameCategory(currentName: currentCategoryName, newName: editedName) {
+                                    if let duplicateIx = physicsMaskCategories.renameCategory(
+                                        currentName: currentCategoryName, newName: editedName
+                                    ) {
                                         duplicateCategoryIndex = duplicateIx
                                         showDuplicateAlert = true
                                     } else {
@@ -85,7 +87,10 @@ struct PhysicsWorldView: View {
                     .alert(isPresented: $showDuplicateAlert) {  // Alert now bound to state
                       Alert(
                         title: Text("Category names must be unique"),
-                        message: Text("There is already a category called \(physicsMaskCategories.names[duplicateCategoryIndex])"),
+                        message: Text(
+                            "There is already a category called "
+                            + "\(physicsMaskCategories.names[duplicateCategoryIndex])"
+                        ),
                         dismissButton: .cancel()
                       )
                     }

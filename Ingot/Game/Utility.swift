@@ -18,6 +18,7 @@ enum Utility {
     }
 }
 
+// swiftlint:disable nesting
 extension Utility {
     protocol RandomizableRange {
         associatedtype Bound: BinaryFloatingPoint where Bound.RawSignificand: FixedWidthInteger
@@ -26,9 +27,13 @@ extension Utility {
         var upperBound: Bound { get }
     }
 }
+// swiftlint:enable nesting
 
-extension Range: Utility.RandomizableRange where Bound: BinaryFloatingPoint, Bound.RawSignificand: FixedWidthInteger {}
-extension ClosedRange: Utility.RandomizableRange where Bound: BinaryFloatingPoint, Bound.RawSignificand: FixedWidthInteger {}
+extension Range: Utility.RandomizableRange
+    where Bound: BinaryFloatingPoint, Bound.RawSignificand: FixedWidthInteger {}
+
+extension ClosedRange: Utility.RandomizableRange
+    where Bound: BinaryFloatingPoint, Bound.RawSignificand: FixedWidthInteger {}
 
 extension Utility {
     static func randomPair<T: RandomizableRange>(in range: T, bRange: T? = nil) -> (T.Bound, T.Bound) {
@@ -37,5 +42,16 @@ extension Utility {
         let b = T.Bound.random(in: bRange.lowerBound..<bRange.upperBound)
 
         return (a, b)
+    }
+}
+
+extension Utility {
+    static func forceCast<T>(_ object: Any?, to expectedType: T.Type) -> T {
+        assert(object is T, "You said this couldn't happen")
+        guard let forced = object as? T else {
+            fatalError("The gods said this couldn't happen")
+        }
+
+        return forced
     }
 }

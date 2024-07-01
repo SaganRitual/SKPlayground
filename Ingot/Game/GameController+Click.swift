@@ -3,7 +3,7 @@
 import Foundation
 
 extension GameController {
-    
+
     func click(_ clickDispatch: ClickDispatch) {
         if let entity = clickDispatch.entity {
             // Clicked on an entity; do selection stuff

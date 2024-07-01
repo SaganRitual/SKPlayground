@@ -16,16 +16,16 @@ class GameEntity {
     var rotationAnchor: CGFloat?
     var scaleAnchor: CGFloat?
 
-    var physicsBody: SKPhysicsBody? { get { nil } set { } }
-
     var position: CGPoint {
         get { face.position }
         set { face.position = newValue }
     }
 
+    // swiftlint:disable unused_setter_value
+    var physicsBody: SKPhysicsBody? { get { nil } set { } }
     var rotation: CGFloat { get { 0 } set { } }
-
     var scale: CGFloat { get { 1 } set { } }
+    // swiftlint:enable unused_setter_value
 
     var selectionOrder = 0
 

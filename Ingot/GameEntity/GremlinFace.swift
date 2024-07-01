@@ -4,9 +4,7 @@ import Foundation
 import SpriteKit
 
 final class GremlinFace: GameEntityFace {
-    var rsHalo: SelectionHaloRS {
-        halo as! SelectionHaloRS
-    }
+    var rsHalo: SelectionHaloRS { Utility.forceCast(halo, to: SelectionHaloRS.self) }
 
     override var rotation: CGFloat {
         get { rootSceneNode.zRotation }

@@ -9,9 +9,7 @@ class SelectionHalo: GameEntitySprite {
     var dragAnchor: CGPoint = .zero
     var isSelected: Bool { !sceneNode.isHidden }
 
-    var haloShapeNode: SKShapeNode {
-        sceneNode as! SKShapeNode
-    }
+    var haloShapeNode: SKShapeNode { Utility.forceCast(sceneNode, to: SKShapeNode.self) }
 
     init() {
         let shape = SKShapeNode(circleOfRadius: Self.radius)

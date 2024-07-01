@@ -28,37 +28,44 @@ struct ShapeLabView: View {
         HStack(spacing: 40) {
             VStack(alignment: .leading) {
                 Button("Create Open Edge") {
-                    selectedEdge = shapeLab.newShape(.edge, gameController.getSelected() as! Set<Vertex>, true)
+                    let vertices = Utility.forceCast(gameController.getSelected(), to: Set<Vertex>.self)
+                    selectedEdge = shapeLab.newShape(.edge, vertices, true)
                 }
                 .disabled(uniformVertexCount() < 2)
-                
+
                 Button("Create Closed Edge") {
-                    selectedEdge = shapeLab.newShape(.edge, gameController.getSelected() as! Set<Vertex>, false)
+                    let vertices = Utility.forceCast(gameController.getSelected(), to: Set<Vertex>.self)
+                    selectedEdge = shapeLab.newShape(.edge, vertices, false)
                 }
                 .disabled(uniformVertexCount() < 3)
 
                 Button("Create Open Path") {
-                    selectedPath = shapeLab.newShape(.path, gameController.getSelected() as! Set<Vertex>, true)
+                    let vertices = Utility.forceCast(gameController.getSelected(), to: Set<Vertex>.self)
+                    selectedPath = shapeLab.newShape(.path, vertices, true)
                 }
                 .disabled(uniformVertexCount() < 2)
 
                 Button("Create Closed Path") {
-                    selectedPath = shapeLab.newShape(.path, gameController.getSelected() as! Set<Vertex>, false)
+                    let vertices = Utility.forceCast(gameController.getSelected(), to: Set<Vertex>.self)
+                    selectedPath = shapeLab.newShape(.path, vertices, false)
                 }
                 .disabled(uniformVertexCount() < 3)
 
                 Button("Create Circlular Region") {
-                    selectedRegion = shapeLab.newShape(.region, gameController.getSelected() as! Set<Vertex>, false)
+                    let vertices = Utility.forceCast(gameController.getSelected(), to: Set<Vertex>.self)
+                    selectedRegion = shapeLab.newShape(.region, vertices, false)
                 }
                 .disabled(uniformVertexCount() != 2)
-                
+
                 Button("Create Rectangular Region") {
-                    selectedRegion = shapeLab.newShape(.region, gameController.getSelected() as! Set<Vertex>, false)
+                    let vertices = Utility.forceCast(gameController.getSelected(), to: Set<Vertex>.self)
+                    selectedRegion = shapeLab.newShape(.region, vertices, false)
                 }
                 .disabled(uniformVertexCount() != 2)
-                
+
                 Button("Create Polygonal Region") {
-                    selectedRegion = shapeLab.newShape(.region, gameController.getSelected() as! Set<Vertex>, false)
+                    let vertices = Utility.forceCast(gameController.getSelected(), to: Set<Vertex>.self)
+                    selectedRegion = shapeLab.newShape(.region, vertices, false)
                 }
                 .disabled(uniformVertexCount() < 3)
             }

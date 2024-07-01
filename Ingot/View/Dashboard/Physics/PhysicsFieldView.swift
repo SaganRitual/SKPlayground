@@ -115,7 +115,10 @@ struct PhysicsFieldView: View {
                         BasicScalarSlider(
                             scalar: $physicsFieldState.animationSpeed,
                             scalarView: Text(String(format: "%.1f", physicsFieldState.animationSpeed)),
-                            title: VStack(alignment: .leading) { Text("Animation").font(.system(size: 10)); Text("Speed").font(.system(size: 10)) },
+                            title: VStack(alignment: .leading) {
+                                Text("Animation").font(.system(size: 10))
+                                Text("Speed").font(.system(size: 10))
+                            },
                             minLabel: "0", maxLabel: "100", range: 0...100
                         )
                         .padding([.leading, .bottom])

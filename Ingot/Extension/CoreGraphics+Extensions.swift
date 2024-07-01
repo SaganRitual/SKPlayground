@@ -42,7 +42,9 @@ extension CGPoint {
 
     init(_ size: CGSize) { self.init(x: size.width, y: size.height) }
 
-    func constrained<T>(raw: T, min: T, max: T) -> T where T: Comparable & AdditiveArithmetic & ExpressibleByIntegerLiteral {
+    func constrained<T>(raw: T, min: T, max: T) -> T
+        where T: Comparable & AdditiveArithmetic & ExpressibleByIntegerLiteral
+    {
         var result = raw
         if result < min { result = min }
         if result > max { result = max }

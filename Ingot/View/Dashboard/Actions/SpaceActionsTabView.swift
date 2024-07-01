@@ -8,7 +8,7 @@ struct SpaceActionsTabView: View {
     @EnvironmentObject var spaceActionsState: SpaceActionsState
 
     @State private var duration: CGFloat = 0.5
-    @State private var selectedPath: String? = nil
+    @State private var selectedPath: String?
 
     func makeShapeListView() -> some View {
         return VStack {

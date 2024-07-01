@@ -28,8 +28,10 @@ final class CommandSelection: ObservableObject {
         var imageNames = [String]()
 
         if let bundleURL = Bundle.main.url(forResource: "Sprites", withExtension: nil),
-           let bundleContents = try? FileManager.default.contentsOfDirectory(at: bundleURL, includingPropertiesForKeys: nil, options: []) {
-
+           let bundleContents = try? FileManager.default.contentsOfDirectory(
+            at: bundleURL, includingPropertiesForKeys: nil, options: []
+           )
+        {
             imageNames = bundleContents
                 .filter { $0.pathExtension == "png" } // Filter for PNGs
                 .map { $0.deletingPathExtension().lastPathComponent } // Extract file names

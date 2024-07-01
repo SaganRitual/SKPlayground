@@ -82,7 +82,9 @@ struct ShapeListView: View {
 
                 HStack {
                     Button("Save") {
-                        if let duplicateIx = shapeLab.renameShape(whichSet, currentName: currentSelection!, newName: editedName) {
+                        if let duplicateIx = shapeLab.renameShape(
+                            whichSet, currentName: currentSelection!, newName: editedName
+                        ) {
                             duplicateNameIndex = duplicateIx
                             showDuplicateAlert = true
                         } else {

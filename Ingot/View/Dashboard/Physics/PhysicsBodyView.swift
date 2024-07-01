@@ -105,7 +105,7 @@ struct PhysicsBodyView: View {
             }
         }
         .frame(width: 700, height: 400)
-        .onAppear() {
+        .onAppear {
             gameController.loadPhysicsBodyFromSelected()
         }
 //        .onAppear() {

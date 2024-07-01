@@ -20,9 +20,10 @@ class GameEntityFace {
         set { rootSceneNode.position = newValue }
     }
 
+    // swiftlint:disable unused_setter_value
     var rotation: CGFloat { get { 0 } set { } }
-
     var scale: CGFloat { get { 1 } set { } }
+    // swiftlint:enable unused_setter_value
 
     init(at position: CGPoint, avatar: GameEntitySprite, halo: SelectionHalo) {
         self.avatar = avatar

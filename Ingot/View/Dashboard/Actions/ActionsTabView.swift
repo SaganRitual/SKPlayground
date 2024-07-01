@@ -8,12 +8,12 @@ struct ActionsTabView: View {
             TabView {
                 SpaceActionsTabView()
                     .tabItem {
-                        Label("Space", systemImage: "globe")
+                        Label("Space Actions", systemImage: "globe")
                     }
 
                 PhysicsActionsTabView()
                     .tabItem {
-                        Label("Physics", systemImage: "atom")
+                        Label("Physics Actions", systemImage: "atom")
                     }
             }
 

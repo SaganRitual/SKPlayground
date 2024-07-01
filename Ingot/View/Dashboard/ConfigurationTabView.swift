@@ -13,17 +13,19 @@ struct ConfigurationTabView: View {
                 .padding(.vertical)
 
             TabView {
-                if entitySelectionState.selectionState == .one &&
-                    gameController.getSelected().first is Gremlin {
-                    ActionsTabView()
-                        .tabItem {
-                            Label("Actions", systemImage: "atom")
-                        }
-                }
+                ActionsTabView()
+                    .tabItem {
+                        Label("Actions", systemImage: "atom")
+                    }
 
                 PhysicsTabView()
                     .tabItem {
                         Label("Physics", systemImage: "atom")
+                    }
+
+                ShapeLabView()
+                    .tabItem {
+                        Label("Shape Lab", systemImage: "atom")
                     }
             }
         }

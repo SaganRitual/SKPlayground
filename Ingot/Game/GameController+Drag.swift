@@ -10,7 +10,8 @@ extension GameController {
             let entity = dragDispatch.entity!
 
             if !entity.isSelected {
-                entity.select()
+                entity.select(selectionOrderTracker)
+                selectionOrderTracker += 1
             }
 
             setDragAnchorsForSelected()

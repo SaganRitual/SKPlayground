@@ -17,21 +17,17 @@ struct PhysicsTabView: View {
     var body: some View {
         VStack {
             TabView {
-                if exactlyOneGremlinSelected() {
-                    PhysicsBodyView()
-                        .padding()
-                        .tabItem {
-                            Label("Body", systemImage: "atom")
-                        }
-                }
+                PhysicsBodyView()
+                    .padding()
+                    .tabItem {
+                        Label("Body", systemImage: "atom")
+                    }
 
-                if exactlyOneFieldSelected() {
-                    PhysicsFieldView()
-                        .padding()
-                        .tabItem {
-                            Label("Field", systemImage: "atom")
-                        }
-                }
+                PhysicsFieldView()
+                    .padding()
+                    .tabItem {
+                        Label("Field", systemImage: "atom")
+                    }
 
                 PhysicsWorldView()
                     .tabItem {

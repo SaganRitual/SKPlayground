@@ -20,6 +20,7 @@ struct ContentView: View {
     @StateObject var entitySelectionState = EntitySelectionState()
     @StateObject var gameController = GameController()
     @StateObject var physicsBodyState = PhysicsBodyState(preview: true)
+    @StateObject var physicsFieldState = PhysicsFieldState()
     @StateObject var playgroundState = PlaygroundState()
     @StateObject var spaceActionsState = SpaceActionsState()
 
@@ -35,6 +36,7 @@ struct ContentView: View {
                 entityActionsPublisher,
                 entitySelectionState,
                 physicsBodyState,
+                physicsFieldState,
                 playgroundState,
                 spaceActionsState
             )

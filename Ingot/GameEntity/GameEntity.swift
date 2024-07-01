@@ -27,6 +27,8 @@ class GameEntity {
 
     var scale: CGFloat { get { 1 } set { } }
 
+    var selectionOrder = 0
+
     init(_ face: GameEntityFace) {
         self.face = face
     }
@@ -36,10 +38,6 @@ class GameEntity {
 
     func restoreActionAnchors() { }
 
-    func setAssignActionsMode(_ setIt: Bool) {
-        face.halo?.setSelectionMode(setIt ? .assignActions : .normal)
-    }
-
     func cancelActionsMode() { }
     func commitPhysicsAction(_ token: ActionTokenProtocol) { }
     func commitSpaceActions(duration: TimeInterval) { }
@@ -47,10 +45,25 @@ class GameEntity {
 }
 
 extension GameEntity {
+
+    func resetSelectionMode() {
+        face.halo?.setSelectionMode(.normal)
+    }
+
+    func setAssignActionsMode() {
+        face.halo?.setSelectionMode(.assignActions)
+    }
+
+    func setOrderIndicator(_ oi: SelectionHalo.OrderIndicator) {
+        face.halo?.setSelectionMode(.orderIndicator(oi))
+    }
+}
+
+extension GameEntity {
     var isSelected: Bool { face.isSelected }
     func deselect() { face.deselect() }
-    func select() { face.select() }
-    func toggleSelect() { face.toggleSelect() }
+    func select(_ selectionOrder: Int) { self.selectionOrder = selectionOrder; face.select() }
+    func toggleSelect(_ selectionOrder: Int) { self.selectionOrder = selectionOrder; face.toggleSelect() }
 }
 
 extension GameEntity: Equatable, Hashable {

@@ -44,7 +44,7 @@ final class Gremlin: GameEntity {
     }
 
     override func cancelActionsMode() {
-        setAssignActionsMode(false)
+        resetSelectionMode()
         restoreActionAnchors()
     }
 
@@ -53,7 +53,7 @@ final class Gremlin: GameEntity {
     }
 
     override func commitSpaceActions(duration: TimeInterval) {
-        setAssignActionsMode(false)
+        resetSelectionMode()
 
         if let dragAnchor = dragAnchor, dragAnchor != position {
             let t = MoveActionToken(duration: duration, targetPosition: position)
@@ -126,6 +126,6 @@ final class Gremlin: GameEntity {
             }
         }
 
-        setAssignActionsMode(true)
+        setAssignActionsMode()
     }
 }

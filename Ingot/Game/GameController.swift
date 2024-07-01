@@ -9,18 +9,22 @@ final class GameController: ObservableObject {
     weak var entitySelectionState: EntitySelectionState!
     weak var gameScene: GameScene!
     weak var physicsBodyState: PhysicsBodyState!
+    weak var physicsFieldState: PhysicsFieldState!
     weak var playgroundState: PlaygroundState!
     weak var spaceActionsState: SpaceActionsState!
     var selectionMarquee: SelectionMarquee!
 
     var entities = Set<GameEntity>()
     var resumePhysicsSpeed: CGFloat?
+    var selectionOrderTracker = 0
+    let spriteManager = SpriteManager()
 
     func postInit(
         _ commandSelection: CommandSelection,
         _ entityActionsPublisher: EntityActionsPublisher,
         _ entitySelectionState: EntitySelectionState,
         _ physicsBodyState: PhysicsBodyState,
+        _ physicsFieldState: PhysicsFieldState,
         _ playgroundState: PlaygroundState,
         _ spaceActionsState: SpaceActionsState
     ) {
@@ -28,13 +32,16 @@ final class GameController: ObservableObject {
         self.entityActionsPublisher = entityActionsPublisher
         self.entitySelectionState = entitySelectionState
         self.physicsBodyState = physicsBodyState
+        self.physicsFieldState = physicsFieldState
         self.playgroundState = playgroundState
         self.selectionMarquee = SelectionMarquee(playgroundState)
         self.spaceActionsState = spaceActionsState
     }
 
     func loadPhysicsBodyFromSelected() {
-        physicsBodyState.load(getSelected().first!.physicsBody!)
+        if let body = getSelected().first?.physicsBody {
+            physicsBodyState.load(body)
+        }
     }
 
     func cancelAssignActionsMode() {

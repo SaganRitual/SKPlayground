@@ -38,7 +38,12 @@ class SelectionHalo: GameEntitySprite {
         }
     }
 
-    enum SelectionMode { case normal, assignActions }
+    enum OrderIndicator { case first, inner, last }
+
+    enum SelectionMode {
+        case normal, assignActions
+        case orderIndicator(OrderIndicator)
+    }
 
     func setSelectionMode(_ mode: SelectionMode) {
         switch mode {
@@ -46,6 +51,15 @@ class SelectionHalo: GameEntitySprite {
             haloShapeNode.strokeColor = .green
         case .assignActions:
             haloShapeNode.strokeColor = .orange
+        case .orderIndicator(let oi):
+            switch oi {
+            case .first:
+                haloShapeNode.strokeColor = .green
+            case .inner:
+                haloShapeNode.strokeColor = .blue
+            case .last:
+                haloShapeNode.strokeColor = .red
+            }
         }
     }
 }

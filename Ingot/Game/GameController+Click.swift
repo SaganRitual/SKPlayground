@@ -43,7 +43,7 @@ extension GameController {
     }
 
     func newField(at position: CGPoint) -> Field {
-        let field = Field.make(at: position)
+        let field = Field.make(at: position, fieldType: physicsFieldState.fieldType)
 
         gameScene.entitiesNode.addChild(field.face.rootSceneNode)
 

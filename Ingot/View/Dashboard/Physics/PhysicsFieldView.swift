@@ -18,6 +18,8 @@ enum PhysicsFieldType: String, CaseIterable, Identifiable, RawRepresentable {
 }
 
 struct PhysicsFieldView: View {
+    @EnvironmentObject var entitySelectionState: EntitySelectionState
+    @EnvironmentObject var gameController: GameController
     @EnvironmentObject var physicsFieldState: PhysicsFieldState
     @EnvironmentObject var physicsMaskCategories: PhysicsMaskCategories
     @EnvironmentObject var shapeLab: ShapeLab
@@ -46,6 +48,20 @@ struct PhysicsFieldView: View {
     }
 
     var body: some View {
+        if gameController.entitySelectionState.selectionState == .one &&
+            gameController.getSelected().first! is Field
+        {
+            bodySelect
+        } else {
+            bodyNoSelect
+        }
+    }
+
+    var bodyNoSelect: some View {
+        Text("No Field is selected")
+    }
+
+    var bodySelect: some View {
         VStack {
             HStack(spacing: 30) {
                 Toggle(isOn: $physicsFieldState.enabled) {

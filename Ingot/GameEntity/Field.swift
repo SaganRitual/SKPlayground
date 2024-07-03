@@ -23,7 +23,7 @@ class FieldSprite: GameEntitySprite {
 }
 
 final class Field: GameEntity {
-    static func make(at position: CGPoint) -> Field {
+    static func make(at position: CGPoint, fieldType: PhysicsFieldType) -> Field {
         let field = Field(at: position)
         field.face.setOwnerEntity(field)
         return field

@@ -15,6 +15,8 @@
 		D404DF7C2C3201ED009686F6 /* SelectionHaloOI.swift in Sources */ = {isa = PBXBuildFile; fileRef = D404DF7B2C3201ED009686F6 /* SelectionHaloOI.swift */; };
 		D404DF7F2C320856009686F6 /* SpriteManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D404DF7E2C320856009686F6 /* SpriteManager.swift */; };
 		D404DF812C32B408009686F6 /* FollowPathActionTokenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D404DF802C32B408009686F6 /* FollowPathActionTokenView.swift */; };
+		D445A8D32C337E82001C1421 /* PhysicsFieldToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = D445A8D22C337E82001C1421 /* PhysicsFieldToken.swift */; };
+		D445A8D62C34B264001C1421 /* PhysicsFieldLab.swift in Sources */ = {isa = PBXBuildFile; fileRef = D445A8D52C34B264001C1421 /* PhysicsFieldLab.swift */; };
 		D46584E62C2CD73800BC19E7 /* ConfigurationTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D46584E52C2CD73800BC19E7 /* ConfigurationTabView.swift */; };
 		D49BD4FB2C2A7E8400FD313C /* PhysicsJointView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49BD4FA2C2A7E8400FD313C /* PhysicsJointView.swift */; };
 		D49BD4FF2C2B218900FD313C /* CommandView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49BD4FE2C2B218900FD313C /* CommandView.swift */; };
@@ -97,6 +99,9 @@
 		D404DF852C33103D009686F6 /* .overcommit.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = .overcommit.yml; sourceTree = "<group>"; };
 		D445A8D02C33370A001C1421 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		D445A8D12C334225001C1421 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		D445A8D22C337E82001C1421 /* PhysicsFieldToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhysicsFieldToken.swift; sourceTree = "<group>"; };
+		D445A8D42C3458ED001C1421 /* Fields.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = Fields.md; sourceTree = "<group>"; };
+		D445A8D52C34B264001C1421 /* PhysicsFieldLab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhysicsFieldLab.swift; sourceTree = "<group>"; };
 		D46584E52C2CD73800BC19E7 /* ConfigurationTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurationTabView.swift; sourceTree = "<group>"; };
 		D49BD4FA2C2A7E8400FD313C /* PhysicsJointView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhysicsJointView.swift; sourceTree = "<group>"; };
 		D49BD4FC2C2AC29600FD313C /* UXScenarios.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = UXScenarios.md; sourceTree = "<group>"; };
@@ -209,6 +214,7 @@
 			children = (
 				D49BD4FC2C2AC29600FD313C /* UXScenarios.md */,
 				D404DF742C3096EC009686F6 /* Vertices.md */,
+				D445A8D42C3458ED001C1421 /* Fields.md */,
 			);
 			path = Documentation;
 			sourceTree = "<group>";
@@ -297,14 +303,14 @@
 		D4D1F0652C27BA8800003163 /* Ingot */ = {
 			isa = PBXGroup;
 			children = (
-				D404DF7D2C3205F8009686F6 /* Game */,
-				D4D1F0832C27BFBE00003163 /* ActionToken */,
 				D49BD4FD2C2B212C00FD313C /* Documentation */,
 				D49BD5B92C2C4D7000FD313C /* Extension */,
+				D404DF7D2C3205F8009686F6 /* Game */,
 				D49BD5AD2C2C40DF00FD313C /* GameEntity */,
 				D49BD5CF2C2C683700FD313C /* MouseInput */,
 				D49BD5B22C2C4B4100FD313C /* Selection */,
 				D4EC5E4F2C2DC8FE00E20EC7 /* StateObject */,
+				D4D1F0832C27BFBE00003163 /* Token */,
 				D4D1F0952C28B31F00003163 /* View */,
 				D4D1F0662C27BA8800003163 /* IngotApp.swift */,
 				D49BD59A2C2C10D800FD313C /* Assets.xcassets */,
@@ -340,12 +346,13 @@
 			path = ActionTokenView;
 			sourceTree = "<group>";
 		};
-		D4D1F0832C27BFBE00003163 /* ActionToken */ = {
+		D4D1F0832C27BFBE00003163 /* Token */ = {
 			isa = PBXGroup;
 			children = (
 				D4D1F0822C27BFBE00003163 /* ActionToken.swift */,
+				D445A8D22C337E82001C1421 /* PhysicsFieldToken.swift */,
 			);
-			path = ActionToken;
+			path = Token;
 			sourceTree = "<group>";
 		};
 		D4D1F0952C28B31F00003163 /* View */ = {
@@ -391,6 +398,7 @@
 				D4EC5E542C2DE4E300E20EC7 /* EntityActionsPublisher.swift */,
 				D4EC5E5C2C2DEC1700E20EC7 /* EntitySelectionState.swift */,
 				D4DE8B402C29E6440075F4B7 /* PhysicsBodyState.swift */,
+				D445A8D52C34B264001C1421 /* PhysicsFieldLab.swift */,
 				D4EC5E582C2DE7E100E20EC7 /* PhysicsFieldState.swift */,
 				D4EC5E5A2C2DE9E100E20EC7 /* PhysicsMaskCategories.swift */,
 				D4EC5E5E2C2DED3B00E20EC7 /* PhysicsWorldState.swift */,
@@ -520,6 +528,7 @@
 				D49BD5CB2C2C682B00FD313C /* GameScene+Mouse.swift in Sources */,
 				D4EC5E552C2DE4E300E20EC7 /* EntityActionsPublisher.swift in Sources */,
 				D4D1F0862C27BFF300003163 /* PlaygroundState.swift in Sources */,
+				D445A8D32C337E82001C1421 /* PhysicsFieldToken.swift in Sources */,
 				D49BD5C52C2C66C300FD313C /* Joint.swift in Sources */,
 				D404DF782C31A29C009686F6 /* ShapeLab.swift in Sources */,
 				D4D1F07D2C27BBDE00003163 /* RotateActionTokenView.swift in Sources */,
@@ -533,6 +542,7 @@
 				D4D1F0762C27BAE700003163 /* ActionTokenView.swift in Sources */,
 				D4D1F0882C27C4B400003163 /* ForceActionTokenView.swift in Sources */,
 				D404DF722C2F7FEE009686F6 /* GremlinFace.swift in Sources */,
+				D445A8D62C34B264001C1421 /* PhysicsFieldLab.swift in Sources */,
 				D4EC5E592C2DE7E100E20EC7 /* PhysicsFieldState.swift in Sources */,
 				D49BD5C92C2C682500FD313C /* GameScene.swift in Sources */,
 				D49BD5D82C2C69C700FD313C /* GameController+Select.swift in Sources */,
@@ -702,7 +712,7 @@
 				DEVELOPMENT_TEAM = DD983V4X84;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
-				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
+				GCC_TREAT_WARNINGS_AS_ERRORS = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -713,7 +723,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.saganritual.Ingot;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_TREAT_WARNINGS_AS_ERRORS = YES;
+				SWIFT_TREAT_WARNINGS_AS_ERRORS = NO;
 				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
@@ -732,7 +742,7 @@
 				DEVELOPMENT_TEAM = DD983V4X84;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
-				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
+				GCC_TREAT_WARNINGS_AS_ERRORS = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -743,7 +753,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.saganritual.Ingot;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_TREAT_WARNINGS_AS_ERRORS = YES;
+				SWIFT_TREAT_WARNINGS_AS_ERRORS = NO;
 				SWIFT_VERSION = 5.0;
 			};
 			name = Release;

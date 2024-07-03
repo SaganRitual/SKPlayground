@@ -12,15 +12,20 @@ struct ShapeListView: View {
 
     @Binding var currentSelection: String?
 
-    let whichSet: ShapeLab.WhichShape
     let labelFrameWidth: CGFloat?
+    let readOnly: Bool
+    let readOnlyNullSelection: String?
+    let whichSet: ShapeLab.WhichShape
 
     init(
-        selection: Binding<String?>, whichSet: ShapeLab.WhichShape, labelFrame: CGFloat? = nil
+        selection: Binding<String?>, whichSet: ShapeLab.WhichShape, labelFrame: CGFloat? = nil,
+        readOnly: Bool = false, readOnlyNullSelection: String? = nil
     ) {
         self._currentSelection = selection
-        self.whichSet = whichSet
         self.labelFrameWidth = labelFrame
+        self.readOnly = readOnly
+        self.readOnlyNullSelection = readOnlyNullSelection
+        self.whichSet = whichSet
     }
 
     var theSet: [UserShape] {
@@ -59,19 +64,29 @@ struct ShapeListView: View {
     var body: some View {
         HStack {
             Picker(selection: $currentSelection) {
+                if let readOnlyNullSelection {
+                    Text(readOnlyNullSelection).tag(Optional(readOnlyNullSelection))
+                }
+
                 ForEach(theSet) { shape in
                     Text(shape.name)
                         .tag(Optional(shape.name))
                 }
             } label: {
-                Text("\(setName)s")
-                    .frame(width: labelFrameWidth, alignment: .leading)
+                if readOnly {
+                    EmptyView()
+                } else {
+                    Text("\(setName)s")
+                        .frame(width: labelFrameWidth, alignment: .leading)
+                }
             }
             .pickerStyle(.menu)
 
-            Button("Rename") {
-                editedName = currentSelection!
-                isEditing = true
+            if !readOnly {
+                Button("Rename") {
+                    editedName = currentSelection!
+                    isEditing = true
+                }
             }
         }
         .padding(.top)

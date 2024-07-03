@@ -4,23 +4,26 @@ import Foundation
 import SpriteKit
 
 class PhysicsBodyState: ObservableObject {
-    @Published var angularDamping: CGFloat = .random(in: 0...10)
-    @Published var area: CGFloat = .random(in: 0...10)
-    @Published var density: CGFloat = .random(in: 0...10)
-    @Published var friction: CGFloat = .random(in: 0...10)
-    @Published var linearDamping: CGFloat = .random(in: 0...10)
-    @Published var mass: CGFloat = .random(in: 0...10)
-    @Published var restitution: CGFloat = .random(in: 0...10)
+    @Published var angularDamping: CGFloat
+    @Published var area: CGFloat
+    @Published var charge: CGFloat
+    @Published var density: CGFloat
+    @Published var friction: CGFloat
+    @Published var linearDamping: CGFloat
+    @Published var mass: CGFloat
+    @Published var restitution: CGFloat
 
-    @Published var dynamism: Bool = .random()
-    @Published var gravitism: Bool = .random()
-    @Published var rotatism: Bool = .random()
+    @Published var dynamism: Bool
+    @Published var gravitism: Bool
+    @Published var rotatism: Bool
 
     init(preview: Bool) {
         density = 1
 
         if preview {
             angularDamping = .random(in: 0...10)
+            area = 1
+            charge = .random(in: -10...10)
             friction = .random(in: 0...10)
             linearDamping = .random(in: 0...10)
             mass = .random(in: 0...10)
@@ -31,6 +34,8 @@ class PhysicsBodyState: ObservableObject {
             rotatism = .random()
         } else {
             angularDamping = 0.1
+            area = 1
+            charge = 0
             friction = 0.2
             linearDamping = 0.1
             mass = 1

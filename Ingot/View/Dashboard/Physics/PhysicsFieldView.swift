@@ -20,11 +20,19 @@ enum PhysicsFieldType: String, CaseIterable, Identifiable, RawRepresentable {
 struct PhysicsFieldView: View {
     @EnvironmentObject var physicsFieldState: PhysicsFieldState
     @EnvironmentObject var physicsMaskCategories: PhysicsMaskCategories
+    @EnvironmentObject var shapeLab: ShapeLab
 
     @State private var enableRegion = false
     @State private var selectedCategoryIndices = Set<Int>()
+    @State private var selectedRegion: String?
     @State private var regionPair = ABPair(a: 0, b: 0)
     @State private var velocityPair = ABPair(a: 0, b: 0)
+
+    let noRegionString = "No region selected - field is infinite"
+
+    init() {
+        _selectedRegion = State(initialValue: noRegionString)
+    }
 
     func makeScalarView(_ value: CGFloat) -> some View {
         Text(String(format: "%.1f", value))
@@ -39,7 +47,7 @@ struct PhysicsFieldView: View {
 
     var body: some View {
         VStack {
-            HStack {
+            HStack(spacing: 30) {
                 Toggle(isOn: $physicsFieldState.enabled) {
                     Text("Enabled")
                 }
@@ -70,7 +78,7 @@ struct PhysicsFieldView: View {
                     BasicScalarSlider(
                         scalar: $physicsFieldState.smoothness,
                         scalarView: Text(String(format: "%.1f", physicsFieldState.smoothness)),
-                        title: Text("Smooth"),
+                        title: Text("Smoothness"),
                         minLabel: "0", maxLabel: "100", range: 0...100
                     )
                     BasicScalarSlider(
@@ -83,18 +91,6 @@ struct PhysicsFieldView: View {
             }
 
             HStack {
-                Slider2DView(
-                    output: $regionPair,
-                    size: CGSize(width: 100, height: 100),
-                    snapTolerance: 5,
-                    title: regionToggle,
-                    virtualSize: CGSize(width: 20, height: 20)
-                )
-                .padding(.trailing)
-                .onChange(of: regionPair) {
-                    physicsFieldState.region = CGSize(regionPair)
-                }
-
                 if physicsFieldState.fieldType == .velocity {
                     Slider2DView(
                         output: $velocityPair,
@@ -109,7 +105,7 @@ struct PhysicsFieldView: View {
                     }
                 }
 
-                VStack {
+                VStack(alignment: .leading) {
                     if physicsFieldState.fieldType == .noise ||
                         physicsFieldState.fieldType == .turbulence {
                         BasicScalarSlider(
@@ -121,16 +117,20 @@ struct PhysicsFieldView: View {
                             },
                             minLabel: "0", maxLabel: "100", range: 0...100
                         )
-                        .padding([.leading, .bottom])
                     }
+
+                    ShapeListView(
+                        selection: $selectedRegion, whichSet: .region, labelFrame: 100,
+                        readOnly: true, readOnlyNullSelection: noRegionString
+                    )
 
                     CheckboxPicker(
                         selectedIndices: $selectedCategoryIndices,
                         label: Text("Set Categories"),
                         options: physicsMaskCategories.names
                     )
-                    .padding(.leading)
                 }
+                .frame(width: 400, alignment: .leading)
             }
             .padding([.horizontal])
         }

@@ -1,6 +1,6 @@
 #  SKPlayground
 
-A tool for experimenting with SpriteKit
+A desktop (macOS only, not iOS) tool for experimenting with SpriteKit.
 
 ![](https://github.com/SaganRitual/SKPlayground/blob/main/SKPlayground%20Place-Select-Move.gif)
 

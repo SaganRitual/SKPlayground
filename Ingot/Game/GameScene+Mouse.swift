@@ -83,6 +83,60 @@ extension GameScene {
         mouseState = .idle
     }
 
+    override func rightMouseUp(with event: NSEvent) {
+        let mouseDispatch = MouseDispatch(from: event, scene: self)
+
+        // Note that we're checking the nodes for owner entity. We shouldn't have to
+        // do it, but sometimes nodes(at:) will include nodes we don't want,
+        // such as the entities node, which has zero size and technically sits at the origin
+        guard let topNode = getTopNode(at: mouseDispatch.location) else {
+            // Nothing at the click point; background context menu
+            gameController.showContextMenu = .background
+            print("should show .background menu")
+            updateContextMenu(with: event)
+            return
+        }
+
+        if topNode.getOwnerEntity() == nil {
+            assert(false, "Got a node with no owner? See getTopNode()")
+            return
+        }
+
+        gameController.showContextMenu = .entity
+        print("should show .entity menu")
+
+        updateContextMenu(with: event)
+    }
+
+    func updateContextMenu(with event: NSEvent) {
+        let menu = NSMenu()
+
+        switch gameController.showContextMenu {
+        case .background:
+            print("adding background")
+            let item = NSMenuItem(title: "Background", action: #selector(backgroundAction), keyEquivalent: "")
+            item.target = self
+            menu.addItem(item)
+        case .entity:
+            print("adding entity")
+            let item = NSMenuItem(title: "Entity", action: #selector(entityAction), keyEquivalent: "")
+            item.target = self
+            menu.addItem(item)
+        default:
+            fatalError()
+        }
+
+        NSMenu.popUpContextMenu(menu, with: event, for: self.view!)
+    }
+
+    @objc func backgroundAction() {
+        print("background")
+    }
+
+    @objc func entityAction() {
+        print("entity")
+    }
+
 }
 
 private extension GameScene {

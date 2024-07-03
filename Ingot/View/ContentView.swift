@@ -3,6 +3,8 @@
 import SwiftUI
 
 struct ContentView: View {
+    @EnvironmentObject var gameController: GameController
+
     var body: some View {
         HStack(alignment: .top) {
             SpriteKitView()

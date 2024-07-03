@@ -20,6 +20,9 @@ final class GameController: ObservableObject {
     var selectionOrderTracker = 0
     let spriteManager = SpriteManager()
 
+    enum WhichContextMenu { case background, entity, noMenu }
+    var showContextMenu = WhichContextMenu.noMenu
+
     // swiftlint:disable function_parameter_count
     func postInit(
         _ commandSelection: CommandSelection,

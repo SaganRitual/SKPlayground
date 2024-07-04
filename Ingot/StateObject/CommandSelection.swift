@@ -16,6 +16,8 @@ final class CommandSelection: ObservableObject {
     @Published var playActions: Bool = false
     @Published var playPhysics: Bool = false
     @Published var selectedGremlinTexture = ""
+    @Published var selectedPhysicsFieldType = PhysicsFieldType.drag.rawValue
+    @Published var selectedPhysicsJointType = PhysicsJointType.fixed.rawValue
 
     var gremlinImageNames = [String]()
 

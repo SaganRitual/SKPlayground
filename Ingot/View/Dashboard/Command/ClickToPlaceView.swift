@@ -5,7 +5,6 @@ import SwiftUI
 struct ClickToPlaceView: View {
     @EnvironmentObject var commandSelection: CommandSelection
 
-    @State private var physicsFieldType: PhysicsFieldType = .drag
     @State private var pickerHeight = 0.0
 
     let titleTextWidth = 120.0
@@ -37,7 +36,7 @@ struct ClickToPlaceView: View {
                     Text("Field Type")
                         .frame(width: titleTextWidth, alignment: .leading)
 
-                    Picker("", selection: $physicsFieldType) {
+                    Picker("", selection: $commandSelection.selectedPhysicsFieldType) {
                         ForEach(PhysicsFieldType.allCases) { option in
                             Text(option.rawValue).tag(option)
                         }
@@ -52,6 +51,18 @@ struct ClickToPlaceView: View {
                     Picker("", selection: $commandSelection.selectedGremlinTexture) {
                         ForEach(commandSelection.gremlinImageNames, id: \.self) { imageName in
                             Image(imageName)
+                        }
+                    }
+                }
+
+            case .joint:
+                HStack {
+                    Text("Joint Type")
+                        .frame(width: titleTextWidth, alignment: .leading)
+
+                    Picker("", selection: $commandSelection.selectedPhysicsJointType) {
+                        ForEach(PhysicsJointType.allCases) { option in
+                            Text(option.rawValue).tag(option)
                         }
                     }
                 }

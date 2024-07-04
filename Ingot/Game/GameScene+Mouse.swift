@@ -92,7 +92,6 @@ extension GameScene {
         guard let topNode = getTopNode(at: mouseDispatch.location) else {
             // Nothing at the click point; background context menu
             gameController.showContextMenu = .background
-            print("should show .background menu")
             updateContextMenu(with: event)
             return
         }
@@ -103,40 +102,129 @@ extension GameScene {
         }
 
         gameController.showContextMenu = .entity
-        print("should show .entity menu")
 
         updateContextMenu(with: event)
     }
 
+    @objc func selectGremlinTexture(_ sender: Any?) {
+        let menuItem = Utility.forceCast(sender, to: NSMenuItem.self)
+        let textureName = Utility.forceCast(menuItem.representedObject, to: String.self)
+        gameController.commandSelection.selectedGremlinTexture = textureName
+        gameController.commandSelection.clickToPlace = .gremlin
+    }
+
+    @objc func selectPhysicsField(_ sender: Any?) {
+        let menuItem = Utility.forceCast(sender, to: NSMenuItem.self)
+        let fieldName = Utility.forceCast(menuItem.representedObject, to: String.self)
+        gameController.commandSelection.selectedPhysicsFieldType = fieldName
+        gameController.commandSelection.clickToPlace = .field
+    }
+
+    @objc func selectPhysicsJoint(_ sender: Any?) {
+        let menuItem = Utility.forceCast(sender, to: NSMenuItem.self)
+        let jointName = Utility.forceCast(menuItem.representedObject, to: String.self)
+        gameController.commandSelection.selectedPhysicsJointType = jointName
+        gameController.commandSelection.clickToPlace = .joint
+    }
+
     func updateContextMenu(with event: NSEvent) {
         let menu = NSMenu()
+        var iField: NSMenuItem!
+        var iGremlin: NSMenuItem!
+        var iJoint: NSMenuItem!
+        var iVertex: NSMenuItem!
 
         switch gameController.showContextMenu {
         case .background:
-            print("adding background")
-            let item = NSMenuItem(title: "Background", action: #selector(backgroundAction), keyEquivalent: "")
-            item.target = self
-            menu.addItem(item)
+            iField = NSMenuItem(title: "Place Field", action: nil, keyEquivalent: "")
+            iGremlin = NSMenuItem(title: "Place Gremlin", action: nil, keyEquivalent: "")
+            iJoint = NSMenuItem(title: "Place Joint", action: nil, keyEquivalent: "")
+            iVertex = NSMenuItem(title: "Place Vertex", action: nil, keyEquivalent: "")
+
         case .entity:
-            print("adding entity")
-            let item = NSMenuItem(title: "Entity", action: #selector(entityAction), keyEquivalent: "")
-            item.target = self
-            menu.addItem(item)
+            iField = NSMenuItem(title: "Attach Field", action: nil, keyEquivalent: "")
+            iJoint = NSMenuItem(title: "Attach Joint", action: nil, keyEquivalent: "")
+
         default:
             fatalError()
         }
 
+        makeFieldsSubmenu(menu, iField)
+        makeGremlinsSubmenu(menu, iGremlin)
+        makeJointsSubmenu(menu, iJoint)
+        makeVerticesSubmenu(menu, iVertex)
+
         NSMenu.popUpContextMenu(menu, with: event, for: self.view!)
     }
+}
 
-    @objc func backgroundAction() {
-        print("background")
+private extension GameScene {
+    func makeFieldsSubmenu(_ menu: NSMenu, _ iField: NSMenuItem?) {
+        if let iField {
+            iField.target = self
+            menu.addItem(iField)
+
+            let fieldsSubmenu = NSMenu()
+
+            PhysicsFieldType.allCases.forEach { fieldType in
+                let item = NSMenuItem(
+                    title: fieldType.rawValue, action: #selector(selectPhysicsField), keyEquivalent: ""
+                )
+
+                item.representedObject = fieldType.rawValue
+                item.target = self
+                fieldsSubmenu.addItem(item)
+            }
+
+            iField.submenu = fieldsSubmenu
+        }
     }
 
-    @objc func entityAction() {
-        print("entity")
+    func makeGremlinsSubmenu(_ menu: NSMenu, _ iGremlin: NSMenuItem?) {
+        if let iGremlin {
+            iGremlin.target = self
+            menu.addItem(iGremlin)
+
+            let gremlinsSubmenu = NSMenu()
+
+            gameController.commandSelection.gremlinImageNames.forEach { name in
+                let item = NSMenuItem(title: "", action: #selector(selectGremlinTexture), keyEquivalent: "")
+                item.representedObject = name
+                item.image = NSImage(named: name)
+                item.target = self
+                gremlinsSubmenu.addItem(item)
+            }
+
+            iGremlin.submenu = gremlinsSubmenu
+        }
     }
 
+    func makeJointsSubmenu(_ menu: NSMenu, _ iJoint: NSMenuItem?) {
+        if let iJoint {
+            iJoint.target = self
+            menu.addItem(iJoint)
+
+            let jointsSubmenu = NSMenu()
+
+            PhysicsJointType.allCases.forEach { jointType in
+                let item = NSMenuItem(
+                    title: jointType.rawValue, action: #selector(selectPhysicsJoint), keyEquivalent: ""
+                )
+                item.representedObject = jointType.rawValue
+                item.target = self
+                jointsSubmenu.addItem(item)
+            }
+
+            iJoint.submenu = jointsSubmenu
+        }
+    }
+
+    func makeVerticesSubmenu(_ menu: NSMenu, _ iVertex: NSMenuItem?) {
+        if let iVertex {
+            iVertex.target = self
+            menu.addItem(iVertex)
+        }
+    }
 }
 
 private extension GameScene {

@@ -6,7 +6,7 @@ import SwiftUI
 enum ClickToPlace: String, RawRepresentable, CaseIterable, Identifiable {
     var id: String { self.rawValue }
 
-    case field = "Field", gremlin = "Gremlin", joint = "Joint", vertex = "Vertex", waypoint = "Waypoint"
+    case field = "Field", gremlin = "Gremlin", joint = "Joint", vertex = "Vertex"
 }
 
 final class CommandSelection: ObservableObject {

@@ -31,9 +31,6 @@ extension GameController {
 
         case .vertex:
             entity = newVertex(at: clickDispatch.location)
-
-        case .waypoint:
-            entity = newWaypoint(at: clickDispatch.location)
         }
 
         entities.insert(entity)
@@ -80,16 +77,6 @@ extension GameController {
         entities.insert(vertex)
 
         return vertex
-    }
-
-    func newWaypoint(at position: CGPoint) -> Waypoint {
-        let waypoint = Waypoint.make(at: position)
-
-        gameScene.entitiesNode.addChild(waypoint.face.rootSceneNode)
-
-        entities.insert(waypoint)
-
-        return waypoint
     }
 
 }

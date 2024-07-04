@@ -29,7 +29,6 @@
 		D49BD5B62C2C4B8800FD313C /* GameEntitySprite.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49BD5B52C2C4B8800FD313C /* GameEntitySprite.swift */; };
 		D49BD5B82C2C4CCB00FD313C /* Gremlin.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49BD5B72C2C4CCB00FD313C /* Gremlin.swift */; };
 		D49BD5BB2C2C4D8900FD313C /* SKNode+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49BD5BA2C2C4D8900FD313C /* SKNode+Extensions.swift */; };
-		D49BD5BF2C2C602200FD313C /* Waypoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49BD5BE2C2C602200FD313C /* Waypoint.swift */; };
 		D49BD5C12C2C628200FD313C /* Vertex.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49BD5C02C2C628200FD313C /* Vertex.swift */; };
 		D49BD5C32C2C645500FD313C /* Field.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49BD5C22C2C645500FD313C /* Field.swift */; };
 		D49BD5C52C2C66C300FD313C /* Joint.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49BD5C42C2C66C300FD313C /* Joint.swift */; };
@@ -115,7 +114,6 @@
 		D49BD5B52C2C4B8800FD313C /* GameEntitySprite.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameEntitySprite.swift; sourceTree = "<group>"; };
 		D49BD5B72C2C4CCB00FD313C /* Gremlin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Gremlin.swift; sourceTree = "<group>"; };
 		D49BD5BA2C2C4D8900FD313C /* SKNode+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SKNode+Extensions.swift"; sourceTree = "<group>"; };
-		D49BD5BE2C2C602200FD313C /* Waypoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Waypoint.swift; sourceTree = "<group>"; };
 		D49BD5C02C2C628200FD313C /* Vertex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vertex.swift; sourceTree = "<group>"; };
 		D49BD5C22C2C645500FD313C /* Field.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Field.swift; sourceTree = "<group>"; };
 		D49BD5C42C2C66C300FD313C /* Joint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Joint.swift; sourceTree = "<group>"; };
@@ -230,7 +228,6 @@
 				D404DF712C2F7FEE009686F6 /* GremlinFace.swift */,
 				D49BD5C42C2C66C300FD313C /* Joint.swift */,
 				D49BD5C02C2C628200FD313C /* Vertex.swift */,
-				D49BD5BE2C2C602200FD313C /* Waypoint.swift */,
 			);
 			path = GameEntity;
 			sourceTree = "<group>";
@@ -548,7 +545,6 @@
 				D49BD5D82C2C69C700FD313C /* GameController+Select.swift in Sources */,
 				D46584E62C2CD73800BC19E7 /* ConfigurationTabView.swift in Sources */,
 				D4DE8B412C29E6440075F4B7 /* PhysicsBodyState.swift in Sources */,
-				D49BD5BF2C2C602200FD313C /* Waypoint.swift in Sources */,
 				D4EC5E572C2DE70900E20EC7 /* SpaceActionsState.swift in Sources */,
 				D4DE8B3C2C29E0990075F4B7 /* PhysicsFieldView.swift in Sources */,
 				D49BD5BB2C2C4D8900FD313C /* SKNode+Extensions.swift in Sources */,

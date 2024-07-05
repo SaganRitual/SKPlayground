@@ -48,7 +48,7 @@ struct Slider2DView<Title: View>: View {
     }
 
     private var scaledOutput: CGPoint {
-        let p = handleOffset + dotPosition
+        let p = handleOffset// + dotPosition
         return CGPoint(x: p.x * scale.dx, y: -p.y * scale.dy)
     }
 

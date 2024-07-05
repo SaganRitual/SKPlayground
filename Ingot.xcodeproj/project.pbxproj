@@ -20,6 +20,7 @@
 		D46584E62C2CD73800BC19E7 /* ConfigurationTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D46584E52C2CD73800BC19E7 /* ConfigurationTabView.swift */; };
 		D4950A762C366FF700278438 /* GameScene+ContextMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4950A752C366FF700278438 /* GameScene+ContextMenu.swift */; };
 		D4950A782C3707A300278438 /* EdgeLoopCategoriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4950A772C3707A300278438 /* EdgeLoopCategoriesView.swift */; };
+		D4950A7A2C38191300278438 /* PhysicsFieldSlidersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4950A792C38191300278438 /* PhysicsFieldSlidersView.swift */; };
 		D49BD4FB2C2A7E8400FD313C /* PhysicsJointView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49BD4FA2C2A7E8400FD313C /* PhysicsJointView.swift */; };
 		D49BD4FF2C2B218900FD313C /* CommandView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49BD4FE2C2B218900FD313C /* CommandView.swift */; };
 		D49BD5932C2BA92000FD313C /* Sprites in Resources */ = {isa = PBXBuildFile; fileRef = D49BD5922C2BA91F00FD313C /* Sprites */; };
@@ -106,6 +107,7 @@
 		D46584E52C2CD73800BC19E7 /* ConfigurationTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurationTabView.swift; sourceTree = "<group>"; };
 		D4950A752C366FF700278438 /* GameScene+ContextMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameScene+ContextMenu.swift"; sourceTree = "<group>"; };
 		D4950A772C3707A300278438 /* EdgeLoopCategoriesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EdgeLoopCategoriesView.swift; sourceTree = "<group>"; };
+		D4950A792C38191300278438 /* PhysicsFieldSlidersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhysicsFieldSlidersView.swift; sourceTree = "<group>"; };
 		D49BD4FA2C2A7E8400FD313C /* PhysicsJointView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhysicsJointView.swift; sourceTree = "<group>"; };
 		D49BD4FC2C2AC29600FD313C /* UXScenarios.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = UXScenarios.md; sourceTree = "<group>"; };
 		D49BD4FE2C2B218900FD313C /* CommandView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandView.swift; sourceTree = "<group>"; };
@@ -386,6 +388,7 @@
 				D4950A772C3707A300278438 /* EdgeLoopCategoriesView.swift */,
 				D4A621AA2C2917CA00C3F89A /* PhysicsBodyView.swift */,
 				D4DE8B322C29D4280075F4B7 /* PhysicsBodyCategoriesView.swift */,
+				D4950A792C38191300278438 /* PhysicsFieldSlidersView.swift */,
 				D4DE8B3B2C29E0990075F4B7 /* PhysicsFieldView.swift */,
 				D49BD4FA2C2A7E8400FD313C /* PhysicsJointView.swift */,
 				D4A621A82C29172D00C3F89A /* PhysicsTabView.swift */,
@@ -545,6 +548,7 @@
 				D49BD5AF2C2C40FC00FD313C /* GameEntity.swift in Sources */,
 				D4DE8B332C29D4280075F4B7 /* PhysicsBodyCategoriesView.swift in Sources */,
 				D4D1F0762C27BAE700003163 /* ActionTokenView.swift in Sources */,
+				D4950A7A2C38191300278438 /* PhysicsFieldSlidersView.swift in Sources */,
 				D4D1F0882C27C4B400003163 /* ForceActionTokenView.swift in Sources */,
 				D404DF722C2F7FEE009686F6 /* GremlinFace.swift in Sources */,
 				D445A8D62C34B264001C1421 /* PhysicsFieldLab.swift in Sources */,

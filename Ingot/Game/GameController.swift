@@ -46,12 +46,6 @@ final class GameController: ObservableObject {
     }
     // swiftlint:enable function_parameter_count
 
-    func loadPhysicsBodyFromSelected() {
-        if let body = getSelected().first?.physicsBody {
-            physicsBodyState.load(body)
-        }
-    }
-
     func cancelAssignActionsMode() {
         spaceActionsState.assignSpaceActions = false
         getSelected().first?.cancelActionsMode()
@@ -277,6 +271,12 @@ final class GameController: ObservableObject {
         let entity = getSelected().first!
 
         entityActionsPublisher.actionTokens = entity.getActionTokens()
+
+        if let body = entity.physicsBody {
+            physicsBodyState.load(body)
+        } else if let _ = entity.face.rootSceneNode.children.first(where: { $0 is SKFieldNode }) {
+            physicsFieldState.loadState(from: entity)
+        }
     }
 
     func enableSceneEdgeLoop(_ enable: Bool) {

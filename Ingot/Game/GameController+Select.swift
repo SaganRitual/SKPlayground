@@ -21,10 +21,6 @@ extension GameController {
         entitySelectionState.setSelectionState(getSelected())
         reloadEntityViews()
         updateOrderIndicators()
-
-        if entitySelectionState.selectionState == .one {
-            loadPhysicsBodyFromSelected()
-        }
     }
 
     func deselectAll() {
@@ -49,10 +45,6 @@ extension GameController {
         entitySelectionState.setSelectionState(getSelected())
         reloadEntityViews()
         updateOrderIndicators()
-
-        if entitySelectionState.selectionState == .one {
-            loadPhysicsBodyFromSelected()
-        }
     }
 
     func selectionIsUniform() -> Set<GameEntity>? {
@@ -75,10 +67,6 @@ extension GameController {
         entitySelectionState.setSelectionState(getSelected())
         reloadEntityViews()
         updateOrderIndicators()
-
-        if entitySelectionState.selectionState == .one {
-            loadPhysicsBodyFromSelected()
-        }
     }
 
     func updateOrderIndicators() {

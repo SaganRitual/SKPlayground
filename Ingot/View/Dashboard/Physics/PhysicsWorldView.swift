@@ -34,18 +34,6 @@ struct PhysicsWorldView: View {
                 }
 
                 VStack(alignment: .leading) {
-                    Toggle(isOn: $enableEdgeLoop) {
-                        Text("Full Scene Edge Loop")
-                    }
-                    .toggleStyle(.checkbox)
-                    .padding(.bottom)
-                    .onChange(of: enableEdgeLoop) {
-                        gameController.enableSceneEdgeLoop(enableEdgeLoop)
-                    }
-                    .onAppear {
-                        enableEdgeLoop = gameController.getSceneEdgeLoopEnabled()
-                    }
-
                     HStack {
                         Picker("Category Names", selection: $currentCategoryName) {
                             ForEach(physicsMaskCategories.names, id: \.self) { name in
@@ -85,15 +73,29 @@ struct PhysicsWorldView: View {
                         }
                     }
                     .alert(isPresented: $showDuplicateAlert) {  // Alert now bound to state
-                      Alert(
-                        title: Text("Category names must be unique"),
-                        message: Text(
-                            "There is already a category called "
-                            + "\(physicsMaskCategories.names[duplicateCategoryIndex])"
-                        ),
-                        dismissButton: .cancel()
-                      )
+                        Alert(
+                            title: Text("Category names must be unique"),
+                            message: Text(
+                                "There is already a category called "
+                                + "\(physicsMaskCategories.names[duplicateCategoryIndex])"
+                            ),
+                            dismissButton: .cancel()
+                        )
                     }
+
+                    Toggle(isOn: $enableEdgeLoop) {
+                        Text("Full Scene Edge Loop")
+                    }
+                    .toggleStyle(.checkbox)
+                    .padding(.top, 30)
+                    .onChange(of: enableEdgeLoop) {
+                        gameController.enableSceneEdgeLoop(enableEdgeLoop)
+                    }
+                    .onAppear {
+                        enableEdgeLoop = gameController.getSceneEdgeLoopEnabled()
+                    }
+
+                    EdgeLoopCategoriesView()
                 }
             }
         }

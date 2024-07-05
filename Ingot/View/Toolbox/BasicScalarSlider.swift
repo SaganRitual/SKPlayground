@@ -52,7 +52,6 @@ struct BasicScalarSlider<TitleView: View, ScalarView: View>: View {
             .frame(width: widthSlider, alignment: .leading)
             .padding([.horizontal])
         }
-        .padding(.vertical)
     }
 }
 

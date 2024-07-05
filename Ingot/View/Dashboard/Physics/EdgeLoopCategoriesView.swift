@@ -3,13 +3,7 @@
 import SpriteKit
 import SwiftUI
 
-final class CategorySwitches: ObservableObject {
-    @Published var category: [Bool] = (0..<32).map { _ in Bool.random() }
-    @Published var collision: [Bool] = (0..<32).map { _ in Bool.random() }
-    @Published var contact: [Bool] = (0..<32).map { _ in Bool.random() }
-}
-
-struct PhysicsBodyCategoriesView: View {
+struct EdgeLoopCategoriesView: View {
     @EnvironmentObject var gameController: GameController
     @EnvironmentObject var physicsMaskCategories: PhysicsMaskCategories
 
@@ -33,11 +27,8 @@ struct PhysicsBodyCategoriesView: View {
                 )
                 .frame(minWidth: 100)
                 .onChange(of: selectedCategoryIndices) {
-                    guard gameController.entitySelectionState.selectionState == .one else { return }
-                    guard let entity = gameController.getSelected().first else { return }
-                    let body = Utility.forceCast(entity.physicsBody, to: SKPhysicsBody.self)
-
-                    body.fieldBitMask = Utility.makeBitmask(selectedCategoryIndices)
+                    let edge = Utility.forceCast(gameController.gameScene.cachedEdgeLoop, to: SKPhysicsBody.self)
+                    edge.categoryBitMask = Utility.makeBitmask(selectedCategoryIndices)
                 }
 
                 CheckboxPicker(
@@ -47,11 +38,8 @@ struct PhysicsBodyCategoriesView: View {
                 )
                 .frame(minWidth: 100)
                 .onChange(of: selectedCollisionIndices) {
-                    guard gameController.entitySelectionState.selectionState == .one else { return }
-                    guard let entity = gameController.getSelected().first else { return }
-                    let body = Utility.forceCast(entity.physicsBody, to: SKPhysicsBody.self)
-
-                    body.collisionBitMask = Utility.makeBitmask(selectedCollisionIndices)
+                    let edge = Utility.forceCast(gameController.gameScene.cachedEdgeLoop, to: SKPhysicsBody.self)
+                    edge.collisionBitMask = Utility.makeBitmask(selectedCollisionIndices)
                 }
 
                 CheckboxPicker(
@@ -61,18 +49,15 @@ struct PhysicsBodyCategoriesView: View {
                 )
                 .frame(minWidth: 100)
                 .onChange(of: selectedContactIndices) {
-                    guard gameController.entitySelectionState.selectionState == .one else { return }
-                    guard let entity = gameController.getSelected().first else { return }
-                    let body = Utility.forceCast(entity.physicsBody, to: SKPhysicsBody.self)
-
-                    body.contactTestBitMask = Utility.makeBitmask(selectedContactIndices)
+                    let edge = Utility.forceCast(gameController.gameScene.cachedEdgeLoop, to: SKPhysicsBody.self)
+                    edge.contactTestBitMask = Utility.makeBitmask(selectedContactIndices)
                 }
             }
+            .padding()
         }
     }
 }
 
 #Preview {
-    PhysicsBodyCategoriesView()
-        .environmentObject(PhysicsMaskCategories())
+    EdgeLoopCategoriesView()
 }

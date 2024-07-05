@@ -1,5 +1,6 @@
 // We are a way for the cosmos to know itself. -- C. Sagan
 
+import SpriteKit
 import SwiftUI
 
 enum PlaceablePhysics: String, RawRepresentable, CaseIterable, Identifiable {
@@ -18,6 +19,7 @@ enum PhysicsFieldType: String, CaseIterable, Identifiable, RawRepresentable {
 }
 
 struct PhysicsFieldView: View {
+    @EnvironmentObject var commandSelection: CommandSelection
     @EnvironmentObject var entitySelectionState: EntitySelectionState
     @EnvironmentObject var gameController: GameController
     @EnvironmentObject var physicsFieldState: PhysicsFieldState
@@ -31,6 +33,7 @@ struct PhysicsFieldView: View {
     @State private var velocityPair = ABPair(a: 0, b: 0)
 
     let noRegionString = "No region selected - field is infinite"
+    let widthSlider = 500.0
 
     init() {
         _selectedRegion = State(initialValue: noRegionString)
@@ -63,51 +66,116 @@ struct PhysicsFieldView: View {
 
     var bodySelect: some View {
         VStack {
-            HStack(spacing: 30) {
+            Text(physicsFieldState.fieldType.rawValue)
+                .underline()
+
+            HStack {
+                Spacer()
+
                 Toggle(isOn: $physicsFieldState.enabled) {
                     Text("Enabled")
                 }
                 .toggleStyle(.checkbox)
+                .onChange(of: physicsFieldState.enabled) {
+                    guard gameController.entitySelectionState.selectionState == .one else { return }
+                    guard let fieldEntity = gameController.getSelected().first as? Field else { return }
+
+                    let fieldNode_ = fieldEntity.face.rootSceneNode.children.first(where: { $0 is SKFieldNode })
+                    let fieldNode = Utility.forceCast(fieldNode_, to: SKFieldNode.self)
+
+                    fieldNode.isEnabled = physicsFieldState.enabled
+                }
+
+                Spacer()
 
                 Toggle(isOn: $physicsFieldState.exclusive) {
                     Text("Exclusive")
                 }
                 .toggleStyle(.checkbox)
-            }
+                .onChange(of: physicsFieldState.exclusive) {
+                    guard gameController.entitySelectionState.selectionState == .one else { return }
+                    guard let fieldEntity = gameController.getSelected().first as? Field else { return }
 
-            VStack {
-                HStack {
-                    BasicScalarSlider(
-                        scalar: $physicsFieldState.falloff,
-                        scalarView: Text(String(format: "%.1f", physicsFieldState.falloff)),
-                        title: Text("Falloff"),
-                        minLabel: "0", maxLabel: "100", range: 0...100
-                    )
-                    BasicScalarSlider(
-                        scalar: $physicsFieldState.minimumRadius,
-                        scalarView: Text(String(format: "%.1f", physicsFieldState.minimumRadius)),
-                        title: VStack(alignment: .leading) { Text("Minimum"); Text("Radius") },
-                        minLabel: "0", maxLabel: "100", range: 0...100
-                    )
-                }
-                HStack {
-                    BasicScalarSlider(
-                        scalar: $physicsFieldState.smoothness,
-                        scalarView: Text(String(format: "%.1f", physicsFieldState.smoothness)),
-                        title: Text("Smoothness"),
-                        minLabel: "0", maxLabel: "100", range: 0...100
-                    )
-                    BasicScalarSlider(
-                        scalar: $physicsFieldState.strength,
-                        scalarView: Text(String(format: "%.1f", physicsFieldState.strength)),
-                        title: Text("Strength"),
-                        minLabel: "0", maxLabel: "100", range: 0...100
-                    )
-                }
-            }
+                    let fieldNode_ = fieldEntity.face.rootSceneNode.children.first(where: { $0 is SKFieldNode })
+                    let fieldNode = Utility.forceCast(fieldNode_, to: SKFieldNode.self)
 
-            HStack {
-                if physicsFieldState.fieldType == .velocity {
+                    fieldNode.isExclusive = physicsFieldState.exclusive
+                }
+
+                Spacer()
+            }
+            .padding(.vertical)
+
+            VStack(spacing: 0) {
+                BasicScalarSlider(
+                    scalar: $physicsFieldState.falloff,
+                    scalarView: Text(String(format: "%.2f", physicsFieldState.falloff)),
+                    title: Text("Falloff"),
+                    minLabel: "-2", maxLabel: "10", range: -2...10, widthSlider: widthSlider
+                )
+                .padding(.top)
+                .onChange(of: physicsFieldState.falloff) {
+                    guard gameController.entitySelectionState.selectionState == .one else { return }
+                    guard let fieldEntity = gameController.getSelected().first as? Field else { return }
+
+                    let fieldNode_ = fieldEntity.face.rootSceneNode.children.first(where: { $0 is SKFieldNode })
+                    let fieldNode = Utility.forceCast(fieldNode_, to: SKFieldNode.self)
+
+                    fieldNode.falloff = Float(physicsFieldState.falloff)
+                }
+
+                BasicScalarSlider(
+                    scalar: $physicsFieldState.minimumRadius,
+                    scalarView: Text(String(format: "%.2f", physicsFieldState.minimumRadius)),
+                    title: VStack(alignment: .leading) { Text("Minimum"); Text("Radius") },
+                    minLabel: "0", maxLabel: "100", range: 0...100, widthSlider: widthSlider
+                )
+                .padding(.top)
+                .onChange(of: physicsFieldState.minimumRadius) {
+                    guard gameController.entitySelectionState.selectionState == .one else { return }
+                    guard let fieldEntity = gameController.getSelected().first as? Field else { return }
+
+                    let fieldNode_ = fieldEntity.face.rootSceneNode.children.first(where: { $0 is SKFieldNode })
+                    let fieldNode = Utility.forceCast(fieldNode_, to: SKFieldNode.self)
+
+                    fieldNode.minimumRadius = Float(physicsFieldState.minimumRadius)
+                }
+
+                BasicScalarSlider(
+                    scalar: $physicsFieldState.smoothness,
+                    scalarView: Text(String(format: "%.2f", physicsFieldState.smoothness)),
+                    title: Text("Smoothness"),
+                    minLabel: "-2", maxLabel: "10", range: -2...10, widthSlider: widthSlider
+                )
+                .padding(.top)
+                .onChange(of: physicsFieldState.smoothness) {
+                    guard gameController.entitySelectionState.selectionState == .one else { return }
+                    guard let fieldEntity = gameController.getSelected().first as? Field else { return }
+
+                    let fieldNode_ = fieldEntity.face.rootSceneNode.children.first(where: { $0 is SKFieldNode })
+                    let fieldNode = Utility.forceCast(fieldNode_, to: SKFieldNode.self)
+
+                    fieldNode.smoothness = Float(physicsFieldState.smoothness)
+                }
+
+                BasicScalarSlider(
+                    scalar: $physicsFieldState.strength,
+                    scalarView: Text(String(format: "%.2f", physicsFieldState.strength)),
+                    title: Text("Strength"),
+                    minLabel: "-2", maxLabel: "100", range: -2...100, widthSlider: widthSlider
+                )
+                .padding(.top)
+                .onChange(of: physicsFieldState.strength) {
+                    guard gameController.entitySelectionState.selectionState == .one else { return }
+                    guard let fieldEntity = gameController.getSelected().first as? Field else { return }
+
+                    let fieldNode_ = fieldEntity.face.rootSceneNode.children.first(where: { $0 is SKFieldNode })
+                    let fieldNode = Utility.forceCast(fieldNode_, to: SKFieldNode.self)
+
+                    fieldNode.strength = Float(physicsFieldState.strength)
+                }
+
+                if physicsFieldState.fieldType == .velocity || physicsFieldState.fieldType == .linearGravity {
                     Slider2DView(
                         output: $velocityPair,
                         size: CGSize(width: 100, height: 100),
@@ -118,38 +186,66 @@ struct PhysicsFieldView: View {
                     .padding(.trailing)
                     .onChange(of: velocityPair) {
                         physicsFieldState.direction = CGVector(velocityPair)
+
+                        guard gameController.entitySelectionState.selectionState == .one else { return }
+                        guard let fieldEntity = gameController.getSelected().first as? Field else { return }
+
+                        let fieldNode_ = fieldEntity.face.rootSceneNode.children.first(where: { $0 is SKFieldNode })
+                        let fieldNode = Utility.forceCast(fieldNode_, to: SKFieldNode.self)
+
+                        fieldNode.direction = vector_float3(x: Float(velocityPair.a), y: Float(velocityPair.b), z: 0)
                     }
                 }
 
-                VStack(alignment: .leading) {
-                    if physicsFieldState.fieldType == .noise ||
-                        physicsFieldState.fieldType == .turbulence {
-                        BasicScalarSlider(
-                            scalar: $physicsFieldState.animationSpeed,
-                            scalarView: Text(String(format: "%.1f", physicsFieldState.animationSpeed)),
-                            title: VStack(alignment: .leading) {
-                                Text("Animation").font(.system(size: 10))
-                                Text("Speed").font(.system(size: 10))
-                            },
-                            minLabel: "0", maxLabel: "100", range: 0...100
-                        )
+                if physicsFieldState.fieldType == .noise ||
+                    physicsFieldState.fieldType == .turbulence {
+                    BasicScalarSlider(
+                        scalar: $physicsFieldState.animationSpeed,
+                        scalarView: Text(String(format: "%.2f", physicsFieldState.animationSpeed)),
+                        title: VStack(alignment: .leading) {
+                            Text("Animation").font(.system(size: 10))
+                            Text("Speed").font(.system(size: 10))
+                        },
+                        minLabel: "-2", maxLabel: "2", range: -2...2, widthSlider: widthSlider
+                    )
+                    .padding(.top)
+                    .onChange(of: physicsFieldState.animationSpeed) {
+                        guard gameController.entitySelectionState.selectionState == .one else { return }
+                        guard let fieldEntity = gameController.getSelected().first as? Field else { return }
+
+                        let fieldNode_ = fieldEntity.face.rootSceneNode.children.first(where: { $0 is SKFieldNode })
+                        let fieldNode = Utility.forceCast(fieldNode_, to: SKFieldNode.self)
+
+                        fieldNode.animationSpeed = Float(physicsFieldState.animationSpeed)
                     }
-
-                    ShapeListView(
-                        selection: $selectedRegion, whichSet: .region, labelFrame: 100,
-                        readOnly: true, readOnlyNullSelection: noRegionString
-                    )
-
-                    CheckboxPicker(
-                        selectedIndices: $selectedCategoryIndices,
-                        label: Text("Set Categories"),
-                        options: physicsMaskCategories.names
-                    )
                 }
-                .frame(width: 400, alignment: .leading)
             }
-            .padding([.horizontal])
+
+            VStack(spacing: 0) {
+                ShapeListView(
+                    selection: $selectedRegion, whichSet: .region, labelFrame: 100,
+                    readOnly: true, readOnlyNullSelection: noRegionString
+                )
+                .padding(.top)
+
+                CheckboxPicker(
+                    selectedIndices: $selectedCategoryIndices,
+                    label: Text("Set Categories"),
+                    options: physicsMaskCategories.names
+                )
+                .padding(.top)
+                .onChange(of: selectedCategoryIndices) {
+                    guard gameController.entitySelectionState.selectionState == .one else { return }
+                    guard let fieldEntity = gameController.getSelected().first as? Field else { return }
+
+                    let fieldNode_ = fieldEntity.face.rootSceneNode.children.first(where: { $0 is SKFieldNode })
+                    let fieldNode = Utility.forceCast(fieldNode_, to: SKFieldNode.self)
+
+                    fieldNode.categoryBitMask = Utility.makeBitmask(selectedCategoryIndices)
+                }
+            }
         }
+        .frame(width: 700, height: 350)
     }
 }
 

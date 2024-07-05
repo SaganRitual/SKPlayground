@@ -55,3 +55,15 @@ extension Utility {
         return forced
     }
 }
+
+extension Utility {
+    static func makeBitmask(_ intSet: Set<Int>) -> UInt32 {
+        let result = intSet.reduce(0) { currentValue, newIndex in
+            currentValue + (UInt32(1) << newIndex)
+        }
+
+        print("intSet \(intSet) -> result \(result)")
+
+        return result
+    }
+}

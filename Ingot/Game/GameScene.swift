@@ -29,6 +29,8 @@ class GameScene: SKScene {
     init(_ size: CGSize) {
         super.init(size: size)
 
+//        anchorPoint = .zero
+
         backgroundColor = .black
         isUserInteractionEnabled = true
         scaleMode = .resizeFill
@@ -81,9 +83,9 @@ class GameScene: SKScene {
     override func update(_ currentTime: TimeInterval) {
         // Jumping through some hoops to make the scene edge loop
         // work properly when we disable/enable/recreate it repeatedly.
-        // Note that this seems to make the edge work as a physics
-        // object, but it doesn't always show up as an outline when
-        // view.showsPhysics == true
+        // Note that this seems to make the edge work properly in its
+        // role as a physics object, but it doesn't always show up as
+        // an outline when view.showsPhysics == true
         if enableEdgeLoop {
             if hotEdgeLoop == nil {
                 hotEdgeLoop = cachedEdgeLoop

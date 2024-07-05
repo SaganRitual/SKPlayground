@@ -5,11 +5,54 @@ import Foundation
 import SpriteKit
 import SwiftUI
 
+class MySKView: SKView {
+    var trackingArea: NSTrackingArea?
+
+    override var acceptsFirstResponder: Bool { return true }
+
+    override func mouseDown(with event: NSEvent) {
+        super.mouseDown(with: event)
+        self.nextResponder?.mouseDown(with: event)
+    }
+
+    override func mouseDragged(with event: NSEvent) {
+        super.mouseDragged(with: event)
+        self.nextResponder?.mouseDragged(with: event)
+    }
+
+    override func mouseUp(with event: NSEvent) {
+        super.mouseUp(with: event)
+        self.nextResponder?.mouseUp(with: event)
+    }
+
+    override func mouseMoved(with event: NSEvent) {
+        super.mouseMoved(with: event)
+        self.nextResponder?.mouseMoved(with: event)
+    }
+
+    override func updateTrackingAreas() {
+        super.updateTrackingAreas()
+
+        if let existingArea = trackingArea {
+            removeTrackingArea(existingArea)
+        }
+
+        let options: NSTrackingArea.Options = [
+            .mouseMoved,
+            .activeInKeyWindow,
+            .inVisibleRect
+        ]
+
+        trackingArea = NSTrackingArea(rect: bounds, options: options, owner: self, userInfo: nil)
+        addTrackingArea(trackingArea!)
+    }
+}
+
 struct SpriteKitView: NSViewRepresentable {
     @EnvironmentObject var gameController: GameController
 
     func makeNSView(context: Context) -> SKView {
-        let view = SKView()
+        let view = MySKView()
 
         view.ignoresSiblingOrder = true
         view.showsFPS = true

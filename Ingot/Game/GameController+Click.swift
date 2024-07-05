@@ -22,6 +22,7 @@ extension GameController {
         switch commandSelection.clickToPlace {
         case .field:
             entity = newField(at: clickDispatch.location)
+            physicsFieldState.loadState(from: entity)
 
         case .gremlin:
             entity = newGremlin(at: clickDispatch.location)
@@ -40,7 +41,10 @@ extension GameController {
     }
 
     func newField(at position: CGPoint) -> Field {
-        let field = Field.make(at: position, fieldType: physicsFieldState.fieldType)
+        let field = Field.make(
+            at: position, fieldType: PhysicsFieldType(rawValue: commandSelection.selectedPhysicsFieldType)!,
+            gameScene: gameScene
+        )
 
         gameScene.entitiesNode.addChild(field.face.rootSceneNode)
 

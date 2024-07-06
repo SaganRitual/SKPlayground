@@ -23,6 +23,8 @@ final class GameController: ObservableObject {
     enum WhichContextMenu { case background, entity, noMenu }
     var showContextMenu = WhichContextMenu.noMenu
 
+    @Published var soleSelectedJoint: SKPhysicsJoint?
+
     // swiftlint:disable function_parameter_count
     func postInit(
         _ commandSelection: CommandSelection,
@@ -274,7 +276,7 @@ final class GameController: ObservableObject {
 
         if let body = entity.physicsBody {
             physicsBodyState.load(body)
-        } else if let _ = entity.face.rootSceneNode.children.first(where: { $0 is SKFieldNode }) {
+        } else if entity.face.rootSceneNode.children.first(where: { $0 is SKFieldNode }) != nil {
             physicsFieldState.loadState(from: entity)
         }
     }

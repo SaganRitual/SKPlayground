@@ -59,6 +59,11 @@ extension GameController {
         return selected
     }
 
+    func singleSelectedItemIs<T: AnyObject>(_ class: T) -> T? {
+        guard entitySelectionState.selectionState == .one else { return nil }
+        return getSelected().first as? T
+    }
+
     func toggleSelect(_ entity: GameEntity) {
         cancelAssignActionsMode()
 

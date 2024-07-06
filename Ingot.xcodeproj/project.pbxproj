@@ -36,9 +36,18 @@
 		D4950A982C39731000278438 /* PhysicsFieldMasksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4950A972C39731000278438 /* PhysicsFieldMasksView.swift */; };
 		D4950A9A2C39B34300278438 /* PhysicsWorldConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4950A992C39B34300278438 /* PhysicsWorldConfigurator.swift */; };
 		D4950A9C2C39B5D700278438 /* PhysicsMaskNamesConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4950A9B2C39B5D700278438 /* PhysicsMaskNamesConfigurator.swift */; };
-		D4950A9E2C39B7FB00278438 /* SKPTrackpad.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4950A9D2C39B7FB00278438 /* SKPTrackpad.swift */; };
 		D4950AA22C39BB7400278438 /* PhysicsWorldSlidersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4950AA12C39BB7400278438 /* PhysicsWorldSlidersView.swift */; };
 		D4950AA42C39BF5D00278438 /* PhysicsWorldEdgeLoopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4950AA32C39BF5D00278438 /* PhysicsWorldEdgeLoopView.swift */; };
+		D4950AA62C39C5A700278438 /* PhysicsJointConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4950AA52C39C5A700278438 /* PhysicsJointConfigurator.swift */; };
+		D4950AA82C39CB9A00278438 /* PhysicsJointRelays.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4950AA72C39CB9A00278438 /* PhysicsJointRelays.swift */; };
+		D4950AAB2C39CCD400278438 /* PhysicsBodyRelay.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4950AAA2C39CCD400278438 /* PhysicsBodyRelay.swift */; };
+		D4950AAD2C39CCF000278438 /* PhysicsFieldRelay.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4950AAC2C39CCF000278438 /* PhysicsFieldRelay.swift */; };
+		D4950AAF2C39D1F000278438 /* PhysicsJointPinView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4950AAE2C39D1F000278438 /* PhysicsJointPinView.swift */; };
+		D4950AB22C39FFB100278438 /* PhysicsJointCommonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4950AB12C39FFB100278438 /* PhysicsJointCommonView.swift */; };
+		D4950AB42C39FFD200278438 /* PhysicsJointFixedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4950AB32C39FFD200278438 /* PhysicsJointFixedView.swift */; };
+		D4950AB62C39FFFB00278438 /* PhysicsJointLimitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4950AB52C39FFFB00278438 /* PhysicsJointLimitView.swift */; };
+		D4950AB82C3A006800278438 /* PhysicsJointSlidingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4950AB72C3A006800278438 /* PhysicsJointSlidingView.swift */; };
+		D4950ABA2C3A015900278438 /* PhysicsJointSpringView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4950AB92C3A015900278438 /* PhysicsJointSpringView.swift */; };
 		D49BD4FB2C2A7E8400FD313C /* PhysicsJointView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49BD4FA2C2A7E8400FD313C /* PhysicsJointView.swift */; };
 		D49BD4FF2C2B218900FD313C /* CommandView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49BD4FE2C2B218900FD313C /* CommandView.swift */; };
 		D49BD5932C2BA92000FD313C /* Sprites in Resources */ = {isa = PBXBuildFile; fileRef = D49BD5922C2BA91F00FD313C /* Sprites */; };
@@ -141,9 +150,18 @@
 		D4950A972C39731000278438 /* PhysicsFieldMasksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhysicsFieldMasksView.swift; sourceTree = "<group>"; };
 		D4950A992C39B34300278438 /* PhysicsWorldConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhysicsWorldConfigurator.swift; sourceTree = "<group>"; };
 		D4950A9B2C39B5D700278438 /* PhysicsMaskNamesConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhysicsMaskNamesConfigurator.swift; sourceTree = "<group>"; };
-		D4950A9D2C39B7FB00278438 /* SKPTrackpad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKPTrackpad.swift; sourceTree = "<group>"; };
 		D4950AA12C39BB7400278438 /* PhysicsWorldSlidersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhysicsWorldSlidersView.swift; sourceTree = "<group>"; };
 		D4950AA32C39BF5D00278438 /* PhysicsWorldEdgeLoopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhysicsWorldEdgeLoopView.swift; sourceTree = "<group>"; };
+		D4950AA52C39C5A700278438 /* PhysicsJointConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhysicsJointConfigurator.swift; sourceTree = "<group>"; };
+		D4950AA72C39CB9A00278438 /* PhysicsJointRelays.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhysicsJointRelays.swift; sourceTree = "<group>"; };
+		D4950AAA2C39CCD400278438 /* PhysicsBodyRelay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhysicsBodyRelay.swift; sourceTree = "<group>"; };
+		D4950AAC2C39CCF000278438 /* PhysicsFieldRelay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhysicsFieldRelay.swift; sourceTree = "<group>"; };
+		D4950AAE2C39D1F000278438 /* PhysicsJointPinView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhysicsJointPinView.swift; sourceTree = "<group>"; };
+		D4950AB12C39FFB100278438 /* PhysicsJointCommonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhysicsJointCommonView.swift; sourceTree = "<group>"; };
+		D4950AB32C39FFD200278438 /* PhysicsJointFixedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhysicsJointFixedView.swift; sourceTree = "<group>"; };
+		D4950AB52C39FFFB00278438 /* PhysicsJointLimitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhysicsJointLimitView.swift; sourceTree = "<group>"; };
+		D4950AB72C3A006800278438 /* PhysicsJointSlidingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhysicsJointSlidingView.swift; sourceTree = "<group>"; };
+		D4950AB92C3A015900278438 /* PhysicsJointSpringView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhysicsJointSpringView.swift; sourceTree = "<group>"; };
 		D49BD4FA2C2A7E8400FD313C /* PhysicsJointView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhysicsJointView.swift; sourceTree = "<group>"; };
 		D49BD4FC2C2AC29600FD313C /* UXScenarios.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = UXScenarios.md; sourceTree = "<group>"; };
 		D49BD4FE2C2B218900FD313C /* CommandView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandView.swift; sourceTree = "<group>"; };
@@ -271,6 +289,8 @@
 		D4950A7D2C3869D200278438 /* Physics */ = {
 			isa = PBXGroup;
 			children = (
+				D4950AB02C39FF8900278438 /* Joints */,
+				D4950AA92C39CCBC00278438 /* Relays */,
 				D4950A812C387D7900278438 /* PhysicsBodyConfigurator.swift */,
 				D4950A8B2C38AF0E00278438 /* PhysicsBodyMasksView.swift */,
 				D4950A8D2C38BB4100278438 /* PhysicsBodySlidersView.swift */,
@@ -279,10 +299,11 @@
 				D4950A972C39731000278438 /* PhysicsFieldMasksView.swift */,
 				D4950A952C39662600278438 /* PhysicsFieldSlidersView.swift */,
 				D4950A932C38D55700278438 /* PhysicsFieldTogglesView.swift */,
+				D4950AA52C39C5A700278438 /* PhysicsJointConfigurator.swift */,
 				D4950A9B2C39B5D700278438 /* PhysicsMaskNamesConfigurator.swift */,
 				D4950A992C39B34300278438 /* PhysicsWorldConfigurator.swift */,
-				D4950AA12C39BB7400278438 /* PhysicsWorldSlidersView.swift */,
 				D4950AA32C39BF5D00278438 /* PhysicsWorldEdgeLoopView.swift */,
+				D4950AA12C39BB7400278438 /* PhysicsWorldSlidersView.swift */,
 			);
 			path = Physics;
 			sourceTree = "<group>";
@@ -294,9 +315,31 @@
 				D4950A7F2C3879FA00278438 /* SKPSlider.swift */,
 				D4950A872C388A9300278438 /* SKPSliderWithRelay.swift */,
 				D4950A832C38858900278438 /* SKPToggle.swift */,
-				D4950A9D2C39B7FB00278438 /* SKPTrackpad.swift */,
 			);
 			path = Toolbox;
+			sourceTree = "<group>";
+		};
+		D4950AA92C39CCBC00278438 /* Relays */ = {
+			isa = PBXGroup;
+			children = (
+				D4950AAA2C39CCD400278438 /* PhysicsBodyRelay.swift */,
+				D4950AAC2C39CCF000278438 /* PhysicsFieldRelay.swift */,
+				D4950AA72C39CB9A00278438 /* PhysicsJointRelays.swift */,
+			);
+			path = Relays;
+			sourceTree = "<group>";
+		};
+		D4950AB02C39FF8900278438 /* Joints */ = {
+			isa = PBXGroup;
+			children = (
+				D4950AB12C39FFB100278438 /* PhysicsJointCommonView.swift */,
+				D4950AB32C39FFD200278438 /* PhysicsJointFixedView.swift */,
+				D4950AB52C39FFFB00278438 /* PhysicsJointLimitView.swift */,
+				D4950AAE2C39D1F000278438 /* PhysicsJointPinView.swift */,
+				D4950AB72C3A006800278438 /* PhysicsJointSlidingView.swift */,
+				D4950AB92C3A015900278438 /* PhysicsJointSpringView.swift */,
+			);
+			path = Joints;
 			sourceTree = "<group>";
 		};
 		D49BD4FD2C2B212C00FD313C /* Documentation */ = {
@@ -603,6 +646,7 @@
 				D4EC5E5B2C2DE9E100E20EC7 /* PhysicsMaskCategories.swift in Sources */,
 				D4950A9A2C39B34300278438 /* PhysicsWorldConfigurator.swift in Sources */,
 				D4EC5E5D2C2DEC1700E20EC7 /* EntitySelectionState.swift in Sources */,
+				D4950AA82C39CB9A00278438 /* PhysicsJointRelays.swift in Sources */,
 				D4D1F0972C28B38100003163 /* SpaceActionsTabView.swift in Sources */,
 				D4EC5E5F2C2DED3B00E20EC7 /* PhysicsWorldState.swift in Sources */,
 				D49BD5B82C2C4CCB00FD313C /* Gremlin.swift in Sources */,
@@ -623,14 +667,16 @@
 				D49BD5D22C2C683700FD313C /* MouseDispatch.swift in Sources */,
 				D4D1F0922C28A15200003163 /* Slider2DView.swift in Sources */,
 				D4A621A92C29172D00C3F89A /* PhysicsTabView.swift in Sources */,
-				D4950A9E2C39B7FB00278438 /* SKPTrackpad.swift in Sources */,
 				D4950A8C2C38AF0E00278438 /* PhysicsBodyMasksView.swift in Sources */,
 				D49BD5CB2C2C682B00FD313C /* GameScene+Mouse.swift in Sources */,
+				D4950ABA2C3A015900278438 /* PhysicsJointSpringView.swift in Sources */,
 				D4EC5E552C2DE4E300E20EC7 /* EntityActionsPublisher.swift in Sources */,
 				D4D1F0862C27BFF300003163 /* PlaygroundState.swift in Sources */,
+				D4950AAB2C39CCD400278438 /* PhysicsBodyRelay.swift in Sources */,
 				D4950A762C366FF700278438 /* GameScene+ContextMenu.swift in Sources */,
 				D445A8D32C337E82001C1421 /* PhysicsFieldToken.swift in Sources */,
 				D49BD5C52C2C66C300FD313C /* Joint.swift in Sources */,
+				D4950AB22C39FFB100278438 /* PhysicsJointCommonView.swift in Sources */,
 				D404DF782C31A29C009686F6 /* ShapeLab.swift in Sources */,
 				D4D1F07D2C27BBDE00003163 /* RotateActionTokenView.swift in Sources */,
 				D404DF7F2C320856009686F6 /* SpriteManager.swift in Sources */,
@@ -639,6 +685,7 @@
 				D4A621AB2C2917CA00C3F89A /* OldPhysicsBodyView.swift in Sources */,
 				D4950A8E2C38BB4100278438 /* PhysicsBodySlidersView.swift in Sources */,
 				D4950A842C38858900278438 /* SKPToggle.swift in Sources */,
+				D4950AAD2C39CCF000278438 /* PhysicsFieldRelay.swift in Sources */,
 				D4A621A42C28CB0300C3F89A /* ActionsTabView.swift in Sources */,
 				D49BD5AF2C2C40FC00FD313C /* GameEntity.swift in Sources */,
 				D4DE8B332C29D4280075F4B7 /* PhysicsBodyCategoriesView.swift in Sources */,
@@ -650,6 +697,7 @@
 				D404DF722C2F7FEE009686F6 /* GremlinFace.swift in Sources */,
 				D445A8D62C34B264001C1421 /* PhysicsFieldLab.swift in Sources */,
 				D4EC5E592C2DE7E100E20EC7 /* PhysicsFieldState.swift in Sources */,
+				D4950AB42C39FFD200278438 /* PhysicsJointFixedView.swift in Sources */,
 				D49BD5C92C2C682500FD313C /* GameScene.swift in Sources */,
 				D49BD5D82C2C69C700FD313C /* GameController+Select.swift in Sources */,
 				D46584E62C2CD73800BC19E7 /* ConfigurationTabView.swift in Sources */,
@@ -661,12 +709,15 @@
 				D4EC5E662C2DFABF00E20EC7 /* PlayControlsView.swift in Sources */,
 				D4D1F08C2C27C4C800003163 /* ImpulseActionTokenView.swift in Sources */,
 				D4950A8A2C38ACE000278438 /* SKPMaskSelector.swift in Sources */,
+				D4950AAF2C39D1F000278438 /* PhysicsJointPinView.swift in Sources */,
 				D49BD5C32C2C645500FD313C /* Field.swift in Sources */,
 				D4D1F0842C27BFBE00003163 /* ActionToken.swift in Sources */,
+				D4950AA62C39C5A700278438 /* PhysicsJointConfigurator.swift in Sources */,
 				D49BD5D02C2C683700FD313C /* ClickDispatch.swift in Sources */,
 				D404DF7C2C3201ED009686F6 /* SelectionHaloOI.swift in Sources */,
 				D4D1F0992C28B3D600003163 /* GameController.swift in Sources */,
 				D4D1F0672C27BA8800003163 /* IngotApp.swift in Sources */,
+				D4950AB82C3A006800278438 /* PhysicsJointSlidingView.swift in Sources */,
 				D49BD5D12C2C683700FD313C /* DragDispatch.swift in Sources */,
 				D4950A922C38D4AD00278438 /* PhysicsFieldConfigurator.swift in Sources */,
 				D4950A962C39662600278438 /* PhysicsFieldSlidersView.swift in Sources */,
@@ -679,6 +730,7 @@
 				D4950A882C388A9300278438 /* SKPSliderWithRelay.swift in Sources */,
 				D4D1F08E2C27C4D500003163 /* AngularImpulseActionTokenView.swift in Sources */,
 				D49BD5B62C2C4B8800FD313C /* GameEntitySprite.swift in Sources */,
+				D4950AB62C39FFFB00278438 /* PhysicsJointLimitView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

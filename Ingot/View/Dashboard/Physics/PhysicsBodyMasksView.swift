@@ -3,22 +3,6 @@
 import SpriteKit
 import SwiftUI
 
-final class PhysicsMaskNames: ObservableObject {
-    @Published var names: [String] = (0..<32).map { "Mask \($0)" }
-
-    func renameMask(currentName: String, newName: String) -> Int? {
-        if let index = names.firstIndex(of: newName) {
-            return index
-        }
-
-        if let index = names.firstIndex(of: currentName) {
-            names[index] = newName
-        }
-
-        return nil
-    }
-}
-
 struct PhysicsBodyMasksView: View {
     @EnvironmentObject var gameController: GameController
 

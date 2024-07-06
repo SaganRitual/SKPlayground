@@ -2,7 +2,7 @@
 
 import SwiftUI
 
-struct PhysicsWorldView: View {
+struct OldPhysicsWorldView: View {
     @EnvironmentObject var gameController: GameController
     @EnvironmentObject var physicsMaskCategories: PhysicsMaskCategories
     @EnvironmentObject var physicsWorldState: PhysicsWorldState
@@ -109,7 +109,7 @@ struct PhysicsWorldView: View {
 }
 
 #Preview {
-    PhysicsWorldView()
+    OldPhysicsWorldView()
         .environmentObject(GameController())
         .environmentObject(PhysicsMaskCategories())
         .environmentObject(PhysicsWorldState())

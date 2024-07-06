@@ -149,7 +149,7 @@ struct PhysicsFieldView: View {
                             }
                         }
 
-                        PhysicsFieldSlidersView(setGravity: $setGravity)
+                        OldPhysicsFieldSlidersView(setGravity: $setGravity)
                     }
                 }
             }

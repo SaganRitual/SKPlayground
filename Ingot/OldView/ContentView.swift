@@ -26,7 +26,7 @@ import SwiftUI
                 PhysicsFieldView
                     PhysicsFieldSlidersView
  
-                PhysicsWorldView
+                OldPhysicsWorldView
                     EdgeLoopCategoriesView
 
             ShapeLabView

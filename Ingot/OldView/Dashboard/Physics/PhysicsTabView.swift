@@ -17,7 +17,7 @@ struct PhysicsTabView: View {
     var body: some View {
         VStack {
             TabView {
-                PhysicsBodyView()
+                OldPhysicsBodyView()
                     .padding()
                     .tabItem {
                         Label("Body", systemImage: "atom")
@@ -29,7 +29,7 @@ struct PhysicsTabView: View {
                         Label("Field", systemImage: "atom")
                     }
 
-                PhysicsWorldView()
+                OldPhysicsWorldView()
                     .tabItem {
                         Label("World", systemImage: "globe")
                     }

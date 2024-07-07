@@ -19,7 +19,11 @@ struct PhysicsJointSlidingView: View {
                     fieldKeypath: \.shouldEnableLimits,
                     title: "Enable"
                 )
+                .padding(.leading)
+
+                Spacer()
             }
+            .padding([.leading, .top])
 
             SKPSliderWithRelay<SKPhysicsJointSliding, CGFloat, Text, Text>(
                 $relay.lowerDistanceLimit,
@@ -38,4 +42,8 @@ struct PhysicsJointSlidingView: View {
             )
         }
     }
+}
+
+#Preview {
+    PhysicsJointSlidingView(relay: PhysicsJointSlidingRelay())
 }

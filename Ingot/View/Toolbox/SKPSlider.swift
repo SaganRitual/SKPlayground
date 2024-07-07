@@ -66,13 +66,23 @@ struct SKPSlider<TargetField, TitleView: View, ScalarView: View>: View
 }
 
 #Preview {
-    @State var scalar: CGFloat = 0
+    @State var duration: CGFloat = 0
+    @State var strength: CGFloat = 0
 
-    return SKPSlider(
-        $scalar,
-        range: 0.1...5.0,
-        scalarView: Text(String(format: "%.2f", scalar)),
-        titleView: Text("Duration")
-    )
+    return VStack {
+        SKPSlider(
+            $duration,
+            range: 0.1...5.0,
+            scalarView: Text(String(format: "%.2f", duration)),
+            titleView: Text("Duration")
+        )
+
+        SKPSlider(
+            $strength,
+            range: 0.1...5.0,
+            scalarView: Text(String(format: "%.2f", strength)),
+            titleView: Text("Strength")
+        )
+    }
     .monospaced()
 }

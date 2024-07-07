@@ -3,16 +3,17 @@
 import SwiftUI
 
 struct PhysicsBodyConfigurator: View {
-    @EnvironmentObject var gameController: GameController
+    @EnvironmentObject var selectedPhysicsRelay: SelectedPhysicsRelay
 
-    @StateObject var physicsBodyRelay = PhysicsBodyRelay()
     @StateObject var physicsMaskNames = PhysicsMaskNames()
 
     var body: some View {
         VStack {
-            PhysicsBodyTogglesView(physicsBodyRelay: physicsBodyRelay)
-            PhysicsBodySlidersView(physicsBodyRelay: physicsBodyRelay)
-            PhysicsBodyMasksView(physicsMaskNames: physicsMaskNames)
+            if case let .body(physicsBodyRelay) = selectedPhysicsRelay.selected {
+                PhysicsBodyTogglesView(physicsBodyRelay: physicsBodyRelay)
+                PhysicsBodySlidersView(physicsBodyRelay: physicsBodyRelay)
+                PhysicsBodyMasksView(physicsMaskNames: physicsMaskNames)
+            }
         }
         .padding(.vertical)
     }
@@ -20,5 +21,5 @@ struct PhysicsBodyConfigurator: View {
 
 #Preview {
     PhysicsBodyConfigurator()
-        .environmentObject(GameController())
+        .environmentObject(SelectedPhysicsRelay(.body(PhysicsBodyRelay())))
 }

@@ -47,7 +47,9 @@ struct SKPSliderWithRelay<RelayObject: AnyObject, Field, TitleView: View, Scalar
 
     var body: some View {
         SKPSlider(
-            $scalar, range: range, scalarView: scalarView, titleView: titleView
+            $scalar,
+            maxLabel: maxLabel, minLabel: minLabel,
+            range: range, scalarView: scalarView, titleView: titleView
         )
         .onChange(of: scalar) { _, newValue in
             gameController.updateSelectedRelayTarget(whichField: fieldKeypath, newValue: newValue)

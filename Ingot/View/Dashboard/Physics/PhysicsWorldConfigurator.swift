@@ -2,24 +2,18 @@
 
 import SwiftUI
 
-final class PhysicsWorldRelay: ObservableObject {
-    @Published var enableEdgeLoop = true
-    @Published var currentCollisionMaskName = "Mask 0"
-    @Published var currentContactMaskName = "Mask 0"
-    @Published var gravity = CGVector.zero
-    @Published var selectedCollisionIndices = Set<Int>()
-    @Published var selectedContactIndices = Set<Int>()
-}
-
 struct PhysicsWorldConfigurator: View {
+    @EnvironmentObject var selectedPhysicsRelay: SelectedPhysicsRelay
+
     @StateObject var physicsMaskNames = PhysicsMaskNames()
-    @StateObject var physicsWorldRelay = PhysicsWorldRelay()
 
     var body: some View {
         VStack {
-            PhysicsWorldSlidersView(physicsWorldRelay: physicsWorldRelay)
-            PhysicsWorldEdgeLoopView(physicsMaskNames: physicsMaskNames, physicsWorldRelay: physicsWorldRelay)
-            PhysicsMaskNamesConfigurator(physicsMaskNames: physicsMaskNames)
+            if case let .world(physicsWorldRelay) = selectedPhysicsRelay.selected {
+                PhysicsWorldSlidersView(physicsWorldRelay: physicsWorldRelay)
+                PhysicsWorldEdgeLoopView(physicsMaskNames: physicsMaskNames, physicsWorldRelay: physicsWorldRelay)
+                PhysicsMaskNamesConfigurator(physicsMaskNames: physicsMaskNames)
+            }
         }
         .padding(.vertical)
     }
@@ -27,4 +21,5 @@ struct PhysicsWorldConfigurator: View {
 
 #Preview {
     PhysicsWorldConfigurator()
+        .environmentObject(SelectedPhysicsRelay(.world(PhysicsWorldRelay())))
 }

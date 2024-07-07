@@ -13,8 +13,12 @@ struct PhysicsJointCommonView<T: PhysicsJointRelay>: View {
 
     var body: some View {
         HStack {
+            Spacer()
             Text(String(format: "Reaction Force \(Utility.vectorString(relay.reactionForce))"))
+            Spacer()
             Text(String(format: "Reaction Torque %.2f", relay.reactionTorque))
+            Spacer()
         }
+        .padding(.horizontal)
     }
 }

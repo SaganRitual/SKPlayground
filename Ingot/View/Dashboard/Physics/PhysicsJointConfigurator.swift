@@ -4,33 +4,27 @@ import SpriteKit
 import SwiftUI
 
 struct PhysicsJointConfigurator: View {
-    @EnvironmentObject var gameController: GameController
-
-    @StateObject var fixedRelay = PhysicsJointFixedRelay()
-    @StateObject var limitRelay = PhysicsJointLimitRelay()
-    @StateObject var pinRelay = PhysicsJointPinRelay()
-    @StateObject var slidingRelay = PhysicsJointSlidingRelay()
-    @StateObject var springRelay = PhysicsJointSpringRelay()
+    @EnvironmentObject var selectedPhysicsRelay: SelectedPhysicsRelay
 
     var body: some View {
         ZStack {
-            switch gameController.soleSelectedJoint {
-            case is SKPhysicsJointFixed:
+            switch selectedPhysicsRelay.selected {
+            case .jointFixed(let fixedRelay):
                 PhysicsJointFixedView(relay: fixedRelay)
-            case is SKPhysicsJointLimit:
+            case .jointLimit(let limitRelay):
                 PhysicsJointLimitView(relay: limitRelay)
-            case is SKPhysicsJointPin:
+            case .jointPin(let pinRelay):
                 PhysicsJointPinView(relay: pinRelay)
-            case is SKPhysicsJointSliding:
+            case .jointSliding(let slidingRelay):
                 PhysicsJointSlidingView(relay: slidingRelay)
-            case is SKPhysicsJointSpring:
+            case .jointSpring(let springRelay):
                 PhysicsJointSpringView(relay: springRelay)
 
             case .none:
                 Text("No Joint Selected, or Multiple Joints Selected")
 
             default:
-                fatalError("Unable to configure physics joint of type \(type(of:gameController.soleSelectedJoint))")
+                fatalError("How did we get here?")
             }
         }
         .padding()
@@ -38,8 +32,6 @@ struct PhysicsJointConfigurator: View {
 }
 
 #Preview {
-    @StateObject var gameController = GameController()
-
-    return PhysicsJointConfigurator()
-        .environmentObject(gameController)
+    PhysicsJointConfigurator()
+        .environmentObject(SelectedPhysicsRelay(.jointSpring(PhysicsJointSpringRelay())))
 }

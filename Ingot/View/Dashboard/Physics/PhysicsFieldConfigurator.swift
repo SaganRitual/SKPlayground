@@ -4,14 +4,17 @@ import SpriteKit
 import SwiftUI
 
 struct PhysicsFieldConfigurator: View {
-    @StateObject var physicsFieldRelay = PhysicsFieldRelay()
+    @EnvironmentObject var selectedPhysicsRelay: SelectedPhysicsRelay
+
     @StateObject var physicsMaskNames = PhysicsMaskNames()
 
     var body: some View {
         VStack {
-            PhysicsFieldTogglesView(physicsFieldRelay: physicsFieldRelay)
-            PhysicsFieldSlidersView(physicsFieldRelay: physicsFieldRelay)
-            PhysicsFieldMasksView(physicsMaskNames: physicsMaskNames)
+            if case let .field(physicsFieldRelay) = selectedPhysicsRelay.selected {
+                PhysicsFieldTogglesView(physicsFieldRelay: physicsFieldRelay)
+                PhysicsFieldSlidersView(physicsFieldRelay: physicsFieldRelay)
+                PhysicsFieldMasksView(physicsMaskNames: physicsMaskNames)
+            }
         }
         .padding(.vertical)
     }
@@ -19,4 +22,5 @@ struct PhysicsFieldConfigurator: View {
 
 #Preview {
     PhysicsFieldConfigurator()
+        .environmentObject(SelectedPhysicsRelay(.field(PhysicsFieldRelay())))
 }

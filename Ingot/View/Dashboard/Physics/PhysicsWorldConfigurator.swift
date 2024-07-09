@@ -10,7 +10,7 @@ struct PhysicsWorldConfigurator: View {
     var body: some View {
         VStack {
             if case let .world(physicsWorldRelay) = selectedPhysicsRelay.selected {
-                PhysicsWorldSlidersView(physicsWorldRelay: physicsWorldRelay)
+                PhysicsWorldSlidersGrid(physicsWorldRelay: physicsWorldRelay)
                 PhysicsWorldEdgeLoopView(physicsMaskNames: physicsMaskNames, physicsWorldRelay: physicsWorldRelay)
                 PhysicsMaskNamesConfigurator(physicsMaskNames: physicsMaskNames)
             }

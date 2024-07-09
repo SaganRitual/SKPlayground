@@ -21,7 +21,7 @@ struct PhysicsFieldConfigurator: View {
         VStack {
             if case let .field(physicsFieldRelay) = selectedPhysicsRelay.selected {
                 PhysicsFieldTogglesView(physicsFieldRelay: physicsFieldRelay)
-                PhysicsFieldSlidersView(physicsFieldRelay: physicsFieldRelay)
+                PhysicsFieldSlidersGrid(physicsFieldRelay: physicsFieldRelay)
                 PhysicsFieldMasksView(physicsMaskNames: physicsMaskNames)
             }
         }

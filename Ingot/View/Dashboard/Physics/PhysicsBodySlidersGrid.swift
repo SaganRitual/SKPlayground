@@ -219,13 +219,6 @@ struct PhysicsBodySlidersGrid: View {
             }
         }
         .padding()
-//        HStack {
-//            PhysicsBodySliderTitles(physicsBodyRelay: physicsBodyRelay)
-//            PhysicsBodySliderValues(physicsBodyRelay: physicsBodyRelay)
-//            PhysicsBodyMinLabels(physicsBodyRelay: physicsBodyRelay)
-//            PhysicsBodySliders(physicsBodyRelay: physicsBodyRelay)
-//            PhysicsBodyMaxLabels(physicsBodyRelay: physicsBodyRelay)
-//        }
     }
 }
 

@@ -11,7 +11,7 @@ struct PhysicsBodyConfigurator: View {
         VStack {
             if case let .body(physicsBodyRelay) = selectedPhysicsRelay.selected {
                 PhysicsBodyTogglesView(physicsBodyRelay: physicsBodyRelay)
-                PhysicsBodySlidersView(physicsBodyRelay: physicsBodyRelay)
+                PhysicsBodySlidersGrid(physicsBodyRelay: physicsBodyRelay)
                 PhysicsBodyMasksView(physicsMaskNames: physicsMaskNames)
             }
         }

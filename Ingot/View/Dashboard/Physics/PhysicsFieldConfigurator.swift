@@ -3,6 +3,15 @@
 import SpriteKit
 import SwiftUI
 
+enum PhysicsFieldType: String, CaseIterable, Identifiable, RawRepresentable {
+    var id: String { self.rawValue }
+
+    case drag = "Drag", electric = "Electric", linearGravity = "Linear Gravity"
+    case magnetic = "Magnetic", noise = "Noise", radialGravity = "Radial Gravity"
+    case spring = "Spring", turbulence = "Turbulence", velocity = "Velocity"
+    case vortex = "Vortex"
+}
+
 struct PhysicsFieldConfigurator: View {
     @EnvironmentObject var selectedPhysicsRelay: SelectedPhysicsRelay
 

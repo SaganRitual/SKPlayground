@@ -18,9 +18,8 @@
 		D445A8D32C337E82001C1421 /* PhysicsFieldToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = D445A8D22C337E82001C1421 /* PhysicsFieldToken.swift */; };
 		D445A8D62C34B264001C1421 /* PhysicsFieldLab.swift in Sources */ = {isa = PBXBuildFile; fileRef = D445A8D52C34B264001C1421 /* PhysicsFieldLab.swift */; };
 		D46584E62C2CD73800BC19E7 /* ConfigurationTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D46584E52C2CD73800BC19E7 /* ConfigurationTabView.swift */; };
+		D46953BE2C3C3A8F00BE1B84 /* PhysicsBodySlidersGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = D46953BD2C3C3A8F00BE1B84 /* PhysicsBodySlidersGrid.swift */; };
 		D4950A762C366FF700278438 /* GameScene+ContextMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4950A752C366FF700278438 /* GameScene+ContextMenu.swift */; };
-		D4950A782C3707A300278438 /* EdgeLoopCategoriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4950A772C3707A300278438 /* EdgeLoopCategoriesView.swift */; };
-		D4950A7A2C38191300278438 /* OldPhysicsFieldSlidersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4950A792C38191300278438 /* OldPhysicsFieldSlidersView.swift */; };
 		D4950A802C3879FA00278438 /* SKPSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4950A7F2C3879FA00278438 /* SKPSlider.swift */; };
 		D4950A822C387D7900278438 /* PhysicsBodyConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4950A812C387D7900278438 /* PhysicsBodyConfigurator.swift */; };
 		D4950A842C38858900278438 /* SKPToggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4950A832C38858900278438 /* SKPToggle.swift */; };
@@ -28,7 +27,6 @@
 		D4950A882C388A9300278438 /* SKPSliderWithRelay.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4950A872C388A9300278438 /* SKPSliderWithRelay.swift */; };
 		D4950A8A2C38ACE000278438 /* SKPMaskSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4950A892C38ACE000278438 /* SKPMaskSelector.swift */; };
 		D4950A8C2C38AF0E00278438 /* PhysicsBodyMasksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4950A8B2C38AF0E00278438 /* PhysicsBodyMasksView.swift */; };
-		D4950A8E2C38BB4100278438 /* PhysicsBodySlidersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4950A8D2C38BB4100278438 /* PhysicsBodySlidersView.swift */; };
 		D4950A902C38BC3C00278438 /* PhysicsBodyTogglesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4950A8F2C38BC3C00278438 /* PhysicsBodyTogglesView.swift */; };
 		D4950A922C38D4AD00278438 /* PhysicsFieldConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4950A912C38D4AD00278438 /* PhysicsFieldConfigurator.swift */; };
 		D4950A942C38D55700278438 /* PhysicsFieldTogglesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4950A932C38D55700278438 /* PhysicsFieldTogglesView.swift */; };
@@ -50,7 +48,6 @@
 		D4950ABA2C3A015900278438 /* PhysicsJointSpringView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4950AB92C3A015900278438 /* PhysicsJointSpringView.swift */; };
 		D4950AC02C3B101700278438 /* PhysicsWorldRelay.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4950ABF2C3B101700278438 /* PhysicsWorldRelay.swift */; };
 		D4950AC22C3B103500278438 /* SelectedPhysicsRelay.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4950AC12C3B103500278438 /* SelectedPhysicsRelay.swift */; };
-		D49BD4FB2C2A7E8400FD313C /* PhysicsJointView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49BD4FA2C2A7E8400FD313C /* PhysicsJointView.swift */; };
 		D49BD4FF2C2B218900FD313C /* CommandView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49BD4FE2C2B218900FD313C /* CommandView.swift */; };
 		D49BD5932C2BA92000FD313C /* Sprites in Resources */ = {isa = PBXBuildFile; fileRef = D49BD5922C2BA91F00FD313C /* Sprites */; };
 		D49BD59B2C2C10D800FD313C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D49BD59A2C2C10D800FD313C /* Assets.xcassets */; };
@@ -75,10 +72,8 @@
 		D49BD5D82C2C69C700FD313C /* GameController+Select.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49BD5D72C2C69C700FD313C /* GameController+Select.swift */; };
 		D49BD5DA2C2C9A8A00FD313C /* PlaygroundStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49BD5D92C2C9A8900FD313C /* PlaygroundStatusView.swift */; };
 		D4A621A42C28CB0300C3F89A /* ActionsTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A621A32C28CB0300C3F89A /* ActionsTabView.swift */; };
-		D4A621A62C28E45D00C3F89A /* PhysicsWorldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A621A52C28E45D00C3F89A /* PhysicsWorldView.swift */; };
-		D4A621A92C29172D00C3F89A /* PhysicsTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A621A82C29172D00C3F89A /* PhysicsTabView.swift */; };
-		D4A621AB2C2917CA00C3F89A /* OldPhysicsBodyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A621AA2C2917CA00C3F89A /* OldPhysicsBodyView.swift */; };
 		D4A621AD2C29184600C3F89A /* BasicScalarSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A621AC2C29184600C3F89A /* BasicScalarSlider.swift */; };
+		D4D043AC2C3CFD2A0074F42C /* PhysicsFieldSlidersGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4D043AB2C3CFD2A0074F42C /* PhysicsFieldSlidersGrid.swift */; };
 		D4D1F0672C27BA8800003163 /* IngotApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4D1F0662C27BA8800003163 /* IngotApp.swift */; };
 		D4D1F0692C27BA8800003163 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4D1F0682C27BA8800003163 /* ContentView.swift */; };
 		D4D1F06E2C27BA8900003163 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D4D1F06D2C27BA8900003163 /* Preview Assets.xcassets */; };
@@ -99,8 +94,6 @@
 		D4D1F0972C28B38100003163 /* SpaceActionsTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4D1F0962C28B38100003163 /* SpaceActionsTabView.swift */; };
 		D4D1F0992C28B3D600003163 /* GameController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4D1F0982C28B3D600003163 /* GameController.swift */; };
 		D4D1F09B2C28B47100003163 /* PhysicsActionsTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4D1F09A2C28B47100003163 /* PhysicsActionsTabView.swift */; };
-		D4DE8B332C29D4280075F4B7 /* PhysicsBodyCategoriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4DE8B322C29D4280075F4B7 /* PhysicsBodyCategoriesView.swift */; };
-		D4DE8B3C2C29E0990075F4B7 /* PhysicsFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4DE8B3B2C29E0990075F4B7 /* PhysicsFieldView.swift */; };
 		D4DE8B412C29E6440075F4B7 /* PhysicsBodyState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4DE8B402C29E6440075F4B7 /* PhysicsBodyState.swift */; };
 		D4DE8B432C2A25060075F4B7 /* CheckboxPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4DE8B422C2A25060075F4B7 /* CheckboxPicker.swift */; };
 		D4EC5E512C2DC91C00E20EC7 /* CommandSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4EC5E502C2DC91C00E20EC7 /* CommandSelection.swift */; };
@@ -134,9 +127,8 @@
 		D445A8D42C3458ED001C1421 /* Fields.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = Fields.md; sourceTree = "<group>"; };
 		D445A8D52C34B264001C1421 /* PhysicsFieldLab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhysicsFieldLab.swift; sourceTree = "<group>"; };
 		D46584E52C2CD73800BC19E7 /* ConfigurationTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurationTabView.swift; sourceTree = "<group>"; };
+		D46953BD2C3C3A8F00BE1B84 /* PhysicsBodySlidersGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhysicsBodySlidersGrid.swift; sourceTree = "<group>"; };
 		D4950A752C366FF700278438 /* GameScene+ContextMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameScene+ContextMenu.swift"; sourceTree = "<group>"; };
-		D4950A772C3707A300278438 /* EdgeLoopCategoriesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EdgeLoopCategoriesView.swift; sourceTree = "<group>"; };
-		D4950A792C38191300278438 /* OldPhysicsFieldSlidersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OldPhysicsFieldSlidersView.swift; sourceTree = "<group>"; };
 		D4950A7F2C3879FA00278438 /* SKPSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKPSlider.swift; sourceTree = "<group>"; };
 		D4950A812C387D7900278438 /* PhysicsBodyConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhysicsBodyConfigurator.swift; sourceTree = "<group>"; };
 		D4950A832C38858900278438 /* SKPToggle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKPToggle.swift; sourceTree = "<group>"; };
@@ -144,7 +136,6 @@
 		D4950A872C388A9300278438 /* SKPSliderWithRelay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKPSliderWithRelay.swift; sourceTree = "<group>"; };
 		D4950A892C38ACE000278438 /* SKPMaskSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKPMaskSelector.swift; sourceTree = "<group>"; };
 		D4950A8B2C38AF0E00278438 /* PhysicsBodyMasksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhysicsBodyMasksView.swift; sourceTree = "<group>"; };
-		D4950A8D2C38BB4100278438 /* PhysicsBodySlidersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhysicsBodySlidersView.swift; sourceTree = "<group>"; };
 		D4950A8F2C38BC3C00278438 /* PhysicsBodyTogglesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhysicsBodyTogglesView.swift; sourceTree = "<group>"; };
 		D4950A912C38D4AD00278438 /* PhysicsFieldConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhysicsFieldConfigurator.swift; sourceTree = "<group>"; };
 		D4950A932C38D55700278438 /* PhysicsFieldTogglesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhysicsFieldTogglesView.swift; sourceTree = "<group>"; };
@@ -167,7 +158,6 @@
 		D4950ABC2C3A824A00278438 /* SpaceActions.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = SpaceActions.md; sourceTree = "<group>"; };
 		D4950ABF2C3B101700278438 /* PhysicsWorldRelay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhysicsWorldRelay.swift; sourceTree = "<group>"; };
 		D4950AC12C3B103500278438 /* SelectedPhysicsRelay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedPhysicsRelay.swift; sourceTree = "<group>"; };
-		D49BD4FA2C2A7E8400FD313C /* PhysicsJointView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhysicsJointView.swift; sourceTree = "<group>"; };
 		D49BD4FC2C2AC29600FD313C /* UXScenarios.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = UXScenarios.md; sourceTree = "<group>"; };
 		D49BD4FE2C2B218900FD313C /* CommandView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandView.swift; sourceTree = "<group>"; };
 		D49BD5922C2BA91F00FD313C /* Sprites */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Sprites; path = Ingot/Sprites; sourceTree = SOURCE_ROOT; };
@@ -193,10 +183,8 @@
 		D49BD5D72C2C69C700FD313C /* GameController+Select.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameController+Select.swift"; sourceTree = "<group>"; };
 		D49BD5D92C2C9A8900FD313C /* PlaygroundStatusView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaygroundStatusView.swift; sourceTree = "<group>"; };
 		D4A621A32C28CB0300C3F89A /* ActionsTabView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionsTabView.swift; sourceTree = "<group>"; };
-		D4A621A52C28E45D00C3F89A /* PhysicsWorldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhysicsWorldView.swift; sourceTree = "<group>"; };
-		D4A621A82C29172D00C3F89A /* PhysicsTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhysicsTabView.swift; sourceTree = "<group>"; };
-		D4A621AA2C2917CA00C3F89A /* OldPhysicsBodyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OldPhysicsBodyView.swift; sourceTree = "<group>"; };
 		D4A621AC2C29184600C3F89A /* BasicScalarSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicScalarSlider.swift; sourceTree = "<group>"; };
+		D4D043AB2C3CFD2A0074F42C /* PhysicsFieldSlidersGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhysicsFieldSlidersGrid.swift; sourceTree = "<group>"; };
 		D4D1F0632C27BA8800003163 /* Ingot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ingot.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4D1F0662C27BA8800003163 /* IngotApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngotApp.swift; sourceTree = "<group>"; };
 		D4D1F0682C27BA8800003163 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -219,8 +207,6 @@
 		D4D1F0962C28B38100003163 /* SpaceActionsTabView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpaceActionsTabView.swift; sourceTree = "<group>"; };
 		D4D1F0982C28B3D600003163 /* GameController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameController.swift; sourceTree = "<group>"; };
 		D4D1F09A2C28B47100003163 /* PhysicsActionsTabView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhysicsActionsTabView.swift; sourceTree = "<group>"; };
-		D4DE8B322C29D4280075F4B7 /* PhysicsBodyCategoriesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhysicsBodyCategoriesView.swift; sourceTree = "<group>"; };
-		D4DE8B3B2C29E0990075F4B7 /* PhysicsFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhysicsFieldView.swift; sourceTree = "<group>"; };
 		D4DE8B402C29E6440075F4B7 /* PhysicsBodyState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhysicsBodyState.swift; sourceTree = "<group>"; };
 		D4DE8B422C2A25060075F4B7 /* CheckboxPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckboxPicker.swift; sourceTree = "<group>"; };
 		D4EC5E502C2DC91C00E20EC7 /* CommandSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandSelection.swift; sourceTree = "<group>"; };
@@ -299,11 +285,12 @@
 				D4950AA92C39CCBC00278438 /* Relays */,
 				D4950A812C387D7900278438 /* PhysicsBodyConfigurator.swift */,
 				D4950A8B2C38AF0E00278438 /* PhysicsBodyMasksView.swift */,
-				D4950A8D2C38BB4100278438 /* PhysicsBodySlidersView.swift */,
+				D46953BD2C3C3A8F00BE1B84 /* PhysicsBodySlidersGrid.swift */,
 				D4950A8F2C38BC3C00278438 /* PhysicsBodyTogglesView.swift */,
 				D4950A912C38D4AD00278438 /* PhysicsFieldConfigurator.swift */,
 				D4950A972C39731000278438 /* PhysicsFieldMasksView.swift */,
 				D4950A952C39662600278438 /* PhysicsFieldSlidersView.swift */,
+				D4D043AB2C3CFD2A0074F42C /* PhysicsFieldSlidersGrid.swift */,
 				D4950A932C38D55700278438 /* PhysicsFieldTogglesView.swift */,
 				D4950AA52C39C5A700278438 /* PhysicsJointConfigurator.swift */,
 				D4950A9B2C39B5D700278438 /* PhysicsMaskNamesConfigurator.swift */,
@@ -417,7 +404,6 @@
 			children = (
 				D4DE8B372C29DFBD0075F4B7 /* Actions */,
 				D4EC5E622C2DFA1900E20EC7 /* Command */,
-				D4DE8B3A2C29E0010075F4B7 /* Physics */,
 				D46584E52C2CD73800BC19E7 /* ConfigurationTabView.swift */,
 				D4EC5E522C2DC9F300E20EC7 /* DashboardView.swift */,
 				D49BD5D92C2C9A8900FD313C /* PlaygroundStatusView.swift */,
@@ -524,21 +510,6 @@
 				D4D1F0962C28B38100003163 /* SpaceActionsTabView.swift */,
 			);
 			path = Actions;
-			sourceTree = "<group>";
-		};
-		D4DE8B3A2C29E0010075F4B7 /* Physics */ = {
-			isa = PBXGroup;
-			children = (
-				D4950A772C3707A300278438 /* EdgeLoopCategoriesView.swift */,
-				D4A621AA2C2917CA00C3F89A /* OldPhysicsBodyView.swift */,
-				D4DE8B322C29D4280075F4B7 /* PhysicsBodyCategoriesView.swift */,
-				D4950A792C38191300278438 /* OldPhysicsFieldSlidersView.swift */,
-				D4DE8B3B2C29E0990075F4B7 /* PhysicsFieldView.swift */,
-				D49BD4FA2C2A7E8400FD313C /* PhysicsJointView.swift */,
-				D4A621A82C29172D00C3F89A /* PhysicsTabView.swift */,
-				D4A621A52C28E45D00C3F89A /* PhysicsWorldView.swift */,
-			);
-			path = Physics;
 			sourceTree = "<group>";
 		};
 		D4EC5E4F2C2DC8FE00E20EC7 /* StateObject */ = {
@@ -650,16 +621,15 @@
 				D4D1F07B2C27BB2D00003163 /* MoveActionTokenView.swift in Sources */,
 				D49BD5C72C2C67DB00FD313C /* SpriteKitView.swift in Sources */,
 				D49BD5C12C2C628200FD313C /* Vertex.swift in Sources */,
-				D4950A782C3707A300278438 /* EdgeLoopCategoriesView.swift in Sources */,
 				D4D1F0812C27BF7500003163 /* ActionTokensScrollView.swift in Sources */,
 				D4D1F0782C27BAF900003163 /* Utility.swift in Sources */,
 				D4950A942C38D55700278438 /* PhysicsFieldTogglesView.swift in Sources */,
 				D4EC5E612C2DF84600E20EC7 /* GameController+Click.swift in Sources */,
-				D49BD4FB2C2A7E8400FD313C /* PhysicsJointView.swift in Sources */,
 				D49BD4FF2C2B218900FD313C /* CommandView.swift in Sources */,
 				D49BD5AC2C2C3EAA00FD313C /* GameControllerTestView.swift in Sources */,
 				D49BD5DA2C2C9A8A00FD313C /* PlaygroundStatusView.swift in Sources */,
 				D4EC5E5B2C2DE9E100E20EC7 /* PhysicsMaskCategories.swift in Sources */,
+				D4D043AC2C3CFD2A0074F42C /* PhysicsFieldSlidersGrid.swift in Sources */,
 				D4950A9A2C39B34300278438 /* PhysicsWorldConfigurator.swift in Sources */,
 				D4EC5E5D2C2DEC1700E20EC7 /* EntitySelectionState.swift in Sources */,
 				D4950AA82C39CB9A00278438 /* PhysicsJointRelays.swift in Sources */,
@@ -676,13 +646,11 @@
 				D404DF702C2F79D5009686F6 /* GameEntityFace.swift in Sources */,
 				D4D1F0692C27BA8800003163 /* ContentView.swift in Sources */,
 				D49BD5D62C2C698F00FD313C /* GameController+Drag.swift in Sources */,
-				D4A621A62C28E45D00C3F89A /* PhysicsWorldView.swift in Sources */,
 				D404DF7A2C31A97A009686F6 /* ShapeListView.swift in Sources */,
 				D404DF812C32B408009686F6 /* FollowPathActionTokenView.swift in Sources */,
 				D4950A982C39731000278438 /* PhysicsFieldMasksView.swift in Sources */,
 				D49BD5D22C2C683700FD313C /* MouseDispatch.swift in Sources */,
 				D4D1F0922C28A15200003163 /* Slider2DView.swift in Sources */,
-				D4A621A92C29172D00C3F89A /* PhysicsTabView.swift in Sources */,
 				D4950A8C2C38AF0E00278438 /* PhysicsBodyMasksView.swift in Sources */,
 				D49BD5CB2C2C682B00FD313C /* GameScene+Mouse.swift in Sources */,
 				D4950ABA2C3A015900278438 /* PhysicsJointSpringView.swift in Sources */,
@@ -698,16 +666,12 @@
 				D404DF7F2C320856009686F6 /* SpriteManager.swift in Sources */,
 				D49BD5D42C2C684400FD313C /* SelectionMarquee.swift in Sources */,
 				D4D1F09B2C28B47100003163 /* PhysicsActionsTabView.swift in Sources */,
-				D4A621AB2C2917CA00C3F89A /* OldPhysicsBodyView.swift in Sources */,
-				D4950A8E2C38BB4100278438 /* PhysicsBodySlidersView.swift in Sources */,
 				D4950A842C38858900278438 /* SKPToggle.swift in Sources */,
 				D4950AAD2C39CCF000278438 /* PhysicsFieldRelay.swift in Sources */,
 				D4A621A42C28CB0300C3F89A /* ActionsTabView.swift in Sources */,
 				D49BD5AF2C2C40FC00FD313C /* GameEntity.swift in Sources */,
-				D4DE8B332C29D4280075F4B7 /* PhysicsBodyCategoriesView.swift in Sources */,
 				D4D1F0762C27BAE700003163 /* ActionTokenView.swift in Sources */,
 				D4950A862C38863800278438 /* GameController+Relay.swift in Sources */,
-				D4950A7A2C38191300278438 /* OldPhysicsFieldSlidersView.swift in Sources */,
 				D4D1F0882C27C4B400003163 /* ForceActionTokenView.swift in Sources */,
 				D4950AC22C3B103500278438 /* SelectedPhysicsRelay.swift in Sources */,
 				D4950A822C387D7900278438 /* PhysicsBodyConfigurator.swift in Sources */,
@@ -719,10 +683,10 @@
 				D49BD5D82C2C69C700FD313C /* GameController+Select.swift in Sources */,
 				D46584E62C2CD73800BC19E7 /* ConfigurationTabView.swift in Sources */,
 				D4DE8B412C29E6440075F4B7 /* PhysicsBodyState.swift in Sources */,
+				D46953BE2C3C3A8F00BE1B84 /* PhysicsBodySlidersGrid.swift in Sources */,
 				D4950AC02C3B101700278438 /* PhysicsWorldRelay.swift in Sources */,
 				D4EC5E572C2DE70900E20EC7 /* SpaceActionsState.swift in Sources */,
 				D4950A9C2C39B5D700278438 /* PhysicsMaskNamesConfigurator.swift in Sources */,
-				D4DE8B3C2C29E0990075F4B7 /* PhysicsFieldView.swift in Sources */,
 				D49BD5BB2C2C4D8900FD313C /* SKNode+Extensions.swift in Sources */,
 				D4EC5E662C2DFABF00E20EC7 /* PlayControlsView.swift in Sources */,
 				D4D1F08C2C27C4C800003163 /* ImpulseActionTokenView.swift in Sources */,

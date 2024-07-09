@@ -53,5 +53,5 @@ struct PhysicsFieldSlidersView: View {
 }
 
 #Preview {
-    PhysicsBodySlidersView(physicsBodyRelay: PhysicsBodyRelay())
+    PhysicsFieldSlidersView(physicsFieldRelay: PhysicsFieldRelay())
 }

@@ -2,37 +2,6 @@
 
 import SwiftUI
 
-/*
- ContentView:
-    SpriteKitView
- 
-    DashboardView
-        PlaygroundStatusView
-
-        CommandView
-            ClickToPlaceView
-            PlayControlsView
-
-        ConfigurationTabView
-            ActionsTabView
-                SpaceActionsTabView
-                PhysicsActionsTabView
-                ActionTokensScrollView
-
-            PhysicsTabView
-                PhysicsBodyView
-                    PhysicsBodyCategoriesView
-
-                PhysicsFieldView
-                    PhysicsFieldSlidersView
- 
-                OldPhysicsWorldView
-                    EdgeLoopCategoriesView
-
-            ShapeLabView
-                ShapeListView
- */
-
 struct ContentView: View {
     @EnvironmentObject var gameController: GameController
 

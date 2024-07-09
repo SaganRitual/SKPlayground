@@ -18,10 +18,10 @@ struct ConfigurationTabView: View {
                         Label("Actions", systemImage: "atom")
                     }
 
-                PhysicsTabView()
-                    .tabItem {
-                        Label("Physics", systemImage: "atom")
-                    }
+//                PhysicsTabView()
+//                    .tabItem {
+//                        Label("Physics", systemImage: "atom")
+//                    }
 
                 ShapeLabView()
                     .tabItem {

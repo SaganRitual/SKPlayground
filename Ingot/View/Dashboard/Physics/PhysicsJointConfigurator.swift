@@ -3,6 +3,12 @@
 import SpriteKit
 import SwiftUI
 
+enum PhysicsJointType: String, CaseIterable, Identifiable, RawRepresentable {
+    var id: String { self.rawValue }
+
+    case fixed = "Fixed", limit = "Limit", pin = "Pin", sliding = "Sliding", spring = "Spring"
+}
+
 struct PhysicsJointConfigurator: View {
     @EnvironmentObject var selectedPhysicsRelay: SelectedPhysicsRelay
 

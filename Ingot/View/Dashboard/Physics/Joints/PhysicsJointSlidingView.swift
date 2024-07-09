@@ -6,40 +6,80 @@ import SwiftUI
 struct PhysicsJointSlidingView: View {
     @ObservedObject var relay: PhysicsJointSlidingRelay
 
+    @State private var titleWidths = [CGFloat]()
+    @State private var scalarWidths = [CGFloat]()
+    @State private var minLabelWidths = [CGFloat]()
+    @State private var maxLabelWidths = [CGFloat]()
+
     var body: some View {
         VStack {
             PhysicsJointCommonView(relay: relay)
 
-            HStack {
-                Text("Distance Limits")
-                    .underline()
-
-                SKPToggle<SKPhysicsJointSliding>(
-                    isOn: $relay.shouldEnableLimits,
-                    fieldKeypath: \.shouldEnableLimits,
-                    title: "Enable"
+            Grid {
+                PhysicsJointSlidersGridAlignmentRow(
+                    titleWidths: $titleWidths,
+                    scalarWidths: $scalarWidths,
+                    minLabelWidths: $minLabelWidths,
+                    maxLabelWidths: $maxLabelWidths
                 )
-                .padding(.leading)
 
-                Spacer()
+                GridRow {
+                    Text("Distance Limits")
+                        .underline()
+                        .frame(width: titleWidths.max(), alignment: .leading)
+                        .background(
+                            GeometryReader { gr in
+                                Color.clear.onAppear {
+                                    titleWidths.append(gr.size.width)
+                                }
+                            }
+                        )
+
+                    SKPToggle<SKPhysicsJointSliding>(
+                        isOn: $relay.shouldEnableLimits,
+                        fieldKeypath: \.shouldEnableLimits,
+                        title: "Enforce"
+                    )
+                        .padding(.leading)
+                        .frame(width: scalarWidths.max(), alignment: .leading)
+                        .background(
+                            GeometryReader { gr in
+                                Color.clear.onAppear {
+                                    scalarWidths.append(gr.size.width)
+                                }
+                            }
+                        )
+                }
+                .padding(.vertical)
+
+                PhysicsJointSlidingSlidersGridRow<PhysicsJointSlidingRelay, CGFloat, Text, Text>(
+                    relay: relay,
+                    titleWidths: $titleWidths,
+                    scalarWidths: $scalarWidths,
+                    minLabelWidths: $minLabelWidths,
+                    maxLabelWidths: $maxLabelWidths,
+                    maxLabel: "+100.0", minLabel: "0.0",
+                    range: 0...100,
+                    scalarView: Text(
+                        String(format: "%.2f", relay.lowerDistanceLimit)
+                    ),
+                    titleView: Text("Lower")
+                )
+
+                PhysicsJointSlidingSlidersGridRow<PhysicsJointSlidingRelay, CGFloat, Text, Text>(
+                    relay: relay,
+                    titleWidths: $titleWidths,
+                    scalarWidths: $scalarWidths,
+                    minLabelWidths: $minLabelWidths,
+                    maxLabelWidths: $maxLabelWidths,
+                    maxLabel: "+100.0", minLabel: "0.0",
+                    range: 0...100,
+                    scalarView: Text(
+                        String(format: "%.2f", relay.upperDistanceLimit)
+                    ),
+                    titleView: Text("Upper")
+                )
             }
-            .padding([.leading, .top])
-
-            SKPSliderWithRelay<SKPhysicsJointSliding, CGFloat, Text, Text>(
-                $relay.lowerDistanceLimit,
-                fieldKeypath: \.lowerDistanceLimit,
-                range: 0...100,
-                scalarView: Text(String(format: "%.2f", relay.lowerDistanceLimit)),
-                titleView: Text("Lower")
-            )
-
-            SKPSliderWithRelay<SKPhysicsJointSliding, CGFloat, Text, Text>(
-                $relay.upperDistanceLimit,
-                fieldKeypath: \.upperDistanceLimit,
-                range: 0...100,
-                scalarView: Text(String(format: "%.2f", relay.upperDistanceLimit)),
-                titleView: Text("Upper")
-            )
         }
     }
 }

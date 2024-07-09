@@ -2,9 +2,9 @@
 
 import SwiftUI
 
-struct PhysicsWorldSlidersGridRow<RelayObject: AnyObject, TargetWorld, TitleView: View, ScalarView: View>: View
-    where TargetWorld: Comparable & AdditiveArithmetic & ExpressibleByIntegerLiteral & BinaryFloatingPoint,
-    TargetWorld.Stride: BinaryFloatingPoint
+struct PhysicsWorldSlidersGridRow<RelayObject: AnyObject, TargetField, TitleView: View, ScalarView: View>: View
+    where TargetField: Comparable & AdditiveArithmetic & ExpressibleByIntegerLiteral & BinaryFloatingPoint,
+    TargetField.Stride: BinaryFloatingPoint
 {
     @ObservedObject var physicsWorldRelay: PhysicsWorldRelay
 
@@ -17,7 +17,7 @@ struct PhysicsWorldSlidersGridRow<RelayObject: AnyObject, TargetWorld, TitleView
 
     let maxLabel: String
     let minLabel: String
-    let range: ClosedRange<TargetWorld>
+    let range: ClosedRange<TargetField>
     let scalarView: ScalarView
     let titleView: TitleView
 

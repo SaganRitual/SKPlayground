@@ -45,13 +45,16 @@ extension SKPScene {
         let oldms = mouseState
         mouseState = newMouseState
 
-        inputDelegate?.inputEvent(
-            InputEvent(from: nsEvent, newMouseState: mouseState, oldMouseState: oldms, scene: self)
-        )
+        let inputEvent = InputEvent(from: nsEvent, newMouseState: mouseState, oldMouseState: oldms, scene: self)
+
+        gameSceneRelay.mousePosition = inputEvent.location
+
+        inputDelegate?.inputEvent(inputEvent)
     }
 
     override func mouseDown(with event: NSEvent) { publish(event, .leftDown) }
     override func mouseDragged(with event: NSEvent) { publish(event, .leftDrag) }
+    override func mouseMoved(with event: NSEvent) { publish(event, .idle) }
     override func mouseUp(with event: NSEvent) { publish(event, .idle) }
     override func rightMouseDown(with event: NSEvent) { publish(event, .rightDown) }
     override func rightMouseUp(with event: NSEvent) { publish(event, .idle) }

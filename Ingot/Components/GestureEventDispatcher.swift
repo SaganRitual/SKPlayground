@@ -6,6 +6,7 @@ final class GestureEventDispatcher: InputEventDispatcher.GestureDelegate {
     weak var contextMenuManager: ContextMenuManager!
     weak var entityManager: EntityManager!
     weak var selectionMarquee: SelectionMarquee!
+    weak var workflowManager: WorkflowManager!
 
     var draggingEntity = false
 
@@ -16,11 +17,11 @@ final class GestureEventDispatcher: InputEventDispatcher.GestureDelegate {
         case .dragEnd:    dragEnd(gestureEvent)
         case .rightClick: rightClick(gestureEvent)
 
-        case .limbo:
+        case .idle:     // This is mouse move; we don't care about it at this high level
             break
 
-        default:
-            fatalError("You said this couldn't happen")
+        case .limbo:    // This is right or left mouse button down, awaiting drag or mouse up
+            break
         }
     }
 }
@@ -28,6 +29,28 @@ final class GestureEventDispatcher: InputEventDispatcher.GestureDelegate {
 private extension GestureEventDispatcher {
 
     func click(_ gestureEvent: GestureEvent) {
+        switch workflowManager.currentWorkflow {
+        case .assigningSpaceActions:
+            fatalError("You thought this couldn't happen")
+
+        case .idle:
+            clickWorkflowIdle(gestureEvent)
+
+        case .placingEdgeVertices:
+            clickWorkflowPlacingEdgeVertices(gestureEvent)
+
+        case .placingPhysicsJoint:
+            break
+
+        case .placingRegionVertices:
+            break
+
+        case .placingWaypoints:
+            break
+        }
+    }
+
+    func clickWorkflowIdle(_ gestureEvent: GestureEvent) {
         var entity = gestureEvent.inputEvent.getTopEntity()
 
         if gestureEvent.inputEvent.shift {
@@ -42,14 +65,42 @@ private extension GestureEventDispatcher {
             entityManager.deselectAll()
         }
 
-        // If we didn't just click an entity, create one here
         if entity == nil {
+            // User clicked the background; create new entity here
             entity = entityManager.newEntity(at: gestureEvent.inputEvent.location)
         }
 
         // New entity, or newly selected entity
         entityManager.select(Utility.forceUnwrap(entity))
     }
+
+    func clickWorkflowPlacingEdgeVertices(_ gestureEvent: GestureEvent) {
+        var entity = gestureEvent.inputEvent.getTopEntity()
+
+        if gestureEvent.inputEvent.shift {
+            // Shift-click
+            if let entity {
+                // On an existing entity
+                entityManager.toggleSelect(entity)
+                return
+            }
+        } else {
+            // Click with no shift, either on background or on an existing entity
+            entityManager.deselectAll()
+        }
+
+        if entity == nil {
+            // User clicked the background; create new entity here
+            entity = entityManager.newEntity(at: gestureEvent.inputEvent.location)
+        }
+
+        // New entity, or newly selected entity
+        entityManager.select(Utility.forceUnwrap(entity))
+    }
+
+}
+
+private extension GestureEventDispatcher {
 
     func drag(_ gestureEvent: GestureEvent) {
         if gestureEvent.oldGestureState == .limbo {
@@ -101,7 +152,15 @@ private extension GestureEventDispatcher {
     }
 
     func rightClick(_ gestureEvent: GestureEvent) {
-        contextMenuManager.showMenu(gestureEvent.inputEvent.getTopEntity() == nil ? .scene : .entity, gestureEvent)
+        entityManager.deselectAll()
+
+        let entity = gestureEvent.inputEvent.getTopEntity()
+        if let gremlin = entity as? Gremlin {
+            entityManager.select(gremlin)
+            contextMenuManager.showMenu(.entity, gestureEvent)
+        } else if entity == nil {
+            contextMenuManager.showMenu(.scene, gestureEvent)
+        }
     }
 
 }

@@ -5,6 +5,7 @@ import SpriteKit
 
 class SKPScene: SKScene {
     weak var inputDelegate: InputDelegate?
+    weak var gameSceneRelay: GameSceneRelay!
 
     var mouseState = InputEvent.MouseState.idle
 
@@ -27,5 +28,15 @@ class SKPScene: SKScene {
         anchorPoint = CGPoint(x: 0.5, y: 0.5)
         backgroundColor = .black
         scaleMode = .resizeFill
+
+        Task { @MainActor in
+            gameSceneRelay?.viewSize = view.scene?.size ?? .zero
+        }
+    }
+
+    override func didChangeSize(_ oldSize: CGSize) {
+        Task { @MainActor in
+            gameSceneRelay?.viewSize = size
+        }
     }
 }

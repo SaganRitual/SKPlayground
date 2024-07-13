@@ -6,9 +6,23 @@ final class EntityManager {
     var entities = Set<GameEntity>()
 
     weak var sceneManager: SKPScene!
-    weak var placementManager: WorkflowManager!
+    weak var workflowManager: WorkflowManager!
 
     private weak var hotEntityDrag: GameEntity?
+}
+
+extension EntityManager {
+    func commitFollowPathAction(path: [Vertex], for entity: GameEntity) {
+        print("commitFollowPathAction")
+    }
+
+    func commitSpaceActions(for entity: GameEntity) {
+        print("commitSpaceActions")
+    }
+
+    func setSpaceActionsMode(for entity: GameEntity) {
+        print("setSpaceActionsMode")
+    }
 }
 
 extension EntityManager {
@@ -32,7 +46,7 @@ extension EntityManager {
 
 extension EntityManager {
     func newEntity(at position: CGPoint) -> GameEntity {
-        switch placementManager.clickToPlace {
+        switch workflowManager.clickToPlace {
         case .field:
             return placeField(at: position)
         case .gremlin:
@@ -45,7 +59,7 @@ extension EntityManager {
     }
 
     func placeField(at position: CGPoint) -> Field {
-        let field = Field.make(at: position, fieldType: placementManager.fieldType)
+        let field = Field.make(at: position, fieldType: workflowManager.fieldType)
 //        relayManager.impl.hotPhysicsField.loadState(from: field)
 
         postPlace(field)
@@ -53,7 +67,7 @@ extension EntityManager {
     }
 
     func placeGremlin(at position: CGPoint) -> Gremlin {
-        let gremlin = Gremlin.make(at: position, avatarName: placementManager.avatarName)
+        let gremlin = Gremlin.make(at: position, avatarName: workflowManager.avatarName)
 //        relayManager.impl.hotPhysicsBody.loadState(from: gremlin)
 
         postPlace(gremlin)
@@ -62,7 +76,7 @@ extension EntityManager {
 
     func placeJoint(at position: CGPoint) -> Joint {
         let joint = Joint.make(at: position)
-        switch placementManager.jointType {
+        switch workflowManager.jointType {
         case .fixed:
 //            relayManager.impl.hotPhysicsJointFixed.loadState(from: joint)
             break

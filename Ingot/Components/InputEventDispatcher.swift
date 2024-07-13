@@ -31,6 +31,9 @@ final class InputEventDispatcher: SKPScene.InputDelegate {
         let oldGestureState = gestureState
 
         switch(inputEvent.oldMouseState, inputEvent.newMouseState) {
+        case (.idle, .idle):    // Mouse move, for example; we don't care about it at this high level
+            break
+
         case (.leftDown, .leftDrag): fallthrough
         case (.leftDrag, .leftDrag):
             gestureState = .drag

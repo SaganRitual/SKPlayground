@@ -21,13 +21,16 @@ final class ContextMenuManager {
         "triclops"
     ]
 
+    weak var entityManager: EntityManager!
     weak var gestureEventDispatcher: GestureEventDispatcher!
-    weak var placementManager: WorkflowManager!
+    weak var workflowManager: WorkflowManager!
 
     func showMenu(_ menuType: MenuType, _ gestureEvent: GestureEvent) {
         let menu = NSMenu()
 
+        var iActions: NSMenuItem!
         var iField: NSMenuItem!
+        var iFollow: NSMenuItem!
         var iGremlin: NSMenuItem!
         var iJoint: NSMenuItem!
         var iVertex: NSMenuItem!
@@ -40,14 +43,18 @@ final class ContextMenuManager {
             iVertex = NSMenuItem(title: "Place Vertex", action: #selector(clickToPlaceVertex), keyEquivalent: "")
 
         case .entity:
+            iActions = NSMenuItem(title: "Assign Space Actions", action: #selector(readyForActions), keyEquivalent: "")
             iField = NSMenuItem(title: "Attach Field", action: nil, keyEquivalent: "")
+            iFollow = NSMenuItem(title: "Create Path", action: #selector(clickToPlaceWaypoint), keyEquivalent: "")
             iJoint = NSMenuItem(title: "Attach Joint", action: nil, keyEquivalent: "")
         }
 
+        makeActionsSubmenu(menu, iActions, gestureEvent)
         makeFieldsSubmenu(menu, iField, gestureEvent)
         makeGremlinsSubmenu(menu, iGremlin, gestureEvent)
         makeJointsSubmenu(menu, iJoint, gestureEvent)
         makeVerticesSubmenu(menu, iVertex, gestureEvent)
+        makeWaypointsSubmenu(menu, iFollow, gestureEvent)
 
         let view = Utility.forceCast(gestureEvent.inputEvent.scene.view, to: NSView.self)
         let nsEvent = gestureEvent.inputEvent.nsEvent
@@ -66,22 +73,16 @@ private extension ContextMenuManager {
         }
     }
 
-    static func makeLeftClickGestureEvent(fromRightClick sender: Any?) -> GestureEvent {
+    static func getGestureEvent(from sender: Any?) -> GestureEvent {
         let menuItem = Utility.forceCast(sender, to: NSMenuItem.self)
         let arguments = Utility.forceCast(menuItem.representedObject, to: ContextMenuArguments.self)
         let gestureEvent = Utility.forceCast(arguments.gestureEvent, to: GestureEvent.self)
 
-        return GestureEvent(
-            inputEvent: gestureEvent.inputEvent, newGestureState: .click, oldGestureState: gestureEvent.oldGestureState
-        )
+        return gestureEvent
     }
 
     static func getLocation(from sender: Any?) -> CGPoint {
-        let menuItem = Utility.forceCast(sender, to: NSMenuItem.self)
-        let arguments = Utility.forceCast(menuItem.representedObject, to: ContextMenuArguments.self)
-        let gestureEvent = Utility.forceCast(arguments.gestureEvent, to: GestureEvent.self)
-
-        return gestureEvent.inputEvent.location
+        return getGestureEvent(from: sender).inputEvent.location
     }
 
     static func getString(from sender: Any?) -> String {
@@ -92,33 +93,64 @@ private extension ContextMenuManager {
         return stringArgument
     }
 
+    static func makeLeftClickGestureEvent(fromRightClick sender: Any?) -> GestureEvent {
+        let gestureEvent = getGestureEvent(from: sender)
+
+        return GestureEvent(
+            inputEvent: gestureEvent.inputEvent, newGestureState: .click, oldGestureState: gestureEvent.oldGestureState
+        )
+    }
+}
+
+private extension ContextMenuManager {
+
     @objc func clickToPlaceVertex(_ sender: Any?) {
-        placementManager.placeVertex()
+        workflowManager.placeVertex()
         gestureEventDispatcher.gestureEvent(Self.makeLeftClickGestureEvent(fromRightClick: sender))
     }
 
+    @objc func clickToPlaceWaypoint(_ sender: Any?) {
+        workflowManager.beginPath()
+        gestureEventDispatcher.gestureEvent(Self.makeLeftClickGestureEvent(fromRightClick: sender))
+    }
+
+    @objc func readyForActions(_ sender: Any?) {
+        workflowManager.assignSpaceActions()
+
+        let gestureEvent = Self.getGestureEvent(from: sender)
+        let entity = Utility.forceUnwrap(gestureEvent.inputEvent.getTopEntity())
+        entityManager.setSpaceActionsMode(for: entity)
+    }
+
     @objc func selectGremlinTexture(_ sender: Any?) {
-        placementManager.placeGremlin(Self.getString(from: sender))
+        workflowManager.placeGremlin(Self.getString(from: sender))
         gestureEventDispatcher.gestureEvent(Self.makeLeftClickGestureEvent(fromRightClick: sender))
     }
 
     @objc func selectPhysicsField(_ sender: Any?) {
         let fieldName = Self.getString(from: sender)
         let fieldType = Utility.forceCast(PhysicsFieldType(rawValue: fieldName), to: PhysicsFieldType.self)
-        placementManager.placeField(fieldType)
+        workflowManager.placeField(fieldType)
         gestureEventDispatcher.gestureEvent(Self.makeLeftClickGestureEvent(fromRightClick: sender))
     }
 
     @objc func selectPhysicsJoint(_ sender: Any?) {
         let jointName = Self.getString(from: sender)
         let jointType = Utility.forceCast(PhysicsJointType(rawValue: jointName), to: PhysicsJointType.self)
-        placementManager.placeJoint(jointType)
+        workflowManager.placeJoint(jointType)
         gestureEventDispatcher.gestureEvent(Self.makeLeftClickGestureEvent(fromRightClick: sender))
     }
 
 }
 
 private extension ContextMenuManager {
+    func makeActionsSubmenu(_ menu: NSMenu, _ iActions: NSMenuItem?, _ gestureEvent: GestureEvent) {
+        if let iActions {
+            iActions.representedObject = ContextMenuArguments(gestureEvent: gestureEvent)
+            iActions.target = self
+            menu.addItem(iActions)
+        }
+    }
 
     func makeFieldsSubmenu(_ menu: NSMenu, _ iField: NSMenuItem?, _ gestureEvent: GestureEvent) {
         if let iField {
@@ -198,6 +230,14 @@ private extension ContextMenuManager {
             iVertex.representedObject = ContextMenuArguments(gestureEvent: gestureEvent)
             iVertex.target = self
             menu.addItem(iVertex)
+        }
+    }
+
+    func makeWaypointsSubmenu(_ menu: NSMenu, _ iFollow: NSMenuItem?, _ gestureEvent: GestureEvent) {
+        if let iFollow {
+            iFollow.representedObject = ContextMenuArguments(gestureEvent: gestureEvent)
+            iFollow.target = self
+            menu.addItem(iFollow)
         }
     }
 }

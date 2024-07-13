@@ -5,7 +5,7 @@ This document describes the user workflow scenarios available in SKPlayground.
 ## Place Game Entity in Scene
 
 The *Click to Place* picker in the *Commands* pane has the following options:
-Field, Gremlin, Joint, Vertex, and Waypoint. This section describes workflows
+Field, Gremlin, Joint, and Vertex. This section describes workflows
 that start with the user choosing one of these options in the picker.
 
 1. *Field*
@@ -42,17 +42,83 @@ both a physics-enabled entity and a non-physics-enabled entity are selected.
 Dragging is always available for selected entities. When the user drags one selected
 entity, all selected entities are moved by the same offset as the one being dragged.
 If the user begins to drag an entity that is not currently selected, that entity is
-automatically selected -- without deselecting any others -- and all selected entities
-are moved.
+automatically selected; the shift key determines whether other entities are deselected.
 
 The basics of mouse clicking work in the same fashion as most other mouse-driven apps
 
 - Simple click on an entity selects that entity and deselects all others
 - Shift-click selects the entity without deselecting others
 - Right-click opens a context menu
+  - Right-click on an entity selects that entity, deselecting all others before showing the context menu. Context menu
+  options apply to the right-clicked entity
+  - Right-click on the background deselects all entities before showing the context menu
 - A handle appears on a selected entity, indicating the mouse-driven operations that
 are available, such as dragging, rotating, and scaling, depending on how the handle is
 dragged
+
+### Context Menus
+
+Right-clicking on some entities will produce a context menu. For a Gremlin, the context menu includes
+the following options.
+
+*Create Path*
+
+The *Create Path* option allows the user to create a path of waypoints to be packaged into a follow-path action to be
+added to the actions already assigned to the Gremlin. When the user selects this option from the context menu, the
+Gremlin's selection halo changes color to indicate that subsequent clicks in the scene will create waypoints and add
+them to a path. The user may click in the background to create a waypoint at the location of the click, or click an
+existing waypoint to add it to the path. As the user adds waypoints to the path, a line is drawn from the previous
+waypoint to the new waypoint, so the user can see the whole path as it develops. The user indicates the completion of
+the path by one of the following:
+
+- Right-click the Gremlin to which the path will be assigned and choose "Assign Closed Path", or double-click said
+Gremlin. The present position of
+the Gremlin is added as a final waypoint in the path and an action is created. The Gremlin remains selected; the
+selection halo returns to normal to indicate that no workflows are in progress. The lines that indicate the path the
+Gremlin will follow change color to indicate that the path and the action are complete. The *Paths* pane in the
+Dashboard is activated, showing the auto-generated name of the new path in a dropdown menu, with a "Rename" button
+alongside to allow the user to assign a new name to the path.
+
+- Right-click the final waypoint in the path and choose "Assign Open Path", or double-click said waypoint. Identical to
+the above operation, except that the path remains open; that is, the Gremlin's present position is not added to the
+path.
+
+- Right-click anywhere in the background and choose "Assign Closed Path" or "Assign Open Path". A closed or open path
+is created as though the user had performed one of the above right-click or double-click operations.
+
+*Attach Field*
+
+The *Attach Field* option allows the user to create a physics field and attach it to the selected Gremlin. When the
+user clicks the *Attach Field* option, a submenu appears, allowing the user to select the type of physics field: drag,
+magnetic, electrical, etc. When the type is selected, the field is created and attached to the Gremlin. The Physics
+Field Configurator pane is activated in the Dashboard, with controls specific to the type of Field that has been
+created, as well as a horizontal scroller showing all the fields that are attached to the Gremlin. The new Field is
+selected in the scroller. The user can select other fields in the scroller and manipulate their settings with the
+controls in the Configurator pane. Fields can also be deleted, by selecting them in the scroller and clicking the
+"Delete Field" button in the Configurator pane.
+
+*Attach Joint*
+
+The *Attach Joint* option allows the user to create a physics joint and attach it to the selected Gremlin as "body A"
+in SpriteKit parlance. When the user clicks the *Attach Joint* option, a submenu appears, allowing the suer to select
+the type of joint: fixed, spring, etc. Then the type is selected, the Gremlin's selection halo changes to indicate that
+further user input is required to complete the joint creation. The Physics Joint Configurator pane is activated in the
+Dashboard, with controls specific to the type of Joint being created. A message appears in the Configurator pane,
+prompting the user to click "body B" for the joint. The user can click either the background, to assign the scene's
+physics body as "body B", or another Gremlin, to assign that Gremlin as "body B". When the user clicks, a new indicator
+appears at the point of the click in the scene. The Configurator pane is updated with a message prompting the user to
+drag this new indicator to a desired location; the user can drag the indicator or leave it where it is, then click
+"Create Field" in the Configurator pane.  
+
+*Assign Space Actions*
+
+The *Assign Space Actions* option allows the user to create simple move, rotate, and scale actions against the
+Gremlin. When the user selects *Assign Space Actions*, the Gremlin's selection halo changes to indicate that the user
+can drag it around with the main selection halo, or rotate/scale it with the halo subhandles. The Space Actions
+Configurator pane appears in the Dashboard, with a button titled "Click to Create Actions". When finished
+dragging the Gremlin around, the user clicks this button and action(s) are created that correspond to the user's
+operations on the Gremlin. The new actions appear in the actions scroll view in the Configurator pane. The user can
+select actions in the scroller individually to manipulate their settings. 
 
 Non-mouse-driven operations are made available in the Dashboard depending on what is
 selected. The following Dashboard behavior applies when a single entity of the indicated
@@ -72,8 +138,6 @@ various joint attributes such as movement limits. Joint attributes are specific 
 type of joint, as described elsewhere in this document.
 1. *Vertex*: The Dashboard displays all the user-defined regions that include the vertex.
 Region definition is described elsewhere in this document.
-1. *Waypoint*: The Dashboard displays all the user-defined paths that include the waypoint.
-Path definition is described elsewhere in this document.
 
 ## Actions
 

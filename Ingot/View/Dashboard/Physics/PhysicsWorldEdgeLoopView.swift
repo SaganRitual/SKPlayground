@@ -4,10 +4,13 @@ import SpriteKit
 import SwiftUI
 
 struct PhysicsWorldEdgeLoopView: View {
-    @EnvironmentObject var gameController: GameController
+//    @EnvironmentObject var gameController: GameController
 
     @ObservedObject var physicsMaskNames: PhysicsMaskNames
     @ObservedObject var physicsWorldRelay: PhysicsWorldRelay
+
+    @State private var collideWith = Set<Int>()
+    @State private var reportContactWith = Set<Int>()
 
     var body: some View {
         VStack(alignment: .leading) {
@@ -16,14 +19,16 @@ struct PhysicsWorldEdgeLoopView: View {
             }
             .toggleStyle(.checkbox)
 
-            CheckboxPicker(
-                selectedIndices: $physicsWorldRelay.selectedCollisionIndices,
+            SKPMaskSelector<SKPhysicsBody>(
+                $collideWith,
+                fieldKeypath: \.collisionBitMask,
                 label: Text("Collide With"),
                 options: physicsMaskNames.names
             )
 
-            CheckboxPicker(
-                selectedIndices: $physicsWorldRelay.selectedContactIndices,
+            SKPMaskSelector<SKPhysicsBody>(
+                $reportContactWith,
+                fieldKeypath: \.contactTestBitMask,
                 label: Text("Report Contact With"),
                 options: physicsMaskNames.names
             )
@@ -32,6 +37,6 @@ struct PhysicsWorldEdgeLoopView: View {
     }
 }
 
-#Preview {
-    PhysicsWorldEdgeLoopView(physicsMaskNames: PhysicsMaskNames(), physicsWorldRelay: PhysicsWorldRelay())
-}
+//#Preview {
+//    PhysicsWorldEdgeLoopView(physicsMaskNames: PhysicsMaskNames(), physicsWorldRelay: PhysicsWorldRelay())
+//}

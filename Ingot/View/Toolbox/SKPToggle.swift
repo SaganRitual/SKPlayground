@@ -4,7 +4,7 @@ import SpriteKit
 import SwiftUI
 
 struct SKPToggle<T: AnyObject>: View {
-    @EnvironmentObject var gameController: GameController
+//    @EnvironmentObject var gameController: GameController
 
     @Binding var isOn: Bool
 
@@ -16,8 +16,8 @@ struct SKPToggle<T: AnyObject>: View {
             Text(title)
         }
         .toggleStyle(.checkbox)
-        .onChange(of: isOn) {
-            gameController.updateSelectedRelayTarget(whichField: fieldKeypath, newValue: isOn)
-        }
+//        .onChange(of: isOn) {
+//            gameController.updateSelectedRelayTarget(whichField: fieldKeypath, newValue: isOn)
+//        }
     }
 }

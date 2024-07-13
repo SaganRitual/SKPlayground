@@ -66,21 +66,7 @@ final class ShapeLab: ObservableObject {
     }
 
     func newShape(_ which: WhichShape, _ vertices: Set<Vertex>, _ open: Bool) -> String {
-        let orderedVertices = Array(vertices).sorted { $0.selectionOrder < $1.selectionOrder }
-
-        let name = makeUniqueName(shapeSet(for: which), whichShape: which, open: open)
-        let shape = UserShape(name, orderedVertices, open)
-
-        switch which {
-        case .edge:
-            edges.append(shape)
-        case .path:
-            paths.append(shape)
-        case .region:
-            regions.append(shape)
-        }
-
-        return name
+        ""
     }
 
     func renameShape(_ which: WhichShape, currentName: String, newName: String) -> Int? {

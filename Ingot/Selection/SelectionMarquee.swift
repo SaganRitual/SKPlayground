@@ -8,7 +8,7 @@ enum SpriteWorld {
     enum Directions: Int, CaseIterable { case n = 0, e = 1, s = 2, w = 3 }
 }
 
-class SelectionMarquee {
+final class SelectionMarquee {
     // Setup anchor points for each side of the marquee to make
     // positioning the sprites super-easy
     let anchorPoints: [SpriteWorld.Directions: CGPoint] = [
@@ -18,16 +18,12 @@ class SelectionMarquee {
         .w: CGPoint(x: 0.5, y: 1)
     ]
 
-    let playgroundState: PlaygroundState
     let marqueeRootNode = SKNode()
 
     var borderSprites = [SpriteWorld.Directions: SKSpriteNode]()
-
     var dragAnchor = CGPoint.zero
 
-    init(_ playgroundState: PlaygroundState) {
-        self.playgroundState = playgroundState
-
+    init() {
         SpriteWorld.Directions.allCases.forEach { direction in
             let sprite = SKSpriteNode(imageNamed: "pixel_1x1")
             sprite.name = "selectionMarqueeSprite_\(direction)"
@@ -49,22 +45,25 @@ class SelectionMarquee {
         marqueeRootNode.isHidden = true
     }
 
-    func drag(_ dragDispatch: DragDispatch) {
-        switch dragDispatch.phase {
-        case .begin:
-            dragAnchor = dragDispatch.location
-        case .continue:
-            draw(from: dragAnchor, to: dragDispatch.location)
-        case .end:
-            hide()
-        }
+    func draw(to endVertex: CGPoint) {
+        marqueeRootNode.isHidden = false
+        draw(from: dragAnchor, to: endVertex)
+    }
+
+    func getRectangle(endVertex: CGPoint) -> CGRect {
+        getRectangle(vertexA: dragAnchor, vertexB: endVertex)
+    }
+
+    func hide() { marqueeRootNode.isHidden = true }
+
+    func setDragAnchor(_ position: CGPoint) {
+        self.dragAnchor = position
     }
 }
 
 private extension SelectionMarquee {
 
     func show() { marqueeRootNode.isHidden = false }
-    func hide() { marqueeRootNode.isHidden = true }
 
     func draw(from startVertex: CGPoint, to endVertex: CGPoint) {
         if startVertex == endVertex {
@@ -88,17 +87,26 @@ private extension SelectionMarquee {
         // The negative camera scale is an artifact of the way we convert
         // the start/end vertices from the view, I think. Come back to it
         // and make more sense of it at some point
-        let hScale = CGSize(width: boxSize.width, height: 2) * -playgroundState.cameraScale
+        let hScale = CGSize(width: boxSize.width, height: 2) * -1 // * -gameSceneRelay.cameraScale
 
         borderSprites[.n]!.scale(to: hScale)
         borderSprites[.s]!.scale(to: hScale)
 
-        let vScale = CGSize(width: 2, height: boxSize.height) * playgroundState.cameraScale
+        let vScale = CGSize(width: 2, height: boxSize.height) // * gameSceneRelay.cameraScale
 
         borderSprites[.e]!.scale(to: vScale)
         borderSprites[.w]!.scale(to: vScale)
 
         show()
+    }
+
+    func getRectangle(vertexA: CGPoint, vertexB: CGPoint) -> CGRect {
+        let LL = CGPoint(x: min(vertexA.x, vertexB.x), y: min(vertexA.y, vertexB.y))
+        let UR = CGPoint(x: max(vertexA.x, vertexB.x), y: max(vertexA.y, vertexB.y))
+
+        let size = CGSize(width: UR.x - LL.x, height: UR.y - LL.y)
+
+        return CGRect(origin: LL, size: size)
     }
 
 }

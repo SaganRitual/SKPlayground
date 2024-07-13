@@ -4,7 +4,7 @@ import SpriteKit
 import SwiftUI
 
 struct PhysicsBodyMasksView: View {
-    @EnvironmentObject var gameController: GameController
+//    @EnvironmentObject var gameController: GameController
 
     @ObservedObject var physicsMaskNames: PhysicsMaskNames
 
@@ -39,7 +39,7 @@ struct PhysicsBodyMasksView: View {
     }
 }
 
-#Preview {
-    PhysicsBodyMasksView(physicsMaskNames: PhysicsMaskNames())
-        .environmentObject(GameController())
-}
+//#Preview {
+//    PhysicsBodyMasksView(physicsMaskNames: PhysicsMaskNames())
+//        .environmentObject(GameController())
+//}

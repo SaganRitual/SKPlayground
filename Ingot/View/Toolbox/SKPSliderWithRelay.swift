@@ -7,7 +7,7 @@ struct SKPSliderWithRelay<RelayObject: AnyObject, Field, TitleView: View, Scalar
     where Field: Comparable & AdditiveArithmetic & ExpressibleByIntegerLiteral & BinaryFloatingPoint,
     Field.Stride: BinaryFloatingPoint
 {
-    @EnvironmentObject var gameController: GameController
+//    @EnvironmentObject var gameController: GameController
 
     @Binding var scalar: Field
 
@@ -51,9 +51,9 @@ struct SKPSliderWithRelay<RelayObject: AnyObject, Field, TitleView: View, Scalar
             maxLabel: maxLabel, minLabel: minLabel,
             range: range, scalarView: scalarView, titleView: titleView
         )
-        .onChange(of: scalar) { _, newValue in
-            gameController.updateSelectedRelayTarget(whichField: fieldKeypath, newValue: newValue)
-        }
+//        .onChange(of: scalar) { _, newValue in
+//            gameController.updateSelectedRelayTarget(whichField: fieldKeypath, newValue: newValue)
+//        }
     }
 }
 

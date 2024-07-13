@@ -27,8 +27,6 @@ class GameEntity {
     var scale: CGFloat { get { 1 } set { } }
     // swiftlint:enable unused_setter_value
 
-    var selectionOrder = 0
-
     init(_ face: GameEntityFace) {
         self.face = face
     }
@@ -63,8 +61,8 @@ extension GameEntity {
 extension GameEntity {
     var isSelected: Bool { face.isSelected }
     func deselect() { face.deselect() }
-    func select(_ selectionOrder: Int) { self.selectionOrder = selectionOrder; face.select() }
-    func toggleSelect(_ selectionOrder: Int) { self.selectionOrder = selectionOrder; face.toggleSelect() }
+    func select() { face.select() }
+    func toggleSelect() { face.toggleSelect() }
 }
 
 extension GameEntity: Equatable, Hashable {

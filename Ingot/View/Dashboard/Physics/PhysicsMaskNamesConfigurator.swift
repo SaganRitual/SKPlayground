@@ -19,7 +19,7 @@ final class PhysicsMaskNames: ObservableObject {
 }
 
 struct PhysicsMaskNamesConfigurator: View {
-    @EnvironmentObject var gameController: GameController
+//    @EnvironmentObject var gameController: GameController
 
     @ObservedObject var physicsMaskNames: PhysicsMaskNames
 
@@ -86,7 +86,7 @@ struct PhysicsMaskNamesConfigurator: View {
     }
 }
 
-#Preview {
-    PhysicsMaskNamesConfigurator(physicsMaskNames: PhysicsMaskNames())
-        .environmentObject(GameController())
-}
+//#Preview {
+//    PhysicsMaskNamesConfigurator(physicsMaskNames: PhysicsMaskNames())
+//        .environmentObject(GameController())
+//}

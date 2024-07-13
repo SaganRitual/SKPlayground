@@ -4,7 +4,7 @@ import SpriteKit
 import SwiftUI
 
 struct SKPMaskSelector<RelayObject: AnyObject>: View {
-    @EnvironmentObject var gameController: GameController
+//    @EnvironmentObject var gameController: GameController
 
     @Binding var selectedIndices: Set<Int>
 
@@ -46,16 +46,16 @@ struct SKPMaskSelector<RelayObject: AnyObject>: View {
         } label: {
             label
         }
-        .onChange(of: selectedIndices) { _, newValue in
-            let mask = Utility.makeBitmask(newValue)
-            gameController.updateSelectedRelayTarget(whichField: fieldKeypath, newValue: mask)
-        }
+//        .onChange(of: selectedIndices) { _, newValue in
+//            let mask = Utility.makeBitmask(newValue)
+//            gameController.updateSelectedRelayTarget(whichField: fieldKeypath, newValue: mask)
+//        }
     }
 }
 
-#Preview {
-    @State var selectedIndices = Set<Int>()
-    return SKPMaskSelector<SKPhysicsBody>(
-        $selectedIndices, fieldKeypath: \.fieldBitMask, label: Text("Some text"), options: []
-    )
-}
+//#Preview {
+//    @State var selectedIndices = Set<Int>()
+//    return SKPMaskSelector<SKPhysicsBody>(
+//        $selectedIndices, fieldKeypath: \.fieldBitMask, label: Text("Some text"), options: []
+//    )
+//}

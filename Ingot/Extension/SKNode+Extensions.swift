@@ -18,5 +18,5 @@ extension SKNode {
     func show() { isHidden = false }
     func toggleVisible() { isHidden = !isHidden }
 
-    var gameScene: GameScene { Utility.forceCast(scene, to: GameScene.self) }
+    var gameScene: SKPScene { Utility.forceCast(scene, to: SKPScene.self) }
 }

@@ -8,6 +8,14 @@ extension SKPScene {
         entitiesNode.addChild(entity.face.rootSceneNode)
     }
 
+    func enableEdgeLoop(_ enable: Bool) {
+
+    }
+
+    func isEdgeLoopEnabled() -> Bool {
+        false
+    }
+
     func startActions() {
 
     }

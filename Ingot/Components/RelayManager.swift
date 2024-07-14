@@ -1,5 +1,6 @@
 // We are a way for the cosmos to know itself. -- C. Sagan
 
+import Combine
 import Foundation
 import SpriteKit
 
@@ -69,5 +70,12 @@ extension RelayManager {
 
             fatalError("We thought this couldn't happen")
         }
+    }
+
+    func subscribeToRelays(entityManager: EntityManager, sceneManager: SKPScene) {
+        physicsBodyRelay.subscribe(entityManager: entityManager)
+        physicsFieldRelay.subscribe(entityManager: entityManager)
+        physicsJointRelay.subscribe(entityManager: entityManager)
+        physicsWorldRelay.subscribe(sceneManager: sceneManager)
     }
 }

@@ -12,12 +12,6 @@ final class EntityManager {
 
     private weak var hotEntityDrag: GameEntity?
 
-    private var subscriptions = Set<AnyCancellable>()
-
-    deinit {
-        subscriptions.forEach { $0.cancel() }
-    }
-
     func singleSelected() -> Gremlin? {
         let selected = getSelected()
         if selected.count == 1 {
@@ -25,53 +19,6 @@ final class EntityManager {
         } else {
             return nil
         }
-    }
-
-    func postInit() {
-        relayManager.physicsBodyRelay.$affectedByGravity.sink {
-            self.singleSelected()?.physicsBody?.affectedByGravity = $0
-        }
-        .store(in: &subscriptions)
-
-        relayManager.physicsBodyRelay.$allowsRotation.sink {
-            self.singleSelected()?.physicsBody?.allowsRotation = $0
-        }
-        .store(in: &subscriptions)
-
-        relayManager.physicsBodyRelay.$angularDamping.sink {
-            self.singleSelected()?.physicsBody?.angularDamping = $0
-        }
-        .store(in: &subscriptions)
-
-        relayManager.physicsBodyRelay.$charge.sink {
-            self.singleSelected()?.physicsBody?.charge = $0
-        }
-        .store(in: &subscriptions)
-
-        relayManager.physicsBodyRelay.$friction.sink {
-            self.singleSelected()?.physicsBody?.friction = $0
-        }
-        .store(in: &subscriptions)
-
-        relayManager.physicsBodyRelay.$isDynamic.sink {
-            self.singleSelected()?.physicsBody?.isDynamic = $0
-        }
-        .store(in: &subscriptions)
-
-        relayManager.physicsBodyRelay.$linearDamping.sink {
-            self.singleSelected()?.physicsBody?.linearDamping = $0
-        }
-        .store(in: &subscriptions)
-
-        relayManager.physicsBodyRelay.$mass.sink {
-            self.singleSelected()?.physicsBody?.mass = $0
-        }
-        .store(in: &subscriptions)
-
-        relayManager.physicsBodyRelay.$restitution.sink {
-            self.singleSelected()?.physicsBody?.restitution = $0
-        }
-        .store(in: &subscriptions)
     }
 }
 

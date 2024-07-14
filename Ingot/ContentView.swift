@@ -9,11 +9,10 @@ struct ContentView: View {
     let entityManager = EntityManager()
     let gestureEventDispatcher = GestureEventDispatcher()
     let inputEventDispatcher = InputEventDispatcher()
+    let relayManager = RelayManager()
     let sceneManager = SKPScene(size: Self.sceneMinimumSize)
     let selectionMarquee = SelectionMarquee()
     let workflowManager = WorkflowManager()
-
-    let relayManager = RelayManager()
 
     var body: some View {
         HStack(alignment: .top) {
@@ -29,8 +28,6 @@ struct ContentView: View {
                     entityManager.sceneManager = sceneManager
                     entityManager.workflowRelay = relayManager.workflowRelay
 
-                    entityManager.postInit()
-
                     gestureEventDispatcher.contextMenuManager = contextMenuManager
                     gestureEventDispatcher.entityManager = entityManager
                     gestureEventDispatcher.selectionMarquee = selectionMarquee
@@ -43,6 +40,7 @@ struct ContentView: View {
 
                     sceneManager.addChild(selectionMarquee.marqueeRootNode)
 
+                    relayManager.subscribeToRelays(entityManager: entityManager, sceneManager: sceneManager)
                     relayManager.activatePhysicsRelay(for: nil)
 
                     workflowManager.workflowRelay = relayManager.workflowRelay

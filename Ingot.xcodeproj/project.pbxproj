@@ -235,7 +235,6 @@
 				D4D6516C2C429B960086FAC9 /* Documentation */,
 				D4D651382C429B960086FAC9 /* Extension */,
 				D4D6512A2C429B950086FAC9 /* GameEntity */,
-				D4D6515A2C429B960086FAC9 /* Relays */,
 				D4D6517B2C429B960086FAC9 /* Selection */,
 				D4D651352C429B960086FAC9 /* StateObject */,
 				D4D6516F2C429B960086FAC9 /* Token */,
@@ -324,22 +323,10 @@
 			path = Joints;
 			sourceTree = "<group>";
 		};
-		D4D6514B2C429B960086FAC9 /* Relays */ = {
-			isa = PBXGroup;
-			children = (
-				D4D651472C429B960086FAC9 /* PhysicsBodyRelay.swift */,
-				D4D651482C429B960086FAC9 /* PhysicsFieldRelay.swift */,
-				D4D651492C429B960086FAC9 /* PhysicsJointRelays.swift */,
-				D4D6514A2C429B960086FAC9 /* PhysicsWorldRelay.swift */,
-			);
-			path = Relays;
-			sourceTree = "<group>";
-		};
 		D4D651582C429B960086FAC9 /* Physics */ = {
 			isa = PBXGroup;
 			children = (
 				D4D651462C429B960086FAC9 /* Joints */,
-				D4D6514B2C429B960086FAC9 /* Relays */,
 				D4D6514C2C429B960086FAC9 /* PhysicsBodyConfigurator.swift */,
 				D4D6514D2C429B960086FAC9 /* PhysicsBodyMasksView.swift */,
 				D4D6514E2C429B960086FAC9 /* PhysicsBodySlidersGrid.swift */,
@@ -359,9 +346,13 @@
 		D4D6515A2C429B960086FAC9 /* Relays */ = {
 			isa = PBXGroup;
 			children = (
-				D4D651592C429B960086FAC9 /* GameSceneRelay.swift */,
-				D4D651DC2C4351270086FAC9 /* WorkflowRelay.swift */,
 				D4D651DE2C4352C70086FAC9 /* CommandRelay.swift */,
+				D4D651592C429B960086FAC9 /* GameSceneRelay.swift */,
+				D4D651472C429B960086FAC9 /* PhysicsBodyRelay.swift */,
+				D4D651482C429B960086FAC9 /* PhysicsFieldRelay.swift */,
+				D4D651492C429B960086FAC9 /* PhysicsJointRelays.swift */,
+				D4D6514A2C429B960086FAC9 /* PhysicsWorldRelay.swift */,
+				D4D651DC2C4351270086FAC9 /* WorkflowRelay.swift */,
 			);
 			path = Relays;
 			sourceTree = "<group>";
@@ -434,6 +425,7 @@
 		D4D651762C429B960086FAC9 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				D4D6515A2C429B960086FAC9 /* Relays */,
 				D4D651702C429B960086FAC9 /* ContextMenuManager.swift */,
 				D4D651712C429B960086FAC9 /* EntityManager.swift */,
 				D4D651722C429B960086FAC9 /* GestureEventDispatcher.swift */,

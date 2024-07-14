@@ -40,3 +40,9 @@ extension CGVector {
         self.init(dx: CGFloat(oldStyleVector.x), dy: CGFloat(oldStyleVector.y))
     }
 }
+
+extension vector_float3 {
+    init(_ cgVector: CGVector) {
+        self.init(x: Float(cgVector.dx), y: Float(cgVector.dy), z: .zero)
+    }
+}

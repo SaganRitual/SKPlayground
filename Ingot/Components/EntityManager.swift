@@ -6,7 +6,7 @@ final class EntityManager {
     var entities = Set<GameEntity>()
 
     weak var sceneManager: SKPScene!
-    weak var workflowManager: WorkflowManager!
+    weak var workflowRelay: WorkflowRelay!
 
     private weak var hotEntityDrag: GameEntity?
 }
@@ -46,7 +46,7 @@ extension EntityManager {
 
 extension EntityManager {
     func newEntity(at position: CGPoint) -> GameEntity {
-        switch workflowManager.clickToPlace {
+        switch workflowRelay.clickToPlace {
         case .field:
             return placeField(at: position)
         case .gremlin:
@@ -59,7 +59,7 @@ extension EntityManager {
     }
 
     func placeField(at position: CGPoint) -> Field {
-        let field = Field.make(at: position, fieldType: workflowManager.fieldType)
+        let field = Field.make(at: position, fieldType: workflowRelay.fieldType)
 //        relayManager.impl.hotPhysicsField.loadState(from: field)
 
         postPlace(field)
@@ -67,7 +67,7 @@ extension EntityManager {
     }
 
     func placeGremlin(at position: CGPoint) -> Gremlin {
-        let gremlin = Gremlin.make(at: position, avatarName: workflowManager.avatarName)
+        let gremlin = Gremlin.make(at: position, avatarName: workflowRelay.avatarName)
 //        relayManager.impl.hotPhysicsBody.loadState(from: gremlin)
 
         postPlace(gremlin)
@@ -76,7 +76,7 @@ extension EntityManager {
 
     func placeJoint(at position: CGPoint) -> Joint {
         let joint = Joint.make(at: position)
-        switch workflowManager.jointType {
+        switch workflowRelay.jointType {
         case .fixed:
 //            relayManager.impl.hotPhysicsJointFixed.loadState(from: joint)
             break

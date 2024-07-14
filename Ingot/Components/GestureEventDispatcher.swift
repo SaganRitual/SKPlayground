@@ -29,7 +29,7 @@ final class GestureEventDispatcher: InputEventDispatcher.GestureDelegate {
 private extension GestureEventDispatcher {
 
     func click(_ gestureEvent: GestureEvent) {
-        switch workflowManager.currentWorkflow {
+        switch workflowManager.workflowRelay.currentWorkflow {
         case .assigningSpaceActions:
             fatalError("You thought this couldn't happen")
 

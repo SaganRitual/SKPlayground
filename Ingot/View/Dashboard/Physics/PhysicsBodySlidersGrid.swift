@@ -22,16 +22,19 @@ struct PhysicsBodySlidersGridRow<RelayObject: AnyObject, TargetField, TitleView:
     var body: some View {
         GridRow {
             titleView
+                .fixedSize()
                 .frame(width: titleWidths.max(), alignment: .leading)
                 .background(
                     GeometryReader { gr in
                         Color.clear.onAppear {
+                            print("1: appending \(gr.size.width) to titles")
                             titleWidths.append(gr.size.width)
                         }
                     }
                 )
 
             scalarView
+                .fixedSize()
                 .frame(width: scalarWidths.max(), alignment: .trailing)
                 .background(
                     GeometryReader { gr in
@@ -42,6 +45,7 @@ struct PhysicsBodySlidersGridRow<RelayObject: AnyObject, TargetField, TitleView:
                 )
 
             Text(minLabel)
+                .fixedSize()
                 .frame(width: minLabelWidths.max(), alignment: .trailing)
                 .background(
                     GeometryReader { gr in
@@ -55,8 +59,16 @@ struct PhysicsBodySlidersGridRow<RelayObject: AnyObject, TargetField, TitleView:
                 value: $physicsBodyRelay.charge,
                 in: CGFloat(range.lowerBound)...CGFloat(range.upperBound)
             )
+            .background(
+                GeometryReader { gr in
+                    Color.clear.onAppear {
+                        print("Slider width \(gr.size.width)")
+                    }
+                }
+            )
 
             Text(maxLabel)
+                .fixedSize()
                 .frame(width: maxLabelWidths.max(), alignment: .trailing)
                 .background(
                     GeometryReader { gr in
@@ -149,17 +161,20 @@ struct PhysicsBodySlidersGrid: View {
 
             GridRow {
                 Text("Damping")
+                    .fixedSize()
                     .underline()
                     .frame(width: titleWidths.max(), alignment: .leading)
                     .background(
                         GeometryReader { gr in
                             Color.clear.onAppear {
+                                print("0: appending \(gr.size.width) to titles")
                                 titleWidths.append(gr.size.width)
                             }
                         }
                     )
 
                 Text("+000.00π")
+                    .fixedSize()
                     .hidden()
                     .frame(width: scalarWidths.max(), alignment: .trailing)
                     .background(
@@ -171,6 +186,7 @@ struct PhysicsBodySlidersGrid: View {
                     )
 
                 Text("+000.00π")
+                    .fixedSize()
                     .hidden()
                     .frame(width: minLabelWidths.max(), alignment: .trailing)
                     .background(

@@ -26,7 +26,7 @@ struct ContentView: View {
                     contextMenuManager.workflowManager = workflowManager
 
                     entityManager.sceneManager = sceneManager
-                    entityManager.workflowManager = workflowManager
+                    entityManager.workflowRelay = relayManager.workflowRelay
 
                     gestureEventDispatcher.contextMenuManager = contextMenuManager
                     gestureEventDispatcher.entityManager = entityManager
@@ -39,15 +39,30 @@ struct ContentView: View {
                     sceneManager.gameSceneRelay = relayManager.gameSceneRelay
 
                     sceneManager.addChild(selectionMarquee.marqueeRootNode)
+
+                    workflowManager.workflowRelay = relayManager.workflowRelay
                 }
 
-            PlaygroundStatusView(gameSceneRelay: relayManager.gameSceneRelay)
-                .padding()
-                .border(Color(NSColor.secondarySystemFill))
-                .padding()
-                .monospaced()
-//                .environmentObject(relayManager.gameSceneRelay)
+            VStack {
+                PlaygroundStatusView(gameSceneRelay: relayManager.gameSceneRelay)
+                    .padding()
+                    .border(Color(NSColor.secondarySystemFill))
+                    .padding()
+                
+                CommandView(
+                    commandRelay: relayManager.commandRelay,
+                    workflowRelay: relayManager.workflowRelay,
+                    sceneManager: sceneManager
+                )
+                    .padding()
+                    .border(Color(NSColor.secondarySystemFill))
+                    .padding()
+//
+//                PhysicsBodyConfigurator()
+//                    .environmentObject(SelectedPhysicsRelay(PhysicsObjectType.body(PhysicsBodyRelay())))
+            }
         }
+        .monospaced()
     }
 }
 

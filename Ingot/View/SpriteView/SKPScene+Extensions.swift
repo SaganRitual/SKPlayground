@@ -8,6 +8,26 @@ extension SKPScene {
         entitiesNode.addChild(entity.face.rootSceneNode)
     }
 
+    func startActions() {
+
+    }
+
+    func startActionsOnSelected() {
+        
+    }
+
+    func stopActions() {
+
+    }
+
+    func startPhysics() {
+
+    }
+
+    func stopPhysics() {
+        
+    }
+
     func getNodesInRectangle(_ rectangle: CGRect) -> [SKNode] {
         return entitiesNode.children.compactMap { node in
             guard rectangle.contains(node.position) else {

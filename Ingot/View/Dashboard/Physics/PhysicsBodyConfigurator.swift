@@ -3,13 +3,17 @@
 import SwiftUI
 
 struct PhysicsBodyConfigurator: View {
-    @EnvironmentObject var selectedPhysicsRelay: SelectedPhysicsRelay
+    @ObservedObject var selectedPhysicsRelay: SelectedPhysicsRelay
 
     @StateObject var physicsMaskNames = PhysicsMaskNames()
 
     var body: some View {
         VStack {
             if case let .body(physicsBodyRelay) = selectedPhysicsRelay.selected {
+                Text("Physics Body")
+                    .underline()
+                    .padding(.bottom)
+
                 PhysicsBodyTogglesView(physicsBodyRelay: physicsBodyRelay)
                 PhysicsBodySlidersGrid(physicsBodyRelay: physicsBodyRelay)
                 PhysicsBodyMasksView(physicsMaskNames: physicsMaskNames)
@@ -20,6 +24,5 @@ struct PhysicsBodyConfigurator: View {
 }
 
 #Preview {
-    PhysicsBodyConfigurator()
-        .environmentObject(SelectedPhysicsRelay(.body(PhysicsBodyRelay())))
+    PhysicsBodyConfigurator(selectedPhysicsRelay: SelectedPhysicsRelay(.body(PhysicsBodyRelay())))
 }

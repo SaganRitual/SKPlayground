@@ -23,13 +23,28 @@ class JointSprite: GameEntitySprite {
 }
 
 final class Joint: GameEntity {
-    static func make(at position: CGPoint) -> Joint {
-        let joint = Joint(at: position)
+    let physicsJoint: SKPhysicsJoint
+
+    static func make(at position: CGPoint, type: PhysicsJointType) -> Joint {
+        let joint = Joint(at: position, type: type)
         joint.face.setOwnerEntity(joint)
         return joint
     }
 
-    init(at position: CGPoint) {
+    init(at position: CGPoint, type: PhysicsJointType) {
+        switch type {
+        case .fixed:
+            self.physicsJoint = SKPhysicsJointFixed()
+        case .limit:
+            self.physicsJoint = SKPhysicsJointLimit()
+        case .pin:
+            self.physicsJoint = SKPhysicsJointPin()
+        case .sliding:
+            self.physicsJoint = SKPhysicsJointSliding()
+        case .spring:
+            self.physicsJoint = SKPhysicsJointSpring()
+        }
+
         let halo = SelectionHalo()
         let avatar = JointSprite()
         let face = GameEntityFace(at: position, avatar: avatar, halo: halo)

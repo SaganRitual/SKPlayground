@@ -13,13 +13,17 @@ enum PhysicsFieldType: String, CaseIterable, Identifiable, RawRepresentable {
 }
 
 struct PhysicsFieldConfigurator: View {
-    @EnvironmentObject var selectedPhysicsRelay: SelectedPhysicsRelay
+    @ObservedObject var selectedPhysicsRelay: SelectedPhysicsRelay
 
     @StateObject var physicsMaskNames = PhysicsMaskNames()
 
     var body: some View {
         VStack {
             if case let .field(physicsFieldRelay) = selectedPhysicsRelay.selected {
+                Text("Physics Field")
+                    .underline()
+                    .padding(.bottom)
+
                 PhysicsFieldTogglesView(physicsFieldRelay: physicsFieldRelay)
                 PhysicsFieldSlidersGrid(physicsFieldRelay: physicsFieldRelay)
                 PhysicsFieldMasksView(physicsMaskNames: physicsMaskNames)
@@ -30,6 +34,5 @@ struct PhysicsFieldConfigurator: View {
 }
 
 #Preview {
-    PhysicsFieldConfigurator()
-        .environmentObject(SelectedPhysicsRelay(.field(PhysicsFieldRelay())))
+    PhysicsFieldConfigurator(selectedPhysicsRelay: SelectedPhysicsRelay(.field(PhysicsFieldRelay())))
 }

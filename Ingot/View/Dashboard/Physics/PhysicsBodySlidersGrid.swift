@@ -13,6 +13,7 @@ struct PhysicsBodySlidersGridRow<RelayObject: AnyObject, TargetField, TitleView:
     @Binding var minLabelWidths: [CGFloat]
     @Binding var maxLabelWidths: [CGFloat]
 
+    let fieldKeyPath: ReferenceWritableKeyPath<PhysicsBodyRelay, TargetField>  // Add keypath property
     let maxLabel: String
     let minLabel: String
     let range: ClosedRange<TargetField>
@@ -27,7 +28,6 @@ struct PhysicsBodySlidersGridRow<RelayObject: AnyObject, TargetField, TitleView:
                 .background(
                     GeometryReader { gr in
                         Color.clear.onAppear {
-                            print("1: appending \(gr.size.width) to titles")
                             titleWidths.append(gr.size.width)
                         }
                     }
@@ -56,15 +56,11 @@ struct PhysicsBodySlidersGridRow<RelayObject: AnyObject, TargetField, TitleView:
                 )
 
             Slider(
-                value: $physicsBodyRelay.charge,
-                in: CGFloat(range.lowerBound)...CGFloat(range.upperBound)
-            )
-            .background(
-                GeometryReader { gr in
-                    Color.clear.onAppear {
-                        print("Slider width \(gr.size.width)")
-                    }
-                }
+                value: Binding(
+                    get: { physicsBodyRelay[keyPath: fieldKeyPath] },
+                    set: { physicsBodyRelay[keyPath: fieldKeyPath] = $0 }
+                ),
+                in: TargetField(CGFloat(range.lowerBound))...TargetField(CGFloat(range.upperBound))
             )
 
             Text(maxLabel)
@@ -98,6 +94,7 @@ struct PhysicsBodySlidersGrid: View {
                     scalarWidths: $scalarWidths,
                     minLabelWidths: $minLabelWidths,
                     maxLabelWidths: $maxLabelWidths,
+                    fieldKeyPath: \.charge,
                     maxLabel: "+2.0",
                     minLabel: "-2.0",
                     range: (-2.0)...(+2.0),
@@ -115,6 +112,7 @@ struct PhysicsBodySlidersGrid: View {
                     scalarWidths: $scalarWidths,
                     minLabelWidths: $minLabelWidths,
                     maxLabelWidths: $maxLabelWidths,
+                    fieldKeyPath: \.friction,
                     maxLabel: "+25.0",
                     minLabel: "-2.0",
                     range: (-2.0)...(+25.0),
@@ -132,6 +130,7 @@ struct PhysicsBodySlidersGrid: View {
                     scalarWidths: $scalarWidths,
                     minLabelWidths: $minLabelWidths,
                     maxLabelWidths: $maxLabelWidths,
+                    fieldKeyPath: \.mass,
                     maxLabel: "+10.0",
                     minLabel: " 0.0",
                     range: 0...10,
@@ -149,6 +148,7 @@ struct PhysicsBodySlidersGrid: View {
                     scalarWidths: $scalarWidths,
                     minLabelWidths: $minLabelWidths,
                     maxLabelWidths: $maxLabelWidths,
+                    fieldKeyPath: \.restitution,
                     maxLabel: "+2.0",
                     minLabel: "-2.0",
                     range: (-2.0)...(+2.0),
@@ -167,7 +167,6 @@ struct PhysicsBodySlidersGrid: View {
                     .background(
                         GeometryReader { gr in
                             Color.clear.onAppear {
-                                print("0: appending \(gr.size.width) to titles")
                                 titleWidths.append(gr.size.width)
                             }
                         }
@@ -206,6 +205,7 @@ struct PhysicsBodySlidersGrid: View {
                     scalarWidths: $scalarWidths,
                     minLabelWidths: $minLabelWidths,
                     maxLabelWidths: $maxLabelWidths,
+                    fieldKeyPath: \.angularDamping,
                     maxLabel: "+2.0",
                     minLabel: "-2.0",
                     range: (-2.0)...(+2.0),
@@ -224,6 +224,7 @@ struct PhysicsBodySlidersGrid: View {
                     scalarWidths: $scalarWidths,
                     minLabelWidths: $minLabelWidths,
                     maxLabelWidths: $maxLabelWidths,
+                    fieldKeyPath: \.linearDamping,
                     maxLabel: "+2.0",
                     minLabel: "-2.0",
                     range: (-2.0)...(+2.0),

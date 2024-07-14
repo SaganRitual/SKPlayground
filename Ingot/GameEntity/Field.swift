@@ -37,12 +37,13 @@ class FieldSprite: GameEntitySprite {
 }
 
 final class Field: GameEntity {
-    static func make(at position: CGPoint, fieldType: PhysicsFieldType) -> Field {
-        let field = Field(fieldType, at: position)
-        let fieldNode = makeFieldNode(fieldType)
+    let physicsField: SKFieldNode
 
+    static func make(at position: CGPoint, fieldType: PhysicsFieldType) -> Field {
+        let fieldNode = makeFieldNode(fieldType)
         fieldNode.userData = ["fieldType": fieldType]
 
+        let field = Field(fieldNode, at: position)
         field.face.setOwnerEntity(field)
 
         return field
@@ -73,9 +74,14 @@ final class Field: GameEntity {
         }
     }
 
-    init(_ fieldType: PhysicsFieldType, at position: CGPoint) {
+    init(_ fieldNode: SKFieldNode, at position: CGPoint) {
+        self.physicsField = fieldNode
+
         let halo = SelectionHalo()
+
+        let fieldType = Utility.forceCast(fieldNode.userData?["fieldType"], to: PhysicsFieldType.self)
         let avatar = FieldSprite(fieldType)
+
         let face = GameEntityFace(at: position, avatar: avatar, halo: halo)
         super.init(face)
     }

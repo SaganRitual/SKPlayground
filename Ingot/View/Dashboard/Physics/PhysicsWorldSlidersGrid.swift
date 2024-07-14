@@ -24,6 +24,7 @@ struct PhysicsWorldSlidersGridRow<RelayObject: AnyObject, TargetField, TitleView
     var body: some View {
         GridRow {
             titleView
+                .fixedSize()
                 .frame(width: titleWidths.max(), alignment: .leading)
                 .background(
                     GeometryReader { gr in
@@ -34,6 +35,7 @@ struct PhysicsWorldSlidersGridRow<RelayObject: AnyObject, TargetField, TitleView
                 )
 
             scalarView
+                .fixedSize()
                 .frame(width: scalarWidths.max(), alignment: .trailing)
                 .background(
                     GeometryReader { gr in
@@ -44,6 +46,7 @@ struct PhysicsWorldSlidersGridRow<RelayObject: AnyObject, TargetField, TitleView
                 )
 
             Text(minLabel)
+                .fixedSize()
                 .frame(width: minLabelWidths.max(), alignment: .trailing)
                 .background(
                     GeometryReader { gr in
@@ -59,6 +62,7 @@ struct PhysicsWorldSlidersGridRow<RelayObject: AnyObject, TargetField, TitleView
             )
 
             Text(maxLabel)
+                .fixedSize()
                 .frame(width: maxLabelWidths.max(), alignment: .trailing)
                 .background(
                     GeometryReader { gr in
@@ -86,6 +90,7 @@ struct PhysicsWorldSlidersGrid: View {
         Grid {
             GridRow {
                 Text("")
+                    .fixedSize()
                     .hidden()
                     .frame(width: titleWidths.max(), alignment: .leading)
                     .background(
@@ -97,6 +102,7 @@ struct PhysicsWorldSlidersGrid: View {
                     )
 
                 Text("+000.00π")
+                    .fixedSize()
                     .hidden()
                     .frame(width: scalarWidths.max(), alignment: .trailing)
                     .background(
@@ -108,6 +114,7 @@ struct PhysicsWorldSlidersGrid: View {
                     )
 
                 Text("+000.00π")
+                    .fixedSize()
                     .hidden()
                     .frame(width: minLabelWidths.max(), alignment: .trailing)
                     .background(
@@ -162,4 +169,5 @@ struct PhysicsWorldSlidersGrid: View {
 
 #Preview {
     PhysicsWorldSlidersGrid(physicsWorldRelay: PhysicsWorldRelay())
+        .environmentObject(SelectedPhysicsRelay(.body(PhysicsBodyRelay())))
 }

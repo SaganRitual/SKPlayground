@@ -4,7 +4,8 @@ import Foundation
 import SwiftUI
 
 struct PlaygroundStatusView: View {
-    @ObservedObject var gameSceneRelay: GameSceneRelay
+    let viewSize: CGSize
+    let mousePosition: CGPoint
 
     var body: some View {
         VStack {
@@ -19,14 +20,14 @@ struct PlaygroundStatusView: View {
             HStack {
                 Text("Scene Size")
                 Spacer()
-                Text("\(gameSceneRelay.viewSize)")
+                Text("\(viewSize)")
             }
             .padding(.bottom)
 
             HStack {
                 Text("Mouse Position")
                 Spacer()
-                Text(Utility.positionString(gameSceneRelay.mousePosition))
+                Text(Utility.positionString(mousePosition))
             }
         }
     }

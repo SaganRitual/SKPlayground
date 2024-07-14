@@ -10,27 +10,33 @@ enum PhysicsJointType: String, CaseIterable, Identifiable, RawRepresentable {
 }
 
 struct PhysicsJointConfigurator: View {
-    @EnvironmentObject var selectedPhysicsRelay: SelectedPhysicsRelay
+    @ObservedObject var selectedPhysicsRelay: SelectedPhysicsRelay
 
     var body: some View {
         ZStack {
-            switch selectedPhysicsRelay.selected {
-            case .jointFixed(let fixedRelay):
-                PhysicsJointFixedView(relay: fixedRelay)
-            case .jointLimit(let limitRelay):
-                PhysicsJointLimitView(relay: limitRelay)
-            case .jointPin(let pinRelay):
-                PhysicsJointPinView(relay: pinRelay)
-            case .jointSliding(let slidingRelay):
-                PhysicsJointSlidingView(relay: slidingRelay)
-            case .jointSpring(let springRelay):
-                PhysicsJointSpringView(relay: springRelay)
+            if selectedPhysicsRelay.selected?.isJoint ?? false {
+                Text("Physics Joint")
+                    .underline()
+                    .padding(.bottom)
 
-            case .none:
-                Text("No Joint Selected, or Multiple Joints Selected")
+                switch selectedPhysicsRelay.selected {
+                case .jointFixed(let fixedRelay):
+                    PhysicsJointFixedView(relay: fixedRelay)
+                case .jointLimit(let limitRelay):
+                    PhysicsJointLimitView(relay: limitRelay)
+                case .jointPin(let pinRelay):
+                    PhysicsJointPinView(relay: pinRelay)
+                case .jointSliding(let slidingRelay):
+                    PhysicsJointSlidingView(relay: slidingRelay)
+                case .jointSpring(let springRelay):
+                    PhysicsJointSpringView(relay: springRelay)
 
-            default:
-                fatalError("How did we get here?")
+                case .none:
+                    Text("No Joint Selected, or Multiple Joints Selected")
+
+                default:
+                    fatalError("We thought this couldn't happen")
+                }
             }
         }
         .padding()
@@ -38,6 +44,5 @@ struct PhysicsJointConfigurator: View {
 }
 
 #Preview {
-    PhysicsJointConfigurator()
-        .environmentObject(SelectedPhysicsRelay(.jointSpring(PhysicsJointSpringRelay())))
+    PhysicsJointConfigurator(selectedPhysicsRelay: SelectedPhysicsRelay(.jointSpring(PhysicsJointSpringRelay())))
 }

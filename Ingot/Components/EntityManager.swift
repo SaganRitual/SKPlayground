@@ -1,14 +1,78 @@
 // We are a way for the cosmos to know itself. -- C. Sagan
 
+import Combine
 import Foundation
 
 final class EntityManager {
     var entities = Set<GameEntity>()
 
+    weak var relayManager: RelayManager!
     weak var sceneManager: SKPScene!
     weak var workflowRelay: WorkflowRelay!
 
     private weak var hotEntityDrag: GameEntity?
+
+    private var subscriptions = Set<AnyCancellable>()
+
+    deinit {
+        subscriptions.forEach { $0.cancel() }
+    }
+
+    func singleSelected() -> Gremlin? {
+        let selected = getSelected()
+        if selected.count == 1 {
+            return selected.first as? Gremlin
+        } else {
+            return nil
+        }
+    }
+
+    func postInit() {
+        relayManager.physicsBodyRelay.$affectedByGravity.sink {
+            self.singleSelected()?.physicsBody?.affectedByGravity = $0
+        }
+        .store(in: &subscriptions)
+
+        relayManager.physicsBodyRelay.$allowsRotation.sink {
+            self.singleSelected()?.physicsBody?.allowsRotation = $0
+        }
+        .store(in: &subscriptions)
+
+        relayManager.physicsBodyRelay.$angularDamping.sink {
+            self.singleSelected()?.physicsBody?.angularDamping = $0
+        }
+        .store(in: &subscriptions)
+
+        relayManager.physicsBodyRelay.$charge.sink {
+            self.singleSelected()?.physicsBody?.charge = $0
+        }
+        .store(in: &subscriptions)
+
+        relayManager.physicsBodyRelay.$friction.sink {
+            self.singleSelected()?.physicsBody?.friction = $0
+        }
+        .store(in: &subscriptions)
+
+        relayManager.physicsBodyRelay.$isDynamic.sink {
+            self.singleSelected()?.physicsBody?.isDynamic = $0
+        }
+        .store(in: &subscriptions)
+
+        relayManager.physicsBodyRelay.$linearDamping.sink {
+            self.singleSelected()?.physicsBody?.linearDamping = $0
+        }
+        .store(in: &subscriptions)
+
+        relayManager.physicsBodyRelay.$mass.sink {
+            self.singleSelected()?.physicsBody?.mass = $0
+        }
+        .store(in: &subscriptions)
+
+        relayManager.physicsBodyRelay.$restitution.sink {
+            self.singleSelected()?.physicsBody?.restitution = $0
+        }
+        .store(in: &subscriptions)
+    }
 }
 
 extension EntityManager {
@@ -60,40 +124,18 @@ extension EntityManager {
 
     func placeField(at position: CGPoint) -> Field {
         let field = Field.make(at: position, fieldType: workflowRelay.fieldType)
-//        relayManager.impl.hotPhysicsField.loadState(from: field)
-
         postPlace(field)
         return field
     }
 
     func placeGremlin(at position: CGPoint) -> Gremlin {
         let gremlin = Gremlin.make(at: position, avatarName: workflowRelay.avatarName)
-//        relayManager.impl.hotPhysicsBody.loadState(from: gremlin)
-
         postPlace(gremlin)
         return gremlin
     }
 
     func placeJoint(at position: CGPoint) -> Joint {
-        let joint = Joint.make(at: position)
-        switch workflowRelay.jointType {
-        case .fixed:
-//            relayManager.impl.hotPhysicsJointFixed.loadState(from: joint)
-            break
-        case .limit:
-//            relayManager.impl.hotPhysicsJointLimit.loadState(from: joint)
-            break
-        case .pin:
-//            relayManager.impl.hotPhysicsJointPin.loadState(from: joint)
-            break
-        case .sliding:
-//            relayManager.impl.hotPhysicsJointSliding.loadState(from: joint)
-            break
-        case .spring:
-//            relayManager.impl.hotPhysicsJointSpring.loadState(from: joint)
-            break
-        }
-
+        let joint = Joint.make(at: position, type: workflowRelay.jointType)
         postPlace(joint)
         return joint
     }
@@ -122,6 +164,14 @@ extension EntityManager {
 
     func deselect(_ entity: GameEntity) {
         entity.deselect()
+
+        let selected = getSelected()
+        if selected.count == 1 {
+            let entity = Utility.forceUnwrap(selected.first)
+            relayManager.activatePhysicsRelay(for: entity)
+        } else {
+            relayManager.activatePhysicsRelay(for: nil)
+        }
     }
 
     func deselectAll() {
@@ -134,9 +184,14 @@ extension EntityManager {
 
     func select(_ entity: GameEntity) {
         entity.select()
+        relayManager.activatePhysicsRelay(for: entity)
     }
 
     func toggleSelect(_ entity: GameEntity) {
-        entity.toggleSelect()
+        if entity.isSelected {
+            deselect(entity)
+        } else {
+            select(entity)
+        }
     }
 }

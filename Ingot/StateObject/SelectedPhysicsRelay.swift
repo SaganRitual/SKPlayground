@@ -11,6 +11,24 @@ enum PhysicsObjectType {
     case jointSliding(PhysicsJointSlidingRelay)
     case jointSpring(PhysicsJointSpringRelay)
     case world(PhysicsWorldRelay)
+
+    var isJoint: Bool {
+        switch self {
+        case .jointFixed:
+            fallthrough
+        case .jointLimit:
+            fallthrough
+        case .jointPin:
+            fallthrough
+        case .jointSliding:
+            fallthrough
+        case .jointSpring:
+            return true
+
+        default:
+            return false
+        }
+    }
 }
 
 final class SelectedPhysicsRelay: ObservableObject {

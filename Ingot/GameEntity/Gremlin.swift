@@ -22,7 +22,7 @@ final class Gremlin: GameEntity {
 
     override var scale: CGFloat {
         get { face.scale }
-        set { face.scale = newValue }
+        set { face.scale = max(1, newValue) }
     }
 
     init(at position: CGPoint, avatarName: String) {

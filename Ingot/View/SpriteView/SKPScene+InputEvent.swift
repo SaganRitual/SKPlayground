@@ -36,7 +36,7 @@ extension SKPScene {
             return getTopNode()?.getOwnerEntity()
         }
 
-        private func getTopNode() -> SKNode? {
+        func getTopNode() -> SKNode? {
             scene.nodes(at: location).first(where: { $0.getOwnerEntity() != nil })
         }
     }

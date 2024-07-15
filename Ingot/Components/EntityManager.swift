@@ -10,7 +10,8 @@ final class EntityManager {
     weak var sceneManager: SKPScene!
     weak var workflowRelay: WorkflowRelay!
 
-    private weak var hotEntityDrag: GameEntity?
+    private weak var hotDragTarget: GameEntity?
+    private var hotDragSubhandle: SelectionHaloRS.Directions?
 
     func singleSelected() -> Gremlin? {
         let selected = getSelected()
@@ -38,7 +39,7 @@ extension EntityManager {
 
 extension EntityManager {
     func moveSelected(_ anchorTarget: CGPoint) {
-        let hotAnchor = Utility.forceUnwrap(hotEntityDrag?.dragAnchor)
+        let hotAnchor = Utility.forceUnwrap(hotDragTarget?.dragAnchor)
         let delta = anchorTarget - hotAnchor
 
         getSelected().forEach { entity in
@@ -47,10 +48,40 @@ extension EntityManager {
         }
     }
 
-    func setDragAnchors(_ anchorEntity: GameEntity) {
-        hotEntityDrag = anchorEntity
+    func roscaleSelected(_ mousePosition: CGPoint) {
+        let hotAnchor = Utility.forceUnwrap(hotDragTarget?.dragAnchor)
+
+        let delta = mousePosition - hotAnchor
+        let distance = delta.magnitude
+        let scale = max(1, distance / SelectionHaloRS.radius)
+        var rotation = atan2(delta.y, delta.x)
+
+        let subhandle = Utility.forceUnwrap(hotDragSubhandle)
+
+        switch subhandle {
+        case .n: rotation -= .pi / 2
+        case .e: rotation += 0
+        case .s: rotation += .pi / 2
+        case .w: rotation += .pi
+        }
+
+        let rDelta = rotation - Utility.forceUnwrap(hotDragTarget?.rotationAnchor)
+        let sDelta = scale - Utility.forceUnwrap(hotDragTarget?.scaleAnchor)
+
+        getSelected().forEach { entity in
+            entity.rotation = entity.rotationAnchor! + rDelta
+            entity.scale = entity.scaleAnchor! + sDelta
+        }
+    }
+
+    func setDragAnchors(_ anchorEntity: GameEntity, _ subhandleDirection: SelectionHaloRS.Directions? = nil) {
+        hotDragTarget = anchorEntity
+        hotDragSubhandle = subhandleDirection
+
         getSelected().forEach { entity in
             entity.dragAnchor = entity.position
+            entity.rotationAnchor = entity.rotation
+            entity.scaleAnchor = entity.scale
         }
     }
 }

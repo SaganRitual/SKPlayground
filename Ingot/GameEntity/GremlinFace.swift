@@ -14,10 +14,9 @@ final class GremlinFace: GameEntityFace {
     override var scale: CGFloat {
         get { rootSceneNode.xScale }
         set {
-            rootSceneNode.xScale = newValue
-            rootSceneNode.yScale = newValue
-
-            halo?.setScale(newValue)
+            let s = max(1, newValue)
+            rootSceneNode.setScale(s)
+            rsHalo.setScale(s)  // This is so the halo can downsize the subhandles
         }
     }
 

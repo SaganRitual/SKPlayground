@@ -28,14 +28,6 @@ class SelectionHalo: GameEntitySprite {
     func select() { sceneNode.isHidden = false }
     func toggleSelect() { sceneNode.isHidden = !sceneNode.isHidden }
 
-    func setScale(_ scale: CGFloat) {
-        sceneNode.setScale(scale)
-
-        if let shape = sceneNode as? SKShapeNode {
-            shape.lineWidth = 1 / scale
-        }
-    }
-
     enum OrderIndicator { case first, inner, last }
 
     enum SelectionMode {

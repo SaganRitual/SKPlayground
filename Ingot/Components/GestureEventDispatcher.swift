@@ -8,12 +8,13 @@ final class GestureEventDispatcher: InputEventDispatcher.GestureDelegate {
     weak var selectionMarquee: SelectionMarquee!
     weak var workflowManager: WorkflowManager!
 
-    var draggingEntity = false
+    enum DragMode { case background, idle, entity, subhandle }
+    var dragMode = DragMode.idle
 
     func gestureEvent(_ gestureEvent: GestureEvent) {
         switch gestureEvent.newGestureState {
         case .click:      click(gestureEvent)
-        case .drag:       drag(gestureEvent)
+        case .drag:       dragDispatch(gestureEvent)
         case .dragEnd:    dragEnd(gestureEvent)
         case .rightClick: rightClick(gestureEvent)
 
@@ -98,41 +99,75 @@ private extension GestureEventDispatcher {
         entityManager.select(Utility.forceUnwrap(entity))
     }
 
+    func rightClick(_ gestureEvent: GestureEvent) {
+        entityManager.deselectAll()
+
+        let entity = gestureEvent.inputEvent.getTopEntity()
+        if let gremlin = entity as? Gremlin {
+            entityManager.select(gremlin)
+            contextMenuManager.showMenu(.entity, gestureEvent)
+        } else if entity == nil {
+            contextMenuManager.showMenu(.scene, gestureEvent)
+        }
+    }
+
 }
 
 private extension GestureEventDispatcher {
 
-    func drag(_ gestureEvent: GestureEvent) {
-        if gestureEvent.oldGestureState == .limbo {
-            // We're beginning a drag operation
-            if let entity = gestureEvent.inputEvent.getTopEntity() {
-                // Dragging on an entity; select if necessary, deselect others if necessary
-                if !entity.isSelected {
-                    if !gestureEvent.inputEvent.shift {
-                        entityManager.deselectAll()
-                    }
+    func dragBegin(_ gestureEvent: GestureEvent) {
+        // We're beginning a drag operation
+        if let entity = gestureEvent.inputEvent.getTopEntity() {
+            if let haloRS = entity.face.halo as? SelectionHaloRS {
+                let topNode = Utility.forceUnwrap(gestureEvent.inputEvent.getTopNode())
+                if let direction = haloRS.getSubhandleDirection(topNode) {
+                    // Dragging a subhandle on a Gremlin's halo
+                    let entity = Utility.forceUnwrap(topNode.getOwnerEntity())
+                    entityManager.setDragAnchors(entity, direction)
+                    dragMode = .subhandle
+                    return
+                }
+            }
 
-                    entityManager.select(entity)
+            // Dragging on an entity or its main halo, not a subhandle;
+            // select the entity if necessary, deselect others if necessary
+            if !entity.isSelected {
+                if !gestureEvent.inputEvent.shift {
+                    entityManager.deselectAll()
                 }
 
-                // Dragging selected entities using this one as an anchor
-                entityManager.setDragAnchors(entity)
+                entityManager.select(entity)
+            }
 
-                draggingEntity = true
-            } else {
-                // Dragging on the background, ie, beginning a marquee selection
-                selectionMarquee.setDragAnchor(gestureEvent.inputEvent.location)
-                draggingEntity = false
-            }
+            // Dragging selected entities using this one as an anchor
+            entityManager.setDragAnchors(entity)
+            dragMode = .entity
+        } else {
+            // Dragging on the background, ie, beginning a marquee selection
+            selectionMarquee.setDragAnchor(gestureEvent.inputEvent.location)
+            dragMode = .background
+        }
+    }
+
+    func dragContinue(_ gestureEvent: GestureEvent) {
+        // We're continuing a drag operation
+        switch dragMode {
+        case .background:
+            selectionMarquee.draw(to: gestureEvent.inputEvent.location)
+        case .entity:
+            entityManager.moveSelected(gestureEvent.inputEvent.location)
+        case .subhandle:
+            entityManager.roscaleSelected(gestureEvent.inputEvent.location)
+        default:
+            fatalError("We thought this couldn't happen")
+        }
+    }
+
+    func dragDispatch(_ gestureEvent: GestureEvent) {
+        if gestureEvent.oldGestureState == .limbo {
+            dragBegin(gestureEvent)
         } else if gestureEvent.oldGestureState == .drag {
-            // We're continuing a drag operation
-            if draggingEntity {
-                // Dragging selected entities
-                entityManager.moveSelected(gestureEvent.inputEvent.location)
-            } else {
-                // Dragging out a rubber-band selection rectangle
-                selectionMarquee.draw(to: gestureEvent.inputEvent.location)
-            }
+            dragContinue(gestureEvent)
         }
     }
 
@@ -148,19 +183,7 @@ private extension GestureEventDispatcher {
         }
 
         selectionMarquee.hide()
-        draggingEntity = false
-    }
-
-    func rightClick(_ gestureEvent: GestureEvent) {
-        entityManager.deselectAll()
-
-        let entity = gestureEvent.inputEvent.getTopEntity()
-        if let gremlin = entity as? Gremlin {
-            entityManager.select(gremlin)
-            contextMenuManager.showMenu(.entity, gestureEvent)
-        } else if entity == nil {
-            contextMenuManager.showMenu(.scene, gestureEvent)
-        }
+        dragMode = .idle
     }
 
 }

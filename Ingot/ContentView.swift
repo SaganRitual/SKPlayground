@@ -51,10 +51,7 @@ struct ContentView: View {
                 // pass an observable object like the game scene relay, SwiftUI
                 // wants to update everything in the VStack whenever mousePosition
                 // changes.
-                PlaygroundStatusView(
-                    viewSize: relayManager.gameSceneRelay.viewSize,
-                    mousePosition: relayManager.gameSceneRelay.mousePosition
-                )
+                PlaygroundStatusView(gameSceneRelay: relayManager.gameSceneRelay)
                 .padding()
                 .border(Color(NSColor.secondarySystemFill))
                 .padding([.horizontal, .top])

@@ -153,6 +153,12 @@ extension CGVector {
     }
 }
 
+extension CGVector {
+    init(_ oldStyleVector: vector_float3) {
+        self.init(dx: CGFloat(oldStyleVector.x), dy: CGFloat(oldStyleVector.y))
+    }
+}
+
 extension CGSize {
     init(_ abPair: ABPair) {
         self.init(width: abPair.a, height: abPair.b)

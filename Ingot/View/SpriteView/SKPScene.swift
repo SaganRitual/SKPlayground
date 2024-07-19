@@ -4,9 +4,11 @@ import Foundation
 import SpriteKit
 
 class SKPScene: SKScene {
-    weak var inputDelegate: InputDelegate?
     weak var gameSceneRelay: GameSceneRelay!
+    weak var inputDelegate: InputDelegate?
+    weak var physicsWorldRelay: PhysicsWorldRelay!
 
+    var edgeLoop: SKPhysicsBody?
     var mouseState = InputEvent.MouseState.idle
 
     let entitiesNode = SKNode()
@@ -35,7 +37,14 @@ class SKPScene: SKScene {
     }
 
     override func didChangeSize(_ oldSize: CGSize) {
+        let shrunk = size * 0.95
+        let origin = CGPoint(x: -shrunk.width / 2, y: -shrunk.height / 2)
+        let pb = SKPhysicsBody(edgeLoopFrom: CGRect(origin: origin, size: shrunk))
+
+        edgeLoop = pb
+
         Task { @MainActor in
+            physicsWorldRelay.loadState(from: self)
             gameSceneRelay?.viewSize = size
         }
     }

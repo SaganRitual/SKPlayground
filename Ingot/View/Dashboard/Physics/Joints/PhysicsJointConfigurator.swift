@@ -15,9 +15,8 @@ struct PhysicsJointConfigurator: View {
     var body: some View {
         ZStack {
             if selectedPhysicsRelay.selected?.isJoint ?? false {
-                Text("Physics Joint")
+                Text("\(Utility.forceCast(selectedPhysicsRelay.selected, to: PhysicsJointType.self).rawValue) Joint")
                     .underline()
-                    .padding(.bottom)
 
                 switch selectedPhysicsRelay.selected {
                 case .jointFixed(let fixedRelay):

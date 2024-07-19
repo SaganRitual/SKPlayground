@@ -72,6 +72,6 @@ struct ClickToPlaceView: View {
                     .frame(height: pickerHeight)
             }
         }
-        .padding()
+        .padding([.bottom, .horizontal])
     }
 }

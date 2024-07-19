@@ -4,7 +4,7 @@ import SpriteKit
 import SwiftUI
 
 enum PhysicsFieldType: String, CaseIterable, Identifiable, RawRepresentable {
-    var id: String { self.rawValue }
+    var id: String { self.rawValue.capitalized }
 
     case drag = "Drag", electric = "Electric", linearGravity = "Linear Gravity"
     case magnetic = "Magnetic", noise = "Noise", radialGravity = "Radial Gravity"
@@ -13,26 +13,23 @@ enum PhysicsFieldType: String, CaseIterable, Identifiable, RawRepresentable {
 }
 
 struct PhysicsFieldConfigurator: View {
+    @ObservedObject var physicsMaskNamesManager: PhysicsMaskNamesManager
     @ObservedObject var selectedPhysicsRelay: SelectedPhysicsRelay
-
-    @StateObject var physicsMaskNames = PhysicsMaskNames()
 
     var body: some View {
         VStack {
             if case let .field(physicsFieldRelay) = selectedPhysicsRelay.selected {
-                Text("Physics Field")
+                Text("\(physicsFieldRelay.fieldType.id) Field")
                     .underline()
-                    .padding(.bottom)
 
                 PhysicsFieldTogglesView(physicsFieldRelay: physicsFieldRelay)
                 PhysicsFieldSlidersGrid(physicsFieldRelay: physicsFieldRelay)
-                PhysicsFieldMasksView(physicsMaskNames: physicsMaskNames)
+                PhysicsFieldMasksView(
+                    physicsFieldRelay: physicsFieldRelay,
+                    physicsMaskNamesManager: physicsMaskNamesManager
+                )
             }
         }
         .padding(.vertical)
     }
-}
-
-#Preview {
-    PhysicsFieldConfigurator(selectedPhysicsRelay: SelectedPhysicsRelay(.field(PhysicsFieldRelay())))
 }

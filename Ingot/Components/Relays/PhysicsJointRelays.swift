@@ -48,7 +48,7 @@ final class PhysicsJointLimitRelay: PhysicsJointRelay {
     }
 
     override func subscribe(entityManager: EntityManager) {
-        $maxLength.sink { [weak entityManager] in
+        $maxLength.dropFirst().sink { [weak entityManager] in
             Self.selectedJoint(entityManager: entityManager)?.maxLength = $0
         }
         .store(in: &subscriptions)
@@ -79,27 +79,27 @@ final class PhysicsJointPinRelay: PhysicsJointRelay {
     }
 
     override func subscribe(entityManager: EntityManager) {
-        $frictionTorque.sink { [weak entityManager] in
+        $frictionTorque.dropFirst().sink { [weak entityManager] in
             Self.selectedJoint(entityManager: entityManager)?.frictionTorque = $0
         }
         .store(in: &subscriptions)
 
-        $lowerAngleLimit.sink { [weak entityManager] in
+        $lowerAngleLimit.dropFirst().sink { [weak entityManager] in
             Self.selectedJoint(entityManager: entityManager)?.lowerAngleLimit = $0
         }
         .store(in: &subscriptions)
 
-        $rotationSpeed.sink { [weak entityManager] in
+        $rotationSpeed.dropFirst().sink { [weak entityManager] in
             Self.selectedJoint(entityManager: entityManager)?.rotationSpeed = $0
         }
         .store(in: &subscriptions)
 
-        $shouldEnableLimits.sink { [weak entityManager] in
+        $shouldEnableLimits.dropFirst().sink { [weak entityManager] in
             Self.selectedJoint(entityManager: entityManager)?.shouldEnableLimits = $0
         }
         .store(in: &subscriptions)
 
-        $upperAngleLimit.sink { [weak entityManager] in
+        $upperAngleLimit.dropFirst().sink { [weak entityManager] in
             Self.selectedJoint(entityManager: entityManager)?.upperAngleLimit = $0
         }
         .store(in: &subscriptions)
@@ -126,17 +126,17 @@ final class PhysicsJointSlidingRelay: PhysicsJointRelay {
     }
 
     override func subscribe(entityManager: EntityManager) {
-        $lowerDistanceLimit.sink { [weak entityManager] in
+        $lowerDistanceLimit.dropFirst().sink { [weak entityManager] in
             Self.selectedJoint(entityManager: entityManager)?.lowerDistanceLimit = $0
         }
         .store(in: &subscriptions)
 
-        $shouldEnableLimits.sink { [weak entityManager] in
+        $shouldEnableLimits.dropFirst().sink { [weak entityManager] in
             Self.selectedJoint(entityManager: entityManager)?.shouldEnableLimits = $0
         }
         .store(in: &subscriptions)
 
-        $upperDistanceLimit.sink { [weak entityManager] in
+        $upperDistanceLimit.dropFirst().sink { [weak entityManager] in
             Self.selectedJoint(entityManager: entityManager)?.upperDistanceLimit = $0
         }
         .store(in: &subscriptions)
@@ -160,12 +160,12 @@ final class PhysicsJointSpringRelay: PhysicsJointRelay {
     }
 
     override func subscribe(entityManager: EntityManager) {
-        $damping.sink { [weak entityManager] in
+        $damping.dropFirst().sink { [weak entityManager] in
             Self.selectedJoint(entityManager: entityManager)?.damping = $0
         }
         .store(in: &subscriptions)
 
-        $frequency.sink { [weak entityManager] in
+        $frequency.dropFirst().sink { [weak entityManager] in
             Self.selectedJoint(entityManager: entityManager)?.frequency = $0
         }
         .store(in: &subscriptions)

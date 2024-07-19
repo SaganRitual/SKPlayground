@@ -20,7 +20,7 @@ struct PhysicsBodyTogglesView: View {
                 isOn: $physicsBodyRelay.allowsRotation, fieldKeypath: \.allowsRotation, title: "Allow Rotation"
             )
         }
-        .padding()
+        .padding([.horizontal, .top])
     }
 }
 

@@ -143,6 +143,9 @@ struct PhysicsWorldSlidersGrid: View {
                     ),
                     titleView: Text("Gravity X")
                 )
+                .onChange(of: gravityX) { _, newValue in
+                    physicsWorldRelay.gravity.dx = newValue
+                }
             }
 
             GridRow {
@@ -161,6 +164,9 @@ struct PhysicsWorldSlidersGrid: View {
                     ),
                     titleView: Text("Gravity Y")
                 )
+                .onChange(of: gravityY) { _, newValue in
+                    physicsWorldRelay.gravity.dy  = newValue
+                }
             }
         }
         .padding()

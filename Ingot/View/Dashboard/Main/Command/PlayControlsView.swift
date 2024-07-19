@@ -21,7 +21,7 @@ struct PlayButtonsView: View {
                 }
             }
         }
-        .padding()
+        .padding([.horizontal, .top])
     }
 }
 

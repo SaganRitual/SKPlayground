@@ -44,6 +44,7 @@ final class Field: GameEntity {
         fieldNode.userData = ["fieldType": fieldType]
 
         let field = Field(fieldNode, at: position)
+        field.face.rootSceneNode.addChild(fieldNode)
         field.face.setOwnerEntity(field)
 
         return field

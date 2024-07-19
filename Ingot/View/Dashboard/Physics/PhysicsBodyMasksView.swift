@@ -4,42 +4,39 @@ import SpriteKit
 import SwiftUI
 
 struct PhysicsBodyMasksView: View {
-//    @EnvironmentObject var gameController: GameController
-
-    @ObservedObject var physicsMaskNames: PhysicsMaskNames
-
-    @State private var applyFields = Set<Int>()
-    @State private var collideWith = Set<Int>()
-    @State private var reportContactWith = Set<Int>()
+    @ObservedObject var physicsBodyRelay: PhysicsBodyRelay
+    @ObservedObject var physicsMaskNamesManager: PhysicsMaskNamesManager
 
     var body: some View {
         VStack {
             SKPMaskSelector<SKPhysicsBody>(
-                $applyFields,
+                $physicsBodyRelay.memberOf,
+                fieldKeypath: \.categoryBitMask,
+                label: Text("Member Of"),
+                options: physicsMaskNamesManager.names
+            )
+
+            SKPMaskSelector<SKPhysicsBody>(
+                $physicsBodyRelay.applyFields,
                 fieldKeypath: \.fieldBitMask,
                 label: Text("Apply Fields"),
-                options: physicsMaskNames.names
+                options: physicsMaskNamesManager.names
             )
 
             SKPMaskSelector<SKPhysicsBody>(
-                $collideWith,
+                $physicsBodyRelay.collideWith,
                 fieldKeypath: \.collisionBitMask,
                 label: Text("Collide With"),
-                options: physicsMaskNames.names
+                options: physicsMaskNamesManager.names
             )
 
             SKPMaskSelector<SKPhysicsBody>(
-                $reportContactWith,
+                $physicsBodyRelay.reportContactWith,
                 fieldKeypath: \.contactTestBitMask,
                 label: Text("Report Contact With"),
-                options: physicsMaskNames.names
+                options: physicsMaskNamesManager.names
             )
         }
         .padding([.top, .horizontal])
     }
 }
-
-//#Preview {
-//    PhysicsBodyMasksView(physicsMaskNames: PhysicsMaskNames())
-//        .environmentObject(GameController())
-//}

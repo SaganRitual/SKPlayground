@@ -70,8 +70,18 @@ extension Utility {
             currentValue + (UInt32(1) << newIndex)
         }
 
-        print("intSet \(intSet) -> result \(result)")
+        print("intSet \(intSet) -> result \(String(result, radix: 2))")
 
         return result
+    }
+
+    static func makeIndexSet(_ bitmask: UInt32) -> Set<Int> {
+        var indexSet = Set<Int>()
+
+        for ix in 0..<32 where (bitmask & (1 << ix)) != 0 {
+            indexSet.insert(ix)
+        }
+
+        return indexSet
     }
 }

@@ -19,7 +19,7 @@ extension RelayManager {
 
     func activatePhysicsRelay(for entity: GameEntity?) {
         if entity == nil {
-            selectedPhysicsRelay.setSelected(.world(physicsWorldRelay))
+            selectedPhysicsRelay.clearSelection()
             return
         }
 

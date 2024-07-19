@@ -13,6 +13,7 @@ struct PhysicsFieldSlidersGridRow<RelayObject: AnyObject, TargetField, TitleView
     @Binding var minLabelWidths: [CGFloat]
     @Binding var maxLabelWidths: [CGFloat]
 
+    let fieldKeyPath: ReferenceWritableKeyPath<PhysicsFieldRelay, TargetField>
     let maxLabel: String
     let minLabel: String
     let range: ClosedRange<TargetField>
@@ -52,7 +53,10 @@ struct PhysicsFieldSlidersGridRow<RelayObject: AnyObject, TargetField, TitleView
                 )
 
             Slider(
-                value: $physicsFieldRelay.animationSpeed,
+                value: Binding(
+                    get: { Float(physicsFieldRelay[keyPath: fieldKeyPath]) },
+                    set: { physicsFieldRelay[keyPath: fieldKeyPath] = TargetField($0) }
+                ),
                 in: Float(range.lowerBound)...Float(range.upperBound)
             )
 
@@ -76,6 +80,18 @@ struct PhysicsFieldSlidersGrid: View {
     @State private var scalarWidths = [CGFloat]()
     @State private var minLabelWidths = [CGFloat]()
     @State private var maxLabelWidths = [CGFloat]()
+
+    @State private var gravityX = Float.zero
+    @State private var gravityY = Float.zero
+
+    func getLabelsAndRange<T: BinaryFloatingPoint>() -> (max: String, min: String, range: ClosedRange<T>) {
+        switch physicsFieldRelay.fieldType {
+        case .vortex:
+            return ("+0.5", "-0.5", -0.5...0.5)
+        default:
+            return ("+10.0", "-10.0", -10.0...10.0)
+        }
+    }
 
     var body: some View {
         Grid {
@@ -115,33 +131,75 @@ struct PhysicsFieldSlidersGrid: View {
             }
             .frame(height: 0)
 
-            GridRow {
-                PhysicsFieldSlidersGridRow<PhysicsFieldRelay, CGFloat, Text, Text>(
-                    physicsFieldRelay: physicsFieldRelay,
-                    titleWidths: $titleWidths,
-                    scalarWidths: $scalarWidths,
-                    minLabelWidths: $minLabelWidths,
-                    maxLabelWidths: $maxLabelWidths,
-                    maxLabel: "+10.0",
-                    minLabel: "0.0",
-                    range: 0...10,
-                    scalarView: Text(
-                        String(format: "%.2f", physicsFieldRelay.animationSpeed)
-                    ),
-                    titleView: Text("Animation Speed")
-                )
+            if physicsFieldRelay.fieldType == .noise || physicsFieldRelay.fieldType == .turbulence {
+                GridRow {
+                    PhysicsFieldSlidersGridRow<PhysicsFieldRelay, Float, Text, Text>(
+                        physicsFieldRelay: physicsFieldRelay,
+                        titleWidths: $titleWidths,
+                        scalarWidths: $scalarWidths,
+                        minLabelWidths: $minLabelWidths,
+                        maxLabelWidths: $maxLabelWidths,
+                        fieldKeyPath: \.animationSpeed,
+                        maxLabel: "+10.0",
+                        minLabel: "0.0",
+                        range: 0...10,
+                        scalarView: Text(
+                            String(format: "%.2f", physicsFieldRelay.animationSpeed)
+                        ),
+                        titleView: Text("Animation Speed")
+                    )
+                }
+            }
+
+            if physicsFieldRelay.fieldType == .linearGravity {
+                GridRow {
+                    PhysicsFieldSlidersGridRow<PhysicsFieldRelay, Float, Text, Text>(
+                        physicsFieldRelay: physicsFieldRelay,
+                        titleWidths: $titleWidths,
+                        scalarWidths: $scalarWidths,
+                        minLabelWidths: $minLabelWidths,
+                        maxLabelWidths: $maxLabelWidths,
+                        fieldKeyPath: \.gravityX,
+                        maxLabel: "+10.0",
+                        minLabel: "-10.0",
+                        range: (-10.0)...(+10.0),
+                        scalarView: Text(
+                            String(format: "%.2f", gravityX)
+                        ),
+                        titleView: Text("Gravity X")
+                    )
+                }
+
+                GridRow {
+                    PhysicsFieldSlidersGridRow<PhysicsFieldRelay, Float, Text, Text>(
+                        physicsFieldRelay: physicsFieldRelay,
+                        titleWidths: $titleWidths,
+                        scalarWidths: $scalarWidths,
+                        minLabelWidths: $minLabelWidths,
+                        maxLabelWidths: $maxLabelWidths,
+                        fieldKeyPath: \.gravityY,
+                        maxLabel: "+10.0",
+                        minLabel: "-10.0",
+                        range: (-10.0)...(+10.0),
+                        scalarView: Text(
+                            String(format: "%.2f", gravityY)
+                        ),
+                        titleView: Text("Gravity Y")
+                    )
+                }
             }
 
             GridRow {
-                PhysicsFieldSlidersGridRow<PhysicsFieldRelay, CGFloat, Text, Text>(
+                PhysicsFieldSlidersGridRow<PhysicsFieldRelay, Float, Text, Text>(
                     physicsFieldRelay: physicsFieldRelay,
                     titleWidths: $titleWidths,
                     scalarWidths: $scalarWidths,
                     minLabelWidths: $minLabelWidths,
                     maxLabelWidths: $maxLabelWidths,
-                    maxLabel: "+10.0",
+                    fieldKeyPath: \.falloff,
+                    maxLabel: "+3.0",
                     minLabel: "0.0",
-                    range: 0...10,
+                    range: 0...3,
                     scalarView: Text(
                         String(format: "%.2f", physicsFieldRelay.falloff)
                     ),
@@ -150,15 +208,16 @@ struct PhysicsFieldSlidersGrid: View {
             }
 
             GridRow {
-                PhysicsFieldSlidersGridRow<PhysicsFieldRelay, CGFloat, Text, Text>(
+                PhysicsFieldSlidersGridRow<PhysicsFieldRelay, Float, Text, Text>(
                     physicsFieldRelay: physicsFieldRelay,
                     titleWidths: $titleWidths,
                     scalarWidths: $scalarWidths,
                     minLabelWidths: $minLabelWidths,
                     maxLabelWidths: $maxLabelWidths,
-                    maxLabel: "+100.0",
+                    fieldKeyPath: \.minimumRadius,
+                    maxLabel: "+512.0",
                     minLabel: " 0.0",
-                    range: 0...100,
+                    range: 0...512,
                     scalarView: Text(
                         String(format: "%.2f", physicsFieldRelay.minimumRadius)
                     ),
@@ -166,33 +225,38 @@ struct PhysicsFieldSlidersGrid: View {
                 )
             }
 
-            GridRow {
-                PhysicsFieldSlidersGridRow<PhysicsFieldRelay, CGFloat, Text, Text>(
-                    physicsFieldRelay: physicsFieldRelay,
-                    titleWidths: $titleWidths,
-                    scalarWidths: $scalarWidths,
-                    minLabelWidths: $minLabelWidths,
-                    maxLabelWidths: $maxLabelWidths,
-                    maxLabel: "+10.0",
-                    minLabel: "0.0",
-                    range: 0...10,
-                    scalarView: Text(
-                        String(format: "%.2f", physicsFieldRelay.smoothness)
-                    ),
-                    titleView: Text("Smoothness")
-                )
+            if physicsFieldRelay.fieldType == .noise {
+                GridRow {
+                    PhysicsFieldSlidersGridRow<PhysicsFieldRelay, Float, Text, Text>(
+                        physicsFieldRelay: physicsFieldRelay,
+                        titleWidths: $titleWidths,
+                        scalarWidths: $scalarWidths,
+                        minLabelWidths: $minLabelWidths,
+                        maxLabelWidths: $maxLabelWidths,
+                        fieldKeyPath: \.smoothness,
+                        maxLabel: "+10.0",
+                        minLabel: "0.0",
+                        range: 0...10,
+                        scalarView: Text(
+                            String(format: "%.2f", physicsFieldRelay.smoothness)
+                        ),
+                        titleView: Text("Smoothness")
+                    )
+                }
             }
 
             GridRow {
-                PhysicsFieldSlidersGridRow<PhysicsFieldRelay, CGFloat, Text, Text>(
+                let (max, min, range): (String, String, ClosedRange<Float>) = getLabelsAndRange()
+                PhysicsFieldSlidersGridRow<PhysicsFieldRelay, Float, Text, Text>(
                     physicsFieldRelay: physicsFieldRelay,
                     titleWidths: $titleWidths,
                     scalarWidths: $scalarWidths,
                     minLabelWidths: $minLabelWidths,
                     maxLabelWidths: $maxLabelWidths,
-                    maxLabel: "+100.0",
-                    minLabel: " 0.0",
-                    range: 0...100,
+                    fieldKeyPath: \.strength,
+                    maxLabel: max,
+                    minLabel: min,
+                    range: range,
                     scalarView: Text(
                         String(format: "%.2f", physicsFieldRelay.strength)
                     ),

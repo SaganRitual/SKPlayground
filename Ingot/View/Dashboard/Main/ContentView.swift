@@ -9,10 +9,13 @@ struct ContentView: View {
     let entityManager = EntityManager()
     let gestureEventDispatcher = GestureEventDispatcher()
     let inputEventDispatcher = InputEventDispatcher()
+    let physicsMaskNamesManager = PhysicsMaskNamesManager()
     let relayManager = RelayManager()
     let sceneManager = SKPScene(size: Self.sceneMinimumSize)
     let selectionMarquee = SelectionMarquee()
     let workflowManager = WorkflowManager()
+
+    @State private var activeTab = CommandRelay.ActiveTab.physicsWorld
 
     var body: some View {
         HStack(alignment: .top) {
@@ -35,12 +38,14 @@ struct ContentView: View {
 
                     inputEventDispatcher.gestureDelegate = gestureEventDispatcher
 
-                    sceneManager.inputDelegate = inputEventDispatcher
                     sceneManager.gameSceneRelay = relayManager.gameSceneRelay
+                    sceneManager.inputDelegate = inputEventDispatcher
+                    sceneManager.physicsWorldRelay = relayManager.physicsWorldRelay
 
                     sceneManager.addChild(selectionMarquee.marqueeRootNode)
 
                     relayManager.subscribeToRelays(entityManager: entityManager, sceneManager: sceneManager)
+                    relayManager.physicsWorldRelay.loadState(from: sceneManager)
                     relayManager.activatePhysicsRelay(for: nil)
 
                     workflowManager.workflowRelay = relayManager.workflowRelay
@@ -54,7 +59,7 @@ struct ContentView: View {
                 PlaygroundStatusView(gameSceneRelay: relayManager.gameSceneRelay)
                 .padding()
                 .border(Color(NSColor.secondarySystemFill))
-                .padding([.horizontal, .top])
+                .padding(.top)
 
                 CommandView(
                     commandRelay: relayManager.commandRelay,
@@ -63,18 +68,49 @@ struct ContentView: View {
                 )
                 .padding()
                 .border(Color(NSColor.secondarySystemFill))
-                .padding(.horizontal)
 
-                ZStack {
-                    PhysicsBodyConfigurator(selectedPhysicsRelay: relayManager.selectedPhysicsRelay)
-                    PhysicsFieldConfigurator(selectedPhysicsRelay: relayManager.selectedPhysicsRelay)
-                    PhysicsJointConfigurator(selectedPhysicsRelay: relayManager.selectedPhysicsRelay)
-                    PhysicsWorldConfigurator(selectedPhysicsRelay: relayManager.selectedPhysicsRelay)
+                VStack {
+                    Text("Configure")
+                        .underline()
+                        .padding(.bottom)
+
+                    TabView {
+                        PhysicsWorldConfigurator(
+                            physicsMaskNamesManager: physicsMaskNamesManager,
+                            physicsWorldRelay: relayManager.physicsWorldRelay
+                        )
+                            .tabItem {
+                                Label("World", systemImage: "globe.europe.africa")
+                            }
+                            .tag(CommandRelay.ActiveTab.physicsWorld)
+
+                        PhysicsEntityConfigurators(
+                            physicsMaskNamesManager: physicsMaskNamesManager,
+                            selectedPhysicsRelay: relayManager.selectedPhysicsRelay
+                        )
+                            .tabItem {
+                                Label("Physics Entity", systemImage: "globe.europe.africa")
+                            }
+                            .tag(CommandRelay.ActiveTab.physicsEntity)
+
+                        Text("Physics Actions")
+                            .tabItem {
+                                Label("Physics Actions", systemImage: "globe.europe.africa")
+                            }
+                            .tag(CommandRelay.ActiveTab.physicsAction)
+
+                        Text("Space Actions")
+                            .tabItem {
+                                Label("Space Actions", systemImage: "globe.europe.africa")
+                            }
+                            .tag(CommandRelay.ActiveTab.spaceAction)
+                    }
                 }
                 .padding()
                 .border(Color(NSColor.secondarySystemFill))
-                .padding(.horizontal)
+                .padding(.bottom)
             }
+            .padding(.trailing)
         }
         .monospaced()
     }

@@ -3,26 +3,19 @@
 import SwiftUI
 
 struct PhysicsWorldConfigurator: View {
-    @ObservedObject var selectedPhysicsRelay: SelectedPhysicsRelay
-
-    @StateObject var physicsMaskNames = PhysicsMaskNames()
+    @ObservedObject var physicsMaskNamesManager: PhysicsMaskNamesManager
+    @ObservedObject var physicsWorldRelay: PhysicsWorldRelay
 
     var body: some View {
         VStack {
-            if case let .world(physicsWorldRelay) = selectedPhysicsRelay.selected {
-                Text("Physics World")
-                    .underline()
-                    .padding(.bottom)
+            Text("Physics World")
+                .underline()
+                .padding(.bottom)
 
-                PhysicsWorldSlidersGrid(physicsWorldRelay: physicsWorldRelay)
-                PhysicsWorldEdgeLoopView(physicsMaskNames: physicsMaskNames, physicsWorldRelay: physicsWorldRelay)
-                PhysicsMaskNamesConfigurator(physicsMaskNames: physicsMaskNames)
-            }
+            PhysicsWorldSlidersGrid(physicsWorldRelay: physicsWorldRelay)
+            PhysicsEdgeLoopMasksView(physicsMaskNamesManager: physicsMaskNamesManager, physicsWorldRelay: physicsWorldRelay)
+            PhysicsMaskNamesConfigurator(physicsMaskNamesManager: physicsMaskNamesManager)
         }
         .padding(.vertical)
     }
-}
-
-#Preview {
-    PhysicsWorldConfigurator(selectedPhysicsRelay: SelectedPhysicsRelay(.world(PhysicsWorldRelay())))
 }

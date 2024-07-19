@@ -9,11 +9,11 @@ extension SKPScene {
     }
 
     func enableEdgeLoop(_ enable: Bool) {
-
+        self.physicsBody = enable ? edgeLoop : nil
     }
 
     func isEdgeLoopEnabled() -> Bool {
-        false
+        self.physicsBody != nil
     }
 
     func startActions() {

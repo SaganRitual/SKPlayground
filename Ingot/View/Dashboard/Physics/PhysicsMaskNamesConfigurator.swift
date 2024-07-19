@@ -2,26 +2,8 @@
 
 import SwiftUI
 
-final class PhysicsMaskNames: ObservableObject {
-    @Published var names: [String] = (0..<32).map { "Mask \($0)" }
-
-    func renameMask(currentName: String, newName: String) -> Int? {
-        if let index = names.firstIndex(of: newName) {
-            return index
-        }
-
-        if let index = names.firstIndex(of: currentName) {
-            names[index] = newName
-        }
-
-        return nil
-    }
-}
-
 struct PhysicsMaskNamesConfigurator: View {
-//    @EnvironmentObject var gameController: GameController
-
-    @ObservedObject var physicsMaskNames: PhysicsMaskNames
+    @ObservedObject var physicsMaskNamesManager: PhysicsMaskNamesManager
 
     @State private var currentMaskName = "Mask 0"
     @State private var duplicateCategoryIndex = 0
@@ -34,7 +16,7 @@ struct PhysicsMaskNamesConfigurator: View {
             VStack(alignment: .leading) {
                 HStack {
                     Picker("Mask Names", selection: $currentMaskName) {
-                        ForEach(physicsMaskNames.names, id: \.self) { name in
+                        ForEach(physicsMaskNamesManager.names, id: \.self) { name in
                             Text(name)
                         }
                     }
@@ -53,7 +35,7 @@ struct PhysicsMaskNamesConfigurator: View {
 
                         HStack {
                             Button("Submit") {
-                                if let duplicateIx = physicsMaskNames.renameMask(
+                                if let duplicateIx = physicsMaskNamesManager.renameMask(
                                     currentName: currentMaskName, newName: editedName
                                 ) {
                                     duplicateCategoryIndex = duplicateIx
@@ -75,7 +57,7 @@ struct PhysicsMaskNamesConfigurator: View {
                         title: Text("Masks names must be unique"),
                         message: Text(
                             "There is already a mask called "
-                            + "\(physicsMaskNames.names[duplicateCategoryIndex])"
+                            + "\(physicsMaskNamesManager.names[duplicateCategoryIndex])"
                         ),
                         dismissButton: .cancel()
                     )
@@ -85,8 +67,3 @@ struct PhysicsMaskNamesConfigurator: View {
         .padding(.horizontal)
     }
 }
-
-//#Preview {
-//    PhysicsMaskNamesConfigurator(physicsMaskNames: PhysicsMaskNames())
-//        .environmentObject(GameController())
-//}

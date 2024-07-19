@@ -4,26 +4,18 @@ import SpriteKit
 import SwiftUI
 
 struct PhysicsFieldMasksView: View {
-//    @EnvironmentObject var gameController: GameController
-
-    @ObservedObject var physicsMaskNames: PhysicsMaskNames
-
-    @State private var applyToBodies = Set<Int>()
+    @ObservedObject var physicsFieldRelay: PhysicsFieldRelay
+    @ObservedObject var physicsMaskNamesManager: PhysicsMaskNamesManager
 
     var body: some View {
         VStack {
             SKPMaskSelector<SKFieldNode>(
-                $applyToBodies,
+                $physicsFieldRelay.applyTo,
                 fieldKeypath: \.categoryBitMask,
                 label: Text("Apply To"),
-                options: physicsMaskNames.names
+                options: physicsMaskNamesManager.names
             )
         }
         .padding([.top, .horizontal])
     }
 }
-
-//#Preview {
-//    PhysicsFieldMasksView(physicsMaskNames: PhysicsMaskNames())
-//        .environmentObject(GameController())
-//}

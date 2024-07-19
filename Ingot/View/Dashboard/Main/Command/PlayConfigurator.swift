@@ -29,7 +29,6 @@ struct PlayConfigurator: View {
             PlayButtonsView(sceneManager: sceneManager)
             PlaySlidersGrid(commandRelay: commandRelay)
         }
-        .padding(.vertical)
     }
 }
 

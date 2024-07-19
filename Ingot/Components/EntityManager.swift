@@ -13,10 +13,10 @@ final class EntityManager {
     private weak var hotDragTarget: GameEntity?
     private var hotDragSubhandle: SelectionHaloRS.Directions?
 
-    func singleSelected() -> Gremlin? {
+    func singleSelected() -> GameEntity? {
         let selected = getSelected()
         if selected.count == 1 {
-            return selected.first as? Gremlin
+            return selected.first
         } else {
             return nil
         }

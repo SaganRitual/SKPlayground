@@ -3,14 +3,9 @@
 import SpriteKit
 import SwiftUI
 
-struct PhysicsWorldEdgeLoopView: View {
-//    @EnvironmentObject var gameController: GameController
-
-    @ObservedObject var physicsMaskNames: PhysicsMaskNames
+struct PhysicsEdgeLoopMasksView: View {
+    @ObservedObject var physicsMaskNamesManager: PhysicsMaskNamesManager
     @ObservedObject var physicsWorldRelay: PhysicsWorldRelay
-
-    @State private var collideWith = Set<Int>()
-    @State private var reportContactWith = Set<Int>()
 
     var body: some View {
         VStack(alignment: .leading) {
@@ -20,23 +15,26 @@ struct PhysicsWorldEdgeLoopView: View {
             .toggleStyle(.checkbox)
 
             SKPMaskSelector<SKPhysicsBody>(
-                $collideWith,
-                fieldKeypath: \.collisionBitMask,
-                label: Text("Collide With"),
-                options: physicsMaskNames.names
+                $physicsWorldRelay.memberOf,
+                fieldKeypath: \.categoryBitMask,
+                label: Text("Member Of"),
+                options: physicsMaskNamesManager.names
             )
 
             SKPMaskSelector<SKPhysicsBody>(
-                $reportContactWith,
+                $physicsWorldRelay.collideWith,
+                fieldKeypath: \.collisionBitMask,
+                label: Text("Collide With"),
+                options: physicsMaskNamesManager.names
+            )
+
+            SKPMaskSelector<SKPhysicsBody>(
+                $physicsWorldRelay.reportContactWith,
                 fieldKeypath: \.contactTestBitMask,
                 label: Text("Report Contact With"),
-                options: physicsMaskNames.names
+                options: physicsMaskNamesManager.names
             )
         }
         .padding()
     }
 }
-
-//#Preview {
-//    PhysicsWorldEdgeLoopView(physicsMaskNames: PhysicsMaskNames(), physicsWorldRelay: PhysicsWorldRelay())
-//}

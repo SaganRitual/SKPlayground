@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		D4301D762C48623A00A30A26 /* vector_float3+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4301D752C48623A00A30A26 /* vector_float3+Extensions.swift */; };
+		D4301D952C4969F300A30A26 /* PhysicsEntityConfigurators.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4301D942C4969F300A30A26 /* PhysicsEntityConfigurators.swift */; };
 		D4D6510C2C429B290086FAC9 /* IngotApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4D6510B2C429B290086FAC9 /* IngotApp.swift */; };
 		D4D6510E2C429B290086FAC9 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4D6510D2C429B290086FAC9 /* ContentView.swift */; };
 		D4D651102C429B2A0086FAC9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D4D6510F2C429B2A0086FAC9 /* Assets.xcassets */; };
@@ -53,7 +54,7 @@
 		D4D651A72C429B960086FAC9 /* PhysicsFieldTogglesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4D651532C429B960086FAC9 /* PhysicsFieldTogglesView.swift */; };
 		D4D651A82C429B960086FAC9 /* PhysicsMaskNamesConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4D651542C429B960086FAC9 /* PhysicsMaskNamesConfigurator.swift */; };
 		D4D651A92C429B960086FAC9 /* PhysicsWorldConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4D651552C429B960086FAC9 /* PhysicsWorldConfigurator.swift */; };
-		D4D651AA2C429B960086FAC9 /* PhysicsWorldEdgeLoopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4D651562C429B960086FAC9 /* PhysicsWorldEdgeLoopView.swift */; };
+		D4D651AA2C429B960086FAC9 /* PhysicsEdgeLoopMasksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4D651562C429B960086FAC9 /* PhysicsEdgeLoopMasksView.swift */; };
 		D4D651AB2C429B960086FAC9 /* PhysicsWorldSlidersGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4D651572C429B960086FAC9 /* PhysicsWorldSlidersGrid.swift */; };
 		D4D651AC2C429B960086FAC9 /* GameSceneRelay.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4D651592C429B960086FAC9 /* GameSceneRelay.swift */; };
 		D4D651AD2C429B960086FAC9 /* SKPScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4D6515C2C429B960086FAC9 /* SKPScene.swift */; };
@@ -90,10 +91,12 @@
 		D4D651DF2C4352C70086FAC9 /* CommandRelay.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4D651DE2C4352C70086FAC9 /* CommandRelay.swift */; };
 		D4D651E12C43567E0086FAC9 /* PlayConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4D651E02C43567E0086FAC9 /* PlayConfigurator.swift */; };
 		D4D651E32C4356D60086FAC9 /* PlaySlidersGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4D651E22C4356D60086FAC9 /* PlaySlidersGrid.swift */; };
+		D4FE50992C49C726005A55E4 /* PhysicsMaskNamesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4FE50982C49C726005A55E4 /* PhysicsMaskNamesManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		D4301D752C48623A00A30A26 /* vector_float3+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "vector_float3+Extensions.swift"; sourceTree = "<group>"; };
+		D4301D942C4969F300A30A26 /* PhysicsEntityConfigurators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhysicsEntityConfigurators.swift; sourceTree = "<group>"; };
 		D4D651082C429B280086FAC9 /* Ingot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ingot.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4D6510B2C429B290086FAC9 /* IngotApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngotApp.swift; sourceTree = "<group>"; };
 		D4D6510D2C429B290086FAC9 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -141,7 +144,7 @@
 		D4D651532C429B960086FAC9 /* PhysicsFieldTogglesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhysicsFieldTogglesView.swift; sourceTree = "<group>"; };
 		D4D651542C429B960086FAC9 /* PhysicsMaskNamesConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhysicsMaskNamesConfigurator.swift; sourceTree = "<group>"; };
 		D4D651552C429B960086FAC9 /* PhysicsWorldConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhysicsWorldConfigurator.swift; sourceTree = "<group>"; };
-		D4D651562C429B960086FAC9 /* PhysicsWorldEdgeLoopView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhysicsWorldEdgeLoopView.swift; sourceTree = "<group>"; };
+		D4D651562C429B960086FAC9 /* PhysicsEdgeLoopMasksView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhysicsEdgeLoopMasksView.swift; sourceTree = "<group>"; };
 		D4D651572C429B960086FAC9 /* PhysicsWorldSlidersGrid.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhysicsWorldSlidersGrid.swift; sourceTree = "<group>"; };
 		D4D651592C429B960086FAC9 /* GameSceneRelay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameSceneRelay.swift; sourceTree = "<group>"; };
 		D4D6515C2C429B960086FAC9 /* SKPScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKPScene.swift; sourceTree = "<group>"; };
@@ -179,6 +182,7 @@
 		D4D651DE2C4352C70086FAC9 /* CommandRelay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandRelay.swift; sourceTree = "<group>"; };
 		D4D651E02C43567E0086FAC9 /* PlayConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayConfigurator.swift; sourceTree = "<group>"; };
 		D4D651E22C4356D60086FAC9 /* PlaySlidersGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaySlidersGrid.swift; sourceTree = "<group>"; };
+		D4FE50982C49C726005A55E4 /* PhysicsMaskNamesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhysicsMaskNamesManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -303,7 +307,7 @@
 				D4D651532C429B960086FAC9 /* PhysicsFieldTogglesView.swift */,
 				D4D651542C429B960086FAC9 /* PhysicsMaskNamesConfigurator.swift */,
 				D4D651552C429B960086FAC9 /* PhysicsWorldConfigurator.swift */,
-				D4D651562C429B960086FAC9 /* PhysicsWorldEdgeLoopView.swift */,
+				D4D651562C429B960086FAC9 /* PhysicsEdgeLoopMasksView.swift */,
 				D4D651572C429B960086FAC9 /* PhysicsWorldSlidersGrid.swift */,
 			);
 			path = Physics;
@@ -396,6 +400,7 @@
 				D4D651712C429B960086FAC9 /* EntityManager.swift */,
 				D4D651722C429B960086FAC9 /* GestureEventDispatcher.swift */,
 				D4D651732C429B960086FAC9 /* InputEventDispatcher.swift */,
+				D4FE50982C49C726005A55E4 /* PhysicsMaskNamesManager.swift */,
 				D4D651D02C430EDA0086FAC9 /* RelayManager.swift */,
 				D4D6517A2C429B960086FAC9 /* SelectionMarquee.swift */,
 				D4D651742C429B960086FAC9 /* Utility.swift */,
@@ -419,6 +424,7 @@
 			children = (
 				D4D651D62C434F370086FAC9 /* Command */,
 				D4D6510D2C429B290086FAC9 /* ContentView.swift */,
+				D4301D942C4969F300A30A26 /* PhysicsEntityConfigurators.swift */,
 				D4D651CE2C430E620086FAC9 /* PlaygroundStatusView.swift */,
 			);
 			path = Main;
@@ -543,6 +549,7 @@
 				D4D651C02C429B960086FAC9 /* Utility.swift in Sources */,
 				D4D651A02C429B960086FAC9 /* PhysicsBodyConfigurator.swift in Sources */,
 				D4D651972C429B960086FAC9 /* PhysicsJointSlidersGridAlignmentRow.swift in Sources */,
+				D4FE50992C49C726005A55E4 /* PhysicsMaskNamesManager.swift in Sources */,
 				D4D651982C429B960086FAC9 /* PhysicsJointSlidingSlidersGridRow.swift in Sources */,
 				D4D651A32C429B960086FAC9 /* PhysicsBodyTogglesView.swift in Sources */,
 				D4D651C52C429B960086FAC9 /* SelectionMarquee.swift in Sources */,
@@ -556,7 +563,7 @@
 				D4D651AE2C429B960086FAC9 /* SKPScene+Extensions.swift in Sources */,
 				D4D651B02C429B960086FAC9 /* SKPSpriteView.swift in Sources */,
 				D4D651CF2C430E620086FAC9 /* PlaygroundStatusView.swift in Sources */,
-				D4D651AA2C429B960086FAC9 /* PhysicsWorldEdgeLoopView.swift in Sources */,
+				D4D651AA2C429B960086FAC9 /* PhysicsEdgeLoopMasksView.swift in Sources */,
 				D4D651BD2C429B960086FAC9 /* EntityManager.swift in Sources */,
 				D4D651B32C429B960086FAC9 /* SKPSlider.swift in Sources */,
 				D4D651BF2C429B960086FAC9 /* InputEventDispatcher.swift in Sources */,
@@ -574,6 +581,7 @@
 				D4D651D82C434F370086FAC9 /* CommandView.swift in Sources */,
 				D4D651A72C429B960086FAC9 /* PhysicsFieldTogglesView.swift in Sources */,
 				D4D651BE2C429B960086FAC9 /* GestureEventDispatcher.swift in Sources */,
+				D4301D952C4969F300A30A26 /* PhysicsEntityConfigurators.swift in Sources */,
 				D4D6517D2C429B960086FAC9 /* GameEntity.swift in Sources */,
 				D4D651B22C429B960086FAC9 /* SKPMaskSelector.swift in Sources */,
 				D4D6517C2C429B960086FAC9 /* Field.swift in Sources */,

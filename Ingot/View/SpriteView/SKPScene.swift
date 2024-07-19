@@ -9,6 +9,7 @@ class SKPScene: SKScene {
     weak var physicsWorldRelay: PhysicsWorldRelay!
 
     var edgeLoop: SKPhysicsBody?
+    var firstPass = true
     var mouseState = InputEvent.MouseState.idle
 
     let entitiesNode = SKNode()
@@ -44,6 +45,11 @@ class SKPScene: SKScene {
         edgeLoop = pb
 
         Task { @MainActor in
+            if firstPass || physicsBody != nil {
+                physicsBody = edgeLoop
+                firstPass = false
+            }
+
             physicsWorldRelay.loadState(from: self)
             gameSceneRelay?.viewSize = size
         }

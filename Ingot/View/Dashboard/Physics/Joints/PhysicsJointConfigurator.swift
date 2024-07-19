@@ -10,38 +10,47 @@ enum PhysicsJointType: String, CaseIterable, Identifiable, RawRepresentable {
 }
 
 struct PhysicsJointConfigurator: View {
-    @ObservedObject var selectedPhysicsRelay: SelectedPhysicsRelay
+    @ObservedObject var gameController: GameController
 
     var body: some View {
         ZStack {
-            if selectedPhysicsRelay.selected?.isJoint ?? false {
-                Text("\(Utility.forceCast(selectedPhysicsRelay.selected, to: PhysicsJointType.self).rawValue) Joint")
+            if let joint = gameController.selectedPhysicsJoint {
+                Text("\(gameController.physicsJointRelay.jointType.rawValue.capitalized) Joint")
                     .underline()
 
-                switch selectedPhysicsRelay.selected {
-                case .jointFixed(let fixedRelay):
-                    PhysicsJointFixedView(relay: fixedRelay)
-                case .jointLimit(let limitRelay):
-                    PhysicsJointLimitView(relay: limitRelay)
-                case .jointPin(let pinRelay):
-                    PhysicsJointPinView(relay: pinRelay)
-                case .jointSliding(let slidingRelay):
-                    PhysicsJointSlidingView(relay: slidingRelay)
-                case .jointSpring(let springRelay):
-                    PhysicsJointSpringView(relay: springRelay)
+                switch joint.joint {
+                case is SKPhysicsJointFixed:
+                    PhysicsJointFixedView(
+                        relay: Utility.forceCast(gameController.physicsJointRelay, to: PhysicsJointFixedRelay.self)
+                    )
 
-                case .none:
-                    Text("No Joint Selected, or Multiple Joints Selected")
+                case is SKPhysicsJointLimit:
+                    PhysicsJointLimitView(
+                        relay: Utility.forceCast(gameController.physicsJointRelay, to: PhysicsJointLimitRelay.self)
+                    )
+
+                case is SKPhysicsJointPin:
+                    PhysicsJointPinView(
+                        relay: Utility.forceCast(gameController.physicsJointRelay, to: PhysicsJointPinRelay.self)
+                    )
+
+                case is SKPhysicsJointSliding:
+                    PhysicsJointSlidingView(
+                        relay: Utility.forceCast(gameController.physicsJointRelay, to: PhysicsJointSlidingRelay.self)
+                    )
+
+                case is SKPhysicsJointSpring:
+                    PhysicsJointSpringView(
+                        relay: Utility.forceCast(gameController.physicsJointRelay, to: PhysicsJointSpringRelay.self)
+                    )
 
                 default:
                     fatalError("We thought this couldn't happen")
                 }
+            } else {
+                Text("No Joint Selected, or Multiple Joints Selected")
             }
         }
         .padding()
     }
-}
-
-#Preview {
-    PhysicsJointConfigurator(selectedPhysicsRelay: SelectedPhysicsRelay(.jointSpring(PhysicsJointSpringRelay())))
 }

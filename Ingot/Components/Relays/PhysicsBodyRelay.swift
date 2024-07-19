@@ -27,7 +27,7 @@ final class PhysicsBodyRelay: ObservableObject {
 
     func loadState(from entity_: GameEntity) {
         let entity = Utility.forceCast(entity_, to: Gremlin.self)
-        let body = Utility.forceCast(entity.physicsBody, to: SKPhysicsBody.self)
+        let body = Utility.forceCast(entity.physicsBody?.body, to: SKPhysicsBody.self)
 
         affectedByGravity = body.affectedByGravity
         allowsRotation = body.allowsRotation
@@ -45,69 +45,69 @@ final class PhysicsBodyRelay: ObservableObject {
         reportContactWith = Utility.makeIndexSet(body.contactTestBitMask)
     }
 
-    func subscribe(entityManager: EntityManager) {
-        $affectedByGravity.dropFirst().sink { [weak entityManager] in
-            entityManager?.singleSelected()?.physicsBody?.affectedByGravity = $0
+    func subscribe(gameController: GameController) {
+        $affectedByGravity.dropFirst().sink { [weak gameController] in
+            gameController?.singleSelected()?.physicsBody?.body.affectedByGravity = $0
         }
         .store(in: &subscriptions)
 
-        $allowsRotation.dropFirst().sink { [weak entityManager] in
-            entityManager?.singleSelected()?.physicsBody?.allowsRotation = $0
+        $allowsRotation.dropFirst().sink { [weak gameController] in
+            gameController?.singleSelected()?.physicsBody?.body.allowsRotation = $0
         }
         .store(in: &subscriptions)
 
-        $angularDamping.dropFirst().sink { [weak entityManager] in
-            entityManager?.singleSelected()?.physicsBody?.angularDamping = $0
+        $angularDamping.dropFirst().sink { [weak gameController] in
+            gameController?.singleSelected()?.physicsBody?.body.angularDamping = $0
         }
         .store(in: &subscriptions)
 
-        $applyFields.dropFirst().sink { [weak entityManager] in
-            entityManager?.singleSelected()?.physicsBody?.fieldBitMask = Utility.makeBitmask($0)
+        $applyFields.dropFirst().sink { [weak gameController] in
+            gameController?.singleSelected()?.physicsBody?.body.fieldBitMask = Utility.makeBitmask($0)
         }
         .store(in: &subscriptions)
 
-        $charge.dropFirst().sink { [weak entityManager] in
-            entityManager?.singleSelected()?.physicsBody?.charge = $0
+        $charge.dropFirst().sink { [weak gameController] in
+            gameController?.singleSelected()?.physicsBody?.body.charge = $0
         }
         .store(in: &subscriptions)
 
-        $collideWith.dropFirst().sink { [weak entityManager] in
-            entityManager?.singleSelected()?.physicsBody?.collisionBitMask = Utility.makeBitmask($0)
+        $collideWith.dropFirst().sink { [weak gameController] in
+            gameController?.singleSelected()?.physicsBody?.body.collisionBitMask = Utility.makeBitmask($0)
         }
         .store(in: &subscriptions)
 
-        $friction.dropFirst().sink { [weak entityManager] in
-            entityManager?.singleSelected()?.physicsBody?.friction = $0
+        $friction.dropFirst().sink { [weak gameController] in
+            gameController?.singleSelected()?.physicsBody?.body.friction = $0
         }
         .store(in: &subscriptions)
 
-        $isDynamic.dropFirst().sink { [weak entityManager] in
-            entityManager?.singleSelected()?.physicsBody?.isDynamic = $0
+        $isDynamic.dropFirst().sink { [weak gameController] in
+            gameController?.singleSelected()?.physicsBody?.body.isDynamic = $0
         }
         .store(in: &subscriptions)
 
-        $linearDamping.dropFirst().sink { [weak entityManager] in
-            entityManager?.singleSelected()?.physicsBody?.linearDamping = $0
+        $linearDamping.dropFirst().sink { [weak gameController] in
+            gameController?.singleSelected()?.physicsBody?.body.linearDamping = $0
         }
         .store(in: &subscriptions)
 
-        $mass.dropFirst().sink { [weak entityManager] in
-            entityManager?.singleSelected()?.physicsBody?.mass = $0
+        $mass.dropFirst().sink { [weak gameController] in
+            gameController?.singleSelected()?.physicsBody?.body.mass = $0
         }
         .store(in: &subscriptions)
 
-        $memberOf.dropFirst().sink { [weak entityManager] in
-            entityManager?.singleSelected()?.physicsBody?.categoryBitMask = Utility.makeBitmask($0)
+        $memberOf.dropFirst().sink { [weak gameController] in
+            gameController?.singleSelected()?.physicsBody?.body.categoryBitMask = Utility.makeBitmask($0)
         }
         .store(in: &subscriptions)
 
-        $reportContactWith.dropFirst().sink { [weak entityManager] in
-            entityManager?.singleSelected()?.physicsBody?.contactTestBitMask = Utility.makeBitmask($0)
+        $reportContactWith.dropFirst().sink { [weak gameController] in
+            gameController?.singleSelected()?.physicsBody?.body.contactTestBitMask = Utility.makeBitmask($0)
         }
         .store(in: &subscriptions)
 
-        $restitution.dropFirst().sink { [weak entityManager] in
-            entityManager?.singleSelected()?.physicsBody?.restitution = $0
+        $restitution.dropFirst().sink { [weak gameController] in
+            gameController?.singleSelected()?.physicsBody?.body.restitution = $0
         }
         .store(in: &subscriptions)
     }

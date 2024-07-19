@@ -13,19 +13,19 @@ enum PhysicsFieldType: String, CaseIterable, Identifiable, RawRepresentable {
 }
 
 struct PhysicsFieldConfigurator: View {
+    @ObservedObject var gameController: GameController
     @ObservedObject var physicsMaskNamesManager: PhysicsMaskNamesManager
-    @ObservedObject var selectedPhysicsRelay: SelectedPhysicsRelay
 
     var body: some View {
         VStack {
-            if case let .field(physicsFieldRelay) = selectedPhysicsRelay.selected {
-                Text("\(physicsFieldRelay.fieldType.id) Field")
+            if gameController.selectedPhysicsField != nil {
+                Text("\(gameController.physicsFieldRelay.fieldType.id) Field")
                     .underline()
 
-                PhysicsFieldTogglesView(physicsFieldRelay: physicsFieldRelay)
-                PhysicsFieldSlidersGrid(physicsFieldRelay: physicsFieldRelay)
+                PhysicsFieldTogglesView(physicsFieldRelay: gameController.physicsFieldRelay)
+                PhysicsFieldSlidersGrid(physicsFieldRelay: gameController.physicsFieldRelay)
                 PhysicsFieldMasksView(
-                    physicsFieldRelay: physicsFieldRelay,
+                    physicsFieldRelay: gameController.physicsFieldRelay,
                     physicsMaskNamesManager: physicsMaskNamesManager
                 )
             }

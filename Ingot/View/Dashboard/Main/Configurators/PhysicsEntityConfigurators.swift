@@ -3,25 +3,25 @@
 import SwiftUI
 
 struct PhysicsEntityConfigurators: View {
+    @ObservedObject var gameController: GameController
     @ObservedObject var physicsMaskNamesManager: PhysicsMaskNamesManager
-    @ObservedObject var selectedPhysicsRelay: SelectedPhysicsRelay
 
     var body: some View {
         ZStack {
-            if selectedPhysicsRelay.selected == nil {
+            if gameController.singleSelected() == nil {
                 Text("No entity selected; select a Field, Gremlin, or Joint")
             } else {
                 PhysicsBodyConfigurator(
-                    physicsMaskNamesManager: physicsMaskNamesManager,
-                    selectedPhysicsRelay: selectedPhysicsRelay
+                    gameController: gameController,
+                    physicsMaskNamesManager: physicsMaskNamesManager
                 )
 
                 PhysicsFieldConfigurator(
-                    physicsMaskNamesManager: physicsMaskNamesManager,
-                    selectedPhysicsRelay: selectedPhysicsRelay
+                    gameController: gameController,
+                    physicsMaskNamesManager: physicsMaskNamesManager
                 )
 
-                PhysicsJointConfigurator(selectedPhysicsRelay: selectedPhysicsRelay)
+                PhysicsJointConfigurator(gameController: gameController)
             }
         }
     }

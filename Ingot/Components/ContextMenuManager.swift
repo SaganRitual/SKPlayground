@@ -21,7 +21,7 @@ final class ContextMenuManager {
         "triclops"
     ]
 
-    weak var entityManager: EntityManager!
+    weak var gameController: GameController!
     weak var gestureEventDispatcher: GestureEventDispatcher!
     weak var workflowManager: WorkflowManager!
 
@@ -115,11 +115,11 @@ private extension ContextMenuManager {
     }
 
     @objc func readyForActions(_ sender: Any?) {
-        workflowManager.assignSpaceActions()
-
-        let gestureEvent = Self.getGestureEvent(from: sender)
-        let entity = Utility.forceUnwrap(gestureEvent.inputEvent.getTopEntity())
-        entityManager.setSpaceActionsMode(for: entity)
+//        workflowManager.assignSpaceActions()
+//
+//        let gestureEvent = Self.getGestureEvent(from: sender)
+//        let entity = Utility.forceUnwrap(gestureEvent.inputEvent.getTopEntity())
+//        gameController.setSpaceActionsMode(for: entity)
     }
 
     @objc func selectGremlinTexture(_ sender: Any?) {

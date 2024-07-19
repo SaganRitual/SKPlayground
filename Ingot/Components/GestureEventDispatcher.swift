@@ -4,7 +4,7 @@ import Foundation
 
 final class GestureEventDispatcher: InputEventDispatcher.GestureDelegate {
     weak var contextMenuManager: ContextMenuManager!
-    weak var entityManager: EntityManager!
+    weak var gameController: GameController!
     weak var selectionMarquee: SelectionMarquee!
     weak var workflowManager: WorkflowManager!
 
@@ -58,21 +58,21 @@ private extension GestureEventDispatcher {
             // Shift-click
             if let entity {
                 // On an existing entity
-                entityManager.toggleSelect(entity)
+                gameController.toggleSelect(entity)
                 return
             }
         } else {
             // Click with no shift, either on background or on an existing entity
-            entityManager.deselectAll()
+            gameController.deselectAll()
         }
 
         if entity == nil {
             // User clicked the background; create new entity here
-            entity = entityManager.newEntity(at: gestureEvent.inputEvent.location)
+            entity = gameController.newEntity(at: gestureEvent.inputEvent.location)
         }
 
         // New entity, or newly selected entity
-        entityManager.select(Utility.forceUnwrap(entity))
+        gameController.select(Utility.forceUnwrap(entity))
     }
 
     func clickWorkflowPlacingEdgeVertices(_ gestureEvent: GestureEvent) {
@@ -82,29 +82,29 @@ private extension GestureEventDispatcher {
             // Shift-click
             if let entity {
                 // On an existing entity
-                entityManager.toggleSelect(entity)
+                gameController.toggleSelect(entity)
                 return
             }
         } else {
             // Click with no shift, either on background or on an existing entity
-            entityManager.deselectAll()
+            gameController.deselectAll()
         }
 
         if entity == nil {
             // User clicked the background; create new entity here
-            entity = entityManager.newEntity(at: gestureEvent.inputEvent.location)
+            entity = gameController.newEntity(at: gestureEvent.inputEvent.location)
         }
 
         // New entity, or newly selected entity
-        entityManager.select(Utility.forceUnwrap(entity))
+        gameController.select(Utility.forceUnwrap(entity))
     }
 
     func rightClick(_ gestureEvent: GestureEvent) {
-        entityManager.deselectAll()
+        gameController.deselectAll()
 
         let entity = gestureEvent.inputEvent.getTopEntity()
         if let gremlin = entity as? Gremlin {
-            entityManager.select(gremlin)
+            gameController.select(gremlin)
             contextMenuManager.showMenu(.entity, gestureEvent)
         } else if entity == nil {
             contextMenuManager.showMenu(.scene, gestureEvent)
@@ -123,7 +123,7 @@ private extension GestureEventDispatcher {
                 if let direction = haloRS.getSubhandleDirection(topNode) {
                     // Dragging a subhandle on a Gremlin's halo
                     let entity = Utility.forceUnwrap(topNode.getOwnerEntity())
-                    entityManager.setDragAnchors(entity, direction)
+                    gameController.setDragAnchors(entity, direction)
                     dragMode = .subhandle
                     return
                 }
@@ -133,14 +133,14 @@ private extension GestureEventDispatcher {
             // select the entity if necessary, deselect others if necessary
             if !entity.isSelected {
                 if !gestureEvent.inputEvent.shift {
-                    entityManager.deselectAll()
+                    gameController.deselectAll()
                 }
 
-                entityManager.select(entity)
+                gameController.select(entity)
             }
 
             // Dragging selected entities using this one as an anchor
-            entityManager.setDragAnchors(entity)
+            gameController.setDragAnchors(entity)
             dragMode = .entity
         } else {
             // Dragging on the background, ie, beginning a marquee selection
@@ -155,9 +155,9 @@ private extension GestureEventDispatcher {
         case .background:
             selectionMarquee.draw(to: gestureEvent.inputEvent.location)
         case .entity:
-            entityManager.moveSelected(gestureEvent.inputEvent.location)
+            gameController.moveSelected(gestureEvent.inputEvent.location)
         case .subhandle:
-            entityManager.roscaleSelected(gestureEvent.inputEvent.location)
+            gameController.roscaleSelected(gestureEvent.inputEvent.location)
         default:
             fatalError("We thought this couldn't happen")
         }
@@ -179,7 +179,7 @@ private extension GestureEventDispatcher {
             let rectangle = selectionMarquee.getRectangle(endVertex: gestureEvent.inputEvent.location)
             let enclosedNodes = gestureEvent.inputEvent.scene.getNodesInRectangle(rectangle)
             let enclosedEntities = Set(enclosedNodes.compactMap { $0.getOwnerEntity() })
-            entityManager.commitMarqueeSelect(enclosedEntities, gestureEvent.inputEvent.shift)
+            gameController.commitMarqueeSelect(enclosedEntities, gestureEvent.inputEvent.shift)
         }
 
         selectionMarquee.hide()

@@ -1,12 +1,9 @@
 // We are a way for the cosmos to know itself. -- C. Sagan
 
 import Foundation
-import SpriteKit
 
 class GameEntity {
     let uuid = UUID()
-
-    var actionsArray = [SKAction]()
 
     let face: GameEntityFace
 
@@ -15,6 +12,7 @@ class GameEntity {
     var dragAnchor: CGPoint?
     var rotationAnchor: CGFloat?
     var scaleAnchor: CGFloat?
+    var selectedAction: ActionToken?
 
     var position: CGPoint {
         get { face.position }
@@ -22,7 +20,9 @@ class GameEntity {
     }
 
     // swiftlint:disable unused_setter_value
-    var physicsBody: SKPhysicsBody? { get { nil } set { } }
+    var physicsBody: SKPPhysicsBody?
+    var selectedPhysicsField: SKPPhysicsField?
+    var selectedPhysicsJoint: SKPPhysicsJoint?
     var rotation: CGFloat { get { 0 } set { } }
     var scale: CGFloat { get { 1 } set { } }
     // swiftlint:enable unused_setter_value
@@ -31,14 +31,16 @@ class GameEntity {
         self.face = face
     }
 
-    func addActionToken(_ token: any ActionTokenProtocol) { }
-    func getActionTokens() -> [ActionTokenContainer] { [] }
+    func addActionToken(_ token: ActionToken) { }
+    func getActionTokens() -> [ActionToken] { [] }
+
+    func getActionsManager() -> ActionsManager? { nil }
 
     func restoreActionAnchors() { }
 
     func cancelActionsMode() { }
-    func commitFollowPathAction(_ token: ActionTokenProtocol) { }
-    func commitPhysicsAction(_ token: ActionTokenProtocol) { }
+    func commitFollowPathAction(_ token: ActionToken) { }
+    func commitPhysicsAction(_ token: ActionToken) { }
     func commitSpaceActions(duration: TimeInterval) { }
     func startActionsMode() { }
 }

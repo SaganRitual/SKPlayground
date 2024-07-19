@@ -5,7 +5,7 @@ import Foundation
 final class CommandRelay: ObservableObject {
 
     enum ActiveTab {
-        case physicsAction, physicsEntity, physicsWorld, spaceAction
+        case physicsAction, physicsEntity, physicsWorld, shapeLab, spaceAction
     }
 
     @Published var actionsSpeed: CGFloat = 1

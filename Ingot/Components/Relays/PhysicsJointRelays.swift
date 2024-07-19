@@ -8,6 +8,7 @@ class PhysicsJointRelay: ObservableObject {
     weak var bodyA: SKPhysicsBody?
     weak var bodyB: SKPhysicsBody?
 
+    @Published var jointType: PhysicsJointType = .allCases.randomElement()!
     @Published var reactionForce = CGVector.zero
     @Published var reactionTorque = CGFloat.zero
 
@@ -17,17 +18,13 @@ class PhysicsJointRelay: ObservableObject {
         subscriptions.forEach { $0.cancel() }
     }
 
-    class func selectedJoint(entityManager: EntityManager?) -> SKPhysicsJoint? {
-        (entityManager?.singleSelected() as? SKPhysicsJoint)
-    }
-
     func loadState(from entity_: GameEntity) {
         let joint = Utility.forceCast(entity_, to: SKPhysicsJoint.self)
         reactionForce = joint.reactionForce
         reactionTorque = joint.reactionTorque
     }
 
-    func subscribe(entityManager: EntityManager) { }
+    func subscribe(gameController: GameController) { }
 }
 
 final class PhysicsJointFixedRelay: PhysicsJointRelay {
@@ -43,13 +40,10 @@ final class PhysicsJointLimitRelay: PhysicsJointRelay {
         super.loadState(from: entity_)
     }
 
-    override class func selectedJoint(entityManager: EntityManager?) -> SKPhysicsJointLimit? {
-        super.selectedJoint(entityManager: entityManager) as? SKPhysicsJointLimit
-    }
-
-    override func subscribe(entityManager: EntityManager) {
-        $maxLength.dropFirst().sink { [weak entityManager] in
-            Self.selectedJoint(entityManager: entityManager)?.maxLength = $0
+    override func subscribe(gameController: GameController) {
+        $maxLength.dropFirst().sink { [weak gameController] in
+            let joint = Utility.forceCast(gameController?.selectedPhysicsJoint, to: SKPhysicsJointLimit.self)
+            joint.maxLength = $0
         }
         .store(in: &subscriptions)
     }
@@ -74,33 +68,34 @@ final class PhysicsJointPinRelay: PhysicsJointRelay {
         super.loadState(from: entity_)
     }
 
-    override class func selectedJoint(entityManager: EntityManager?) -> SKPhysicsJointPin? {
-        super.selectedJoint(entityManager: entityManager) as? SKPhysicsJointPin
-    }
-
-    override func subscribe(entityManager: EntityManager) {
-        $frictionTorque.dropFirst().sink { [weak entityManager] in
-            Self.selectedJoint(entityManager: entityManager)?.frictionTorque = $0
+    override func subscribe(gameController: GameController) {
+        $frictionTorque.dropFirst().sink { [weak gameController] in
+            let joint = Utility.forceCast(gameController?.selectedPhysicsJoint, to: SKPhysicsJointPin.self)
+            joint.frictionTorque = $0
         }
         .store(in: &subscriptions)
 
-        $lowerAngleLimit.dropFirst().sink { [weak entityManager] in
-            Self.selectedJoint(entityManager: entityManager)?.lowerAngleLimit = $0
+        $lowerAngleLimit.dropFirst().sink { [weak gameController] in
+            let joint = Utility.forceCast(gameController?.selectedPhysicsJoint, to: SKPhysicsJointPin.self)
+            joint.lowerAngleLimit = $0
         }
         .store(in: &subscriptions)
 
-        $rotationSpeed.dropFirst().sink { [weak entityManager] in
-            Self.selectedJoint(entityManager: entityManager)?.rotationSpeed = $0
+        $rotationSpeed.dropFirst().sink { [weak gameController] in
+            let joint = Utility.forceCast(gameController?.selectedPhysicsJoint, to: SKPhysicsJointPin.self)
+            joint.rotationSpeed = $0
         }
         .store(in: &subscriptions)
 
-        $shouldEnableLimits.dropFirst().sink { [weak entityManager] in
-            Self.selectedJoint(entityManager: entityManager)?.shouldEnableLimits = $0
+        $shouldEnableLimits.dropFirst().sink { [weak gameController] in
+            let joint = Utility.forceCast(gameController?.selectedPhysicsJoint, to: SKPhysicsJointPin.self)
+            joint.shouldEnableLimits = $0
         }
         .store(in: &subscriptions)
 
-        $upperAngleLimit.dropFirst().sink { [weak entityManager] in
-            Self.selectedJoint(entityManager: entityManager)?.upperAngleLimit = $0
+        $upperAngleLimit.dropFirst().sink { [weak gameController] in
+            let joint = Utility.forceCast(gameController?.selectedPhysicsJoint, to: SKPhysicsJointPin.self)
+            joint.upperAngleLimit = $0
         }
         .store(in: &subscriptions)
     }
@@ -121,23 +116,22 @@ final class PhysicsJointSlidingRelay: PhysicsJointRelay {
         super.loadState(from: entity_)
     }
 
-    override class func selectedJoint(entityManager: EntityManager?) -> SKPhysicsJointSliding? {
-        super.selectedJoint(entityManager: entityManager) as? SKPhysicsJointSliding
-    }
-
-    override func subscribe(entityManager: EntityManager) {
-        $lowerDistanceLimit.dropFirst().sink { [weak entityManager] in
-            Self.selectedJoint(entityManager: entityManager)?.lowerDistanceLimit = $0
+    override func subscribe(gameController: GameController) {
+        $lowerDistanceLimit.dropFirst().sink { [weak gameController] in
+            let joint = Utility.forceCast(gameController?.selectedPhysicsJoint, to: SKPhysicsJointSliding.self)
+            joint.lowerDistanceLimit = $0
         }
         .store(in: &subscriptions)
 
-        $shouldEnableLimits.dropFirst().sink { [weak entityManager] in
-            Self.selectedJoint(entityManager: entityManager)?.shouldEnableLimits = $0
+        $shouldEnableLimits.dropFirst().sink { [weak gameController] in
+            let joint = Utility.forceCast(gameController?.selectedPhysicsJoint, to: SKPhysicsJointSliding.self)
+            joint.shouldEnableLimits = $0
         }
         .store(in: &subscriptions)
 
-        $upperDistanceLimit.dropFirst().sink { [weak entityManager] in
-            Self.selectedJoint(entityManager: entityManager)?.upperDistanceLimit = $0
+        $upperDistanceLimit.dropFirst().sink { [weak gameController] in
+            let joint = Utility.forceCast(gameController?.selectedPhysicsJoint, to: SKPhysicsJointSliding.self)
+            joint.upperDistanceLimit = $0
         }
         .store(in: &subscriptions)
     }
@@ -155,18 +149,16 @@ final class PhysicsJointSpringRelay: PhysicsJointRelay {
         super.loadState(from: entity_)
     }
 
-    override class func selectedJoint(entityManager: EntityManager?) -> SKPhysicsJointSpring? {
-        super.selectedJoint(entityManager: entityManager) as? SKPhysicsJointSpring
-    }
-
-    override func subscribe(entityManager: EntityManager) {
-        $damping.dropFirst().sink { [weak entityManager] in
-            Self.selectedJoint(entityManager: entityManager)?.damping = $0
+    override func subscribe(gameController: GameController) {
+        $damping.dropFirst().sink { [weak gameController] in
+            let joint = Utility.forceCast(gameController?.selectedPhysicsJoint, to: SKPhysicsJointSpring.self)
+            joint.damping = $0
         }
         .store(in: &subscriptions)
 
-        $frequency.dropFirst().sink { [weak entityManager] in
-            Self.selectedJoint(entityManager: entityManager)?.frequency = $0
+        $frequency.dropFirst().sink { [weak gameController] in
+            let joint = Utility.forceCast(gameController?.selectedPhysicsJoint, to: SKPhysicsJointSpring.self)
+            joint.frequency = $0
         }
         .store(in: &subscriptions)
     }

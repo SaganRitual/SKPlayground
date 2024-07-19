@@ -4,15 +4,19 @@ import Foundation
 import SpriteKit
 
 final class Gremlin: GameEntity {
-    var actionTokens = [any ActionTokenProtocol]()
-
     var anchorMoveAction: CGPoint?
     var anchorRotateAction: CGFloat?
     var anchorScaleAction: CGFloat?
 
-    override var physicsBody: SKPhysicsBody? {
-        get { face.rootSceneNode.physicsBody }
-        set { face.rootSceneNode.physicsBody = newValue }
+    var actions = [ActionToken]()
+    var fields = [SKPPhysicsField]()
+    var joints = [SKPPhysicsJoint]()
+
+    private var physicsBody_: SKPPhysicsBody
+
+    override var physicsBody: SKPPhysicsBody? {
+        get { physicsBody_ }
+        set { physicsBody_ = Utility.forceUnwrap(newValue) }
     }
 
     override var rotation: CGFloat {
@@ -26,6 +30,8 @@ final class Gremlin: GameEntity {
     }
 
     init(at position: CGPoint, avatarName: String) {
+        self.physicsBody_ = SKPPhysicsBody(SKPhysicsBody(circleOfRadius: 15))
+
         let face = GremlinFace(at: position, avatarName: avatarName)
         super.init(face)
     }
@@ -33,14 +39,15 @@ final class Gremlin: GameEntity {
     static func make(at position: CGPoint, avatarName: String) -> Gremlin {
         let gremlin = Gremlin(at: position, avatarName: avatarName)
 
-        gremlin.face.rootSceneNode.physicsBody = SKPhysicsBody(circleOfRadius: 15)
+        gremlin.face.rootSceneNode.physicsBody = Utility.forceUnwrap(gremlin.physicsBody).body
         gremlin.face.setOwnerEntity(gremlin)
 
         return gremlin
     }
 
-    override func addActionToken(_ token: any ActionTokenProtocol) {
-        actionTokens.append(token)
+    override func addActionToken(_ token: ActionToken) {
+        actions.append(token)
+        selectedAction = token
     }
 
     override func cancelActionsMode() {
@@ -48,11 +55,11 @@ final class Gremlin: GameEntity {
         restoreActionAnchors()
     }
 
-    override func commitFollowPathAction(_ token: ActionTokenProtocol) {
+    override func commitFollowPathAction(_ token: ActionToken) {
         addActionToken(token)
     }
 
-    override func commitPhysicsAction(_ token: ActionTokenProtocol) {
+    override func commitPhysicsAction(_ token: ActionToken) {
         addActionToken(token)
     }
 
@@ -76,10 +83,6 @@ final class Gremlin: GameEntity {
 
         restoreActionAnchors()
      }
-
-    override func getActionTokens() -> [ActionTokenContainer] {
-        actionTokens.map { ActionTokenContainer(token: $0) }
-    }
 
     override func restoreActionAnchors() {
         var actions = [SKAction]()
@@ -112,24 +115,5 @@ final class Gremlin: GameEntity {
     }
 
     override func startActionsMode() {
-        if actionTokens.isEmpty {
-            anchorMoveAction = position
-            anchorRotateAction = rotation
-            anchorScaleAction = scale
-        } else {
-            if let lastMove = actionTokens.last(where: { $0 is MoveActionToken }) as? MoveActionToken {
-                position = lastMove.targetPosition
-            }
-
-            if let lastRotate = actionTokens.last(where: { $0 is RotateActionToken }) as? RotateActionToken {
-                rotation = lastRotate.targetRotation
-            }
-
-            if let lastScale = actionTokens.last(where: { $0 is ScaleActionToken }) as? ScaleActionToken {
-                scale = lastScale.targetScale
-            }
-        }
-
-        setAssignActionsMode()
     }
 }

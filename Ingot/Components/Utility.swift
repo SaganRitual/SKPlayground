@@ -69,9 +69,7 @@ extension Utility {
         let result = intSet.reduce(0) { currentValue, newIndex in
             currentValue + (UInt32(1) << newIndex)
         }
-
-        print("intSet \(intSet) -> result \(String(result, radix: 2))")
-
+        
         return result
     }
 

@@ -26,10 +26,6 @@ final class PhysicsFieldRelay: ObservableObject {
         subscriptions.forEach { $0.cancel() }
     }
 
-    static func selectedField(entityManager: EntityManager?) -> Field? {
-        (entityManager?.singleSelected() as? Field)
-    }
-
     func loadState(from entity_: GameEntity) {
         let entity = Utility.forceCast(entity_, to: Field.self)
         let fieldNode_ = entity.face.rootSceneNode.children.first(where: { $0 is SKFieldNode })
@@ -49,59 +45,59 @@ final class PhysicsFieldRelay: ObservableObject {
         strength = fieldNode.strength
     }
 
-    func subscribe(entityManager: EntityManager) {
-        $animationSpeed.dropFirst().sink { [weak entityManager] in
-            Self.selectedField(entityManager: entityManager)?.physicsField.animationSpeed = $0
+    func subscribe(gameController: GameController) {
+        $animationSpeed.dropFirst().sink { [weak gameController] in
+            gameController?.selectedPhysicsField?.field.animationSpeed = $0
         }
         .store(in: &subscriptions)
 
-        $applyTo.dropFirst().sink { [weak entityManager] in
-            Self.selectedField(entityManager: entityManager)?.physicsField.categoryBitMask = Utility.makeBitmask($0)
+        $applyTo.dropFirst().sink { [weak gameController] in
+            gameController?.selectedPhysicsField?.field.categoryBitMask = Utility.makeBitmask($0)
         }
         .store(in: &subscriptions)
 
-        $gravityX.dropFirst().sink { [weak entityManager] in
-            Self.selectedField(entityManager: entityManager)?.physicsField.direction.x = $0
+        $gravityX.dropFirst().sink { [weak gameController] in
+            gameController?.selectedPhysicsField?.field.direction.x = $0
         }
         .store(in: &subscriptions)
 
-        $gravityY.dropFirst().sink { [weak entityManager] in
-            Self.selectedField(entityManager: entityManager)?.physicsField.direction.y = $0
+        $gravityY.dropFirst().sink { [weak gameController] in
+            gameController?.selectedPhysicsField?.field.direction.y = $0
         }
         .store(in: &subscriptions)
 
-        $enabled.dropFirst().sink { [weak entityManager] in
-            Self.selectedField(entityManager: entityManager)?.physicsField.isEnabled = $0
+        $enabled.dropFirst().sink { [weak gameController] in
+            gameController?.selectedPhysicsField?.field.isEnabled = $0
         }
         .store(in: &subscriptions)
 
-        $exclusive.dropFirst().sink { [weak entityManager] in
-            Self.selectedField(entityManager: entityManager)?.physicsField.isExclusive = $0
+        $exclusive.dropFirst().sink { [weak gameController] in
+            gameController?.selectedPhysicsField?.field.isExclusive = $0
         }
         .store(in: &subscriptions)
 
-        $falloff.dropFirst().sink { [weak entityManager] in
-            Self.selectedField(entityManager: entityManager)?.physicsField.falloff = $0
+        $falloff.dropFirst().sink { [weak gameController] in
+            gameController?.selectedPhysicsField?.field.falloff = $0
         }
         .store(in: &subscriptions)
 
-        $minimumRadius.dropFirst().sink { [weak entityManager] in
-            Self.selectedField(entityManager: entityManager)?.physicsField.minimumRadius = $0
+        $minimumRadius.dropFirst().sink { [weak gameController] in
+            gameController?.selectedPhysicsField?.field.minimumRadius = $0
         }
         .store(in: &subscriptions)
 
-        $region.dropFirst().sink { [weak entityManager] in
-            Self.selectedField(entityManager: entityManager)?.physicsField.region = $0
+        $region.dropFirst().sink { [weak gameController] in
+            gameController?.selectedPhysicsField?.field.region = $0
         }
         .store(in: &subscriptions)
 
-        $smoothness.dropFirst().sink { [weak entityManager] in
-            Self.selectedField(entityManager: entityManager)?.physicsField.smoothness = $0
+        $smoothness.dropFirst().sink { [weak gameController] in
+            gameController?.selectedPhysicsField?.field.smoothness = $0
         }
         .store(in: &subscriptions)
 
-        $strength.dropFirst().sink { [weak entityManager] in
-            Self.selectedField(entityManager: entityManager)?.physicsField.strength = $0
+        $strength.dropFirst().sink { [weak gameController] in
+            gameController?.selectedPhysicsField?.field.strength = $0
         }
         .store(in: &subscriptions)
     }

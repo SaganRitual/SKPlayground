@@ -2,147 +2,180 @@
 
 import Foundation
 
-protocol ActionTokenProtocol {
-    var duration: TimeInterval { get }
+enum ActionType: CaseIterable {
+    case followPath, move, rotate, scale
+    case force, torque, impulse, angularImpulse
 }
 
-struct ActionTokenContainer: Identifiable {
+class ActionToken: ObservableObject, Identifiable {
     let id = UUID()
-    let token: any ActionTokenProtocol
+    let actionType: ActionType
 
-    static func randomToken() -> ActionTokenContainer {
-        switch Int.random(in: 0..<8) {
-        case 0:
-            return ActionTokenContainer(token: FollowPathActionToken.randomToken())
-        case 1:
-            return ActionTokenContainer(token: MoveActionToken.randomToken())
-        case 2:
-            return ActionTokenContainer(token: RotateActionToken.randomToken())
-        case 3:
-            return ActionTokenContainer(token: ScaleActionToken.randomToken())
-        case 4:
-            return ActionTokenContainer(token: ForceActionToken.randomToken())
-        case 5:
-            return ActionTokenContainer(token: TorqueActionToken.randomToken())
-        case 6:
-            return ActionTokenContainer(token: ImpulseActionToken.randomToken())
-        case 7:
-            return ActionTokenContainer(token: AngularImpulseActionToken.randomToken())
-        default:
-            fatalError("Reputable accordion players insist this cannot happen")
+    @Published var duration: TimeInterval
+
+    init(actionType: ActionType, duration: TimeInterval) {
+        self.actionType = actionType
+        self.duration = duration
+    }
+
+    class func randomToken() -> ActionToken {
+        let duration = TimeInterval.random(in: 1...5)
+
+        switch Utility.forceUnwrap(ActionType.allCases.randomElement()) {
+        case .angularImpulse:
+            return AngularImpulseActionToken(duration: duration, torque: CGFloat.random(in: (-2 * .pi)...(+2 * .pi)))
+        case .followPath:
+            return FollowPathActionToken(duration: duration)
+
+        case .force:
+            return ForceActionToken(
+                duration: duration, force: CGVector.random(in: (-100)...(+100)), focus: CGPoint.random(in: -1...1)
+            )
+
+        case .impulse:
+            return ImpulseActionToken(
+                duration: duration, force: CGVector.random(in: (-100)...(+100)), focus: CGPoint.random(in: -1...1)
+            )
+
+        case .move:
+            return MoveActionToken(duration: duration, targetPosition: CGPoint.random(in: (-100)...(+100)))
+        case .rotate:
+            return RotateActionToken(duration: duration, targetRotation: CGFloat.random(in: (-2 * .pi)...(+2 * .pi)))
+        case .scale:
+            return ScaleActionToken(duration: duration, targetScale: CGFloat.random(in: 1...2))
+        case .torque:
+            return TorqueActionToken(duration: duration, torque: CGFloat.random(in: (-2 * .pi)...(+2 * .pi)))
         }
     }
 }
 
-struct FollowPathActionToken: ActionTokenProtocol {
-    let duration: TimeInterval
-    let path: [CGPoint]?
-    let pathId: UUID?
-
-    init(duration: TimeInterval, path: [CGPoint]) {
-        self.duration = duration
-        self.path = path
-        self.pathId = nil
-    }
-
-    init(duration: TimeInterval, pathId: UUID) {
-        self.duration = duration
-        self.path = nil
-        self.pathId = pathId
-    }
-
-    static func randomToken() -> FollowPathActionToken {
-        FollowPathActionToken(
-            duration: .random(in: (1.0 / 60)...10),
-            path: (0..<5).map { _ in CGPoint.random(in: -100...100) }
-        )
+extension ActionToken: Equatable {
+    static func == (lhs: ActionToken, rhs: ActionToken) -> Bool {
+        lhs === rhs
     }
 }
 
-struct MoveActionToken: ActionTokenProtocol {
-    let duration: TimeInterval
-    let targetPosition: CGPoint
+final class FollowPathActionToken: ActionToken {
+    @Published var pathId: UUID?
 
-    static func randomToken() -> MoveActionToken {
-        MoveActionToken(
-            duration: .random(in: (1.0 / 60)...10),
-            targetPosition: CGPoint(x: .random(in: -100...100), y: .random(in: -100...100))
-        )
+    init(duration: TimeInterval) {
+        super.init(actionType: .followPath, duration: duration)
     }
 }
 
-struct RotateActionToken: ActionTokenProtocol {
-    let duration: TimeInterval
-    let targetRotation: CGFloat
+final class MoveActionToken: ActionToken {
+    @Published var targetPosition = CGPoint.zero
 
-    static func randomToken() -> RotateActionToken {
-        RotateActionToken(
-            duration: .random(in: (1.0 / 60)...10),
-            targetRotation: .random(in: (-2 * .pi)...(2 * .pi))
-        )
+    init(duration: TimeInterval, targetPosition: CGPoint) {
+        self.targetPosition = targetPosition
+        super.init(actionType: .move, duration: duration)
     }
 }
 
-struct ScaleActionToken: ActionTokenProtocol {
-    let duration: TimeInterval
-    let targetScale: CGFloat
+final class RotateActionToken: ActionToken {
+    @Published var targetRotation = CGFloat.zero
 
-    static func randomToken() -> ScaleActionToken {
-        ScaleActionToken(
-            duration: .random(in: (1.0 / 60)...10),
-            targetScale: .random(in: 1...10)
-        )
+    init(duration: TimeInterval, targetRotation: CGFloat = 1) {
+        self.targetRotation = targetRotation
+        super.init(actionType: .rotate, duration: duration)
     }
 }
 
-struct ForceActionToken: ActionTokenProtocol {
-    let duration: TimeInterval
-    let focus: CGPoint
-    let force: CGVector
+final class ScaleActionToken: ActionToken {
+    @Published var targetScale: CGFloat
 
-    static func randomToken() -> ForceActionToken {
-        ForceActionToken(
-            duration: .random(in: (1.0 / 60)...10),
-            focus: CGPoint(x: .random(in: -100...100), y: .random(in: -100...100)),
-            force: CGVector(dx: .random(in: -100...100), dy: .random(in: -100...100))
-        )
+    init(duration: TimeInterval, targetScale: CGFloat = 1) {
+        self.targetScale = targetScale
+        super.init(actionType: .scale, duration: duration)
     }
 }
 
-struct TorqueActionToken: ActionTokenProtocol {
-    let duration: TimeInterval
-    let torque: CGFloat
+protocol ForceIshActionToken {
+    var forceDX: CGFloat { get set }
+    var forceDY: CGFloat { get set }
+    var positionX: CGFloat { get set }
+    var positionY: CGFloat { get set }
+}
 
-    static func randomToken() -> TorqueActionToken {
-        TorqueActionToken(
-            duration: .random(in: (1.0 / 60)...10),
-            torque: .random(in: -100...100)
-        )
+extension ForceIshActionToken {
+    var focus: CGPoint { CGPoint(x: positionX, y: positionY) }
+    var force: CGVector { CGVector(dx: forceDX, dy: forceDY) }
+}
+
+final class ForceActionToken: ActionToken, ForceIshActionToken {
+    @Published var forceDX: CGFloat
+    @Published var forceDY: CGFloat
+    @Published var positionX: CGFloat
+    @Published var positionY: CGFloat
+
+    init(_ actionRelay: ActionRelay) {
+        self.forceDX = actionRelay.forceDX
+        self.forceDY = actionRelay.forceDY
+        self.positionX = actionRelay.positionX
+        self.positionY = actionRelay.positionY
+        super.init(actionType: .force, duration: actionRelay.duration)
+    }
+
+    init(duration: TimeInterval, force: CGVector, focus: CGPoint) {
+        self.forceDX = force.dx
+        self.forceDY = force.dy
+        self.positionX = focus.x
+        self.positionY = focus.y
+        super.init(actionType: .force, duration: duration)
     }
 }
 
-struct ImpulseActionToken: ActionTokenProtocol {
-    let duration: TimeInterval
-    let focus: CGPoint
-    let impulse: CGVector
+protocol TorqueIshActionToken {
+    var torque: CGFloat { get set }
+}
 
-    static func randomToken() -> ImpulseActionToken {
-        ImpulseActionToken(
-            duration: .random(in: (1.0 / 60)...10),
-            focus: CGPoint(x: .random(in: -100...100), y: .random(in: -100...100)),
-            impulse: CGVector(dx: .random(in: -100...100), dy: .random(in: -100...100))
-        )
+final class TorqueActionToken: ActionToken, TorqueIshActionToken {
+    @Published var torque: CGFloat
+
+    init(_ actionRelay: ActionRelay) {
+        self.torque = actionRelay.torque
+        super.init(actionType: .torque, duration: actionRelay.duration)
+    }
+
+    init(duration: TimeInterval, torque: CGFloat) {
+        self.torque = torque
+        super.init(actionType: .torque, duration: duration)
     }
 }
 
-struct AngularImpulseActionToken: ActionTokenProtocol {
-    let duration: TimeInterval
-    let angularImpulse: CGFloat
+final class ImpulseActionToken: ActionToken, ForceIshActionToken {
+    @Published var forceDX: CGFloat
+    @Published var forceDY: CGFloat
+    @Published var positionX: CGFloat
+    @Published var positionY: CGFloat
 
-    static func randomToken() -> AngularImpulseActionToken {
-        AngularImpulseActionToken(
-            duration: .random(in: (1.0 / 60)...10),
-            angularImpulse: .random(in: -100...100)
-        )
+    init(_ actionRelay: ActionRelay) {
+        self.forceDX = actionRelay.forceDX
+        self.forceDY = actionRelay.forceDY
+        self.positionX = actionRelay.positionX
+        self.positionY = actionRelay.positionY
+        super.init(actionType: .impulse, duration: actionRelay.duration)
+    }
+
+    init(duration: TimeInterval, force: CGVector, focus: CGPoint) {
+        self.forceDX = force.dx
+        self.forceDY = force.dy
+        self.positionX = focus.x
+        self.positionY = focus.y
+        super.init(actionType: .impulse, duration: duration)
+    }
+}
+
+final class AngularImpulseActionToken: ActionToken, TorqueIshActionToken {
+    @Published var torque: CGFloat
+
+    init(_ actionRelay: ActionRelay) {
+        self.torque = actionRelay.torque
+        super.init(actionType: .angularImpulse, duration: actionRelay.duration)
+    }
+
+    init(duration: TimeInterval, torque: CGFloat) {
+        self.torque = torque
+        super.init(actionType: .angularImpulse, duration: duration)
     }
 }

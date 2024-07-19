@@ -3,41 +3,13 @@
 import Combine
 import Foundation
 
-final class EntityManager {
-    var entities = Set<GameEntity>()
-
-    weak var relayManager: RelayManager!
-    weak var sceneManager: SKPScene!
-    weak var workflowRelay: WorkflowRelay!
-
-    private weak var hotDragTarget: GameEntity?
-    private var hotDragSubhandle: SelectionHaloRS.Directions?
-
-    func singleSelected() -> GameEntity? {
-        let selected = getSelected()
-        if selected.count == 1 {
-            return selected.first
-        } else {
-            return nil
-        }
-    }
-}
-
-extension EntityManager {
-    func commitFollowPathAction(path: [Vertex], for entity: GameEntity) {
-        print("commitFollowPathAction")
+extension GameController {
+    func addActionToSelected(_ action: ActionToken) {
+        let gremlin = Utility.forceCast(getSelected().first, to: Gremlin.self)
+        gremlin.addActionToken(action)
+        activateActionsRelay(for: gremlin)
     }
 
-    func commitSpaceActions(for entity: GameEntity) {
-        print("commitSpaceActions")
-    }
-
-    func setSpaceActionsMode(for entity: GameEntity) {
-        print("setSpaceActionsMode")
-    }
-}
-
-extension EntityManager {
     func moveSelected(_ anchorTarget: CGPoint) {
         let hotAnchor = Utility.forceUnwrap(hotDragTarget?.dragAnchor)
         let delta = anchorTarget - hotAnchor
@@ -86,7 +58,7 @@ extension EntityManager {
     }
 }
 
-extension EntityManager {
+extension GameController {
     func newEntity(at position: CGPoint) -> GameEntity {
         switch workflowRelay.clickToPlace {
         case .field:
@@ -127,49 +99,5 @@ extension EntityManager {
     private func postPlace(_ entity: GameEntity) {
         entities.insert(entity)
         sceneManager.addEntity(entity)
-    }
-}
-
-extension EntityManager {
-    func commitMarqueeSelect(_ entities: Set<GameEntity>, _ shiftKey: Bool) {
-        if shiftKey {
-            entities.forEach { toggleSelect($0) }
-        } else {
-            deselectAll()
-            entities.forEach { select($0) }
-        }
-    }
-
-    func deselect(_ entity: GameEntity) {
-        entity.deselect()
-
-        let selected = getSelected()
-        if selected.count == 1 {
-            let entity = Utility.forceUnwrap(selected.first)
-            relayManager.activatePhysicsRelay(for: entity)
-        } else {
-            relayManager.activatePhysicsRelay(for: nil)
-        }
-    }
-
-    func deselectAll() {
-        entities.forEach { deselect($0) }
-    }
-
-    func getSelected() -> Set<GameEntity> {
-        Set(entities.compactMap({ $0.isSelected ? $0 : nil }))
-    }
-
-    func select(_ entity: GameEntity) {
-        entity.select()
-        relayManager.activatePhysicsRelay(for: entity)
-    }
-
-    func toggleSelect(_ entity: GameEntity) {
-        if entity.isSelected {
-            deselect(entity)
-        } else {
-            select(entity)
-        }
     }
 }

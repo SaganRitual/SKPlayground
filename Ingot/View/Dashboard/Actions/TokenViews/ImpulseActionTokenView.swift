@@ -3,19 +3,15 @@
 import SwiftUI
 
 struct ImpulseActionTokenView: View {
-    let selected: Bool
-    let token: ImpulseActionToken
+    @ObservedObject var token: ImpulseActionToken
 
-    init(_ token: ImpulseActionToken, selected: Bool) {
-        self.selected = selected
-        self.token = token
-    }
+    let selected: Bool
 
     var body: some View {
         VStack(alignment: .center) {
-            Text("Impulse \(Utility.vectorString(token.force, 0))")
-            Text("At \(Utility.positionString(token.focus))")
-            Text(String(format: "t = %.1fs", token.duration))
+            Text("Impulse \(Utility.vectorString(token.force, 2))")
+            Text("At \(Utility.positionString(token.focus, 2))")
+            Text(String(format: "t = %.2fs", token.duration))
         }
         .actionTokenStyle(selected)
     }

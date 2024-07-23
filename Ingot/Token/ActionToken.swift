@@ -108,12 +108,12 @@ final class ForceActionToken: ActionToken, ForceIshActionToken {
     @Published var positionX: CGFloat
     @Published var positionY: CGFloat
 
-    init(_ actionRelay: ActionRelay) {
-        self.forceDX = actionRelay.forceDX
-        self.forceDY = actionRelay.forceDY
-        self.positionX = actionRelay.positionX
-        self.positionY = actionRelay.positionY
-        super.init(actionType: .force, duration: actionRelay.duration)
+    init() {
+        forceDX = .zero
+        forceDY = .zero
+        positionX = .zero
+        positionY = .zero
+        super.init(actionType: .force, duration: 0.01)
     }
 
     init(duration: TimeInterval, force: CGVector, focus: CGPoint) {
@@ -132,9 +132,9 @@ protocol TorqueIshActionToken {
 final class TorqueActionToken: ActionToken, TorqueIshActionToken {
     @Published var torque: CGFloat
 
-    init(_ actionRelay: ActionRelay) {
-        self.torque = actionRelay.torque
-        super.init(actionType: .torque, duration: actionRelay.duration)
+    init() {
+        self.torque = .zero
+        super.init(actionType: .torque, duration: 0.01)
     }
 
     init(duration: TimeInterval, torque: CGFloat) {
@@ -149,12 +149,12 @@ final class ImpulseActionToken: ActionToken, ForceIshActionToken {
     @Published var positionX: CGFloat
     @Published var positionY: CGFloat
 
-    init(_ actionRelay: ActionRelay) {
-        self.forceDX = actionRelay.forceDX
-        self.forceDY = actionRelay.forceDY
-        self.positionX = actionRelay.positionX
-        self.positionY = actionRelay.positionY
-        super.init(actionType: .impulse, duration: actionRelay.duration)
+    init() {
+        forceDX = .zero
+        forceDY = .zero
+        positionX = .zero
+        positionY = .zero
+        super.init(actionType: .force, duration: 0.01)
     }
 
     init(duration: TimeInterval, force: CGVector, focus: CGPoint) {
@@ -169,9 +169,9 @@ final class ImpulseActionToken: ActionToken, ForceIshActionToken {
 final class AngularImpulseActionToken: ActionToken, TorqueIshActionToken {
     @Published var torque: CGFloat
 
-    init(_ actionRelay: ActionRelay) {
-        self.torque = actionRelay.torque
-        super.init(actionType: .angularImpulse, duration: actionRelay.duration)
+    init() {
+        self.torque = .zero
+        super.init(actionType: .torque, duration: 0.01)
     }
 
     init(duration: TimeInterval, torque: CGFloat) {

@@ -11,16 +11,16 @@ struct ActionTokensScrollView: View {
 
         switch token {
         case let angularImpulseToken as AngularImpulseActionToken:
-            return AngularImpulseActionTokenView(angularImpulseToken, selected: selected)
+            return AngularImpulseActionTokenView(token: angularImpulseToken, selected: selected)
 
 //        case let followPathToken as FollowPathActionToken:
 //            return FollowPathActionTokenView(followPathToken, selected: selected)
 
         case let forceToken as ForceActionToken:
-            return ForceActionTokenView(forceToken, selected: selected)
+            return ForceActionTokenView(token: forceToken, selected: selected)
 
         case let impulseToken as ImpulseActionToken:
-            return ImpulseActionTokenView(impulseToken, selected: selected)
+            return ImpulseActionTokenView(token: impulseToken, selected: selected)
 
 //        case let moveToken as MoveActionToken:
 //            return MoveActionTokenView(
@@ -44,7 +44,7 @@ struct ActionTokensScrollView: View {
 //            )
 
         case let torquen as TorqueActionToken:
-            return TorqueActionTokenView(torquen, selected: selected)
+            return TorqueActionTokenView(token: torquen, selected: selected)
 
         default:
             fatalError()
@@ -58,7 +58,7 @@ struct ActionTokensScrollView: View {
                     HStack {
                         ForEach(gremlin.actions) { token in
                             Button(action: {
-                                gameController.selectedAction = token
+                                gameController.selectAction(token)
                             }) {
                                 AnyView(createActionView(for: token))
                             }

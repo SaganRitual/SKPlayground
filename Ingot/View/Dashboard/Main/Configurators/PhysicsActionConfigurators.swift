@@ -29,10 +29,10 @@ struct PhysicsActionConfigurators: View {
                             let actionToken: ActionToken
 
                             switch selectedType {
-                            case .force:   actionToken = ForceActionToken(actionRelay)
-                            case .torque:  actionToken = TorqueActionToken(actionRelay)
-                            case .impulse: actionToken = ImpulseActionToken(actionRelay)
-                            case .angularImpulse: actionToken = AngularImpulseActionToken(actionRelay)
+                            case .force:   actionToken = ForceActionToken()
+                            case .torque:  actionToken = TorqueActionToken()
+                            case .impulse: actionToken = ImpulseActionToken()
+                            case .angularImpulse: actionToken = AngularImpulseActionToken()
                             }
 
                             gameController.addActionToSelected(actionToken)
@@ -44,6 +44,7 @@ struct PhysicsActionConfigurators: View {
 
                 if gameController.selectedAction != nil {
                     PhysicsActionSlidersGrid(
+                        actionRelay: gameController.actionRelay,
                         selectedAction: Binding(
                             get: { gameController.selectedAction },
                             set: { gameController.selectedAction = $0 }

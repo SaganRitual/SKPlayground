@@ -49,6 +49,7 @@ extension GameController {
     }
 
     func subscribeToRelays(sceneManager: SKPScene) {
+        actionRelay.subscribe(gameController: self)
         physicsBodyRelay.subscribe(gameController: self)
         physicsFieldRelay.subscribe(gameController: self)
         physicsJointRelay.subscribe(gameController: self)

@@ -3,17 +3,13 @@
 import SwiftUI
 
 struct TorqueActionTokenView: View {
-    let selected: Bool
-    let token: TorqueActionToken
+    @ObservedObject var token: TorqueActionToken
 
-    init(_ token: TorqueActionToken, selected: Bool) {
-        self.selected = selected
-        self.token = token
-    }
+    let selected: Bool
 
     var body: some View {
         VStack(alignment: .center) {
-            Text("Torque \(String(format: "%.1f", token.torque))")
+            Text("Torque \(String(format: "%.2f", token.torque))")
             Text(String(format: "t = %.1fs", token.duration))
         }
         .actionTokenStyle(selected)

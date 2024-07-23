@@ -3,19 +3,15 @@
 import SwiftUI
 
 struct ForceActionTokenView: View {
-    let selected: Bool
-    let token: ForceActionToken
+    @ObservedObject var token: ForceActionToken
 
-    init(_ token: ForceActionToken, selected: Bool) {
-        self.token = token
-        self.selected = selected
-    }
+    let selected: Bool
 
     var body: some View {
         VStack(alignment: .center) {
-            Text("Force \(Utility.vectorString(token.force, 0))")
-            Text("At \(Utility.positionString(token.focus))")
-            Text(String(format: "t = %.1fs", token.duration))
+            Text("Force \(Utility.vectorString(token.force, 2))")
+            Text("At \(Utility.positionString(token.focus, 2))")
+            Text(String(format: "t = %.2fs", token.duration))
         }
         .actionTokenStyle(selected)
     }

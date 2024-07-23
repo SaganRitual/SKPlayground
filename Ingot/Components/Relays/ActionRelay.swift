@@ -1,5 +1,6 @@
 // We are a way for the cosmos to know itself. -- C. Sagan
 
+import Combine
 import Foundation
 
 final class ActionRelay: ObservableObject {
@@ -9,6 +10,18 @@ final class ActionRelay: ObservableObject {
     @Published var positionX = CGFloat.zero
     @Published var positionY = CGFloat.zero
     @Published var torque = CGFloat.zero
+
+    private var subscriptions = Set<AnyCancellable>()
+
+    var focus: CGPoint {
+        get { CGPoint(x: positionX, y: positionY) }
+        set { positionX = newValue.x; positionY = newValue.y }
+    }
+
+    var force: CGVector {
+        get { CGVector(dx: forceDX, dy: forceDY) }
+        set { forceDX = newValue.dx; forceDY = newValue.dy }
+    }
 
     func loadState(from entity_: GameEntity) {
         let entity = Utility.forceCast(entity_, to: Gremlin.self)
@@ -38,5 +51,42 @@ final class ActionRelay: ObservableObject {
         default:
             fatalError("We thought this couldn't happen")
         }
+    }
+
+    func subscribe(gameController: GameController) {
+        $forceDX.dropFirst().sink { [weak gameController] in
+            var token = Utility.forceCast(gameController?.selectedAction, to: ForceIshActionToken.self)
+            token.forceDX = $0
+        }
+        .store(in: &subscriptions)
+
+        $forceDY.dropFirst().sink { [weak gameController] in
+            var token = Utility.forceCast(gameController?.selectedAction, to: ForceIshActionToken.self)
+            token.forceDY = $0
+        }
+        .store(in: &subscriptions)
+
+        $positionX.dropFirst().sink { [weak gameController] in
+            var token = Utility.forceCast(gameController?.selectedAction, to: ForceIshActionToken.self)
+            token.positionX = $0
+        }
+        .store(in: &subscriptions)
+
+        $positionY.dropFirst().sink { [weak gameController] in
+            var token = Utility.forceCast(gameController?.selectedAction, to: ForceIshActionToken.self)
+            token.positionY = $0
+        }
+        .store(in: &subscriptions)
+
+        $torque.dropFirst().sink { [weak gameController] in
+            var token = Utility.forceCast(gameController?.selectedAction, to: TorqueIshActionToken.self)
+            token.torque = $0
+        }
+        .store(in: &subscriptions)
+
+        $duration.dropFirst().sink { [weak gameController] in
+            Utility.forceUnwrap(gameController?.selectedAction).duration = $0
+        }
+        .store(in: &subscriptions)
     }
 }

@@ -131,6 +131,13 @@ extension GameController {
         updateRelaysForSelection()
     }
 
+    func selectAction(_ token: ActionToken) {
+        let gremlin = Utility.forceCast(singleSelected(), to: Gremlin.self)
+        gremlin.selectedAction = token
+        self.selectedAction = token
+        updateRelaysForSelection()
+    }
+
     func toggleSelect(_ entity: GameEntity) {
         if entity.isSelected {
             deselect(entity)

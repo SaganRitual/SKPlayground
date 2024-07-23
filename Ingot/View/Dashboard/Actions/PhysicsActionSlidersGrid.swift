@@ -73,6 +73,7 @@ struct PhysicsActionSlidersGrid: View {
     @State private var minLabelWidths = [CGFloat]()
     @State private var maxLabelWidths = [CGFloat]()
 
+    @ObservedObject var actionRelay: ActionRelay
     @Binding var selectedAction: ActionToken?
 
     var body: some View {
@@ -117,7 +118,7 @@ struct PhysicsActionSlidersGrid: View {
             }
             .padding(.top)
 
-            if var forceIsh = self.selectedAction as? ForceIshActionToken {
+            if self.selectedAction is ForceIshActionToken {
                 GridRow {
                     PhysicsActionSlidersGridRow<Text, Text>(
                         titleWidths: $titleWidths,
@@ -125,14 +126,14 @@ struct PhysicsActionSlidersGrid: View {
                         minLabelWidths: $minLabelWidths,
                         maxLabelWidths: $maxLabelWidths,
                         scalar: Binding(
-                            get: { forceIsh.forceDX },
-                            set: { forceIsh.forceDX = $0 }
+                            get: { actionRelay.forceDX },
+                            set: { actionRelay.forceDX = $0 }
                         ),
                         maxLabel: "+10.0",
                         minLabel: "-10.0",
                         range: (-10.0)...(+10.0),
                         scalarView: Text(
-                            String(format: "%.2f", forceIsh.forceDX)
+                            String(format: "%.2f", actionRelay.forceDX)
                         ),
                         titleView: Text("Vector  dX")
                     )
@@ -145,14 +146,14 @@ struct PhysicsActionSlidersGrid: View {
                         minLabelWidths: $minLabelWidths,
                         maxLabelWidths: $maxLabelWidths,
                         scalar: Binding(
-                            get: { forceIsh.forceDY },
-                            set: { forceIsh.forceDY = $0 }
+                            get: { actionRelay.forceDY },
+                            set: { actionRelay.forceDY = $0 }
                         ),
                         maxLabel: "+10.0",
                         minLabel: "-10.0",
                         range: (-10.0)...(+10.0),
                         scalarView: Text(
-                            String(format: "%.2f", forceIsh.forceDY)
+                            String(format: "%.2f", actionRelay.forceDY)
                         ),
                         titleView: Text("        dY")
                     )
@@ -165,14 +166,14 @@ struct PhysicsActionSlidersGrid: View {
                         minLabelWidths: $minLabelWidths,
                         maxLabelWidths: $maxLabelWidths,
                         scalar: Binding(
-                            get: { forceIsh.positionX },
-                            set: { forceIsh.positionX = $0 }
+                            get: { actionRelay.positionX },
+                            set: { actionRelay.positionX = $0 }
                         ),
                         maxLabel: "+1.0",
                         minLabel: "-1.0",
                         range: (-1.0)...(+1.0),
                         scalarView: Text(
-                            String(format: "%.2f", forceIsh.positionX)
+                            String(format: "%.2f", actionRelay.positionX)
                         ),
                         titleView: Text("Apply at X")
                     )
@@ -185,19 +186,19 @@ struct PhysicsActionSlidersGrid: View {
                         minLabelWidths: $minLabelWidths,
                         maxLabelWidths: $maxLabelWidths,
                         scalar: Binding(
-                            get: { forceIsh.positionY },
-                            set: { forceIsh.positionY = $0 }
+                            get: { actionRelay.positionY },
+                            set: { actionRelay.positionY = $0 }
                         ),
                         maxLabel: "+1.0",
                         minLabel: "-1.0",
                         range: (-1.0)...(+1.0),
                         scalarView: Text(
-                            String(format: "%.2f", forceIsh.positionY)
+                            String(format: "%.2f", actionRelay.positionY)
                         ),
                         titleView: Text("         Y")
                     )
                 }
-            } else if var torqueIsh = selectedAction as? TorqueIshActionToken {
+            } else if selectedAction is TorqueIshActionToken {
                 GridRow {
                     PhysicsActionSlidersGridRow<Text, Text>(
                         titleWidths: $titleWidths,
@@ -205,21 +206,21 @@ struct PhysicsActionSlidersGrid: View {
                         minLabelWidths: $minLabelWidths,
                         maxLabelWidths: $maxLabelWidths,
                         scalar: Binding(
-                            get: { torqueIsh.torque },
-                            set: { torqueIsh.torque = $0 }
+                            get: { actionRelay.torque },
+                            set: { actionRelay.torque = $0 }
                         ),
                         maxLabel: "+2π",
                         minLabel: "-2π",
                         range: (-2 * .pi)...(+2 * .pi),
                         scalarView: Text(
-                            String(format: "%.2fπ/s", torqueIsh.torque)
+                            String(format: "%.2fπ/s", actionRelay.torque)
                         ),
                         titleView: Text("Torque")
                     )
                 }
             }
 
-            if let selectedAction {
+            if selectedAction != nil {
                 GridRow {
                     PhysicsActionSlidersGridRow<Text, Text>(
                         titleWidths: $titleWidths,
@@ -227,14 +228,14 @@ struct PhysicsActionSlidersGrid: View {
                         minLabelWidths: $minLabelWidths,
                         maxLabelWidths: $maxLabelWidths,
                         scalar: Binding(
-                            get: { CGFloat(selectedAction.duration) },
-                            set: { selectedAction.duration = TimeInterval($0) }
+                            get: { CGFloat(actionRelay.duration) },
+                            set: { actionRelay.duration = TimeInterval($0) }
                         ),
                         maxLabel: "+5.0",
                         minLabel: "0.01",
                         range: (0.01)...(+5.0),
                         scalarView: Text(
-                            String(format: "%.2f", selectedAction.duration)
+                            String(format: "%.2f", actionRelay.duration)
                         ),
                         titleView: Text("Duration")
                     )
@@ -243,8 +244,4 @@ struct PhysicsActionSlidersGrid: View {
         }
         .padding()
     }
-}
-
-#Preview {
-    PhysicsBodySlidersGrid(physicsBodyRelay: PhysicsBodyRelay())
 }

@@ -3,18 +3,14 @@
 import SwiftUI
 
 struct AngularImpulseActionTokenView: View {
-    let selected: Bool
-    let token: AngularImpulseActionToken
+    @ObservedObject var token: AngularImpulseActionToken
 
-    init(_ token: AngularImpulseActionToken, selected: Bool) {
-        self.selected = selected
-        self.token = token
-    }
+    let selected: Bool
 
     var body: some View {
         VStack(alignment: .center) {
-            Text("Θ-impulse \(String(format: "%.1f", token.torque))")
-            Text(String(format: "t = %.1fs", token.duration))
+            Text("Θ-impulse \(String(format: "%.2f", token.torque))")
+            Text(String(format: "t = %.2fs", token.duration))
         }
         .actionTokenStyle(selected)
     }

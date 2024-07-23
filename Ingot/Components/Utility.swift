@@ -3,16 +3,23 @@
 import Foundation
 
 enum Utility {
+    static func format(_ number: CGFloat) -> String {
+        var pad = String(format: "%+.2f", number)
+        if abs(number) < 100 { pad = " " + pad }
+        if abs(number) < 10 { pad = " " + pad }
+        return pad
+    }
+
     static func positionString(_ position: CGPoint, _ decimals: Int = 2) -> String {
-        let vx = String(format: "%.\(decimals)f", position.x)
-        let vy = String(format: "%.\(decimals)f", position.y)
+        let vx = format(position.x)
+        let vy = format(position.y)
 
         return "(\(vx), \(vy))"
     }
 
     static func vectorString(_ vector: CGVector, _ decimals: Int = 2) -> String {
-        let vx = String(format: "%.\(decimals)f", vector.dx)
-        let vy = String(format: "%.\(decimals)f", vector.dy)
+        let vx = format(vector.dx)
+        let vy = format(vector.dy)
 
         return "(\(vx), \(vy))"
     }

@@ -11,6 +11,7 @@ class SKPScene: SKScene {
     var edgeLoop: SKPhysicsBody?
     var firstPass = true
     var mouseState = InputEvent.MouseState.idle
+    var physicsRunSpeed: CGFloat = 1
 
     let entitiesNode = SKNode()
 

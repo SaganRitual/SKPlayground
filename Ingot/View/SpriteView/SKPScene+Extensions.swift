@@ -16,6 +16,19 @@ extension SKPScene {
         self.physicsBody != nil
     }
 
+    func retrieveEscapedGremlins() {
+        entitiesNode.children.compactMap({ node in node.ownerIsGremlin() }).forEach { gremlin in
+            let hw = size.width / 2
+            let hh = size.height / 2
+
+            let origin = CGPoint(x: -hw, y: -hh)
+
+            if !CGRect(origin: origin, size: self.size).contains(gremlin.position) {
+                gremlin.position = CGPoint.random(in: (-hw)...(+hw), yRange: (-hh)...(+hh))
+            }
+        }
+    }
+
     func startActions() {
 
     }
@@ -28,12 +41,17 @@ extension SKPScene {
 
     }
 
-    func startPhysics() {
-
+    func pausePhysics() {
+        physicsRunSpeed = physicsWorldRelay.speed
+        physicsWorldRelay.speed = 0
     }
 
-    func stopPhysics() {
-        
+    func playPhysics() {
+        if physicsRunSpeed == 0 {
+            physicsRunSpeed = 1
+        }
+
+        physicsWorldRelay.speed = physicsRunSpeed
     }
 
     func getNodesInRectangle(_ rectangle: CGRect) -> [SKNode] {

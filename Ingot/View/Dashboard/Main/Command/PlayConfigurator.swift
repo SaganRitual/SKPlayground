@@ -4,6 +4,7 @@ import SwiftUI
 
 struct PlayConfigurator: View {
     @ObservedObject var commandRelay: CommandRelay
+    @ObservedObject var physicsWorldRelay: PhysicsWorldRelay
     @ObservedObject var workflowRelay: WorkflowRelay
 
     @State private var isPlaying = false
@@ -20,18 +21,14 @@ struct PlayConfigurator: View {
 
     func updatePhysicsState() {
         let goPhysics = isPlaying && applyToPhysics
-        if goPhysics { sceneManager.startPhysics() }
-        else { sceneManager.stopPhysics() }
+        if goPhysics { sceneManager.playPhysics() }
+        else { sceneManager.pausePhysics() }
     }
 
     var body: some View {
         VStack {
-            PlayButtonsView(sceneManager: sceneManager)
-            PlaySlidersGrid(commandRelay: commandRelay)
+            PlayButtonsView(sceneManager: sceneManager, physicsWorldRelay: physicsWorldRelay)
+            PlaySlidersGrid(commandRelay: commandRelay, physicsWorldRelay: physicsWorldRelay)
         }
     }
-}
-
-#Preview {
-    PlayConfigurator(commandRelay: CommandRelay(), workflowRelay: WorkflowRelay(), sceneManager: SKPScene(size: .zero))
 }

@@ -10,7 +10,6 @@ final class CommandRelay: ObservableObject {
 
     @Published var actionsSpeed: CGFloat = 1
     @Published var activeTab = ActiveTab.physicsWorld
-    @Published var physicsSpeed: CGFloat = 1
     @Published var playActions: Bool = false
     @Published var playPhysics: Bool = false
 }

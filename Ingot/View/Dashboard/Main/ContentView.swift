@@ -24,6 +24,7 @@ struct ContentView: View {
 
                 CommandView(
                     commandRelay: gameController.commandRelay,
+                    physicsWorldRelay: gameController.physicsWorldRelay,
                     workflowRelay: gameController.workflowRelay,
                     sceneManager: gameController.sceneManager
                 )

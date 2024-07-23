@@ -6,8 +6,6 @@ struct PlaySlidersGridRow<TargetField, TitleView: View, ScalarView: View>: View
     where TargetField: Comparable & AdditiveArithmetic & ExpressibleByIntegerLiteral & BinaryFloatingPoint,
     TargetField.Stride: BinaryFloatingPoint
 {
-    @ObservedObject var commandRelay: CommandRelay
-
     @Binding var titleWidths: [CGFloat]
     @Binding var scalarWidths: [CGFloat]
     @Binding var minLabelWidths: [CGFloat]
@@ -77,6 +75,7 @@ struct PlaySlidersGridRow<TargetField, TitleView: View, ScalarView: View>: View
 
 struct PlaySlidersGrid: View {
     @ObservedObject var commandRelay: CommandRelay
+    @ObservedObject var physicsWorldRelay: PhysicsWorldRelay
 
     @State private var titleWidths = [CGFloat]()
     @State private var scalarWidths = [CGFloat]()
@@ -126,12 +125,14 @@ struct PlaySlidersGrid: View {
 
             GridRow {
                 PlaySlidersGridRow<CGFloat, Text, Text>(
-                    commandRelay: commandRelay,
                     titleWidths: $titleWidths,
                     scalarWidths: $scalarWidths,
                     minLabelWidths: $minLabelWidths,
                     maxLabelWidths: $maxLabelWidths,
-                    scalar: $commandRelay.actionsSpeed,
+                    scalar: Binding(
+                        get: { commandRelay.actionsSpeed },
+                        set: { commandRelay.actionsSpeed = $0 }
+                    ),
                     maxLabel: "10", minLabel: "0", range: 0...10,
                     scalarView: Text(String(format: "%.1f", commandRelay.actionsSpeed)),
                     titleView: Text("Actions Speed")
@@ -140,22 +141,20 @@ struct PlaySlidersGrid: View {
 
             GridRow {
                 PlaySlidersGridRow<CGFloat, Text, Text>(
-                    commandRelay: commandRelay,
                     titleWidths: $titleWidths,
                     scalarWidths: $scalarWidths,
                     minLabelWidths: $minLabelWidths,
                     maxLabelWidths: $maxLabelWidths,
-                    scalar: $commandRelay.physicsSpeed,
+                    scalar: Binding(
+                        get: { physicsWorldRelay.speed },
+                        set: { physicsWorldRelay.speed = $0 }
+                    ),
                     maxLabel: "10", minLabel: "0", range: 0...10,
-                    scalarView: Text(String(format: "%.1f", commandRelay.physicsSpeed)),
+                    scalarView: Text(String(format: "%.1f", physicsWorldRelay.speed)),
                     titleView: Text("Physics Speed")
                 )
             }
         }
         .padding()
      }
-}
-
-#Preview {
-    PlaySlidersGrid(commandRelay: CommandRelay())
 }

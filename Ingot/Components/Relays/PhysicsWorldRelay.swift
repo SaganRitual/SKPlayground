@@ -12,6 +12,7 @@ final class PhysicsWorldRelay: ObservableObject {
     @Published var collideWith = Set<Int>()
     @Published var memberOf = Set<Int>()
     @Published var reportContactWith = Set<Int>()
+    @Published var speed: CGFloat = 1
 
     private var subscriptions = Set<AnyCancellable>()
 
@@ -53,6 +54,11 @@ final class PhysicsWorldRelay: ObservableObject {
 
         $reportContactWith.dropFirst().sink { [weak sceneManager] in
             sceneManager?.edgeLoop?.contactTestBitMask = Utility.makeBitmask($0)
+        }
+        .store(in: &subscriptions)
+
+        $speed.dropFirst().sink { [weak sceneManager] in
+            sceneManager?.physicsWorld.speed = $0
         }
         .store(in: &subscriptions)
     }

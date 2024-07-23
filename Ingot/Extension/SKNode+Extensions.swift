@@ -4,6 +4,10 @@ import Foundation
 import SpriteKit
 
 extension SKNode {
+    func ownerIsGremlin() -> Gremlin? {
+        return getOwnerEntity() as? Gremlin
+    }
+
     func getOwnerEntity() -> GameEntity? {
         guard let entry = userData?["ownerEntity"] else { return nil }
         return entry as? GameEntity

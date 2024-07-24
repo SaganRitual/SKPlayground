@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D424000C2C50865700B66F87 /* GameController+Select.swift in Sources */ = {isa = PBXBuildFile; fileRef = D424000B2C50865700B66F87 /* GameController+Select.swift */; };
 		D4301D762C48623A00A30A26 /* vector_float3+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4301D752C48623A00A30A26 /* vector_float3+Extensions.swift */; };
 		D4301D952C4969F300A30A26 /* PhysicsEntityConfigurators.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4301D942C4969F300A30A26 /* PhysicsEntityConfigurators.swift */; };
 		D47DB2E52C4AD4D4000FC567 /* AngularImpulseActionTokenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47DB2DB2C4AD4D3000FC567 /* AngularImpulseActionTokenView.swift */; };
@@ -115,6 +116,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D424000B2C50865700B66F87 /* GameController+Select.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameController+Select.swift"; sourceTree = "<group>"; };
 		D4301D752C48623A00A30A26 /* vector_float3+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "vector_float3+Extensions.swift"; sourceTree = "<group>"; };
 		D4301D942C4969F300A30A26 /* PhysicsEntityConfigurators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhysicsEntityConfigurators.swift; sourceTree = "<group>"; };
 		D47DB2D92C4A0EF1000FC567 /* ToDo.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = ToDo.md; sourceTree = "<group>"; };
@@ -486,8 +488,9 @@
 				D47DB3052C4B0FBB000FC567 /* ActionsManager.swift */,
 				D4D651702C429B960086FAC9 /* ContextMenuManager.swift */,
 				D4D651D02C430EDA0086FAC9 /* GameController.swift */,
-				D48006312C4EF7C6006DF725 /* GameController+Relays.swift */,
 				D4D651712C429B960086FAC9 /* GameController+Entities.swift */,
+				D48006312C4EF7C6006DF725 /* GameController+Relays.swift */,
+				D424000B2C50865700B66F87 /* GameController+Select.swift */,
 				D4D651722C429B960086FAC9 /* GestureEventDispatcher.swift */,
 				D4D651732C429B960086FAC9 /* InputEventDispatcher.swift */,
 				D4FE50982C49C726005A55E4 /* PhysicsMaskNamesManager.swift */,
@@ -707,6 +710,7 @@
 				D4D651BB2C429B960086FAC9 /* PhysicsFieldToken.swift in Sources */,
 				D4301D762C48623A00A30A26 /* vector_float3+Extensions.swift in Sources */,
 				D4D651A22C429B960086FAC9 /* PhysicsBodySlidersGrid.swift in Sources */,
+				D424000C2C50865700B66F87 /* GameController+Select.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

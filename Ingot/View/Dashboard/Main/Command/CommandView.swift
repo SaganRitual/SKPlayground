@@ -4,6 +4,7 @@ import SwiftUI
 
 struct CommandView: View {
     @ObservedObject var commandRelay: CommandRelay
+    @ObservedObject var gameController: GameController
     @ObservedObject var physicsWorldRelay: PhysicsWorldRelay
     @ObservedObject var workflowRelay: WorkflowRelay
 
@@ -17,7 +18,11 @@ struct CommandView: View {
 
             ClickToPlaceView(workflowRelay: workflowRelay)
             PlayConfigurator(
-                commandRelay: commandRelay, physicsWorldRelay: physicsWorldRelay, workflowRelay: workflowRelay, sceneManager: sceneManager
+                commandRelay: commandRelay,
+                gameController: gameController,
+                physicsWorldRelay: physicsWorldRelay,
+                workflowRelay: workflowRelay,
+                sceneManager: sceneManager
             )
         }
     }

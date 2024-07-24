@@ -1,10 +1,24 @@
 // We are a way for the cosmos to know itself. -- C. Sagan
 
 import Foundation
+import SpriteKit
 
 enum ActionType: CaseIterable {
     case followPath, move, rotate, scale
     case force, torque, impulse, angularImpulse
+
+    var isPhysics: Bool {
+        switch self {
+        case .angularImpulse: fallthrough
+        case .force: fallthrough
+        case .impulse: fallthrough
+        case .torque: return true
+
+        default: return false
+        }
+    }
+
+    var isSpace: Bool { !isPhysics }
 }
 
 class ActionToken: ObservableObject, Identifiable {
@@ -13,10 +27,15 @@ class ActionToken: ObservableObject, Identifiable {
 
     @Published var duration: TimeInterval
 
+    var isPhysicsAction: Bool { actionType.isPhysics }
+    var isSpaceAction: Bool { actionType.isSpace }
+
     init(actionType: ActionType, duration: TimeInterval) {
         self.actionType = actionType
         self.duration = duration
     }
+
+    func makeSKAction() -> SKAction { fatalError("Not implemented for this action token?") }
 
     class func randomToken() -> ActionToken {
         let duration = TimeInterval.random(in: 1...5)
@@ -123,6 +142,10 @@ final class ForceActionToken: ActionToken, ForceIshActionToken {
         self.positionY = focus.y
         super.init(actionType: .force, duration: duration)
     }
+
+    override func makeSKAction() -> SKAction {
+        SKAction.applyForce(force, duration: duration)
+    }
 }
 
 protocol TorqueIshActionToken {
@@ -140,6 +163,10 @@ final class TorqueActionToken: ActionToken, TorqueIshActionToken {
     init(duration: TimeInterval, torque: CGFloat) {
         self.torque = torque
         super.init(actionType: .torque, duration: duration)
+    }
+
+    override func makeSKAction() -> SKAction {
+        SKAction.applyTorque(torque, duration: duration)
     }
 }
 
@@ -164,6 +191,10 @@ final class ImpulseActionToken: ActionToken, ForceIshActionToken {
         self.positionY = focus.y
         super.init(actionType: .impulse, duration: duration)
     }
+
+    override func makeSKAction() -> SKAction {
+        SKAction.applyImpulse(force, duration: duration)
+    }
 }
 
 final class AngularImpulseActionToken: ActionToken, TorqueIshActionToken {
@@ -177,5 +208,9 @@ final class AngularImpulseActionToken: ActionToken, TorqueIshActionToken {
     init(duration: TimeInterval, torque: CGFloat) {
         self.torque = torque
         super.init(actionType: .angularImpulse, duration: duration)
+    }
+
+    override func makeSKAction() -> SKAction {
+        SKAction.applyAngularImpulse(torque, duration: duration)
     }
 }

@@ -4,6 +4,7 @@ import SwiftUI
 
 struct PlayConfigurator: View {
     @ObservedObject var commandRelay: CommandRelay
+    @ObservedObject var gameController: GameController
     @ObservedObject var physicsWorldRelay: PhysicsWorldRelay
     @ObservedObject var workflowRelay: WorkflowRelay
 
@@ -27,7 +28,11 @@ struct PlayConfigurator: View {
 
     var body: some View {
         VStack {
-            PlayButtonsView(sceneManager: sceneManager, physicsWorldRelay: physicsWorldRelay)
+            PlayButtonsView(
+                sceneManager: sceneManager,
+                gameController: gameController,
+                physicsWorldRelay: physicsWorldRelay
+            )
             PlaySlidersGrid(commandRelay: commandRelay, physicsWorldRelay: physicsWorldRelay)
         }
     }

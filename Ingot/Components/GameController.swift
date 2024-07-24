@@ -104,45 +104,36 @@ final class GameController: ObservableObject {
 }
 
 extension GameController {
-    func commitMarqueeSelect(_ entities: Set<GameEntity>, _ shiftKey: Bool) {
-        if shiftKey {
-            entities.forEach { toggleSelect($0) }
-        } else {
-            deselectAll()
-            entities.forEach { select($0) }
+    enum ActionSet: String, CaseIterable, Identifiable, RawRepresentable {
+        var id: Self { self }
+        case all, physics, space
+    }
+
+    func isInSet(_ token: ActionToken, _ set: ActionSet) -> Bool {
+        switch set {
+        case .all:     return true
+        case .physics: return token.isPhysicsAction
+        case .space:   return token.isSpaceAction
         }
     }
 
-    func deselect(_ entity: GameEntity) {
-        entity.deselect()
-        updateRelaysForSelection()
+    func startActions(_ set: ActionSet) {
+        entities.compactMap({ $0 as? Gremlin }).forEach { gremlin in
+            let actions = gremlin.actions.filter({ isInSet($0, set) }).map { actionToken in
+                actionToken.makeSKAction()
+            }
+
+            gremlin.face.rootSceneNode.run(SKAction.sequence(actions))
+        }
     }
 
-    func deselectAll() {
-        getSelected().forEach { deselect($0) }
-    }
+    func startActionsOnSelected(_ set: ActionSet) {
+        getSelected().compactMap({ $0 as? Gremlin }).forEach { gremlin in
+            let actions = gremlin.actions.filter({ isInSet($0, set) }).map { actionToken in
+                actionToken.makeSKAction()
+            }
 
-    func getSelected() -> Set<GameEntity> {
-        Set(entities.compactMap({ $0.isSelected ? $0 : nil }))
-    }
-
-    func select(_ entity: GameEntity) {
-        entity.select()
-        updateRelaysForSelection()
-    }
-
-    func selectAction(_ token: ActionToken) {
-        let gremlin = Utility.forceCast(singleSelected(), to: Gremlin.self)
-        gremlin.selectedAction = token
-        self.selectedAction = token
-        updateRelaysForSelection()
-    }
-
-    func toggleSelect(_ entity: GameEntity) {
-        if entity.isSelected {
-            deselect(entity)
-        } else {
-            select(entity)
+            gremlin.face.rootSceneNode.run(SKAction.sequence(actions))
         }
     }
 }

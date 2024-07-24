@@ -4,21 +4,30 @@ import SwiftUI
 
 struct PlayButtonsView: View {
     let sceneManager: SKPScene
+    @ObservedObject var gameController: GameController
     @ObservedObject var physicsWorldRelay: PhysicsWorldRelay
+
+    @State private var actionSet = GameController.ActionSet.all
 
     var body: some View {
         VStack(alignment: .center, spacing: 20) {
-            HStack {
-                Spacer()
-
-                Button("Run Actions") {
-                    sceneManager.startActions()
+            Picker("Action Set", selection: $actionSet) {
+                ForEach(GameController.ActionSet.allCases) { set in
+                    Text(set.rawValue.capitalized).tag(set)
                 }
+            }
+            .pickerStyle(.segmented)
+
+            HStack {
+                Button("Run \(actionSet.rawValue.capitalized) Actions") {
+                    gameController.startActions(actionSet)
+                }
+                .padding(.leading)
 
                 Spacer()
 
-                Button("Run Actions on Selected") {
-                    sceneManager.startActionsOnSelected()
+                Button("Run \(actionSet.rawValue.capitalized) Actions on Selected") {
+                    gameController.startActionsOnSelected(actionSet)
                 }
 
                 Spacer()
@@ -26,16 +35,14 @@ struct PlayButtonsView: View {
                 Button("Stop Actions") {
                     sceneManager.stopActions()
                 }
-
-                Spacer()
+                .padding(.trailing)
             }
 
             HStack {
-                Spacer()
-
                 Button("Run Physics") {
                     sceneManager.playPhysics()
                 }
+                .padding(.leading)
                 .disabled(physicsWorldRelay.speed != 0)
 
                 Spacer()
@@ -50,9 +57,8 @@ struct PlayButtonsView: View {
                 Button("Stop Physics") {
                     sceneManager.pausePhysics()
                 }
+                .padding(.trailing)
                 .disabled(physicsWorldRelay.speed == 0)
-
-                Spacer()
             }
         }
         .padding([.horizontal, .top])

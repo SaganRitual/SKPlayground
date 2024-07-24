@@ -36,14 +36,14 @@ class FieldSprite: GameEntitySprite {
     }
 }
 
-final class Field: GameEntity {
-    let physicsField: SKFieldNode
+final class SKPPhysicsField: GameEntity, ObservableObject {
+    let fieldNode: SKFieldNode
 
-    static func make(at position: CGPoint, fieldType: PhysicsFieldType) -> Field {
+    static func make(at position: CGPoint, fieldType: PhysicsFieldType) -> SKPPhysicsField {
         let fieldNode = makeFieldNode(fieldType)
         fieldNode.userData = ["fieldType": fieldType]
 
-        let field = Field(fieldNode, at: position)
+        let field = SKPPhysicsField(fieldNode, at: position)
         field.face.rootSceneNode.addChild(fieldNode)
         field.face.setOwnerEntity(field)
 
@@ -76,7 +76,7 @@ final class Field: GameEntity {
     }
 
     init(_ fieldNode: SKFieldNode, at position: CGPoint) {
-        self.physicsField = fieldNode
+        self.fieldNode = fieldNode
 
         let halo = SelectionHalo()
 

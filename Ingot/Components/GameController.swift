@@ -12,22 +12,6 @@ final class SKPPhysicsBody: ObservableObject {
     }
 }
 
-final class SKPPhysicsField: ObservableObject {
-    let field: SKFieldNode
-
-    init(field: SKFieldNode) {
-        self.field = field
-    }
-}
-
-final class SKPPhysicsJoint: ObservableObject {
-    let joint: SKPhysicsJoint
-
-    init(joint: SKPhysicsJoint) {
-        self.joint = joint
-    }
-}
-
 final class SKPPhysicsWorld: ObservableObject {
     let world: SKPhysicsWorld
 

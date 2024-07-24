@@ -39,9 +39,8 @@ class SKPScene: SKScene {
     }
 
     override func didChangeSize(_ oldSize: CGSize) {
-        let shrunk = size * 0.95
-        let origin = CGPoint(x: -shrunk.width / 2, y: -shrunk.height / 2)
-        let pb = SKPhysicsBody(edgeLoopFrom: CGRect(origin: origin, size: shrunk))
+        let origin = CGPoint(x: -size.width / 2, y: -size.height / 2)
+        let pb = SKPhysicsBody(edgeLoopFrom: CGRect(origin: origin, size: size))
 
         edgeLoop = pb
 

@@ -11,9 +11,7 @@ struct SKPSpriteView: NSViewRepresentable {
     func makeNSView(context: Context) -> SKView {
         let view = SKPView()
 
-        view.showsPhysics = true
         view.showsFPS = true
-        view.showsFields = true
         view.showsDrawCount = true
         view.showsNodeCount = true
         view.showsQuadCount = true

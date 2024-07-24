@@ -117,7 +117,7 @@ struct PhysicsBodySlidersGrid: View {
                     minLabel: "-2.0",
                     range: (-2.0)...(+25.0),
                     scalarView: Text(
-                        String(format: "%.2f", physicsBodyRelay.friction)
+                        String(format: " %.2f", physicsBodyRelay.friction)
                     ),
                     titleView: Text("Friction")
                 )
@@ -131,11 +131,11 @@ struct PhysicsBodySlidersGrid: View {
                     minLabelWidths: $minLabelWidths,
                     maxLabelWidths: $maxLabelWidths,
                     fieldKeyPath: \.mass,
-                    maxLabel: "+10.0",
-                    minLabel: " 0.0",
-                    range: 0...10,
+                    maxLabel: " 1.0",
+                    minLabel: " 0.001",
+                    range: (0.001)...(1),
                     scalarView: Text(
-                        String(format: "%.2f", physicsBodyRelay.mass)
+                        String(format: "%.3f", physicsBodyRelay.mass)
                     ),
                     titleView: Text("Mass")
                 )
@@ -153,7 +153,7 @@ struct PhysicsBodySlidersGrid: View {
                     minLabel: "-2.0",
                     range: (-2.0)...(+2.0),
                     scalarView: Text(
-                        String(format: "%.2f", physicsBodyRelay.restitution)
+                        String(format: " %.2f", physicsBodyRelay.restitution)
                     ),
                     titleView: Text("Restitution")
                 )

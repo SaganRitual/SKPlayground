@@ -54,9 +54,9 @@ extension Utility {
 
 extension Utility {
     static func forceCast<T>(_ object: Any?, to expectedType: T.Type) -> T {
-        assert(object is T, "You said this couldn't happen")
+        assert(object is T, "We thought this couldn't happen")
         guard let forced = object as? T else {
-            fatalError("The gods said this couldn't happen")
+            fatalError("The gods promised us this couldn't happen")
         }
 
         return forced

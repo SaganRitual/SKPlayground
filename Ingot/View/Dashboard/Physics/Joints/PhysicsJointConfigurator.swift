@@ -18,7 +18,7 @@ struct PhysicsJointConfigurator: View {
                 Text("\(gameController.physicsJointRelay.jointType.rawValue.capitalized) Joint")
                     .underline()
 
-                switch joint.joint {
+                switch joint.physicsJoint {
                 case is SKPhysicsJointFixed:
                     PhysicsJointFixedView(
                         relay: Utility.forceCast(gameController.physicsJointRelay, to: PhysicsJointFixedRelay.self)
@@ -47,8 +47,6 @@ struct PhysicsJointConfigurator: View {
                 default:
                     fatalError("We thought this couldn't happen")
                 }
-            } else {
-                Text("No Joint Selected, or Multiple Joints Selected")
             }
         }
         .padding()

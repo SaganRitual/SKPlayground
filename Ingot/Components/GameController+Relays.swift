@@ -12,13 +12,15 @@ extension GameController {
     }
 
     func activatePhysicsBodyRelay(for entity: GameEntity) {
-        selectedPhysicsBody = entity.physicsBody
+        selectPhysicsEntity(entity)
 
-        physicsBodyRelay.loadState(from: entity)
+        if entity is Gremlin {
+            physicsBodyRelay.loadState(from: entity)
+        }
     }
 
     func activatePhysicsFieldRelay(for entity: GameEntity) {
-        selectedPhysicsField = entity.selectedPhysicsField
+        selectPhysicsEntity(entity)
 
         if selectedPhysicsField != nil {
             physicsFieldRelay.loadState(from: entity)
@@ -26,7 +28,7 @@ extension GameController {
     }
 
     func activatePhysicsJointRelay(for entity: GameEntity) {
-        selectedPhysicsJoint = entity.selectedPhysicsJoint
+        selectPhysicsEntity(entity)
 
         if selectedPhysicsJoint != nil {
             physicsJointRelay.loadState(from: entity)

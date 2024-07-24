@@ -127,12 +127,13 @@ final class ForceActionToken: ActionToken, ForceIshActionToken {
     @Published var positionX: CGFloat
     @Published var positionY: CGFloat
 
-    init() {
-        forceDX = .zero
-        forceDY = .zero
-        positionX = .zero
-        positionY = .zero
-        super.init(actionType: .force, duration: 0.01)
+    init(randomValues: Bool = false) {
+        forceDX = randomValues ? .random(in: (-10)...(10)) : .zero
+        forceDY = randomValues ? .random(in: (-10)...(10)) : .zero
+        positionX = randomValues ? .random(in: (-1)...(1)) : .zero
+        positionY = randomValues ? .random(in: (-1)...(1)) : .zero
+
+        super.init(actionType: .force, duration: randomValues ? .random(in: (0.01)...(5)) : 0.01)
     }
 
     init(duration: TimeInterval, force: CGVector, focus: CGPoint) {
@@ -155,8 +156,8 @@ protocol TorqueIshActionToken {
 final class TorqueActionToken: ActionToken, TorqueIshActionToken {
     @Published var torque: CGFloat
 
-    init() {
-        self.torque = .zero
+    init(randomValues: Bool = false) {
+        self.torque = randomValues ? .random(in: (-2 * .pi)...(2 * .pi)) : .zero
         super.init(actionType: .torque, duration: 0.01)
     }
 
@@ -176,12 +177,13 @@ final class ImpulseActionToken: ActionToken, ForceIshActionToken {
     @Published var positionX: CGFloat
     @Published var positionY: CGFloat
 
-    init() {
-        forceDX = .zero
-        forceDY = .zero
-        positionX = .zero
-        positionY = .zero
-        super.init(actionType: .force, duration: 0.01)
+    init(randomValues: Bool = false) {
+        forceDX = randomValues ? .random(in: (-10)...(10)) : .zero
+        forceDY = randomValues ? .random(in: (-10)...(10)) : .zero
+        positionX = randomValues ? .random(in: (-1)...(1)) : .zero
+        positionY = randomValues ? .random(in: (-1)...(1)) : .zero
+
+        super.init(actionType: .impulse, duration: randomValues ? .random(in: (0.01)...(5)) : 0.01)
     }
 
     init(duration: TimeInterval, force: CGVector, focus: CGPoint) {
@@ -200,9 +202,9 @@ final class ImpulseActionToken: ActionToken, ForceIshActionToken {
 final class AngularImpulseActionToken: ActionToken, TorqueIshActionToken {
     @Published var torque: CGFloat
 
-    init() {
-        self.torque = .zero
-        super.init(actionType: .torque, duration: 0.01)
+    init(randomValues: Bool = false) {
+        self.torque = randomValues ? .random(in: (-2 * .pi)...(2 * .pi)) : .zero
+        super.init(actionType: .angularImpulse, duration: 0.01)
     }
 
     init(duration: TimeInterval, torque: CGFloat) {

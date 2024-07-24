@@ -22,11 +22,11 @@ class JointSprite: GameEntitySprite {
     }
 }
 
-final class Joint: GameEntity {
+final class SKPPhysicsJoint: GameEntity, ObservableObject {
     let physicsJoint: SKPhysicsJoint
 
-    static func make(at position: CGPoint, type: PhysicsJointType) -> Joint {
-        let joint = Joint(at: position, type: type)
+    static func make(at position: CGPoint, type: PhysicsJointType) -> SKPPhysicsJoint {
+        let joint = SKPPhysicsJoint(at: position, type: type)
         joint.face.setOwnerEntity(joint)
         return joint
     }

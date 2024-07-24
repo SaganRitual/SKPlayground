@@ -27,7 +27,7 @@ final class PhysicsFieldRelay: ObservableObject {
     }
 
     func loadState(from entity_: GameEntity) {
-        let entity = Utility.forceCast(entity_, to: Field.self)
+        let entity = Utility.forceCast(entity_, to: SKPPhysicsField.self)
         let fieldNode_ = entity.face.rootSceneNode.children.first(where: { $0 is SKFieldNode })
         let fieldNode = Utility.forceCast(fieldNode_, to: SKFieldNode.self)
 
@@ -47,57 +47,57 @@ final class PhysicsFieldRelay: ObservableObject {
 
     func subscribe(gameController: GameController) {
         $animationSpeed.dropFirst().sink { [weak gameController] in
-            gameController?.selectedPhysicsField?.field.animationSpeed = $0
+            gameController?.selectedPhysicsField?.fieldNode.animationSpeed = $0
         }
         .store(in: &subscriptions)
 
         $applyTo.dropFirst().sink { [weak gameController] in
-            gameController?.selectedPhysicsField?.field.categoryBitMask = Utility.makeBitmask($0)
+            gameController?.selectedPhysicsField?.fieldNode.categoryBitMask = Utility.makeBitmask($0)
         }
         .store(in: &subscriptions)
 
         $gravityX.dropFirst().sink { [weak gameController] in
-            gameController?.selectedPhysicsField?.field.direction.x = $0
+            gameController?.selectedPhysicsField?.fieldNode.direction.x = $0
         }
         .store(in: &subscriptions)
 
         $gravityY.dropFirst().sink { [weak gameController] in
-            gameController?.selectedPhysicsField?.field.direction.y = $0
+            gameController?.selectedPhysicsField?.fieldNode.direction.y = $0
         }
         .store(in: &subscriptions)
 
         $enabled.dropFirst().sink { [weak gameController] in
-            gameController?.selectedPhysicsField?.field.isEnabled = $0
+            gameController?.selectedPhysicsField?.fieldNode.isEnabled = $0
         }
         .store(in: &subscriptions)
 
         $exclusive.dropFirst().sink { [weak gameController] in
-            gameController?.selectedPhysicsField?.field.isExclusive = $0
+            gameController?.selectedPhysicsField?.fieldNode.isExclusive = $0
         }
         .store(in: &subscriptions)
 
         $falloff.dropFirst().sink { [weak gameController] in
-            gameController?.selectedPhysicsField?.field.falloff = $0
+            gameController?.selectedPhysicsField?.fieldNode.falloff = $0
         }
         .store(in: &subscriptions)
 
         $minimumRadius.dropFirst().sink { [weak gameController] in
-            gameController?.selectedPhysicsField?.field.minimumRadius = $0
+            gameController?.selectedPhysicsField?.fieldNode.minimumRadius = $0
         }
         .store(in: &subscriptions)
 
         $region.dropFirst().sink { [weak gameController] in
-            gameController?.selectedPhysicsField?.field.region = $0
+            gameController?.selectedPhysicsField?.fieldNode.region = $0
         }
         .store(in: &subscriptions)
 
         $smoothness.dropFirst().sink { [weak gameController] in
-            gameController?.selectedPhysicsField?.field.smoothness = $0
+            gameController?.selectedPhysicsField?.fieldNode.smoothness = $0
         }
         .store(in: &subscriptions)
 
         $strength.dropFirst().sink { [weak gameController] in
-            gameController?.selectedPhysicsField?.field.strength = $0
+            gameController?.selectedPhysicsField?.fieldNode.strength = $0
         }
         .store(in: &subscriptions)
     }

@@ -72,8 +72,8 @@ extension GameController {
         }
     }
 
-    func placeField(at position: CGPoint) -> Field {
-        let field = Field.make(at: position, fieldType: workflowRelay.fieldType)
+    func placeField(at position: CGPoint) -> SKPPhysicsField {
+        let field = SKPPhysicsField.make(at: position, fieldType: workflowRelay.fieldType)
         postPlace(field)
         return field
     }
@@ -84,8 +84,8 @@ extension GameController {
         return gremlin
     }
 
-    func placeJoint(at position: CGPoint) -> Joint {
-        let joint = Joint.make(at: position, type: workflowRelay.jointType)
+    func placeJoint(at position: CGPoint) -> SKPPhysicsJoint {
+        let joint = SKPPhysicsJoint.make(at: position, type: workflowRelay.jointType)
         postPlace(joint)
         return joint
     }
@@ -99,5 +99,29 @@ extension GameController {
     private func postPlace(_ entity: GameEntity) {
         entities.insert(entity)
         sceneManager.addEntity(entity)
+        selectPhysicsEntity(entity)
+    }
+
+    func selectPhysicsEntity(_ entity: GameEntity) {
+        if entity is Gremlin {
+            selectedPhysicsBody = entity.physicsBody
+            selectedPhysicsField = nil
+            selectedPhysicsJoint = nil
+            return
+        }
+
+        if let field = entity as? SKPPhysicsField {
+            selectedPhysicsBody = nil
+            selectedPhysicsField = field
+            selectedPhysicsJoint = nil
+            return
+        }
+
+        if let joint = entity as? SKPPhysicsJoint {
+            selectedPhysicsBody = nil
+            selectedPhysicsField = nil
+            selectedPhysicsJoint = joint
+            return
+        }
     }
 }

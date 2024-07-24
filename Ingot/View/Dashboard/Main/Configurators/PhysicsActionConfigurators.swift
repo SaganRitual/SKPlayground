@@ -14,33 +14,44 @@ struct PhysicsActionConfigurators: View {
 
     @State private var selectedType = PhysicsActionType.force
 
+    private func newAction(_ actionType: PhysicsActionType, randomValues: Bool = false) {
+        let actionToken: ActionToken
+
+        switch actionType {
+        case .force:   actionToken = ForceActionToken(randomValues: randomValues)
+        case .torque:  actionToken = TorqueActionToken(randomValues: randomValues)
+        case .impulse: actionToken = ImpulseActionToken(randomValues: randomValues)
+        case .angularImpulse: actionToken = AngularImpulseActionToken(randomValues: randomValues)
+        }
+
+        gameController.addActionToSelected(actionToken)
+    }
+
     var body: some View {
         if gameController.singleSelected() is Gremlin {
             VStack {
-                Picker(
-                    selection: $selectedType,
-                    content: {
-                        ForEach(PhysicsActionType.allCases) { type in
-                            Text(type.rawValue.capitalized).tag(type)
-                        }
-                    },
-                    label: {
-                        Button("Create Action") {
-                            let actionToken: ActionToken
-
-                            switch selectedType {
-                            case .force:   actionToken = ForceActionToken()
-                            case .torque:  actionToken = TorqueActionToken()
-                            case .impulse: actionToken = ImpulseActionToken()
-                            case .angularImpulse: actionToken = AngularImpulseActionToken()
+                HStack {
+                    Picker(
+                        selection: $selectedType,
+                        content: {
+                            ForEach(PhysicsActionType.allCases) { type in
+                                Text(type.rawValue.capitalized).tag(type)
                             }
-
-                            gameController.addActionToSelected(actionToken)
+                        },
+                        label: {
+                            Button("Create Action") {
+                                newAction(selectedType)
+                            }
                         }
+                    )
+                    .pickerStyle(.menu)
+                    .padding()
+
+                    Button("Create Random") {
+                        let randomType = Utility.forceUnwrap(PhysicsActionType.allCases.randomElement())
+                        newAction(randomType, randomValues: true)
                     }
-                )
-                .pickerStyle(.menu)
-                .padding()
+                }
 
                 if gameController.selectedAction != nil {
                     PhysicsActionSlidersGrid(

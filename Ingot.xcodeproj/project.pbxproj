@@ -38,13 +38,13 @@
 		D4D6511F2C429B700086FAC9 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = D4D6511B2C429B700086FAC9 /* .gitignore */; };
 		D4D651202C429B700086FAC9 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = D4D6511C2C429B700086FAC9 /* .swiftlint.yml */; };
 		D4D651212C429B700086FAC9 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = D4D6511D2C429B700086FAC9 /* README.md */; };
-		D4D6517C2C429B960086FAC9 /* Field.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4D651222C429B950086FAC9 /* Field.swift */; };
+		D4D6517C2C429B960086FAC9 /* SKPPhysicsField.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4D651222C429B950086FAC9 /* SKPPhysicsField.swift */; };
 		D4D6517D2C429B960086FAC9 /* GameEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4D651232C429B950086FAC9 /* GameEntity.swift */; };
 		D4D6517E2C429B960086FAC9 /* GameEntityFace.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4D651242C429B950086FAC9 /* GameEntityFace.swift */; };
 		D4D6517F2C429B960086FAC9 /* GameEntitySprite.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4D651252C429B950086FAC9 /* GameEntitySprite.swift */; };
 		D4D651802C429B960086FAC9 /* Gremlin.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4D651262C429B950086FAC9 /* Gremlin.swift */; };
 		D4D651812C429B960086FAC9 /* GremlinFace.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4D651272C429B950086FAC9 /* GremlinFace.swift */; };
-		D4D651822C429B960086FAC9 /* Joint.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4D651282C429B950086FAC9 /* Joint.swift */; };
+		D4D651822C429B960086FAC9 /* SKPPhysicsJoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4D651282C429B950086FAC9 /* SKPPhysicsJoint.swift */; };
 		D4D651832C429B960086FAC9 /* Vertex.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4D651292C429B950086FAC9 /* Vertex.swift */; };
 		D4D6518B2C429B960086FAC9 /* SelectedPhysicsRelay.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4D651322C429B960086FAC9 /* SelectedPhysicsRelay.swift */; };
 		D4D6518E2C429B960086FAC9 /* CoreGraphics+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4D651362C429B960086FAC9 /* CoreGraphics+Extensions.swift */; };
@@ -152,13 +152,13 @@
 		D4D6511B2C429B700086FAC9 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		D4D6511C2C429B700086FAC9 /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		D4D6511D2C429B700086FAC9 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		D4D651222C429B950086FAC9 /* Field.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Field.swift; sourceTree = "<group>"; };
+		D4D651222C429B950086FAC9 /* SKPPhysicsField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKPPhysicsField.swift; sourceTree = "<group>"; };
 		D4D651232C429B950086FAC9 /* GameEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameEntity.swift; sourceTree = "<group>"; };
 		D4D651242C429B950086FAC9 /* GameEntityFace.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameEntityFace.swift; sourceTree = "<group>"; };
 		D4D651252C429B950086FAC9 /* GameEntitySprite.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameEntitySprite.swift; sourceTree = "<group>"; };
 		D4D651262C429B950086FAC9 /* Gremlin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Gremlin.swift; sourceTree = "<group>"; };
 		D4D651272C429B950086FAC9 /* GremlinFace.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GremlinFace.swift; sourceTree = "<group>"; };
-		D4D651282C429B950086FAC9 /* Joint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Joint.swift; sourceTree = "<group>"; };
+		D4D651282C429B950086FAC9 /* SKPPhysicsJoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKPPhysicsJoint.swift; sourceTree = "<group>"; };
 		D4D651292C429B950086FAC9 /* Vertex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Vertex.swift; sourceTree = "<group>"; };
 		D4D651322C429B960086FAC9 /* SelectedPhysicsRelay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectedPhysicsRelay.swift; sourceTree = "<group>"; };
 		D4D651362C429B960086FAC9 /* CoreGraphics+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CoreGraphics+Extensions.swift"; sourceTree = "<group>"; };
@@ -339,13 +339,13 @@
 		D4D6512A2C429B950086FAC9 /* GameEntity */ = {
 			isa = PBXGroup;
 			children = (
-				D4D651222C429B950086FAC9 /* Field.swift */,
+				D4D651222C429B950086FAC9 /* SKPPhysicsField.swift */,
 				D4D651232C429B950086FAC9 /* GameEntity.swift */,
 				D4D651242C429B950086FAC9 /* GameEntityFace.swift */,
 				D4D651252C429B950086FAC9 /* GameEntitySprite.swift */,
 				D4D651262C429B950086FAC9 /* Gremlin.swift */,
 				D4D651272C429B950086FAC9 /* GremlinFace.swift */,
-				D4D651282C429B950086FAC9 /* Joint.swift */,
+				D4D651282C429B950086FAC9 /* SKPPhysicsJoint.swift */,
 				D4D651292C429B950086FAC9 /* Vertex.swift */,
 			);
 			path = GameEntity;
@@ -641,7 +641,7 @@
 				D4D651902C429B960086FAC9 /* PhysicsJointCommonView.swift in Sources */,
 				D4D651AC2C429B960086FAC9 /* GameSceneRelay.swift in Sources */,
 				D4D651C12C429B960086FAC9 /* WorkflowManager.swift in Sources */,
-				D4D651822C429B960086FAC9 /* Joint.swift in Sources */,
+				D4D651822C429B960086FAC9 /* SKPPhysicsJoint.swift in Sources */,
 				D4D651832C429B960086FAC9 /* Vertex.swift in Sources */,
 				D47DB2E72C4AD4D4000FC567 /* ImpulseActionTokenView.swift in Sources */,
 				D4D651B42C429B960086FAC9 /* SKPSliderWithRelay.swift in Sources */,
@@ -695,7 +695,7 @@
 				D4301D952C4969F300A30A26 /* PhysicsEntityConfigurators.swift in Sources */,
 				D4D6517D2C429B960086FAC9 /* GameEntity.swift in Sources */,
 				D4D651B22C429B960086FAC9 /* SKPMaskSelector.swift in Sources */,
-				D4D6517C2C429B960086FAC9 /* Field.swift in Sources */,
+				D4D6517C2C429B960086FAC9 /* SKPPhysicsField.swift in Sources */,
 				D47DB2E82C4AD4D4000FC567 /* TorqueActionTokenView.swift in Sources */,
 				D4D651B52C429B960086FAC9 /* SKPToggle.swift in Sources */,
 				D4D651912C429B960086FAC9 /* PhysicsJointConfigurator.swift in Sources */,
